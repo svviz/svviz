@@ -63,6 +63,7 @@ def info():
             html = html.replace(" ", ".")
             result.append(html)
 
+        result.append("<br/>Total length={}".format(len(READ_INFO[readid])))
         result = "".join(result)
         result = "<div style='font-family:Courier;'>" + result + "</div>"
         result = jsonify(result=result)
