@@ -8,7 +8,11 @@ This software is in active development. Some things may not work as expected. Th
 
 ## Installing svviz
 
-Installation can be performed by executing the following command on OS X or linux:
+If you have git and pip installed, you can download and install svviz using the following single line:
+
+```pip install git+https://github.com/svviz/svviz.git#svviz```
+
+Alternately, you can clone the git repository. Installation can then be performed by executing the following command on OS X or linux:
 
 ```python setup.py install```
 
