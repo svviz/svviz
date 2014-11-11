@@ -2,7 +2,7 @@ import collections
 import time
 import pyfaidx
 import pysam
-import ssw_wrap
+from ssw import ssw_wrap
 from Multiprocessor import Multiprocessor
 
 from utilities import reverseComp
