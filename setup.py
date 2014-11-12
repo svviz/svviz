@@ -3,7 +3,7 @@ from setuptools import setup, Extension, find_packages
 
 setup(name='svviz',
       version='1.0',
-      install_requires = ['pyfaidx', 'pysam', 'flask', 'joblib'],
+      install_requires = ['pyfaidx', 'pysam >= 0.7.8', 'flask', 'joblib'],
 
       # Packages
       packages = find_packages("src"),
