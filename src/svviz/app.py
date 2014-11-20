@@ -100,8 +100,9 @@ def main():
     print args
 
     refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)
+    savereads(args, bam, reads)
     altAlignments, refAlignments, ambiguousAlignments = disambiguate(refalignments, altalignments, 
-        args.isize_mean, 2*args.isize_std, args.orientation)
+        args.isize_mean, 2*args.isize_std, args.orientation, bam)
 
     results, refalns, altalns, ambalns = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant)
 

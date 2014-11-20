@@ -4,7 +4,7 @@
 var selectStartPoint = 0;
 function dozoom (svg) {
   svgPanZoom(svg, {
-      zoomEnabled: true,
+    zoomEnabled: true,
       // controlIconsEnabled: true,
       fit: true,
       center: true,
@@ -18,30 +18,31 @@ function dohover (svg) {
     console.log($(this).data("readid"));
     // $(svg + " .info").text($(this).data("readid"));
 
-      $.getJSON('/_info', {"readid":$(this).data("readid")}, function(data) {
-        $(svg + " .info").html(data.result);
-      });
+    $.getJSON('/_info', {"readid":$(this).data("readid")}, function(data) {
+      $(svg + " .info").html(data.result);
+    });
 
 
   });
 }
 
+
 function update () {
   $.getJSON('/_disp', {"req":"alt"}, function(data) {
-      $('#alt_result #track').html(data.result);
-      dozoom('#alt_result svg');
-      dohover('#alt_result');
-    });
+    $('#alt_result #track').html(data.result);
+    dozoom('#alt_result svg');
+    dohover('#alt_result');
+  });
   $.getJSON('/_disp', {"req":"ref"}, function(data) {
-      $('#ref_result #track').html(data.result);
-      dozoom('#ref_result svg');
-      dohover('#ref_result');
-    });
+    $('#ref_result #track').html(data.result);
+    dozoom('#ref_result svg');
+    dohover('#ref_result');
+  });
   $.getJSON('/_disp', {"req":"amb"}, function(data) {
-      $('#amb_result #track').html(data.result);
-      dozoom('#amb_result svg');
-      dohover('#amb_result');
-    });
+    $('#amb_result #track').html(data.result);
+    dozoom('#amb_result svg');
+    dohover('#amb_result');
+  });
 
   $.getJSON('/_disp', {"req":"counts"}, function(data) {
     console.log(data.result);
@@ -60,11 +61,12 @@ function update () {
       table.append(row);
 
         // $('#description').append("<p>"+key+":"+val+"</p>");
-    });
+      });
     console.log(table);
     $('#description').append(table);
   });
 }
+
 
 function loadSVGs() {
   $.getJSON('/_disp', {"req":"progress"},
@@ -74,8 +76,9 @@ function loadSVGs() {
       } else {
         setTimeout(loadSVGs, 100);
       }
-    });
+  });
 }
+
 
 $(function() {
   console.log("here");

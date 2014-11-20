@@ -24,8 +24,9 @@ class AlignmentSet(object):
         return self.start > 0 and self.end > 0
 
     def __len__(self):
-        if self.start > 0:
+        if self.start >= 0:
             return self.end - self.start + 1
+        raise Exception, "Why is the start coordinate less than 0? {} {}".format(self.start, self.end)
         return None
 
     def addAlignment(self, newaln):

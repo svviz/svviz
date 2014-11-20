@@ -59,12 +59,19 @@ class InsertSizeDistribution(object):
     def __init__(self, bam):
         """ bam must be a sorted, indexed pysam.Samfile """
         isizes = sampleInsertSizes(bam)
+        if len(isizes) < 10:
+            self.fail = True
+            self.min = 0
+            return
+        self.fail = False
         self.kde = gaussian_kde(isizes)
         self.min = numpy.min(self.kde(numpy.linspace(0, max(isizes), 100)))
         print "Min score:", self.min
 
     def score(self, isize):
         # we don't ever want a 0 probability
+        if self.fail:
+            return 0
         score = self.kde(abs(isize))
         return max(score, self.min)
 

@@ -169,8 +169,8 @@ class Track(object):
         self.rows = [None]*numRows
 
         for alignmentSet in self.getAlignments():
-            if len(alignmentSet.getAlignments()) < 2:
-                continue
+            # if len(alignmentSet.getAlignments()) < 2:
+                # continue
             currow = self.findRow(alignmentSet.start, alignmentSet.end)
             yoffset = (self.rowHeight+self.rowMargin) * currow
             alignmentSet.yoffset = yoffset
@@ -185,8 +185,8 @@ class Track(object):
         self.readRenderer.svg = self.svg
 
         for alignmentSet in self.getAlignments():
-            if len(alignmentSet.getAlignments()) < 2:
-                continue
+            # if len(alignmentSet.getAlignments()) < 2:
+            #     continue
             self.readRenderer.render(alignmentSet)
 
         for vline in self.vlines:

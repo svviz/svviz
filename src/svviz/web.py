@@ -64,6 +64,7 @@ def info():
             result.append(html)
 
         result.append("<br/>Total length={}".format(len(READ_INFO[readid])))
+        result.append(" &nbsp; Log odds={:.3g}".format(float(READ_INFO[readid].prob)))
         result = "".join(result)
         result = "<div style='font-family:Courier;'>" + result + "</div>"
         result = jsonify(result=result)

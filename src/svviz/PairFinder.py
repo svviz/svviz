@@ -54,8 +54,9 @@ class PairFinder(object):
 
 
     def findmatch(self, read):
-        chrom = self.sam.getrname(read.rnext)
-        self.loadRegion(chrom, read.pnext, read.pnext+1, verbose=True)
+        if read.rnext >= 0:
+            chrom = self.sam.getrname(read.rnext)
+            self.loadRegion(chrom, read.pnext, read.pnext+1, verbose=True)
         # self.loadRegion(read.next_reference_id, read.next_reference_start, read.next_reference_start)
 
 
