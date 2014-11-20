@@ -1,5 +1,8 @@
 import numpy
-from scipy.stats import gaussian_kde
+try:
+    from scipy.stats import gaussian_kde
+except ImportError:
+    gaussian_kde = None
 
 def removeOutliers(data, m = 10.):
     """ a method of trimming outliers from a list/array using 
@@ -58,6 +61,11 @@ class InsertSizeDistribution(object):
 
     def __init__(self, bam):
         """ bam must be a sorted, indexed pysam.Samfile """
+        if gaussian_kde is None:
+            self.min = 0
+            self.fail = True
+            return
+
         isizes = sampleInsertSizes(bam)
         if len(isizes) < 10:
             self.fail = True
