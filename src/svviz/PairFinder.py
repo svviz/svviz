@@ -61,7 +61,7 @@ class PairFinder(object):
 
 
     def loadRegion(self, chrom, start, end, verbose=False):
-        reads = list(self.sam.fetch(chrom, start, end, reopen=False))
+        reads = list(self.sam.fetch(chrom, start, end))
 
         if len(reads) > 100000:
             if verbose:
