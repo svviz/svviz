@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="svg-pan-zoom.js"></script>
-    <script src="interface.js"></script>
+    <script src="jquery.mousewheel.js"></script>
+    <script src="svgscroller.js"></script>
+
+    <!--<script src="svg-pan-zoom.js"></script>-->
 
     <link href="main.css" rel="stylesheet" />
   </head>
@@ -20,7 +23,13 @@
 
     <h2>Alt</h2>
     <div id="alt_result">
-      <div id="track"></div>
+      <div class="scrollsalot">
+        <div class="svg_container">
+          <div class="one_svg">
+            <div id="track"></div>
+          </div>
+        </div>
+      </div>
       <p class="info"></p>
     </div>
 
@@ -36,6 +45,8 @@
       <p class="info"></p>
     </div>
   </div>
+
+    <script src="interface.js"></script>
 
   </body>
 </html>

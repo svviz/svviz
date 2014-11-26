@@ -11,6 +11,7 @@ class SVG(object):
         self.svg.append("""<?xml version="1.0" encoding="utf-8" ?><svg baseProfile="full" height="100%" version="1.1" """
             """width="100%" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg" """
             """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(h=self.height, w=self.width))
+        self.svg.append("<g class=\"svg_viewport\">")
 
     def _addOptions(self, **kwdargs):
         options = []
@@ -33,10 +34,8 @@ class SVG(object):
         self.svg.append("""<text x="{x}" y="{y}" font-size="{size}" text-anchor="{anchor}" {more}>{text}</text>\n""".format(x=x, y=self.height-y, size=size, anchor=anchor, more=more, text=text))
 
     def __str__(self):
-        self.svg.append("""</svg>""")
-        return "".join(self.svg)
+        return "".join(self.svg+["""</g></svg>"""])
 
     def write(self, path):
-        self.svg.append("""</svg>""")
         output = open(path, "w")
-        output.write("".join(self.svg))
+        output.write("".join(self.svg+["""</g></svg>"""]))

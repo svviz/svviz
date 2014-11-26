@@ -66,7 +66,11 @@ class InsertSizeDistribution(object):
             self.fail = True
             return
 
-        isizes = sampleInsertSizes(bam)
+        try:
+            isizes = sampleInsertSizes(bam)
+        except ValueError:
+            isizes = []
+            
         if len(isizes) < 10:
             self.fail = True
             self.min = 0

@@ -3,14 +3,14 @@
 
 var selectStartPoint = 0;
 function dozoom (svg) {
-  svgPanZoom(svg, {
-    zoomEnabled: true,
-      // controlIconsEnabled: true,
-      fit: true,
-      center: true,
-      minZoom:0.05,
-      maxZoom:25
-    });
+  // svgPanZoom(svg, {
+  //   zoomEnabled: true,
+  //     // controlIconsEnabled: true,
+  //     fit: true,
+  //     center: true,
+  //     minZoom:0.05,
+  //     maxZoom:25
+  //   });
 }
 
 function dohover (svg) {
@@ -32,6 +32,9 @@ function update () {
     $('#alt_result #track').html(data.result);
     dozoom('#alt_result svg');
     dohover('#alt_result');
+
+    $(".svg_container").SVGScroller();
+
   });
   $.getJSON('/_disp', {"req":"ref"}, function(data) {
     $('#ref_result #track').html(data.result);
@@ -52,7 +55,7 @@ function update () {
     var keys = ["AltCount", "RefCount", "AmbCount"];
 
     jQuery.each(keys, function(i, key) {
-      console.log(key);
+      // console.log(key);
       var val = data.result[key];
       var row = $('<tr></tr>');
       row.append($("<td>"+key+"</td>"));
@@ -82,5 +85,6 @@ function loadSVGs() {
 
 $(function() {
   console.log("here");
+  console.log($(".svg_viewport"));
   loadSVGs();
 });
