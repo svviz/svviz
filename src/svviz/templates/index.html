@@ -21,49 +21,29 @@
         <h2>Overview</h2>
         <span id="description"></span>
 
-        <h2>Alt</h2>
-        <div id="alt_result">
-            <div class="scrollsalot">
-                <div class="svg_container">
+        {% for allele in ["alt", "ref", "amb"] %}        
+            <h2>{{ allele }}</h2>
+            <div id="{{ allele }}_result">
+                <div class="scrollsalot">
+                    <div class="svg_container">
 
-                    {% for sample in samples %}
-                        <div class="one_svg {{ sample }}">
-                            <div id="track"></div>
-                        </div>
-                        {% if not loop.last %}
-                            <div style="height:2px; background-color:gray;"></div>
-                        {% endif %}
+                        {% for sample in samples %}
 
-                    {% endfor %}
+                            <div class="one_svg {{ sample }}">
+                                <div style="position:absolute; z-index:1;left:0; top:0; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
+                                <div class="track"></div>
+                            </div>
+                            {% if not loop.last %}
+                                <div style="height:2px; background-color:gray;"></div>
+                            {% endif %}
 
-                </div>
-            </div>
-            <p class="info"></p>
-        </div>
+                        {% endfor %}
 
-        <h2>Ref</h2>
-        <div id="ref_result">
-            <div class="scrollsalot">
-                <div class="svg_container">
-                    <div class="one_svg">
-                        <div id="track"></div>
                     </div>
                 </div>
+                <p class="info"></p>
             </div>
-            <p class="info"></p>
-        </div>
-
-        <h2>Ambiguous</h2>
-        <div id="amb_result">
-            <div class="scrollsalot">
-                <div class="svg_container">
-                    <div class="one_svg">
-                        <div id="track"></div>
-                    </div>
-                </div>
-            </div>
-            <p class="info"></p>
-        </div>
+        {% endfor %}
 
         <script src="interface.js"></script>
 

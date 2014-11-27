@@ -18,9 +18,10 @@ def parseArgs():
     defaults.add_argument("--deldemo", action="store_true", help="")
     defaults.add_argument("--insdemo", action="store_true", help="")
 
+    parser.add_argument("-b", "--bam", action="append", help="sorted, indexed bam file containing reads of interest to plot")
+
     parser.add_argument("ref", help="reference fasta file (a .faidx index file will be "
         "created if it doesn't exist so you need write permissions for this directory)")
-    parser.add_argument("bam", help="sorted, indexed bam file containing reads of interest to plot")
     parser.add_argument("breakpoints", nargs="*")
 
     args = parser.parse_args()

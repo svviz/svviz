@@ -1,3 +1,5 @@
+import collections
+import os
 import pyfaidx
 import pysam
 import time
@@ -57,14 +59,14 @@ def getVariant(args, genome):
 
     return variant
 
-def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAlignments, variant):
+def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAlignments, variant, name="x"):
     print "Ref:", len(selectedRefAlignments), "Alt:", len(selectedAltAlignments), "Amb:", len(selectedAmbiguousAlignments)
 
 
     c = track.ChromosomePart(variant.getRefSeq())
     t = track.Track(c, selectedRefAlignments, 3000, 4000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
     # t = track.Track(c, selectedRefAlignments, 3000, 2500, 0, len(refseq), vlines=[8000+extraSpace, end-start+extraSpace])#, 4000, 7000+end-start)
-    out = open("ref.svg", "w")
+    out = open("ref.{}.svg".format(name), "w")
     out.write(t.render())
 
 
@@ -73,7 +75,7 @@ def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAli
 
     # t = track.Track(c, selectedAltAlignments, 1000, 2500, 0, len(altseq), vlines=[8000+extraSpace])#, 8000, 8000+end-start)
     t0 = time.time()
-    out = open("alt.svg", "w")
+    out = open("alt.{}.svg".format(name), "w")
     out.write(t.render())
     t1 = time.time()
 
@@ -82,7 +84,7 @@ def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAli
     c = track.ChromosomePart(variant.getRefSeq())
     t = track.Track(c, selectedAmbiguousAlignments, 4000, 10000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
     # t = track.Track(c, selectedAmbiguousAlignments, 1000, 2500, 0, len(refseq), vlines=[8000+extraSpace, end-start+extraSpace])#, 4000, 7000+end-start)
-    out = open("amb.svg", "w")
+    out = open("amb.{}.svg".format(name), "w")
     out.write(t.render())
 
     return {"AltCount":len(selectedAltAlignments),
@@ -95,27 +97,36 @@ def main():
     args = CommandLine.parseArgs()
 
     genome = pyfaidx.Fasta(args.ref, as_raw=True)
-    bam = pysam.Samfile(args.bam, "rb")
     variant = getVariant(args, genome)
     print args
+    datasets = collections.OrderedDict()
 
-    refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)
-    savereads(args, bam, reads)
-    altAlignments, refAlignments, ambiguousAlignments = disambiguate(refalignments, altalignments, 
-        args.isize_mean, 2*args.isize_std, args.orientation, bam)
+    for bampath in args.bam:
+        name = os.path.basename(bampath).replace(".", "_")
+        bam = pysam.Samfile(bampath, "rb")
 
-    results, refalns, altalns, ambalns = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant)
+        refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)
+        savereads(args, bam, reads)
+        altAlignments, refAlignments, ambiguousAlignments = disambiguate(refalignments, altalignments, 
+            args.isize_mean, 2*args.isize_std, args.orientation, bam)
+
+        counts, refalns, altalns, ambalns = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant, name)
+
+        datasets[name] = {"refalns":refalns, "altalns":altalns, "ambalns":ambalns, "counts":counts}
+
 
     if True:
         # launch web view
         import web
-        web.RESULTS = results
+
+        web.RESULTS = {}
         web.READ_INFO = {}
+        for name in datasets:
+            dataset = datasets[name]
+            for readset in dataset["refalns"] + dataset["altalns"] + dataset["ambalns"]:
+                web.READ_INFO[readset.getAlignments()[0].name] = readset
 
-        for readset in refalns + altalns + ambalns:
-            web.READ_INFO[readset.getAlignments()[0].name] = readset
-
-        web.SAMPLES = ["ALPHA", "BETA", "GAMMA"]
+        web.SAMPLES = datasets.keys()
 
         web.run()
 
