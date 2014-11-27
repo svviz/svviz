@@ -1,52 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-    <script src="jquery.mousewheel.js"></script>
-    <script src="svgscroller.js"></script>
+        <script src="jquery.mousewheel.js"></script>
+        <script src="svgscroller.js"></script>
 
-    <!--<script src="svg-pan-zoom.js"></script>-->
+        <!--<script src="svg-pan-zoom.js"></script>-->
 
-    <link href="main.css" rel="stylesheet" />
-  </head>
+        <link href="main.css" rel="stylesheet" />
+    </head>
 
-  <body>
-  <div class="container">
+    <body>
+    <div class="container">
 
-    <h2>Overview</h2>
-    <span id="description"></span>
+        <h2>Overview</h2>
+        <span id="description"></span>
 
-    <h2>Alt</h2>
-    <div id="alt_result">
-      <div class="scrollsalot">
-        <div class="svg_container">
-          <div class="one_svg">
-            <div id="track"></div>
-          </div>
+        <h2>Alt</h2>
+        <div id="alt_result">
+            <div class="scrollsalot">
+                <div class="svg_container">
+
+                    {% for sample in samples %}
+                        <div class="one_svg {{ sample }}">
+                            <div id="track"></div>
+                        </div>
+                        {% if not loop.last %}
+                            <div style="height:2px; background-color:gray;"></div>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+            </div>
+            <p class="info"></p>
         </div>
-      </div>
-      <p class="info"></p>
-    </div>
 
-    <h2>Ref</h2>
-    <div id="ref_result">
-      <div id="track"></div>
-      <p class="info"></p>
-    </div>
+        <h2>Ref</h2>
+        <div id="ref_result">
+            <div class="scrollsalot">
+                <div class="svg_container">
+                    <div class="one_svg">
+                        <div id="track"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="info"></p>
+        </div>
 
-    <h2>Ambiguous</h2>
-    <div id="amb_result">
-      <div id="track"></div>
-      <p class="info"></p>
-    </div>
-  </div>
+        <h2>Ambiguous</h2>
+        <div id="amb_result">
+            <div class="scrollsalot">
+                <div class="svg_container">
+                    <div class="one_svg">
+                        <div id="track"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="info"></p>
+        </div>
 
-    <script src="interface.js"></script>
+        <script src="interface.js"></script>
 
-  </body>
+    </body>
 </html>

@@ -115,6 +115,8 @@ def main():
         for readset in refalns + altalns + ambalns:
             web.READ_INFO[readset.getAlignments()[0].name] = readset
 
+        web.SAMPLES = ["ALPHA", "BETA", "GAMMA"]
+
         web.run()
 
 

@@ -1,17 +1,6 @@
 /*global $:false */
 'use strict';
 
-var selectStartPoint = 0;
-function dozoom (svg) {
-  // svgPanZoom(svg, {
-  //   zoomEnabled: true,
-  //     // controlIconsEnabled: true,
-  //     fit: true,
-  //     center: true,
-  //     minZoom:0.05,
-  //     maxZoom:25
-  //   });
-}
 
 function dohover (svg) {
   $(svg + " .read").mouseover(function(){
@@ -29,22 +18,28 @@ function dohover (svg) {
 
 function update () {
   $.getJSON('/_disp', {"req":"alt"}, function(data) {
-    $('#alt_result #track').html(data.result);
-    dozoom('#alt_result svg');
+    for (var i=0; i<data.results.length; i++) {
+      var result = data.results[i];
+      $('#alt_result .' + result.name + ' #track').html(result.svg);
+      console.log("LOADING:" + result.name);
+    }
     dohover('#alt_result');
-
-    $(".svg_container").SVGScroller();
-
+    $("#alt_result .svg_container").SVGScroller();
+    $( ".svg_container" ).resizable();
   });
+
   $.getJSON('/_disp', {"req":"ref"}, function(data) {
     $('#ref_result #track').html(data.result);
-    dozoom('#ref_result svg');
+
     dohover('#ref_result');
+    $("#ref_result .svg_container").SVGScroller();
   });
+
   $.getJSON('/_disp', {"req":"amb"}, function(data) {
     $('#amb_result #track').html(data.result);
-    dozoom('#amb_result svg');
+
     dohover('#amb_result');
+    $("#amb_result .svg_container").SVGScroller();
   });
 
   $.getJSON('/_disp', {"req":"counts"}, function(data) {
@@ -85,6 +80,5 @@ function loadSVGs() {
 
 $(function() {
   console.log("here");
-  console.log($(".svg_viewport"));
   loadSVGs();
 });

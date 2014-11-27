@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, jsonify
 
 RESULTS = {}
 READ_INFO = None
+SAMPLES = []
 
 # Initialize the Flask application
 app = Flask(__name__,
@@ -24,7 +25,7 @@ def getport():
 @app.route('/')
 def index():
     print "INDEX"
-    return render_template('index.html')
+    return render_template('index.html', samples=SAMPLES)
     # print t
     # return t
 
@@ -34,6 +35,12 @@ def static_proxy(path):
     return app.send_static_file(path)
 
 
+ALPHA = """<?xml version="1.0" encoding="utf-8" ?><svg baseProfile="full" height="100%" version="1.1" width="100%" viewBox="0 0 15000 4998" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><g class="svg_viewport"><text x="250" y="150" 
+        font-size="55">ALPHA</text></g></svg>"""
+BETA = """<?xml version="1.0" encoding="utf-8" ?><svg baseProfile="full" height="100%" version="1.1" width="100%" viewBox="0 0 15000 4998" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><g class="svg_viewport"><text x="250" y="150" 
+        font-size="55">BETA</text></g></svg>"""
+GAMMA = """<?xml version="1.0" encoding="utf-8" ?><svg baseProfile="full" height="100%" version="1.1" width="100%" viewBox="0 0 15000 4998" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><g class="svg_viewport"><text x="250" y="150" 
+        font-size="55">GAMMA</text></g></svg>"""        
 @app.route('/_disp')
 def display():
     req = request.args.get('req', 0)
@@ -41,9 +48,13 @@ def display():
     if req == "progress":
         return jsonify(result="done")
 
-    if req in ["alt", "ref", "amb"]:
+    if req in ["ref", "amb"]:
         svg = open("{}.svg".format(req)).read()
         return jsonify(result=svg)
+    if req == "alt":
+        svg = open("alt.svg").read()
+        return jsonify(results=[{"svg":ALPHA, "name":"ALPHA"}, {"svg":BETA, "name":"BETA"}, {"svg":GAMMA, "name":"GAMMA"}, ])
+
 
     if req == "counts":
         return jsonify(result=RESULTS)
