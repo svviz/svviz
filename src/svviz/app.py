@@ -12,16 +12,23 @@ from utilities import Locus, reverseComp
 import misc
 
 
-def savereads(args, bam, reads):
+def savereads(args, bam, reads, n=None):
     if args.save_reads:
         outbam_path = args.save_reads
         if not outbam_path.endswith(".bam"):
             outbam_path += ".bam"
 
+        if n is not None:
+            print "Using i =", n
+            outbam_path = outbam_path.replace(".bam", ".{}.bam".format(n))
+
         # print out just the reads we're interested for use later
         bam_small = pysam.Samfile(outbam_path, "wb", template=bam)
         for read in reads:
             bam_small.write(read)
+
+        bam_small.close()
+        pysam.sort(outbam_path, outbam_path.replace(".bam", ".sorted"))
 
 
 def getVariant(args, genome):
@@ -93,7 +100,6 @@ def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAli
 
 
 def main():
-
     args = CommandLine.parseArgs()
 
     genome = pyfaidx.Fasta(args.ref, as_raw=True)
@@ -101,12 +107,12 @@ def main():
     print args
     datasets = collections.OrderedDict()
 
-    for bampath in args.bam:
+    for i, bampath in enumerate(args.bam):
         name = os.path.basename(bampath).replace(".", "_")
         bam = pysam.Samfile(bampath, "rb")
 
         refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)
-        savereads(args, bam, reads)
+        savereads(args, bam, reads, i)
         altAlignments, refAlignments, ambiguousAlignments = disambiguate(refalignments, altalignments, 
             args.isize_mean, 2*args.isize_std, args.orientation, bam)
 
