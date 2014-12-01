@@ -28,7 +28,9 @@ def savereads(args, bam, reads, n=None):
             bam_small.write(read)
 
         bam_small.close()
-        pysam.sort(outbam_path, outbam_path.replace(".bam", ".sorted"))
+        sorted_path = outbam_path.replace(".bam", ".sorted")
+        pysam.sort(outbam_path, sorted_path)
+        pysam.index(sorted_path+".bam")
 
 
 def getVariant(args, genome):

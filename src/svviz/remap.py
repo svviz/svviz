@@ -1,6 +1,7 @@
 import collections
 import time
-import numpy
+# import numpy
+import math
 import pyfaidx
 import pysam
 from ssw import ssw_wrap
@@ -12,6 +13,11 @@ from Alignment import Alignment, AlignmentSet
 from PairFinder import PairFinder
 from InsertSizeProbabilities import InsertSizeDistribution
 
+def log2(x):
+    try:
+        return math.log(x, 2)
+    except ValueError:
+        return float("nan")
 
 
 def findBestAlignment(seq, aligner):
@@ -131,7 +137,7 @@ def _disambiguate(refset, altset, insertSizeDistribution, expectedOrientation):
         refprob = isd.score(len(refset))
         altprob = isd.score(len(altset))
 
-    return numpy.log2(refprob) - numpy.log2(altprob)
+    return log2(refprob) - log2(altprob)
 
 
 
