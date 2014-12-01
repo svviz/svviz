@@ -1,7 +1,8 @@
-import numpy
 try:
+    import numpy
     from scipy.stats import gaussian_kde
 except ImportError:
+    numpy = None
     gaussian_kde = None
 
 def removeOutliers(data, m = 10.):
