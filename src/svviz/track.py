@@ -1,3 +1,5 @@
+import collections
+import itertools
 import re
 from svg import SVG
 
@@ -46,7 +48,12 @@ class ReadRenderer(object):
         pend = self.scale.topixels(alignmentSet.end)
         self.svg.rect(pstart, yoffset-(self.rowHeight/2.0), pend-pstart, 0.25, fill="gray")
 
+        positionCounts = collections.Counter()
+
         for alignment in alignmentSet.getAlignments():
+            for position in range(alignment.start, alignment.end+1):
+                positionCounts[position] += 1
+
             pstart = self.scale.topixels(alignment.start)
             pend = self.scale.topixels(alignment.end)
 
@@ -58,7 +65,8 @@ class ReadRenderer(object):
             # color = "gray"
 
             self.svg.rect(pstart, yoffset, pend-pstart, self.rowHeight, fill=color, **{"class":"read", "data-cigar":alignment.cigar,
-                "data-readid":alignment.name})
+                "data-readid":alignment.name#, "opacity":0.75
+                })
 
             colorCigar = False
             eachNuc = False
@@ -117,7 +125,18 @@ class ReadRenderer(object):
                 # print "".join(out)
                 # print "".join(out2)
 
+        highlightOverlaps = True
+        if highlightOverlaps:
+            overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
 
+            for segment in overlapSegments:
+                start = min(segment)
+                end = max(segment)
+
+                curstart = self.scale.topixels(start)
+                curend = self.scale.topixels(end)
+
+                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill="lime")
 
 class Track(object):
     def __init__(self, chrom, alignmentSets, height, width, gstart, gend, vlines=None):
