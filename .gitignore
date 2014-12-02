@@ -55,3 +55,7 @@ target/
 
 # virtual env
 TEST
+*.bam
+*.bai
+*.svg
+*.sam
