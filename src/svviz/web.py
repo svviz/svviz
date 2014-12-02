@@ -55,6 +55,7 @@ def display():
 
     return jsonify(result="unknown request: {}".format(req))
 
+
 @app.route('/_info')
 def info():
     import Alignment

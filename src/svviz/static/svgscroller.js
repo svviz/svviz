@@ -59,11 +59,13 @@ function Scrollbar(scrollpanel, $host, options) {
             newposition = self.scrollbarSize-self.thumbsize;
         }
 
+
         if (self.settings.vertical) {
             self.$thumb.css({"top": newposition});
         } else {
             self.$thumb.css({"left": newposition});
         }
+        console.log("HERE:" + self.thumbsize);
 
         self.scrollval = newposition / (self.scrollbarSize-self.thumbsize);
         scrollpanel.scroll();
@@ -234,6 +236,12 @@ function ScrollPanel(element, options, svg_tags) {
         })
     }
 
+    self.scrollToBottom = function() {
+        self.yscrollbars.forEach(function(scrollbar){
+            scrollbar.scrollTo(1e100);
+        });
+    }
+
     self.moveView = function(deltax, deltay){
         self.xscrollbar.scrollTo(self.xscrollbar.curscroll()+deltax);
         self.yscrollbars.forEach(function(scrollbar, i){
@@ -318,6 +326,7 @@ $.fn[name] = function (options, options2) {
         if (!scrollpanel) {
             scrollpanel = new ScrollPanel(this, options);
             scrollpanel.update();
+            scrollpanel.scrollToBottom();
             $this.data(name, scrollpanel);
         }
 
