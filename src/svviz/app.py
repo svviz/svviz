@@ -72,7 +72,7 @@ def getVariant(args, genome):
         assert len(args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
         if args.min_mapq is None:
             args.min_mapq = -1
-            
+
         insertionBreakpoint = Locus(args.breakpoints[1], args.breakpoints[2], args.breakpoints[2], "+")
 
         meName = args.breakpoints[3]
@@ -130,6 +130,8 @@ def main():
     print args
     datasets = collections.OrderedDict()
 
+    countsByDataset = collections.OrderedDict()
+
     for i, bampath in enumerate(args.bam):
         name = os.path.basename(bampath).replace(".", "_").replace("+", "_")
         bam = pysam.Samfile(bampath, "rb")
@@ -142,19 +144,20 @@ def main():
         counts, refalns, altalns, ambalns = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant, name)
 
         datasets[name] = {"refalns":refalns, "altalns":altalns, "ambalns":ambalns, "counts":counts}
-
+        countsByDataset[name] = [len(altAlignments), len(refAlignments), len(ambiguousAlignments)]
 
     if True:
         # launch web view
         import web
 
-        web.RESULTS = {}
         web.READ_INFO = {}
         for name in datasets:
             dataset = datasets[name]
             for readset in dataset["refalns"] + dataset["altalns"] + dataset["ambalns"]:
                 web.READ_INFO[readset.getAlignments()[0].name] = readset
 
+        web.RESULTS = countsByDataset
+        web.RESULTS["Total"] = [sum(countsByDataset[row][col] for row in countsByDataset) for col in range(3)]
         web.SAMPLES = datasets.keys()
 
         web.run()

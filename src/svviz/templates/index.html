@@ -19,7 +19,27 @@
     <div class="container">
 
         <h2>Overview</h2>
-        <span id="description"></span>
+        <span id="description">
+            
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Alt</th>
+                    <th>Ref</th>
+                    <th>Alt</th>
+                </tr>
+
+                {% for samplename, row in results_table.iteritems() %}
+                    <tr>
+                        <td>{{ samplename }}</td>
+                        
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </span>
 
         {% for allele in ["alt", "ref", "amb"] %}        
             <h2>{{ allele }}</h2>

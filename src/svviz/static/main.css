@@ -28,8 +28,9 @@
   float: left;
 }
 
-#description td {
+#description td, th {
   padding: 2px 10px;
+  text-align: right;
 }
 
 svg {

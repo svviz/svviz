@@ -25,7 +25,7 @@ def getport():
 @app.route('/')
 def index():
     print "INDEX"
-    return render_template('index.html', samples=SAMPLES)
+    return render_template('index.html', samples=SAMPLES, results_table=RESULTS)
     # print t
     # return t
 

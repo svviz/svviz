@@ -34,23 +34,23 @@ function update () {
   addSVG("ref");
   addSVG("amb");
 
-  $.getJSON('/_disp', {"req":"counts"}, function(data) {
-    // console.log(data.result);
-    var table = $('<table></table>');
+  // $.getJSON('/_disp', {"req":"counts"}, function(data) {
+  //   // console.log(data.result);
+  //   var table = $('<table></table>');
 
-    var keys = ["AltCount", "RefCount", "AmbCount"];
+  //   var keys = ["AltCount", "RefCount", "AmbCount"];
 
-    jQuery.each(keys, function(i, key) {
-      var val = data.result[key];
-      var row = $('<tr></tr>');
-      row.append($("<td>"+key+"</td>"));
-      row.append($("<td>"+val+"</td>"));
+  //   jQuery.each(keys, function(i, key) {
+  //     var val = data.result[key];
+  //     var row = $('<tr></tr>');
+  //     row.append($("<td>"+key+"</td>"));
+  //     row.append($("<td>"+val+"</td>"));
 
-      table.append(row);
-      });
-    console.log(table);
-    $('#description').append(table);
-  });
+  //     table.append(row);
+  //     });
+  //   console.log(table);
+  //   $('#description').append(table);
+  // });
 }
 
 
