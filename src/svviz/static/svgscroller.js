@@ -18,26 +18,30 @@ function Scrollbar(scrollpanel, $host, options) {
 
     self.$host.append(self.$scrollbar);
     self.mouseOffset = 0;
-    self.scrollval = 0;
+    self.scrollProportion = 0;
+    self.scrollmax = 0;
+    self.pageSize = 0;
 
     self.active = true;
 
     self.resize = function(size, viewable, viewsize) {
+        self.scrollmax = viewsize - viewable;
+        self.pageSize = viewable / viewsize;
+
+        self.thumbsize = self.pageSize * self.scrollbarSize;
+        self.thumbsize = Math.max(self.thumbsize, 10);
+
         if (self.settings.vertical) {
             self.scrollbarSize = size - self.settings.endSpace;
             self.$scrollbar.height(self.scrollbarSize);
-            self.thumbsize = (viewable / viewsize) * self.scrollbarSize;
-            self.thumbsize = Math.max(self.thumbsize, 10);
             self.$thumb.height(Math.min(self.scrollbarSize, self.thumbsize));
         } else {
             self.scrollbarSize = size - self.settings.endSpace;
             self.$scrollbar.width(self.scrollbarSize);
-            self.thumbsize = (viewable / viewsize) * self.scrollbarSize;
-            self.thumbsize = Math.max(self.thumbsize, 10);
             self.$thumb.width(Math.min(self.scrollbarSize, self.thumbsize));
         }
 
-        if (self.thumbsize >= self.scrollbarSize) {
+        if (self.pageSize >= 1.0 ) {
             self.$scrollbar.fadeTo(50, 0.8);
             self.$thumb.fadeTo(50, 0.0);
             self.active = false;
@@ -45,30 +49,47 @@ function Scrollbar(scrollpanel, $host, options) {
             self.active = true;
             self.$scrollbar.fadeTo(50, 1);
             self.$thumb.fadeTo(50, 1);
+            self.scrollTo(self.scrollProportion);
         }
     }
 
-    self.scrollTo = function(newposition) {
-        if (!self.active){
+    self.scrollTo = function(newproportion) {
+        if (!self.active) {
             return;
         }
 
-        if (newposition < 0) {
-            newposition = 0;
-        } else if (newposition > self.scrollbarSize-self.thumbsize) {
-            newposition = self.scrollbarSize-self.thumbsize;
+        if (newproportion < 0) {
+            newproportion = 0;
+        } else if (newproportion > 1.0) {
+            newproportion = 1.0;
         }
 
+        self.scrollProportion = newproportion;
+        var scrollBarPosition = (self.scrollbarSize - self.thumbsize) * self.scrollProportion;
 
         if (self.settings.vertical) {
-            self.$thumb.css({"top": newposition});
+            self.$thumb.css({"top": scrollBarPosition});
         } else {
-            self.$thumb.css({"left": newposition});
+            self.$thumb.css({"left": scrollBarPosition});
         }
-        console.log("HERE:" + self.thumbsize);
+        // console.log("HERE:" + self.thumbsize);
 
-        self.scrollval = newposition / (self.scrollbarSize-self.thumbsize);
         scrollpanel.scroll();
+    }
+
+    self.scrollBy = function(distance) {
+        // convert screen coordinates to proportion
+        var proportionalDistance = self.coordToProportion(distance);
+        self.scrollTo(self.scrollProportion+proportionalDistance);
+    }
+
+    self.page = function(pages) {
+        self.scrollTo(self.scrollProportion + pages*self.pageSize);
+    }
+
+    self.coordToProportion = function(coord) {
+        var proportion = coord / (self.scrollbarSize-self.thumbsize);
+        return proportion;
     }
 
     self.onMouseDrag = function(event) {
@@ -78,41 +99,17 @@ function Scrollbar(scrollpanel, $host, options) {
 
         var clickFrac;
         if (self.settings.vertical) {
-            clickFrac = (event.pageY - self.$scrollbar.offset().top - self.mouseOffset) / self.scrollbarSize;
+            clickFrac = self.coordToProportion(event.pageY - self.$scrollbar.offset().top - self.mouseOffset);
         } else {
-            clickFrac = (event.pageX - self.$scrollbar.offset().left - self.mouseOffset) / self.scrollbarSize;
+            clickFrac = self.coordToProportion(event.pageX - self.$scrollbar.offset().left - self.mouseOffset);
         }
 
-        self.scrollTo(clickFrac * self.scrollbarSize);
+        self.scrollTo(clickFrac);
 
         event.preventDefault();
         event.stopPropagation();
     }
 
-    self.page = function(distance) {
-        var newscroll;
-
-        if (!self.active){
-            return;
-        }
-
-        if (self.settings.vertical) {
-            newscroll = self.$thumb.position().top + (self.thumbsize*distance);
-        } else {
-            newscroll = self.$thumb.position().left + (self.thumbsize*distance);
-        }
-
-        // console.log(newscroll);
-        self.scrollTo(newscroll);
-    }
-
-    self.curscroll = function() {
-        if (self.settings.vertical) {
-            return self.$thumb.position().top;
-        } else {
-            return self.$thumb.position().left;
-        }
-    }
 
     self.$thumb.on("mousedown", function(event) {
         if (!self.active){
@@ -167,8 +164,6 @@ function Scrollbar(scrollpanel, $host, options) {
             self.page(direction);
         }
     })
-
-    self.resize();
 }
 
 function ScrollPanel(element, options, svg_tags) {
@@ -181,6 +176,10 @@ function ScrollPanel(element, options, svg_tags) {
 
     self.xmin = 1e100;
     self.xmax = 0;
+
+    self.ymin = 1e100;
+    self.ymax = 0;
+
     self.yviewsizes = [];
 
     self.containerwidth = self.$element.width();
@@ -200,6 +199,9 @@ function ScrollPanel(element, options, svg_tags) {
         self.xmin = Math.min(self.xmin, bbox.x);
         self.xmax = Math.max(self.xmax, bbox.x+bbox.width);
 
+        self.ymin = Math.min(self.ymin, bbox.y);
+        self.ymax = Math.max(self.ymax, bbox.y+bbox.height);
+
         self.yviewsizes.push(bbox.height + 550);
 
         // $(this).width(self.$element.width());
@@ -212,6 +214,7 @@ function ScrollPanel(element, options, svg_tags) {
         self.yviewables.push(0);
     })
 
+    console.log("%%%%%%%" + self.ymin + "  & " + self.ymax);
     self.xzoom = self.containerwidth / (self.xmax-self.xmin);
     self.yzooms = self.$views.map(function(){return self.xzoom;});
 
@@ -221,15 +224,14 @@ function ScrollPanel(element, options, svg_tags) {
         for (var i=0; i < self.yviewables.length; i++) {
             self.yviewables[i] = self.containerheight / self.yzooms[i] / self.nviews;
         }
-        // console.log(":::>");
-        // console.log(self.yzooms);
-        // console.log(":::<");
     }
 
     self.scroll = function() {
         self.$views.each(function(i, j){
-            var xscroll = ((self.xmax-self.xmin) - self.xviewable) * (self.xscrollbar.scrollval) + self.xmin;
-            var yscroll = (self.yviewsizes[i] - self.yviewables[i]) * (self.yscrollbars[i].scrollval);
+            console.log("!!!! " + self.yscrollbars[i].scrollProportion)
+
+            var xscroll = ((self.xmax-self.xmin) - self.xviewable) * (self.xscrollbar.scrollProportion) + self.xmin - 150;
+            var yscroll = ((self.ymax - self.ymin) - self.yviewables[i]) * (self.yscrollbars[i].scrollProportion);
             var viewBox = [xscroll, yscroll, self.xviewable, self.yviewables[i]];
 
             $(this).find("svg")[0].setAttribute("viewBox", viewBox.join(" "));
@@ -238,25 +240,25 @@ function ScrollPanel(element, options, svg_tags) {
 
     self.scrollToBottom = function() {
         self.yscrollbars.forEach(function(scrollbar){
-            scrollbar.scrollTo(1e100);
+            scrollbar.scrollTo(1.0);
         });
     }
 
     self.moveView = function(deltax, deltay){
-        self.xscrollbar.scrollTo(self.xscrollbar.curscroll()+deltax);
+        self.xscrollbar.scrollBy(deltax);
         self.yscrollbars.forEach(function(scrollbar, i){
-            scrollbar.scrollTo(scrollbar.curscroll()+deltay);
+            scrollbar.scrollBy(deltay);
         });
         self.update();
     }
 
     self.update = function() {
-        self.xscrollbar.resize($(self.$views[0]).width(), self.xviewable, self.xmax-self.xmin);
+        self.zoom();
+        self.xscrollbar.resize($(self.$views[0]).width(), self.xviewable, self.xmax-self.xmin + 300);
 
         self.yscrollbars.forEach(function(scrollbar, i){
-            scrollbar.resize($(self.$views[i]).height(), self.yviewables[i], self.yviewsizes[i]);
+            scrollbar.resize($(self.$views[i]).height(), self.yviewables[i], self.ymax-self.ymin); //self.yviewsizes[i]);
         });
-        self.zoom();
         self.scroll();
     }
 

@@ -22,7 +22,7 @@ function update () {
       for (var i=0; i<data.results.length; i++) {
         var result = data.results[i];
         $('#' +which +'_result .' + result.name + ' .track').html(result.svg);
-        console.log("LOADING:" + result.name);
+        // console.log("LOADING:" + result.name);
       }
       dohover('#' +which +'_result');
       $("#" + which + "_result .svg_container").SVGScroller();
@@ -35,7 +35,7 @@ function update () {
   addSVG("amb");
 
   $.getJSON('/_disp', {"req":"counts"}, function(data) {
-    console.log(data.result);
+    // console.log(data.result);
     var table = $('<table></table>');
 
     var keys = ["AltCount", "RefCount", "AmbCount"];
