@@ -12,6 +12,11 @@ from utilities import Locus, reverseComp
 import misc
 
 
+def getListDefault(list_, index, default=None):
+    if len(list_) <= index:
+        return default
+    return list_[index]
+
 def savereads(args, bam, reads, n=None):
     if args.save_reads:
         outbam_path = args.save_reads
@@ -40,7 +45,7 @@ def getVariant(args, genome):
         if args.deldemo:
             chrom, start, end = "chr1", 72766323, 72811840
         else:
-            assert len(args.breakpoints) == 3, "Format for deletion breakpoints is [chrom, start, end]"
+            assert len(args.breakpoints) == 3, "Format for deletion breakpoints is '<chrom> <start> <end>'"
             chrom = args.breakpoints[0]
             start = int(args.breakpoints[1])
             end = int(args.breakpoints[2])
@@ -50,10 +55,10 @@ def getVariant(args, genome):
         variant = StructuralVariants.Deletion.from_breakpoints(chrom, start-1, end-1, extraSpace, genome)
     elif args.type.lower().startswith("ins"):
         if args.insdemo:
-            chrom, pos, seq = "chr3", 20090540, misc.L1SEQ
+            chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
             print "here"
         else:
-            assert len(args.breakpoints) == 3, "Format for insertion breakpoints is [chrom, pos, seq]"
+            assert len(args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <pos> <seq>'"
             chrom = args.breakpoints[0]
             pos = int(args.breakpoints[1])
             seq = int(args.breakpoints[2])
@@ -61,8 +66,21 @@ def getVariant(args, genome):
             args.min_mapq = -1
 
         print chrom, pos, seq
-        variant = StructuralVariants.Insertion(Locus(chrom, pos, pos, "+"), reverseComp(seq), extraSpace, genome)
+        variant = StructuralVariants.Insertion(Locus(chrom, pos, pos, "+"), seq, extraSpace, genome)
         print variant.searchRegions()
+    elif args.type.lower().startswith("mei"):
+        assert len(args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
+        insertionBreakpoint = Locus(args.breakpoints[1], args.breakpoints[2], args.breakpoints[2], "+")
+
+        meName = args.breakpoints[3]
+        meStrand = getListDefault(args.breakpoints, 4, "+")
+        meStart = getListDefault(args.breakpoints, 5, 0)
+        meEnd = getListDefault(args.breakpoints, 6, 1e100)
+
+        meCoords = Locus(meName, meStart, meEnd, meStrand)
+        meFasta = pyfaidx.Fasta(args.breakpoints[0], as_raw=True)
+
+        variant = StructuralVariants.MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, extraSpace, genome)
     else:
         raise Exception("only accept event types of deletion or insertion")
 

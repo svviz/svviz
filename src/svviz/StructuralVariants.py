@@ -1,4 +1,4 @@
-from utilities import Locus
+from utilities import Locus, reverseComp
 
 class StructuralVariant(object):
     def __init__(self, breakpoints, searchDistance, fasta):
@@ -65,7 +65,7 @@ class Deletion(StructuralVariant):
 
 class Insertion(StructuralVariant):
     def __init__(self, breakpoint, insertSeq, searchDistance, fasta):
-        super(Insertion, self,).__init__([breakpoint], searchDistance, fasta)
+        super(Insertion, self).__init__([breakpoint], searchDistance, fasta)
         self.insertSeq = insertSeq
 
     def searchRegions(self):
@@ -89,6 +89,16 @@ class Insertion(StructuralVariant):
 
     def getAltRelativeBreakpoints(self):
         return [self.searchDistance, self.searchDistance+len(self.insertSeq)]
+
+class MobileElementInsertion(Insertion):
+    def __init__(self, breakpoint, insertedSeqLocus, insertionFasta, searchDistance, refFasta):
+        insertionSequence = insertionFasta[insertedSeqLocus.chr()][insertedSeqLocus.start():insertedSeqLocus.end()+1].upper()
+        if insertedSeqLocus.strand() == "-":
+            insertionSequence = reverseComp(insertionSequence)
+
+        super(MobileElementInsertion, self).__init__(breakpoint, insertionSequence, searchDistance, refFasta)
+
+
 
 
 if __name__ == '__main__':

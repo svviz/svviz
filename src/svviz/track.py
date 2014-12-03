@@ -185,7 +185,7 @@ class Track(object):
 
     def dolayout(self):
         numRows = int(self.height/(self.rowHeight+self.rowMargin))
-        self.rows = [None]*numRows
+        self.rows = [None]#*numRows
 
         for alignmentSet in self.getAlignments():
             # if len(alignmentSet.getAlignments()) < 2:
@@ -195,6 +195,8 @@ class Track(object):
             alignmentSet.yoffset = yoffset
 
         self.height = (self.rowHeight+self.rowMargin) * len(self.rows)
+
+        print "HEIGHT:", self.height
 
 
     def render(self):
@@ -209,7 +211,7 @@ class Track(object):
             self.readRenderer.render(alignmentSet)
 
         for vline in self.vlines:
-            self.svg.rect(self.scale.topixels(vline), self.svg.height, 1, self.svg.height, fill="black")
+            self.svg.rect(self.scale.topixels(vline), self.svg.height, 1, self.height, fill="black")
 
         self.rendered = str(self.svg)
 
