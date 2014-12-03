@@ -232,6 +232,10 @@ function ScrollPanel(element, options, svg_tags) {
 
             var xscroll = ((self.xmax-self.xmin) - self.xviewable) * (self.xscrollbar.scrollProportion) + self.xmin - 150;
             var yscroll = ((self.ymax - self.ymin) - self.yviewables[i]) * (self.yscrollbars[i].scrollProportion);
+
+            if (self.yviewables[i] > (self.ymax-self.ymin)) {
+                yscroll = ((self.ymax-self.ymin) - self.yviewables[i]) / 2.0;
+            }
             var viewBox = [xscroll, yscroll, self.xviewable, self.yviewables[i]];
 
             $(this).find("svg")[0].setAttribute("viewBox", viewBox.join(" "));
