@@ -70,6 +70,9 @@ def getVariant(args, genome):
         print variant.searchRegions()
     elif args.type.lower().startswith("mei"):
         assert len(args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
+        if args.min_mapq is None:
+            args.min_mapq = -1
+            
         insertionBreakpoint = Locus(args.breakpoints[1], args.breakpoints[2], args.breakpoints[2], "+")
 
         meName = args.breakpoints[3]
@@ -128,7 +131,7 @@ def main():
     datasets = collections.OrderedDict()
 
     for i, bampath in enumerate(args.bam):
-        name = os.path.basename(bampath).replace(".", "_")
+        name = os.path.basename(bampath).replace(".", "_").replace("+", "_")
         bam = pysam.Samfile(bampath, "rb")
 
         refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)

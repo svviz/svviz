@@ -24,10 +24,10 @@ class AlignmentSet(object):
         return self.start > 0 and self.end > 0
 
     def __len__(self):
-        if self.start >= 0:
-            return self.end - self.start + 1
-        raise Exception, "Why is the start coordinate less than 0? {} {}".format(self.start, self.end)
-        return None
+        # if self.start >= 0:
+        return self.end - self.start + 1
+        # raise Exception, "Why is the start coordinate less than 0? {} {}".format(self.start, self.end)
+        # return None
 
     def addAlignment(self, newaln):
         self._alignments.append(newaln)
@@ -35,6 +35,9 @@ class AlignmentSet(object):
 
         self.start = min(x.start for x in self._alignments)
         self.end = max(x.end for x in self._alignments)
+
+        if self.start < 0:
+            print [x.start for x in self._alignments]
 
     def getAlignments(self):
         return self._alignments

@@ -50,6 +50,7 @@ class Multimap(Multiprocessor):
         self.aligner = ssw_wrap.Aligner(refseq, report_cigar=True)
 
     def remap(self, seq):
+        # print seq
         return seq, findBestAlignment(seq, self.aligner)
 
 def do1remap(refseq, reads):
