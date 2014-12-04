@@ -133,7 +133,7 @@ def main():
     countsByDataset = collections.OrderedDict()
 
     for i, bampath in enumerate(args.bam):
-        name = os.path.basename(bampath).replace(".", "_").replace("+", "_")
+        name = os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
         bam = pysam.Samfile(bampath, "rb")
 
         refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)

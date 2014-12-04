@@ -211,7 +211,7 @@ class Track(object):
             self.readRenderer.render(alignmentSet)
 
         for vline in self.vlines:
-            self.svg.rect(self.scale.topixels(vline), self.svg.height, 1, self.height, fill="black")
+            self.svg.rect(self.scale.topixels(vline), self.svg.height+20, 1, self.height+40, fill="black")
 
         self.rendered = str(self.svg)
 
