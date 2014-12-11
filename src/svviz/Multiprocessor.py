@@ -28,14 +28,7 @@ def chunkIt(seq, num):
 # reuse process pools for multiple Multiprocessor.map() calls
 # to prevent having too many interprocess communication files open
 _queue = multiprocessing.Queue()
-_pools = {}
-def getPool(processes=2):
-    global _pools
-
-    if not processes in _pools:
-        _pools[processes] = multiprocessing.Pool(processes=processes, initializer=_map_init, initargs=[_queue])
-
-    return _pools[processes]    
+  
         
 class Multiprocessor(object):
     @classmethod
@@ -57,7 +50,7 @@ class Multiprocessor(object):
         """
     
         queue = _queue
-        pool = getPool(processes)        
+        pool = multiprocessing.Pool(processes=processes, initializer=_map_init, initargs=[_queue])      
         # queue = multiprocessing.Queue()
         # if verbose <= 2:
         #     pool = multiprocessing.Pool(processes=processes)
@@ -100,7 +93,9 @@ class Multiprocessor(object):
 
             if verbose > 2:
                 progressBar.redraw()
-                
+        
+        pool.close()
+
         if verbose > 2:
             sys.stderr.write("\n")
             t1 = time.time()
