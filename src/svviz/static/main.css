@@ -1,36 +1,16 @@
-.selectbox {
-    display: none;
-    z-index: 9000;
-    position: absolute !important;
-    cursor: default !important;
+.doc {
+  margin-left: 2em;
+  margin-right: 2em;
 
-    background-color:rgba(239, 28, 190, 0.6);
-    /*visibility: hidden;*/
-
-    left: 10;
-    top: 10;
-    width: 100;
-    height: 200;
-}
-
-
-.selectbox > div {
-  position: absolute;
-  left: 0px !important;
-  top: 2px !important;
-}
-
-#selspan {
-  background-color: rgba(0, 28, 190, 0.6);
-  border: 10px solid #b20e8c;
-  width: 100%;
-  height: 100%;
-  float: left;
 }
 
 #description td, th {
   padding: 2px 10px;
   text-align: right;
+}
+
+th {
+  background-color: #eeeeee;
 }
 
 svg {
@@ -44,8 +24,9 @@ svg {
 
 .info {
   height: 150px;
-  width: 1500px;
-  overflow: visible;
+  /*width: 1500px;*/
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .track {
@@ -62,7 +43,7 @@ svg {
     overflow: hidden;
 }
 .svg_container {
-    width: 800px;
+    /*width: 800px;*/
     height: 600px;
     border: 2px solid #5d5d5d;
     /*background-color: #dddddd;*/
@@ -84,8 +65,8 @@ svg {
 .scrollbar.horiz {
     width: 90px;
     height: 10px;
-    right: 10px;
-    bottom: 0px;
+    left: 2px;
+    bottom: 2px;
 }
 .thumb {
     background-color: #888888;

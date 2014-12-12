@@ -47,7 +47,7 @@ def findBestAlignment(seq, aligner):
 
 class Multimap(Multiprocessor):
     def __init__(self, refseq):
-        self.aligner = ssw_wrap.Aligner(refseq, report_cigar=True)
+        self.aligner = ssw_wrap.Aligner(refseq, report_cigar=True, report_secondary=True)
 
     def remap(self, seq):
         # print seq
@@ -68,7 +68,7 @@ def do1remap(refseq, reads):
             # genome_seq = reverseComp(genome_seq)
         if read.is_reverse:
             strand = "+" if strand=="-" else "-"
-        aln = Alignment(read.qname, aln.ref_begin, aln.ref_end, strand, seq, aln.cigar_string, aln.score, genome_seq)
+        aln = Alignment(read.qname, aln.ref_begin, aln.ref_end, strand, seq, aln.cigar_string, aln.score, genome_seq, aln.score2)
         alignmentSets[read.qname].addAlignment(aln)
 
     return alignmentSets
@@ -97,6 +97,8 @@ def do_realign(variant, bam, minmapq):
 
 
 def _isCorrectOrientation(alnset, expectedOrientation):
+    if expectedOrientation == "any":
+        return True
     return alnset.orientation() == expectedOrientation
 
 def _disambiguate(refset, altset, insertSizeDistribution, expectedOrientation):
@@ -181,6 +183,18 @@ def disambiguate(refalignments, altalignments, MEAN_INSERT_SIZE, INSERT_SIZE_2ST
 
         __disambiguate = lambda : _disambiguate(refset, altset, isd, ORIENTATION)
 
+        def _print(who_):
+            aln_ = who_.getAlignments()[0]
+            print aln_.name, aln_.start, aln_.end, aln_.score, aln_.score2
+
+        NAMES = ["6201_8331", "2704_3992", "3791_5699"]
+        for name in NAMES:
+            if name in key:
+                _print(refset)
+                break
+        # print key
+        # _print(refset)
+
         def addref():
             refset.prob = __disambiguate()
             selectedRefAlignments.append(refset)
@@ -194,29 +208,29 @@ def disambiguate(refalignments, altalignments, MEAN_INSERT_SIZE, INSERT_SIZE_2ST
         # print refscore, altscore, refset.getAlignments()[0].seq, refset.getAlignments()[1].seq
 
         if refscore == altscore and refset.allSegmentsWellAligned():
-            if refset.is_aligned() and abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and refset.orientation() == ORIENTATION:
-                if altset.is_aligned() and abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and altset.orientation() == ORIENTATION:
+            if refset.is_aligned() and abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(refset.orientation(), ORIENTATION):
+                if altset.is_aligned() and abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(altset.orientation(), ORIENTATION):
                     # both good
                     # print refscore, altscore
                     addamb()
                 else:
                     addref()
                     # selectedRefAlignments.append(refset)
-            elif altset.is_aligned() and abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and altset.orientation() == ORIENTATION:
+            elif altset.is_aligned() and abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(altset.orientation(), ORIENTATION):
                 addalt()
                 # selectedAltAlignments.append(altset)
             else:
                 addamb()
                 # selectedAmbiguousAlignments.append(refset)
         elif refscore > altscore and refset.allSegmentsWellAligned():
-            if abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and refset.orientation() == ORIENTATION:
+            if abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(refset.orientation(), ORIENTATION):
                 addref()
                 # selectedRefAlignments.append(refset)
             else:
                 addamb()
                 # selectedAmbiguousAlignments.append(refset)
         elif altset.allSegmentsWellAligned():
-            if abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and altset.orientation() == ORIENTATION:
+            if abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(altset.orientation(), ORIENTATION):
                 addalt()
                 # selectedAltAlignments.append(altset)
             else:
@@ -229,7 +243,7 @@ def disambiguate(refalignments, altalignments, MEAN_INSERT_SIZE, INSERT_SIZE_2ST
 
     # for aln in selectedAltAlignments:
     #     print aln.prob
-    return selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAlignments
+    return selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAlignments, isd
 
 
 def main():

@@ -31,16 +31,15 @@ In addition, the ssw alignment module (see below) needs to be compiled using gcc
 
 ```
 usage: svviz [-h] [-t TYPE] [-o ORIENTATION] [-m ISIZE_MEAN] [-s ISIZE_STD]
-             [-q MIN_MAPQ] [--save-reads SAVE_READS]
-             [--mate-pair | --paired300 | --deldemo | --insdemo]
-             ref bam [breakpoints [breakpoints ...]]
+             [-q MIN_MAPQ] [-a ALN_QUALITY] [--no-web]
+             [--save-reads SAVE_READS]
+             [--mate-pair | --pacbio | --deldemo | --insdemo] [-b BAM]
+             ref [breakpoints [breakpoints ...]]
 
 positional arguments:
   ref                   reference fasta file (a .faidx index file will be
                         created if it doesn't exist so you need write
                         permissions for this directory)
-  bam                   sorted, indexed bam file containing reads of interest to
-                        plot
   breakpoints
 
 optional arguments:
@@ -54,12 +53,23 @@ optional arguments:
                         stdev of the insert size
   -q MIN_MAPQ, --min-mapq MIN_MAPQ
                         minimum mapping quality for reads
+  -a ALN_QUALITY, --aln-quality ALN_QUALITY
+                        minimum score of the Smith-Waterman alignment against
+                        the ref or alt allele in order to be considered
+                        (multiplied by 2)
+  --no-web              don't show the web interface
   --save-reads SAVE_READS
                         save relevant reads to this file (bam)
   --mate-pair           sets defaults for ~6.5kb insert mate pair libraries
+  --pacbio              sets defaults for pacbio libraries
+  --deldemo
+  --insdemo
+  -b BAM, --bam BAM     sorted, indexed bam file containing reads of interest
+                        to plot
+
 ```
 
-The format for specifying deletion breakpoints is ```chrom start end```. The format for specifying insertions is ```chrom breakpoint <inserted sequence>```.
+The format for specifying deletion breakpoints is ```chrom start end```. The format for specifying insertions is ```chrom breakpoint <inserted sequence>```. Mobile elements can be specified by ```<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]```, where <ME name> must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
 
 For example:
 
@@ -72,7 +82,7 @@ When reads have been collected and processed, a new window will open in your web
 For the time being, use the mouse to pan and the scrollwheel (or double-clicking) to zoom in and out.
 
 
-### Smith-Waterman Alignment
+#### Smith-Waterman Alignment
 
 The Smith-Waterman Alignments are performed by https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library, whose license requires the following statements:
 

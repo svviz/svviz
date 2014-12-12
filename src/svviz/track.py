@@ -46,7 +46,7 @@ class ReadRenderer(object):
         yoffset = alignmentSet.yoffset
         pstart = self.scale.topixels(alignmentSet.start)
         pend = self.scale.topixels(alignmentSet.end)
-        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0), pend-pstart, 0.25, fill="gray")
+        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0), pend-pstart, 0.75, fill="gray")
 
         positionCounts = collections.Counter()
 

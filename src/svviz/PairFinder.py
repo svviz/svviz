@@ -32,7 +32,7 @@ class PairFinder(object):
         # Unclear what to do with supplementary alignments...
         # self.matched = [[read for read in self.readsByID[id_].reads if read.flag&0x800==0] for id_ in matchIDs]
 
-        print "missing pairs:", sum(1 for x in self.matched if len(x)<2)
+        print "missing pairs:", sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))
 
     def domatching(self):
         t0 = None
@@ -54,7 +54,7 @@ class PairFinder(object):
 
 
     def findmatch(self, read):
-        if read.rnext >= 0:
+        if read.is_paired and read.rnext >= 0:
             chrom = self.sam.getrname(read.rnext)
             self.loadRegion(chrom, read.pnext, read.pnext+1, verbose=True)
         # self.loadRegion(read.next_reference_id, read.next_reference_start, read.next_reference_start)
@@ -69,12 +69,14 @@ class PairFinder(object):
             # return []
 
         for read in reads:
-            if read.mapq > self.minmapq:
+            if read.mapq > self.minmapq and not read.is_secondary:
                 # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
 
-                # if len(self.readsByID[read.qname].reads) > 2:
-                #     print self.readsByID[read.qname]
+                if len(self.readsByID[read.qname].reads) > 1:
+                    print ""
+                    print "\n".join(map(str, self.readsByID[read.qname].reads))
+                    print "*"*200
 
         reads = [read for read in reads if read.mapq > self.minmapq]
         return reads

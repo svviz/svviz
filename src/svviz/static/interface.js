@@ -26,7 +26,7 @@ function update () {
       }
       dohover('#' +which +'_result');
       $("#" + which + "_result .svg_container").SVGScroller();
-      $( ".svg_container" ).resizable();
+      // $( ".svg_container" ).resizable();
     });
   }
 

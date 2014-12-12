@@ -208,7 +208,8 @@ function ScrollPanel(element, options, svg_tags) {
         // $(this).height((self.$element.height()-12)/self.nviews);
 
         $(this).width("100%");
-        $(this).height("calc("+100.0/self.nviews+"% - 12px)");
+        // $(this).height(100.0/self.nviews+"%");
+        $(this).height("calc("+100.0/self.nviews+"% - "+((10 +(self.nviews-1)*2.0)/self.nviews)+"px)");
 
 
         self.yviewables.push(0);
@@ -226,11 +227,19 @@ function ScrollPanel(element, options, svg_tags) {
         }
     }
 
+    $( window ).resize(function() {
+        self.update();
+    });
+
     self.scroll = function() {
+        var xscroll = ((self.xmax-self.xmin) - self.xviewable) * (self.xscrollbar.scrollProportion) + self.xmin;
+        if (self.xviewable > (self.xmax-self.xmin)) {
+            xscroll = ((self.xmax-self.xmin) - self.xviewable) / 2.0;
+        }
+
         self.$views.each(function(i, j){
             console.log("!!!! " + self.yscrollbars[i].scrollProportion)
 
-            var xscroll = ((self.xmax-self.xmin) - self.xviewable) * (self.xscrollbar.scrollProportion) + self.xmin - 150;
             var yscroll = ((self.ymax - self.ymin) - self.yviewables[i]) * (self.yscrollbars[i].scrollProportion);
 
             if (self.yviewables[i] > (self.ymax-self.ymin)) {
@@ -258,7 +267,7 @@ function ScrollPanel(element, options, svg_tags) {
 
     self.update = function() {
         self.zoom();
-        self.xscrollbar.resize($(self.$views[0]).width(), self.xviewable, self.xmax-self.xmin + 300);
+        self.xscrollbar.resize($(self.$views[0]).width(), self.xviewable, self.xmax-self.xmin);
 
         self.yscrollbars.forEach(function(scrollbar, i){
             scrollbar.resize($(self.$views[i]).height(), self.yviewables[i], self.ymax-self.ymin); //self.yviewsizes[i]);

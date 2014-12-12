@@ -4,9 +4,10 @@ import pyfaidx
 import pysam
 import time
 
+import InsertSizeProbabilities
 import CommandLine
 import StructuralVariants
-from remap import do_realign, disambiguate
+import remap
 import track
 from utilities import Locus, reverseComp
 import misc
@@ -15,6 +16,7 @@ import misc
 def getListDefault(list_, index, default=None):
     if len(list_) <= index:
         return default
+
     return list_[index]
 
 def savereads(args, bam, reads, n=None):
@@ -49,6 +51,7 @@ def getVariant(args, genome):
             chrom = args.breakpoints[0]
             start = int(args.breakpoints[1])
             end = int(args.breakpoints[2])
+            assert start < end
         if args.min_mapq is None:
             args.min_mapq = 30
 
@@ -87,6 +90,7 @@ def getVariant(args, genome):
     else:
         raise Exception("only accept event types of deletion or insertion")
 
+
     return variant
 
 def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAlignments, variant, name="x"):
@@ -119,7 +123,7 @@ def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAli
 
     return {"AltCount":len(selectedAltAlignments),
             "RefCount":len(selectedRefAlignments),
-            "AmbCount":len(selectedAmbiguousAlignments)}, selectedRefAlignments, selectedAltAlignments, selectedAmbiguousAlignments
+            "AmbCount":len(selectedAmbiguousAlignments)}
 
 
 def main():
@@ -131,22 +135,26 @@ def main():
     datasets = collections.OrderedDict()
 
     countsByDataset = collections.OrderedDict()
+    isizeDistributionsByDataset = collections.OrderedDict()
+
+    # from IPython import embed; embed()
 
     for i, bampath in enumerate(args.bam):
         name = os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
         bam = pysam.Samfile(bampath, "rb")
 
-        refalignments, altalignments, reads = do_realign(variant, bam, args.min_mapq)
+        refalignments, altalignments, reads = remap.do_realign(variant, bam, args.min_mapq)
         savereads(args, bam, reads, i)
-        altAlignments, refAlignments, ambiguousAlignments = disambiguate(refalignments, altalignments, 
+        altAlignments, refAlignments, ambiguousAlignments, isizes = remap.disambiguate(refalignments, altalignments, 
             args.isize_mean, 2*args.isize_std, args.orientation, bam)
+        isizeDistributionsByDataset[name] = isizes
 
-        counts, refalns, altalns, ambalns = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant, name)
+        counts = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant, name)
 
-        datasets[name] = {"refalns":refalns, "altalns":altalns, "ambalns":ambalns, "counts":counts}
+        datasets[name] = {"refalns":refAlignments, "altalns":altAlignments, "ambalns":ambiguousAlignments, "counts":counts}
         countsByDataset[name] = [len(altAlignments), len(refAlignments), len(ambiguousAlignments)]
 
-    if True:
+    if not args.no_web:
         # launch web view
         import web
 
@@ -159,6 +167,11 @@ def main():
         web.RESULTS = countsByDataset
         web.RESULTS["Total"] = [sum(countsByDataset[row][col] for row in countsByDataset) for col in range(3)]
         web.SAMPLES = datasets.keys()
+
+        if all(not isd.fail for isd in isizeDistributionsByDataset.values()):
+            web.ISIZES = isizeDistributionsByDataset.keys()
+            for name, isd in isizeDistributionsByDataset.iteritems():
+                InsertSizeProbabilities.plotInsertSizeDistribution(isd, name, datasets[name])
 
         web.run()
 

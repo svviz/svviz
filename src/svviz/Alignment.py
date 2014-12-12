@@ -4,7 +4,7 @@ from utilities import reverseComp
 
 
 class Alignment(object):
-    def __init__(self, name, start, end, strand, seq, cigar, score, genome_seq):
+    def __init__(self, name, start, end, strand, seq, cigar, score, genome_seq, score2):
         self.name = name
         self.start = start
         self.end = end
@@ -13,10 +13,13 @@ class Alignment(object):
         self.genome_seq = genome_seq
         self.cigar = cigar
         self.score = score
+        self.score2 = score2
 
 
 
 class AlignmentSet(object):
+    AlnThreshold = 0.8
+
     def __init__(self):
         self._alignments = []
 
@@ -44,7 +47,7 @@ class AlignmentSet(object):
 
     def allSegmentsWellAligned(self):
         for aln in self._alignments:
-            if aln.score / 2.0 < len(aln.seq) * 0.8:
+            if aln.score / 2.0 < len(aln.seq) * self.AlnThreshold:
                 # require matches at 80% of all positions
                 return False
         return True

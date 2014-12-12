@@ -65,6 +65,7 @@ class Multiprocessor(object):
                                                  [cls, methodname, initArgs, chunk, i, verbose])
             result.chunkCount = i
             asyncResults.append(result)
+        pool.close()
 
         numChunks = len(asyncResults)
         
@@ -94,7 +95,7 @@ class Multiprocessor(object):
             if verbose > 2:
                 progressBar.redraw()
         
-        pool.close()
+        pool.join()        
 
         if verbose > 2:
             sys.stderr.write("\n")

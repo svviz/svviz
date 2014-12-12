@@ -1,4 +1,5 @@
 import argparse
+from Alignment import AlignmentSet
 
 def parseArgs():
     parser = argparse.ArgumentParser()
@@ -9,12 +10,16 @@ def parseArgs():
     parser.add_argument("-s", "--isize-std", type=float, help="stdev of the insert size")
 
     parser.add_argument("-q", "--min-mapq", type=float, help="minimum mapping quality for reads")
+    parser.add_argument("-a", "--aln-quality", type=float, help="minimum score of the Smith-Waterman alignment against the ref or alt allele in order to be considered (multiplied by 2)")
+
+    parser.add_argument("--no-web", action="store_true", help="don't show the web interface")
 
     parser.add_argument("--save-reads", help="save relevant reads to this file (bam)")
 
     defaults = parser.add_mutually_exclusive_group()
     defaults.add_argument("--mate-pair", action="store_true", help="sets defaults for ~6.5kb insert mate pair libraries")
-    defaults.add_argument("--paired300", action="store_true", help="sets defaults for ~300 bp insert short fragment paired end libraries")
+    defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
+    defaults.add_argument("--moleculo", action="store_true", help="sets defaults for moleculo libraries")
     defaults.add_argument("--deldemo", action="store_true", help="")
     defaults.add_argument("--insdemo", action="store_true", help="")
 
@@ -30,15 +35,26 @@ def parseArgs():
         args.orientation = "-+"
         args.isize_mean = 6500
         args.isize_std = 1100
-    elif args.paired300:
-        args.orientation = "+-"
-        args.isize_mean = 300
-        args.isize_std = 25
+    elif args.pacbio:
+        args.orientation = "any"
+        args.isize_mean = 10000
+        args.isize_std = 1000000
+        if args.aln_quality is None:
+            args.aln_quality = 0.65
+    elif args.moleculo:
+        args.orientation = "any"
+        args.isize_mean = 10000
+        args.isize_std = 1000000
+        if args.aln_quality is None:
+            args.aln_quality = 0.85
 
     if args.deldemo:
         args.type = "del"
     if args.insdemo:
         args.type = "ins"
+
+    if args.aln_quality is not None:
+        AlignmentSet.AlnThreshold = args.aln_quality
         
     return args
 
