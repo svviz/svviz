@@ -9,6 +9,9 @@ class StructuralVariant(object):
         self._refseq = None
         self._altseq = None
 
+    def __str__(self):
+        return "{}({};{})".format(self.__class__.__name__, self.breakpoints, self.searchDistance)
+
     def searchRegions(self):
         pass    
     def getRefSeq(self):
@@ -92,11 +95,15 @@ class Insertion(StructuralVariant):
 
 class MobileElementInsertion(Insertion):
     def __init__(self, breakpoint, insertedSeqLocus, insertionFasta, searchDistance, refFasta):
+        self.insertedSeqLocus = insertedSeqLocus
         insertionSequence = insertionFasta[insertedSeqLocus.chr()][insertedSeqLocus.start():insertedSeqLocus.end()+1].upper()
         if insertedSeqLocus.strand() == "-":
             insertionSequence = reverseComp(insertionSequence)
 
         super(MobileElementInsertion, self).__init__(breakpoint, insertionSequence, searchDistance, refFasta)
+
+    def __str__(self):
+        return "{}::{}({});{})".format(self.__class__.__name__, self.insertedSeqLocus.chr(), self.breakpoints, self.searchDistance)
 
 
 

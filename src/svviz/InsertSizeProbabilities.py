@@ -97,8 +97,8 @@ def plotInsertSizeDistribution(isd, name, dataset):
             filename += ".svg"
         r.svg(filename)
 
-        alnsetNames = ["altalns", "refalns", "ambalns"]
-        plotting.ecdf([isd.isizes]+[[len(alnset) for alnset in dataset[alnsetName]] for alnsetName in alnsetNames],
+        alnsetNames = ["alt", "ref", "amb"]
+        plotting.ecdf([isd.isizes]+[[len(chosenSet) for chosenSet in dataset["chosenSets"][alnsetName]] for alnsetName in alnsetNames],
             ["average"]+alnsetNames, xlab="Insert size (bp)", main=name)
         
         # x = numpy.arange(0, max(isd.isizes), max(isd.isizes)/250)

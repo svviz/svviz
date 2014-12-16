@@ -1,3 +1,4 @@
+import logging
 import re
 from utilities import reverseComp
 
@@ -14,7 +15,6 @@ class Alignment(object):
         self.cigar = cigar
         self.score = score
         self.score2 = score2
-
 
 
 class AlignmentSet(object):
@@ -40,7 +40,7 @@ class AlignmentSet(object):
         self.end = max(x.end for x in self._alignments)
 
         if self.start < 0:
-            print [x.start for x in self._alignments]
+            logging.warn("Incorrect start positions: {}".format([x.start for x in self._alignments]))
 
     def getAlignments(self):
         return self._alignments
@@ -56,7 +56,35 @@ class AlignmentSet(object):
         return "".join(aln.strand for aln in self.getAlignments())
 
 
+class AlignmentSetCollection(object):
+    def __init__(self, name=None):
+        self.name = name
+        self.sets = {}
+        self.evidences = {}
+        self.choice = None
+
+    def addSet(self, newset, name):
+        self.sets[name] = newset
+
+    def addEvidence(self, evidence, key):
+        self.evidences[key] = evidence
+
+    def choose(self, name):
+        self.choice = name
+
+    def chosenSet(self):
+        choice = self.choice
+        if choice == "amb":
+            choice = "ref"
+        return self.sets[choice]
+
+    def __getitem__(self, key):
+        return self.sets[key]
+
 def getBlastRepresentation(read):
+    return getBlastRepresentation(read.seq, read.genome_seq, read.cigar)
+
+def _getBlastRepresentation(read_seq, genome_seq, cigar):
     pattern = re.compile('([0-9]*)([MIDNSHP=X])')
 
     seqout = []
@@ -66,13 +94,13 @@ def getBlastRepresentation(read):
     genomepos = 0
     seqpos = 0
 
-    for length, code in pattern.findall(read.cigar):
+    for length, code in pattern.findall(cigar):
         length = int(length)
 
         if code == "M":
             for i in range(length):
-                g = read.genome_seq[genomepos]
-                s = read.seq[seqpos]
+                g = genome_seq[genomepos]
+                s = read_seq[seqpos]
 
                 seqout.append(s)
                 genomeout.append(g)
@@ -86,14 +114,14 @@ def getBlastRepresentation(read):
                 seqpos += 1
         elif code in "D":
             for i in range(length):
-                g = read.genome_seq[genomepos]
+                g = genome_seq[genomepos]
                 genomeout.append(g)
                 seqout.append("-")
                 matches.append("x")
                 genomepos += 1
         elif code in "IHS":
             for i in range(length):
-                s = read.seq[seqpos]
+                s = read_seq[seqpos]
                 seqout.append(s)
                 genomeout.append("-")
                 matches.append("#")

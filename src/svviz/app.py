@@ -1,9 +1,11 @@
 import collections
+import logging
 import os
 import pyfaidx
 import pysam
 import time
 
+from svviz import debug
 import InsertSizeProbabilities
 import CommandLine
 import StructuralVariants
@@ -26,7 +28,7 @@ def savereads(args, bam, reads, n=None):
             outbam_path += ".bam"
 
         if n is not None:
-            print "Using i =", n
+            logging.debug("Using i = {}".format(n))
             outbam_path = outbam_path.replace(".bam", ".{}.bam".format(n))
 
         # print out just the reads we're interested for use later
@@ -59,7 +61,6 @@ def getVariant(args, genome):
     elif args.type.lower().startswith("ins"):
         if args.insdemo:
             chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
-            print "here"
         else:
             assert len(args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <pos> <seq>'"
             chrom = args.breakpoints[0]
@@ -68,9 +69,7 @@ def getVariant(args, genome):
         if args.min_mapq is None:
             args.min_mapq = -1
 
-        print chrom, pos, seq
         variant = StructuralVariants.Insertion(Locus(chrom, pos, pos, "+"), seq, extraSpace, genome)
-        print variant.searchRegions()
     elif args.type.lower().startswith("mei"):
         assert len(args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
         if args.min_mapq is None:
@@ -90,52 +89,39 @@ def getVariant(args, genome):
     else:
         raise Exception("only accept event types of deletion or insertion")
 
+    logging.info("Variant: {}".format(variant))
 
     return variant
 
-def getTracks(selectedAltAlignments, selectedRefAlignments, selectedAmbiguousAlignments, variant, name="x"):
-    print "Ref:", len(selectedRefAlignments), "Alt:", len(selectedAltAlignments), "Amb:", len(selectedAmbiguousAlignments)
+def getTracks(chosenSets, variant, name="x"):
+    svgs = {}
 
+    ref_chrom = track.ChromosomePart(variant.getRefSeq())
+    ref_track = track.Track(ref_chrom, chosenSets["ref"], 3000, 4000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
+    svgs["ref"] = ref_track.render()
 
-    c = track.ChromosomePart(variant.getRefSeq())
-    t = track.Track(c, selectedRefAlignments, 3000, 4000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
-    # t = track.Track(c, selectedRefAlignments, 3000, 2500, 0, len(refseq), vlines=[8000+extraSpace, end-start+extraSpace])#, 4000, 7000+end-start)
-    out = open("ref.{}.svg".format(name), "w")
-    out.write(t.render())
+    alt_chrom = track.ChromosomePart(variant.getAltSeq())
+    alt_track = track.Track(alt_chrom, chosenSets["alt"], 5000, 15000, 0, len(variant.getAltSeq()), vlines=variant.getAltRelativeBreakpoints())
+    svgs["alt"] = alt_track.render()
 
+    amb_track = track.Track(ref_chrom, chosenSets["amb"], 4000, 10000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
+    svgs["amb"] = amb_track.render()
 
-    c = track.ChromosomePart(variant.getAltSeq())
-    t = track.Track(c, selectedAltAlignments, 5000, 15000, 0, len(variant.getAltSeq()), vlines=variant.getAltRelativeBreakpoints())
-
-    # t = track.Track(c, selectedAltAlignments, 1000, 2500, 0, len(altseq), vlines=[8000+extraSpace])#, 8000, 8000+end-start)
-    t0 = time.time()
-    out = open("alt.{}.svg".format(name), "w")
-    out.write(t.render())
-    t1 = time.time()
-
-    print "time rendering alt:", t1-t0
-
-    c = track.ChromosomePart(variant.getRefSeq())
-    t = track.Track(c, selectedAmbiguousAlignments, 4000, 10000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
-    # t = track.Track(c, selectedAmbiguousAlignments, 1000, 2500, 0, len(refseq), vlines=[8000+extraSpace, end-start+extraSpace])#, 4000, 7000+end-start)
-    out = open("amb.{}.svg".format(name), "w")
-    out.write(t.render())
-
-    return {"AltCount":len(selectedAltAlignments),
-            "RefCount":len(selectedRefAlignments),
-            "AmbCount":len(selectedAmbiguousAlignments)}
+    return svgs
 
 
 def main():
     args = CommandLine.parseArgs()
+    run(args)
+
+def run(args):
+    logging.debug(args)
 
     genome = pyfaidx.Fasta(args.ref, as_raw=True)
     variant = getVariant(args, genome)
-    print args
     datasets = collections.OrderedDict()
 
-    countsByDataset = collections.OrderedDict()
-    isizeDistributionsByDataset = collections.OrderedDict()
+    
 
     # from IPython import embed; embed()
 
@@ -143,34 +129,46 @@ def main():
         name = os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
         bam = pysam.Samfile(bampath, "rb")
 
-        refalignments, altalignments, reads = remap.do_realign(variant, bam, args.min_mapq)
+        reads = remap.getReads(variant, bam, args.min_mapq)
         savereads(args, bam, reads, i)
-        altAlignments, refAlignments, ambiguousAlignments, isizes = remap.disambiguate(refalignments, altalignments, 
-            args.isize_mean, 2*args.isize_std, args.orientation, bam)
-        isizeDistributionsByDataset[name] = isizes
 
-        counts = getTracks(altAlignments, refAlignments, ambiguousAlignments, variant, name)
+        alnCollections = remap.do_realign(variant, reads)
+        isd = InsertSizeProbabilities.InsertSizeDistribution(bam)
+        remap.disambiguate(alnCollections, isd, args.isize_mean, 2*args.isize_std, args.orientation, bam)
 
-        datasets[name] = {"refalns":refAlignments, "altalns":altAlignments, "ambalns":ambiguousAlignments, "counts":counts}
-        countsByDataset[name] = [len(altAlignments), len(refAlignments), len(ambiguousAlignments)]
+        chosenSets = collections.defaultdict(list)
+        for alnCollection in alnCollections:
+            chosenSets[alnCollection.choice].append(alnCollection.chosenSet())
+
+        datasets[name] = {"alnCollections":alnCollections,
+                          "chosenSets":chosenSets,
+                          "isd": isd,
+                          "counts":collections.Counter([x.choice for x in alnCollections])}
 
     if not args.no_web:
         # launch web view
         import web
 
+        web.SVGsByDataset = {}
+
+        for name in datasets:
+            web.SVGsByDataset[name] = getTracks(datasets[name]["chosenSets"], variant, name)
+
         web.READ_INFO = {}
+        web.RESULTS = collections.OrderedDict()
         for name in datasets:
             dataset = datasets[name]
-            for readset in dataset["refalns"] + dataset["altalns"] + dataset["ambalns"]:
-                web.READ_INFO[readset.getAlignments()[0].name] = readset
+            for readCollection in dataset["alnCollections"]:
+                web.READ_INFO[readCollection.name] = readCollection.chosenSet()
+            web.RESULTS[name] = dataset["counts"]
 
-        web.RESULTS = countsByDataset
-        web.RESULTS["Total"] = [sum(countsByDataset[row][col] for row in countsByDataset) for col in range(3)]
+        web.RESULTS["Total"] = dict((col, sum(web.RESULTS[row][col] for row in web.RESULTS)) for col in ["alt", "ref", "amb"])
         web.SAMPLES = datasets.keys()
 
-        if all(not isd.fail for isd in isizeDistributionsByDataset.values()):
-            web.ISIZES = isizeDistributionsByDataset.keys()
-            for name, isd in isizeDistributionsByDataset.iteritems():
+        if all(not dataset["isd"].fail for dataset in datasets.itervalues()):
+            web.ISIZES = web.SAMPLES
+            for name in web.SAMPLES:
+                isd = datasets[name]["isd"]
                 InsertSizeProbabilities.plotInsertSizeDistribution(isd, name, datasets[name])
 
         web.run()

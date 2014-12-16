@@ -73,13 +73,13 @@ The format for specifying deletion breakpoints is ```chrom start end```. The for
 
 For example:
 
-```svviz --mate-pair -t del ~/data/hg19.fasta ~/data/sample1.sorted.bam chr7 153757067 153758235```
+```svviz --mate-pair -t del -b ~/data/sample1.sorted.bam ~/data/hg19.fasta chr7 153757067 153758235```
 
-```svviz -m 256 -s 32 -q 30 -t ins ~/data/hg19.fasta ~/data/sample2.sorted.bam chr3 35252554 ATGTGTCGTAGATATTTTTCGTAGGAAAACGGCCCCATGAGTATATAGCGCTAGAGTAGA```
+```svviz -m 256 -s 32 -q 30 -t ins -b ~/data/sample2.sorted.bam ~/data/hg19.fasta chr3 35252554 ATGTGTCGTAGATATTTTTCGTAGGAAAACGGCCCCATGAGTATATAGCGCTAGAGTAGA```
 
 When reads have been collected and processed, a new window will open in your web browser allowing you to browse reads supporting the reference and alternate alleles.
 
-For the time being, use the mouse to pan and the scrollwheel (or double-clicking) to zoom in and out.
+For the time being, panning can be performed by using the scrollbars, using the scrollwheel (with shift) or clicking and dragging; to zoom, hold down option (alt) while spinning the scrollwheel.
 
 
 #### Smith-Waterman Alignment

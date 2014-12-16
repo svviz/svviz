@@ -1,4 +1,5 @@
 import collections
+import logging
 import time
 
 class ReadSet(object):
@@ -20,7 +21,7 @@ class PairFinder(object):
         for region in self.regions:
             self.tomatch.update(self.loadRegion(region.chr(), region.start(), region.end()))
 
-        print len(self.tomatch), self.minmapq
+        logging.debug("To-match: {}, min-mapq: {}".format(len(self.tomatch), self.minmapq))
         self.domatching()
 
         # for read in self.tomatch:
@@ -32,7 +33,7 @@ class PairFinder(object):
         # Unclear what to do with supplementary alignments...
         # self.matched = [[read for read in self.readsByID[id_].reads if read.flag&0x800==0] for id_ in matchIDs]
 
-        print "missing pairs:", sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))
+        logging.info("missing pairs: {}".format(sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))))
 
     def domatching(self):
         t0 = None
@@ -46,7 +47,7 @@ class PairFinder(object):
                     t1 = time.time()
                     elapsed = t1-t0
                     t0 = t1
-                print i, len(self.tomatch), elapsed
+                logging.info("{} {} {}".format(i, len(self.tomatch), elapsed))
             if len(self.readsByID[read.qname].reads) < 2:
                 self.findmatch(read)
                 # if len(self.readsByID[read.qname]) < 2:
@@ -56,27 +57,27 @@ class PairFinder(object):
     def findmatch(self, read):
         if read.is_paired and read.rnext >= 0:
             chrom = self.sam.getrname(read.rnext)
-            self.loadRegion(chrom, read.pnext, read.pnext+1, verbose=True)
+            self.loadRegion(chrom, read.pnext, read.pnext+1)
         # self.loadRegion(read.next_reference_id, read.next_reference_start, read.next_reference_start)
 
 
-    def loadRegion(self, chrom, start, end, verbose=False):
+    def loadRegion(self, chrom, start, end):
         reads = list(self.sam.fetch(chrom, start, end))
 
         if len(reads) > 100000:
-            if verbose:
-                print "LOTS OF READS IN REGION:", chrom, start, end, len(reads)
+            logging.warn("LOTS OF READS IN REGION:{} {} {} {}".format(chrom, start, end, len(reads)))
             # return []
 
+        goodReads = []
         for read in reads:
             if read.mapq > self.minmapq and not read.is_secondary:
                 # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
+                goodReads.append(read)
 
-                if len(self.readsByID[read.qname].reads) > 1:
-                    print ""
-                    print "\n".join(map(str, self.readsByID[read.qname].reads))
-                    print "*"*200
+                # if len(self.readsByID[read.qname].reads) > 1:
+                #     print ""
+                #     print "\n".join(map(str, self.readsByID[read.qname].reads))
+                #     print "*"*200
 
-        reads = [read for read in reads if read.mapq > self.minmapq]
-        return reads
+        return goodReads

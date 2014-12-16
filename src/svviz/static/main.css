@@ -24,6 +24,7 @@ svg {
 
 .info {
   height: 150px;
+  font-size: 80%;
   /*width: 1500px;*/
   overflow: auto;
   white-space: nowrap;

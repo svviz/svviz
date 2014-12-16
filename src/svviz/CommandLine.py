@@ -5,7 +5,7 @@ def parseArgs():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-t", "--type", help="event type: either del[etion] or ins[ertion]")
-    parser.add_argument("-o", "--orientation", help="read orientation; probably want +-, -+ or similar")
+    parser.add_argument("-o", "--orientation", help="read orientation; probably want +-, -+ or similar (or 'any' for single-end sequencing data)")
     parser.add_argument("-m", "--isize-mean", type=float, help="mean insert size")
     parser.add_argument("-s", "--isize-std", type=float, help="stdev of the insert size")
 
@@ -23,7 +23,7 @@ def parseArgs():
     defaults.add_argument("--deldemo", action="store_true", help="")
     defaults.add_argument("--insdemo", action="store_true", help="")
 
-    parser.add_argument("-b", "--bam", action="append", help="sorted, indexed bam file containing reads of interest to plot")
+    parser.add_argument("-b", "--bam", action="append", help="sorted, indexed bam file containing reads of interest to plot; can be specified multiple times to load multiple samples")
 
     parser.add_argument("ref", help="reference fasta file (a .faidx index file will be "
         "created if it doesn't exist so you need write permissions for this directory)")

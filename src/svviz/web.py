@@ -1,3 +1,4 @@
+import logging
 import os
 import urllib
 from flask import Flask, render_template, request, jsonify, Response
@@ -6,6 +7,7 @@ RESULTS = {}
 READ_INFO = None
 SAMPLES = []
 ISIZES = False
+SVGsByDataset = {}
 
 # Initialize the Flask application
 app = Flask(__name__,
@@ -25,14 +27,12 @@ def getport():
 
 @app.route('/')
 def index():
-    print "INDEX"
+    logging.debug("INDEX")
     try:
         return render_template('index.html', samples=SAMPLES, results_table=RESULTS, insertSizeDistributions=ISIZES)
     except Exception as e:
-        print "ERROR:", e
+        logging.error("ERROR:{}".format(e))
         raise
-    # print t
-    # return t
 
 @app.route('/<path:path>')
 def static_proxy(path):
@@ -50,7 +50,8 @@ def display():
     if req in ["alt", "ref", "amb"]:
         results = []
         for name in SAMPLES:
-            svg = open("{}.{}.svg".format(req, name)).read()
+            # svg = open("{}.{}.svg".format(req, name)).read()
+            svg = SVGsByDataset[name][req]
             results.append({"name":name, "svg":svg})
         return jsonify(results=results)
 
@@ -81,15 +82,13 @@ def info():
         result = jsonify(result=result)
         return result
     else:
-        print "NOT FOUND:", readid
+        logging.debug("NOT FOUND:{}".format(readid))
 
 @app.route('/_isizes/<name>')
 def displayIsizes(name):
-    print "HERE:", name
     if not ISIZES:
         return None
     data = open(name).read()
-    print data[:10]
 
     return Response(data, mimetype="image/svg+xml")
 
