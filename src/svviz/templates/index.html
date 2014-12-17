@@ -48,7 +48,6 @@
                     <div class="svg_container">
 
                         {% for sample in samples %}
-
                             <div class="one_svg {{ sample }}">
                                 <div style="position:absolute; z-index:1;left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
                                 <div class="track"></div>
@@ -58,6 +57,10 @@
                             {% endif %}
 
                         {% endfor %}
+
+                        <div class="one_svg axis">
+                            <div class="track"></div>
+                        </div>
 
                     </div>
                 </div>

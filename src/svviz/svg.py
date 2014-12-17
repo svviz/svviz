@@ -1,16 +1,18 @@
 
 class SVG(object):
-    def __init__(self, width, height):
+    def __init__(self, width, height, headerExtras=""):
         self.width = width
         self.height = height
 
         self.svg = []
+        self.headerExtras = headerExtras
         self._addHeader()
+
 
     def _addHeader(self):
         self.svg.append("""<?xml version="1.0" encoding="utf-8" ?><svg baseProfile="full" height="100%" version="1.1" """
-            """width="100%" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg" """
-            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(h=self.height, w=self.width))
+            """width="100%" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg" {extras} """
+            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(h=self.height, w=self.width, extras=self.headerExtras))
         self.svg.append("<g class=\"svg_viewport\">")
 
     def _addOptions(self, **kwdargs):

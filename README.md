@@ -36,10 +36,9 @@ In addition, the ssw alignment module (see below) needs to be compiled using gcc
 ## Usage
 
 ```
-usage: svviz [-h] [-t TYPE] [-o ORIENTATION] [-m ISIZE_MEAN] [-s ISIZE_STD]
-             [-q MIN_MAPQ] [-a ALN_QUALITY] [--no-web]
-             [--save-reads SAVE_READS]
-             [--mate-pair | --pacbio | --deldemo | --insdemo] [-b BAM]
+usage: svviz [-h] [-b BAM] [-t TYPE] [-S] [-o ORIENTATION] [-m MEAN] [-s STD]
+             [-d DISTANCE] [-q MAPQ] [-a QUALITY] [--no-web]
+             [--save-reads OUT_BAM_PATH] [--mate-pair] [--pacbio] [--moleculo]
              ref [breakpoints [breakpoints ...]]
 
 positional arguments:
@@ -50,28 +49,47 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -t TYPE, --type TYPE  event type: either del[etion] or ins[ertion]
+
+required parameters:
+  -b BAM, --bam BAM     sorted, indexed bam file containing reads of interest
+                        to plot; can be specified multiple times to load
+                        multiple samples
+
+input parameters:
+  -t TYPE, --type TYPE  event type: either del[etion], ins[ertion] or mei
+                        (mobile element insertion)
+  -S, --single-ended    single-ended sequencing (default is paired-end)
   -o ORIENTATION, --orientation ORIENTATION
-                        read orientation; probably want +-, -+ or similar
-  -m ISIZE_MEAN, --isize-mean ISIZE_MEAN
-                        mean insert size
-  -s ISIZE_STD, --isize-std ISIZE_STD
-                        stdev of the insert size
-  -q MIN_MAPQ, --min-mapq MIN_MAPQ
+                        read orientation; probably want fr, rf or similar
+                        (only needed for paired-end data; default rf)
+  -m MEAN, --isize-mean MEAN
+                        mean insert size; used to determine concordant read
+                        pairs (paired-end)and the size of the flanking region
+                        to align against around breakpoints (default: inferred
+                        from input bam)
+  -s STD, --isize-std STD
+                        stdev of the insert size (default: inferred from input
+                        bam)
+  -d DISTANCE, --search-dist DISTANCE
+                        distance in base-pairs from the breakpoints to search
+                        for reads; default: 2x the isize-mean (paired end) or
+                        1000 (single-end)
+  -q MAPQ, --min-mapq MAPQ
                         minimum mapping quality for reads
-  -a ALN_QUALITY, --aln-quality ALN_QUALITY
+  -a QUALITY, --aln-quality QUALITY
                         minimum score of the Smith-Waterman alignment against
                         the ref or alt allele in order to be considered
                         (multiplied by 2)
+
+interface parameters:
   --no-web              don't show the web interface
-  --save-reads SAVE_READS
+  --save-reads OUT_BAM_PATH
                         save relevant reads to this file (bam)
+
+presets:
   --mate-pair           sets defaults for ~6.5kb insert mate pair libraries
   --pacbio              sets defaults for pacbio libraries
-  --deldemo
-  --insdemo
-  -b BAM, --bam BAM     sorted, indexed bam file containing reads of interest
-                        to plot
+  --moleculo            sets defaults for moleculo libraries
 
 ```
 

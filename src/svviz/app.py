@@ -6,12 +6,12 @@ import pysam
 import time
 
 from svviz import debug
-import InsertSizeProbabilities
-import CommandLine
-import StructuralVariants
-import remap
-import track
-from utilities import Locus, reverseComp
+from svviz import InsertSizeProbabilities
+from svviz import CommandLine
+from svviz import StructuralVariants
+from svviz import remap
+from svviz import track
+from svviz.utilities import Locus, reverseComp, nameFromBamPath
 import misc
 
 
@@ -42,34 +42,37 @@ def savereads(args, bam, reads, n=None):
         pysam.index(sorted_path+".bam")
 
 
-def getVariant(args, genome):
-    extraSpace = int(args.isize_mean) * 2
+def getVariant(args, genome, isds):
+    if args.search_dist is None:
+        args.search_dist = args.isize_mean * 2
+
+    alignDistance = int(max(args.search_dist, args.isize_mean*2))
 
     if args.type.lower().startswith("del"):
-        if args.deldemo:
-            chrom, start, end = "chr1", 72766323, 72811840
-        else:
-            assert len(args.breakpoints) == 3, "Format for deletion breakpoints is '<chrom> <start> <end>'"
-            chrom = args.breakpoints[0]
-            start = int(args.breakpoints[1])
-            end = int(args.breakpoints[2])
-            assert start < end
+        # if args.deldemo:
+        #     chrom, start, end = "chr1", 72766323, 72811840
+        # else:
+        assert len(args.breakpoints) == 3, "Format for deletion breakpoints is '<chrom> <start> <end>'"
+        chrom = args.breakpoints[0]
+        start = int(args.breakpoints[1])
+        end = int(args.breakpoints[2])
+        assert start < end
         if args.min_mapq is None:
             args.min_mapq = 30
 
-        variant = StructuralVariants.Deletion.from_breakpoints(chrom, start-1, end-1, extraSpace, genome)
+        variant = StructuralVariants.Deletion.from_breakpoints(chrom, start-1, end-1, alignDistance, genome)
     elif args.type.lower().startswith("ins"):
-        if args.insdemo:
-            chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
-        else:
-            assert len(args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <pos> <seq>'"
-            chrom = args.breakpoints[0]
-            pos = int(args.breakpoints[1])
-            seq = int(args.breakpoints[2])
+        # if args.insdemo:
+        #     chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
+        # else:
+        assert len(args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <pos> <seq>'"
+        chrom = args.breakpoints[0]
+        pos = int(args.breakpoints[1])
+        seq = args.breakpoints[2]
         if args.min_mapq is None:
             args.min_mapq = -1
 
-        variant = StructuralVariants.Insertion(Locus(chrom, pos, pos, "+"), seq, extraSpace, genome)
+        variant = StructuralVariants.Insertion(Locus(chrom, pos, pos, "+"), seq, alignDistance, genome)
     elif args.type.lower().startswith("mei"):
         assert len(args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
         if args.min_mapq is None:
@@ -85,30 +88,62 @@ def getVariant(args, genome):
         meCoords = Locus(meName, meStart, meEnd, meStrand)
         meFasta = pyfaidx.Fasta(args.breakpoints[0], as_raw=True)
 
-        variant = StructuralVariants.MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, extraSpace, genome)
+        variant = StructuralVariants.MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, alignDistance, genome)
     else:
-        raise Exception("only accept event types of deletion or insertion")
+        raise Exception("only accept event types of deletion, insertion or mei")
 
     logging.info("Variant: {}".format(variant))
 
     return variant
 
-def getTracks(chosenSets, variant, name="x"):
-    svgs = {}
+
+def getTracks(chosenSets, variant, name):
+    tracks = {}
 
     ref_chrom = track.ChromosomePart(variant.getRefSeq())
     ref_track = track.Track(ref_chrom, chosenSets["ref"], 3000, 4000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
-    svgs["ref"] = ref_track.render()
+    tracks["ref"] = ref_track
 
     alt_chrom = track.ChromosomePart(variant.getAltSeq())
     alt_track = track.Track(alt_chrom, chosenSets["alt"], 5000, 15000, 0, len(variant.getAltSeq()), vlines=variant.getAltRelativeBreakpoints())
-    svgs["alt"] = alt_track.render()
+    tracks["alt"] = alt_track
 
     amb_track = track.Track(ref_chrom, chosenSets["amb"], 4000, 10000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
-    svgs["amb"] = amb_track.render()
+    tracks["amb"] = amb_track
 
-    return svgs
+    return tracks
 
+
+def getISDs(args):
+    """ Load the Insert Size Distributions """
+
+    isds = {}
+    for bampath in args.bam:
+        name = nameFromBamPath(bampath)
+        bam = pysam.Samfile(bampath, "rb")
+
+        isds[name] = InsertSizeProbabilities.InsertSizeDistribution(bam)
+
+    if args.isize_mean is None or args.isize_std is None:
+        mean_isizes = [isd.mean() for isd in isds.values()]
+        std_isizes = [isd.std() for isd in isds.values()]
+
+        logging.debug("calculated isize (mean, std): {}".format(zip(mean_isizes, std_isizes)))
+
+        mean_isizes = [mean for mean in mean_isizes if mean is not None]
+        std_isizes = [std for std in std_isizes if std is not None]
+
+        if len(mean_isizes) > 0 and len(std_isizes) > 0:
+            if args.isize_mean is None:
+                args.isize_mean = max(mean_isizes)
+                logging.info("isize-mean not specified; using value {} inferred from input data".format(args.isize_mean))
+            if args.isize_std is None:
+                args.isize_std = max(std_isizes)
+                logging.info("isize-std not specified; using value {} inferred from input data".format(args.isize_std))
+        else:
+            raise Exception("Could not infer isize-mean from input files; make sure you have genome-wide read coverage in the input bams, or pass in the --isize-mean option on the command line")
+
+    return isds
 
 def main():
     args = CommandLine.parseArgs()
@@ -117,24 +152,26 @@ def main():
 def run(args):
     logging.debug(args)
 
+    # need to calculate insert size distributions before defining the variant
+    isds = getISDs(args)
+
     genome = pyfaidx.Fasta(args.ref, as_raw=True)
-    variant = getVariant(args, genome)
+    variant = getVariant(args, genome, isds)
     datasets = collections.OrderedDict()
 
-    
 
     # from IPython import embed; embed()
 
     for i, bampath in enumerate(args.bam):
-        name = os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
+        name = nameFromBamPath(bampath)
         bam = pysam.Samfile(bampath, "rb")
+        curisd = isds[name]
 
-        reads = remap.getReads(variant, bam, args.min_mapq)
+        reads = remap.getReads(variant, bam, args.min_mapq, args.search_dist, args.single_ended)
         savereads(args, bam, reads, i)
 
         alnCollections = remap.do_realign(variant, reads)
-        isd = InsertSizeProbabilities.InsertSizeDistribution(bam)
-        remap.disambiguate(alnCollections, isd, args.isize_mean, 2*args.isize_std, args.orientation, bam)
+        remap.disambiguate(alnCollections, curisd, args.isize_mean, 2*args.isize_std, args.orientation, bam, args.single_ended)
 
         chosenSets = collections.defaultdict(list)
         for alnCollection in alnCollections:
@@ -142,17 +179,18 @@ def run(args):
 
         datasets[name] = {"alnCollections":alnCollections,
                           "chosenSets":chosenSets,
-                          "isd": isd,
+                          "isd": curisd,
                           "counts":collections.Counter([x.choice for x in alnCollections])}
 
     if not args.no_web:
         # launch web view
         import web
 
-        web.SVGsByDataset = {}
-
         for name in datasets:
-            web.SVGsByDataset[name] = getTracks(datasets[name]["chosenSets"], variant, name)
+            tracks = getTracks(datasets[name]["chosenSets"], variant, name)
+            web.TracksByDataset[name] = dict((allele, tracks[allele]) for allele in tracks)
+
+        print web.TracksByDataset
 
         web.READ_INFO = {}
         web.RESULTS = collections.OrderedDict()

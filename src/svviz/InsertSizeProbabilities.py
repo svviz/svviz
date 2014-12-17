@@ -1,3 +1,5 @@
+from svviz.utilities import mean, stddev
+
 try:
     import numpy
     from scipy.stats import gaussian_kde
@@ -26,29 +28,39 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
     inserts = []
     
     count = 0
+    start = 2500000
+    end = 50000000
 
-    # this is a fairly innocuous region on chr1
-    for read in bam.fetch("chr1", 2500000, 50000000):
-        if skip > 0:
-            skip -= 1
-            continue
+    # get the chromosomes and move X, Y, M/MT to the end
+    chromosomes = []
+    for i in range(bam.nreferences):
+        if bam.lengths[i] > start:
+            chromosomes.append(bam.getrname(i))
+
+    for chrom in sorted(chromosomes):
+        for read in bam.fetch(chrom, start, end):
+            if skip > 0:
+                skip -= 1
+                continue
+                
+            if not read.is_read1:
+                continue
             
-        if not read.is_read1:
-            continue
-        
-        if not read.is_proper_pair:
-            continue
-        if read.is_unmapped or read.mate_is_unmapped:
-            continue
-        if read.tid != read.rnext:
-            continue
-        if read.mapq < minmapq:
-            continue
-        
-        # if abs(read.isize) < 20000:
-        inserts.append(abs(read.isize)) 
+            if not read.is_proper_pair:
+                continue
+            if read.is_unmapped or read.mate_is_unmapped:
+                continue
+            if read.tid != read.rnext:
+                continue
+            if read.mapq < minmapq:
+                continue
+            
+            # if abs(read.isize) < 20000:
+            inserts.append(abs(read.isize)) 
 
-        count += 1
+            count += 1
+            if count > maxreads:
+                break
         if count > maxreads:
             break
 
@@ -62,24 +74,36 @@ class InsertSizeDistribution(object):
 
     def __init__(self, bam):
         """ bam must be a sorted, indexed pysam.Samfile """
-        if gaussian_kde is None:
-            self.min = 0
-            self.fail = True
-            return
 
         try:
             self.isizes = sampleInsertSizes(bam)
         except ValueError:
             self.isizes = []
             
-        if len(self.isizes) < 10:
+        if len(self.isizes) < 1000:
             self.fail = True
             self.min = 0
             return
+
+        if gaussian_kde is None:
+            self.min = 0
+            self.fail = True
+            return
+
         self.fail = False
         self.kde = gaussian_kde(self.isizes)
         self.min = numpy.min(self.kde(numpy.linspace(0, max(self.isizes), 100)))
         print "Min score:", self.min
+
+    def mean(self):
+        if len(self.isizes) >= 1000:
+             return mean(self.isizes)
+        return None
+
+    def std(self):
+        if len(self.isizes) >= 1000:
+             return stddev(self.isizes)
+        return None
 
     def score(self, isize):
         # we don't ever want a 0 probability

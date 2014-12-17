@@ -1,5 +1,6 @@
 import collections
 import itertools
+import math
 import re
 from svg import SVG
 
@@ -32,6 +33,57 @@ class Scale(object):
             elif pos > self.pixelWidth:
                 return self.pixelWidth
         return pos
+
+class Axis(object):
+    def __init__(self, scale, vlines):
+        self.scale = scale
+        self.vlines = vlines
+        self._height = 75
+
+    def render(self):
+        svg = SVG(self.scale.pixelWidth, self._height, headerExtras="""preserveAspectRatio="none" """)
+        svg.rect(0, self._height-35, self.scale.pixelWidth, 3)
+
+        for tick in self.getTicks():
+            x = self.scale.topixels(tick)
+            svg.rect(x, self._height-35, 1, 15, fill="black")
+            label = tick
+            if tick > 1e6:
+                label = "{:.1f}MB".format(tick/1e6)
+            elif tick > 1e3:
+                label = "{:.1f}KB".format(tick/1e3)
+
+            if x < 50:
+                x = 50
+            elif x > self.scale.pixelWidth - 50:
+                x = self.scale.pixelWidth - 50
+            svg.text(x, 4, label, size=18)
+
+        for vline in self.vlines:
+            x = self.scale.topixels(vline)
+            svg.rect(x, self._height-20, 1, 35, fill="red")        
+            svg.text(x, self._height-18, "breakpoint", size=18, fill="red")
+
+        return str(svg)
+
+    def getTicks(self):
+        start = self.scale.start
+        end = self.scale.end
+        width = end - start
+
+        res = (10 ** round(math.log10(end - start))) / 10.0
+        if width / res > 15:
+            res *= 2.5
+        elif width / res < 5:
+            res /= 2.0
+
+        roundStart = start - (start%res)
+        ticks = []
+
+        for i in range(int(roundStart), end, int(res)):
+            ticks.append(i)
+
+        return ticks
 
 class ReadRenderer(object):
     def __init__(self, rowHeight, scale, chrom):
@@ -109,7 +161,7 @@ class ReadRenderer(object):
                     elif code in "D":
                         curstart = self.scale.topixels(genomePosition)
                         curend = self.scale.topixels(genomePosition+length+1)
-                        color = "white"
+                        color = "gray"
                         self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
 
                         genomePosition += length
@@ -165,7 +217,11 @@ class Track(object):
         self.vlines = vlines
 
         self.rows = []
-
+        self._axis = None
+    def getAxis(self):
+        if self._axis is None:
+            self._axis = Axis(self.scale, self.vlines)
+        return self._axis
 
     def findRow(self, start, end):
         for currow in range(len(self.rows)):
@@ -195,8 +251,6 @@ class Track(object):
             alignmentSet.yoffset = yoffset
 
         self.height = (self.rowHeight+self.rowMargin) * len(self.rows)
-
-        print "HEIGHT:", self.height
 
 
     def render(self):

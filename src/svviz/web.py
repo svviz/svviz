@@ -7,7 +7,7 @@ RESULTS = {}
 READ_INFO = None
 SAMPLES = []
 ISIZES = False
-SVGsByDataset = {}
+TracksByDataset = {}
 
 # Initialize the Flask application
 app = Flask(__name__,
@@ -51,8 +51,11 @@ def display():
         results = []
         for name in SAMPLES:
             # svg = open("{}.{}.svg".format(req, name)).read()
-            svg = SVGsByDataset[name][req]
+            track = TracksByDataset[name][req]
+            svg = track.render()
             results.append({"name":name, "svg":svg})
+        axisSVG = track.getAxis().render()
+        results.append({"name":"axis", "svg":axisSVG})
         return jsonify(results=results)
 
 

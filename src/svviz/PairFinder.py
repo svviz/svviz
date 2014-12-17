@@ -12,7 +12,7 @@ class ReadSet(object):
             self.reads.append(newread)
 
 class PairFinder(object):
-    def __init__(self, regions, sam, minmapq=-1):
+    def __init__(self, regions, sam, minmapq=-1, is_paired=True):
         self.regions = regions
         self.sam = sam
         self.minmapq = minmapq
@@ -21,8 +21,9 @@ class PairFinder(object):
         for region in self.regions:
             self.tomatch.update(self.loadRegion(region.chr(), region.start(), region.end()))
 
-        logging.debug("To-match: {}, min-mapq: {}".format(len(self.tomatch), self.minmapq))
-        self.domatching()
+        if is_paired:
+            logging.debug("To-match: {}, min-mapq: {}".format(len(self.tomatch), self.minmapq))
+            self.domatching()
 
         # for read in self.tomatch:
         #     assert len(self.readsByID[read.qname]) > 1
@@ -70,7 +71,7 @@ class PairFinder(object):
 
         goodReads = []
         for read in reads:
-            if read.mapq > self.minmapq and not read.is_secondary:
+            if read.mapq >= self.minmapq and not read.is_secondary:
                 # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
                 goodReads.append(read)

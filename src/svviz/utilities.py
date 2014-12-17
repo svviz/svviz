@@ -1,3 +1,4 @@
+import os
 import string
 
 
@@ -10,6 +11,22 @@ def reverseComp(st):
 def reverseString(st):
     """ Reverses a string """
     return str(st[::-1])
+
+
+def nameFromBamPath(bampath):
+    return os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
+
+def mean(items):
+    return sum(items)/float(len(items) or 1)
+def stddev(items):
+    if len(items) <= 1:
+        return 0
+    avg = mean(items)
+    
+    sdsq = sum([(i - avg) ** 2 for i in items])
+    stddev = (sdsq / (len(items)-1)) ** .5
+    
+    return stddev
 
 
 def unionLoci(loci):

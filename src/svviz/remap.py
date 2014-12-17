@@ -92,9 +92,9 @@ def do1remap(refseq, reads):
     return alignmentSets
 
 
-def getReads(variant, bam, minmapq):
+def getReads(variant, bam, minmapq, searchDistance, single_ended=False):
     t0 = time.time()
-    pairFinder = PairFinder(variant.searchRegions(), bam, minmapq=minmapq)
+    pairFinder = PairFinder(variant.searchRegions(searchDistance), bam, minmapq=minmapq, is_paired=(not single_ended))
     reads = [item for sublist in pairFinder.matched for item in sublist]
     t1 = time.time()
 
@@ -188,8 +188,8 @@ def disambiguate_withInsertSizeDistribution(refalignments, altalignments, bam):
 
 
 
-def disambiguate(alnCollections, isd, MEAN_INSERT_SIZE, INSERT_SIZE_2STD, ORIENTATION, bam):
-    logging.debug("{} {} {}".format(ORIENTATION, MEAN_INSERT_SIZE, INSERT_SIZE_2STD))
+def disambiguate(alnCollections, isd, MEAN_INSERT_SIZE, INSERT_SIZE_2STD, ORIENTATION, bam, single_ended=False):
+    logging.debug("Disambiguation: {} {} {} {}".format(ORIENTATION, MEAN_INSERT_SIZE, INSERT_SIZE_2STD, single_ended))
 
     # selectedRefAlignments = []
     # selectedAltAlignments = []
@@ -235,9 +235,9 @@ def disambiguate(alnCollections, isd, MEAN_INSERT_SIZE, INSERT_SIZE_2STD, ORIENT
             # selectedAmbiguousAlignments.append(refset)    
             alnCollection.choose("amb")
                 
-        # print refscore, altscore, refset.getAlignments()[0].seq, refset.getAlignments()[1].seq
+        # print refscore, altscore, refset.getAlignments()[0].seq[:100], [(aln.score/float(len(aln.seq))) for aln in altset.getAlignments()]
 
-        if refscore == altscore and refset.allSegmentsWellAligned():
+        if refscore == altscore and refset.allSegmentsWellAligned() and (not single_ended):
             if refset.is_aligned() and abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(refset, ORIENTATION):
                 if altset.is_aligned() and abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(altset, ORIENTATION):
                     # both good
@@ -253,14 +253,14 @@ def disambiguate(alnCollections, isd, MEAN_INSERT_SIZE, INSERT_SIZE_2STD, ORIENT
                 addamb()
                 # selectedAmbiguousAlignments.append(refset)
         elif refscore > altscore and refset.allSegmentsWellAligned():
-            if abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(refset, ORIENTATION):
+            if (single_ended) or (abs(len(refset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(refset, ORIENTATION)):
                 addref()
                 # selectedRefAlignments.append(refset)
             else:
                 addamb()
                 # selectedAmbiguousAlignments.append(refset)
-        elif altset.allSegmentsWellAligned():
-            if abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(altset, ORIENTATION):
+        elif refscore < altscore and altset.allSegmentsWellAligned():
+            if (single_ended) or (abs(len(altset) - MEAN_INSERT_SIZE) < INSERT_SIZE_2STD and _isCorrectOrientation(altset, ORIENTATION)):
                 addalt()
                 # selectedAltAlignments.append(altset)
             else:
