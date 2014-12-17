@@ -2,9 +2,11 @@
 
 Author: Noah Spies
 
+
 ## Notice
 
 This software is in active development. Some things may not work as expected. The interface is guaranteed to change. 
+
 
 ## Installing svviz
 
@@ -16,16 +18,20 @@ Alternately, you can clone the git repository. Installation can then be performe
 
 ```python setup.py install```
 
-Depending on your setup, you may need to run the command as superuser using the "sudo" prefix.
+Depending on your setup, you may need to run the installation command as superuser using the "sudo" prefix.
 
-svviz requires the following python packages, which should be automatically installed:
+
+## Requirements
+
+svviz has been tested on OS X and linux (ubuntu). svviz requires the following python packages, which should be automatically installed:
 
 - flask
 - joblib
 - pyfaidx
 - pysam
 
-In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X.
+In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see [these directions][http://railsapps.github.io/xcode-command-line-tools.html] for more info).
+
 
 ## Usage
 
@@ -85,10 +91,10 @@ For the time being, panning can be performed by using the scrollbars, using the 
 #### Smith-Waterman Alignment
 
 The Smith-Waterman Alignments are performed by https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library, whose license requires the following statements:
+ 
+>Author: Mengyao Zhao & Wan-Ping Lee
 
-Author: Mengyao Zhao & Wan-Ping Lee
+>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 

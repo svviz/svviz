@@ -215,7 +215,7 @@ function ScrollPanel(element, options, svg_tags) {
         self.yviewables.push(0);
     })
 
-    console.log("%%%%%%%" + self.ymin + "  & " + self.ymax);
+    // console.log("%%%%%%%" + self.ymin + "  & " + self.ymax);
     self.xzoom = self.containerwidth / (self.xmax-self.xmin);
     self.yzooms = self.$views.map(function(){return self.xzoom;});
 
@@ -238,7 +238,7 @@ function ScrollPanel(element, options, svg_tags) {
         }
 
         self.$views.each(function(i, j){
-            console.log("!!!! " + self.yscrollbars[i].scrollProportion)
+            // console.log("!!!! " + self.yscrollbars[i].scrollProportion)
 
             var yscroll = ((self.ymax - self.ymin) - self.yviewables[i]) * (self.yscrollbars[i].scrollProportion);
 
@@ -281,7 +281,7 @@ function ScrollPanel(element, options, svg_tags) {
         var scrollStartY = mouseDownEvent.pageY;
 
         var onMouseDrag = function(dragevent) {
-            console.log("::" + dragevent.pageX + " * " + scrollStartX + ":" + (dragevent.pageX - scrollStartX) + "::" + dragevent.pageY + " * " + scrollStartY + ":" + (dragevent.pageY - scrollStartY));
+            // console.log("::" + dragevent.pageX + " * " + scrollStartX + ":" + (dragevent.pageX - scrollStartX) + "::" + dragevent.pageY + " * " + scrollStartY + ":" + (dragevent.pageY - scrollStartY));
             self.moveView(scrollStartX - dragevent.pageX, scrollStartY - dragevent.pageY);
 
             scrollStartX = dragevent.pageX;

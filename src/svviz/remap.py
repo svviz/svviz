@@ -56,7 +56,7 @@ class Multimap(Multiprocessor):
 def do1remap(refseq, reads):
     # mm = Multimap(refseq)
     # remapped = dict(map(mm.remap, [read.seq for read in reads]))
-    
+
     # tempf = open("reads.txt", "w")
     # for read in reads:
     #     tempf.write(read.seq+"\n")
@@ -66,7 +66,13 @@ def do1remap(refseq, reads):
 
     # return
 
-    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[refseq], verbose=3, processes=1))
+    degenerateOnly = set("N")
+    originalLength = len(reads)
+    reads = [read for read in reads if set(read.seq) != degenerateOnly]
+    if len(reads) < originalLength:
+        logging.info("Removed {} reads with only degenerate nucleotides ('N')".format(originalLength-len(reads)))
+
+    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[refseq], verbose=3, processes=8))
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:

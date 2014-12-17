@@ -16,7 +16,7 @@ class SVG(object):
     def _addOptions(self, **kwdargs):
         options = []
         for key, arg in kwdargs.iteritems():
-            if arg:
+            if arg is not None and arg != "":
                 options.append("""{key}="{arg}" """.format(key=key, arg=arg))
         return " ".join(options)
 
