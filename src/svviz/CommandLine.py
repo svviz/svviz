@@ -1,11 +1,28 @@
 import argparse
+import demo
+import sys
+
 from Alignment import AlignmentSet
 
 def setDefault(args, key, default):
     if args.__dict__[key] is None:
         args.__dict__[key] = default
 
+def checkDemoMode():
+    inputArgs = sys.argv[1:]
+
+    if inputArgs[0] == "demo":
+        cmd = demo.loadDemo()
+        if cmd is not None:
+            inputArgs = cmd
+        else:
+            raise Exception("couldn't load demo command from info.txt file.")
+
+    return inputArgs
+
 def parseArgs():
+    inputArgs = checkDemoMode()
+
     parser = argparse.ArgumentParser()
 
     parser.add_argument("ref", help="reference fasta file (a .faidx index file will be "
@@ -39,7 +56,7 @@ def parseArgs():
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
     defaults.add_argument("--moleculo", action="store_true", help="sets defaults for moleculo libraries")
 
-    args = parser.parse_args()
+    args = parser.parse_args(inputArgs)
 
     # Presets
     if args.mate_pair:

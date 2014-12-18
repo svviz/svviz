@@ -18,7 +18,7 @@ def removeOutliers(data, m = 10.):
     s = d/mdev if mdev else 0.
     return data[s<m]
 
-def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=20000):
+def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=20000, saveReads=False):
     """ get the insert size distribution, cutting off the tail at the high end, 
     and removing most oddly mapping pairs
 
@@ -31,6 +31,7 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
     start = 2500000
     end = 50000000
 
+    reads = []
     # get the chromosomes and move X, Y, M/MT to the end
     chromosomes = []
     for i in range(bam.nreferences):
@@ -58,13 +59,16 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
             # if abs(read.isize) < 20000:
             inserts.append(abs(read.isize)) 
 
+            if saveReads:
+                reads.append(read)
+
             count += 1
             if count > maxreads:
                 break
         if count > maxreads:
             break
 
-    return removeOutliers(inserts)
+    return removeOutliers(inserts), reads
 
 
 
@@ -72,13 +76,14 @@ class InsertSizeDistribution(object):
     """ Use this class to calculate the distribution of insert sizes from a bam;
     then score new read pairs for the likelihood that the insert size came from this distribution """
 
-    def __init__(self, bam):
+    def __init__(self, bam, saveReads=False):
         """ bam must be a sorted, indexed pysam.Samfile """
 
         try:
-            self.isizes = sampleInsertSizes(bam)
+            self.isizes, self.reads = sampleInsertSizes(bam, saveReads=saveReads)
         except ValueError:
             self.isizes = []
+            self.reads = []
             
         if len(self.isizes) < 1000:
             self.fail = True

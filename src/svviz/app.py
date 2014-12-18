@@ -122,7 +122,7 @@ def getISDs(args):
         name = nameFromBamPath(bampath)
         bam = pysam.Samfile(bampath, "rb")
 
-        isds[name] = InsertSizeProbabilities.InsertSizeDistribution(bam)
+        isds[name] = InsertSizeProbabilities.InsertSizeDistribution(bam, saveReads=True)
 
     if args.isize_mean is None or args.isize_std is None:
         mean_isizes = [isd.mean() for isd in isds.values()]
@@ -168,7 +168,7 @@ def run(args):
         curisd = isds[name]
 
         reads = remap.getReads(variant, bam, args.min_mapq, args.search_dist, args.single_ended)
-        savereads(args, bam, reads, i)
+        savereads(args, bam, reads+curisd.reads, i)
 
         alnCollections = remap.do_realign(variant, reads)
         remap.disambiguate(alnCollections, curisd, args.isize_mean, 2*args.isize_std, args.orientation, bam, args.single_ended)
