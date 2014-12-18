@@ -82,7 +82,7 @@ class AlignmentSetCollection(object):
         return self.sets[key]
 
 def getBlastRepresentation(read):
-    return getBlastRepresentation(read.seq, read.genome_seq, read.cigar)
+    return _getBlastRepresentation(read.seq, read.genome_seq, read.cigar)
 
 def _getBlastRepresentation(read_seq, genome_seq, cigar):
     pattern = re.compile('([0-9]*)([MIDNSHP=X])')

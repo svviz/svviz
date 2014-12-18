@@ -273,7 +273,7 @@ class Track(object):
             print xmiddle
             self.svg.text(xmiddle, ymiddle, "No reads found", size=xmiddle/20.0)
 
-        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.svg.height+40, opacity=0.0)
+        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.svg.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
 
         return self.rendered
