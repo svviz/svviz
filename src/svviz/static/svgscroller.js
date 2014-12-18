@@ -42,12 +42,12 @@ function Scrollbar(scrollpanel, $host, options) {
         }
 
         if (self.pageSize >= 1.0 ) {
-            self.$scrollbar.fadeTo(50, 0.8);
+            // self.$scrollbar.fadeTo(50, 0.8);
             self.$thumb.fadeTo(50, 0.0);
             self.active = false;
         } else {
             self.active = true;
-            self.$scrollbar.fadeTo(50, 1);
+            // self.$scrollbar.fadeTo(50, 1);
             self.$thumb.fadeTo(50, 1);
             self.scrollTo(self.scrollProportion);
         }

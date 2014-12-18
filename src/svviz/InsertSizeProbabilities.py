@@ -1,7 +1,8 @@
+import numpy
+
 from svviz.utilities import mean, stddev
 
 try:
-    import numpy
     from scipy.stats import gaussian_kde
 except ImportError:
     numpy = None
