@@ -204,10 +204,12 @@ def run(args):
         web.SAMPLES = datasets.keys()
 
         if all(not dataset["isd"].fail for dataset in datasets.itervalues()):
-            web.ISIZES = web.SAMPLES
+            plotISDs = True
             for name in web.SAMPLES:
                 isd = datasets[name]["isd"]
-                InsertSizeProbabilities.plotInsertSizeDistribution(isd, name, datasets[name])
+                plotISDs = plotISDs and InsertSizeProbabilities.plotInsertSizeDistribution(isd, name, datasets[name])
+            if plotISDs:
+                web.ISIZES = web.SAMPLES
 
         web.run()
 
