@@ -1,8 +1,9 @@
 import argparse
-import demo
+import logging
 import sys
 
-from Alignment import AlignmentSet
+from svviz import demo
+from svviz.Alignment import AlignmentSet
 
 def setDefault(args, key, default):
     if args.__dict__[key] is None:
@@ -15,6 +16,9 @@ def checkDemoMode():
         cmd = demo.loadDemo()
         if cmd is not None:
             inputArgs = cmd
+            logging.info("Running the following command:")
+            logging.info("{} {}".format(sys.argv[0], " ".join(inputArgs)))
+            logging.info("")
         else:
             raise Exception("couldn't load demo command from info.txt file.")
 
@@ -23,7 +27,7 @@ def checkDemoMode():
 def parseArgs():
     inputArgs = checkDemoMode()
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(usage="%(prog)s [options] [demo] [ref breakpoint-info...]", epilog="For an example, run 'svviz demo'.")
 
     parser.add_argument("ref", help="reference fasta file (a .faidx index file will be "
         "created if it doesn't exist so you need write permissions for this directory)")

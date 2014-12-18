@@ -7,39 +7,18 @@ Author: Noah Spies
 
 This software is in active development. Some things may not work as expected. The interface is guaranteed to change. 
 
+## Quickstart
 
-## Installing svviz
-
-If you have git and pip installed, you can download and install svviz using the following single line:
-
-```pip install git+https://github.com/svviz/svviz.git#svviz```
-
-Alternately, you can clone the git repository. Installation can then be performed by executing the following command on OS X or linux:
-
-```python setup.py install```
-
-Depending on your setup, you may need to run the installation command as superuser using the "sudo" prefix.
-
-
-## Requirements
-
-svviz has been tested on OS X and linux (ubuntu). svviz requires the following python packages, which should be automatically installed:
-
-- flask
-- joblib
-- pyfaidx
-- pysam
-
-In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see [these directions](http://railsapps.github.io/xcode-command-line-tools.html) for more info).
+1. (OS X only) Ensure that you have a working compiler by following [these instructions](http://railsapps.github.io/xcode-command-line-tools.html).
+2. Install the latest version of svviz from github using the following terminal command: ```sudo pip install git+https://github.com/svviz/svviz.git#svviz```. (The sudo may not be necessary depending on your setup.)
+3. Run the following command, which downloads example data and runs it through svviz: ```svviz demo```. After several processing steps, a web browser window should open. Click and drag to pan, and zoom using option/alt-scrollwheel.
+4. Please report any issues (after making sure they're not explained in the documentation below) using the [github issue tracker](https://github.com/svviz/svviz/issues).
 
 
 ## Usage
 
 ```
-usage: svviz [-h] [-b BAM] [-t TYPE] [-S] [-o ORIENTATION] [-m MEAN] [-s STD]
-             [-d DISTANCE] [-q MAPQ] [-a QUALITY] [--no-web]
-             [--save-reads OUT_BAM_PATH] [--mate-pair] [--pacbio] [--moleculo]
-             ref [breakpoints [breakpoints ...]]
+usage: svviz [options] [demo] [ref breakpoint-info...]
 
 positional arguments:
   ref                   reference fasta file (a .faidx index file will be
@@ -91,6 +70,7 @@ presets:
   --pacbio              sets defaults for pacbio libraries
   --moleculo            sets defaults for moleculo libraries
 
+For an example, run 'svviz demo'.
 ```
 
 The format for specifying deletion breakpoints is ```chrom start end```. The format for specifying insertions is ```chrom breakpoint <inserted sequence>```. Mobile elements can be specified by ```<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]```, where <ME name> must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
@@ -103,7 +83,31 @@ For example:
 
 When reads have been collected and processed, a new window will open in your web browser allowing you to browse reads supporting the reference and alternate alleles.
 
-For the time being, panning can be performed by using the scrollbars, using the scrollwheel (with shift) or clicking and dragging; to zoom, hold down option (alt) while spinning the scrollwheel.
+
+## Installing svviz
+
+If you have git and pip installed, you can download and install svviz using the following single line:
+
+```pip install git+https://github.com/svviz/svviz.git#svviz```
+
+Alternately, you can clone the git repository. Installation can then be performed by executing the following command on OS X or linux:
+
+```python setup.py install```
+
+Depending on your setup, you may need to run the installation command as superuser using the "sudo" prefix.
+
+
+## Requirements
+
+svviz has been tested on OS X and linux (ubuntu). svviz requires the following python packages, which should be automatically installed:
+
+- flask
+- joblib
+- pyfaidx
+- pysam
+
+In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see [these directions](http://railsapps.github.io/xcode-command-line-tools.html) for more info).
+
 
 
 #### Smith-Waterman Alignment
