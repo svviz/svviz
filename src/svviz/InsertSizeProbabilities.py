@@ -5,7 +5,6 @@ from svviz.utilities import mean, stddev
 try:
     from scipy.stats import gaussian_kde
 except ImportError:
-    numpy = None
     gaussian_kde = None
 
 def removeOutliers(data, m = 10.):
