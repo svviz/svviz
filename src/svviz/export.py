@@ -9,13 +9,32 @@ class TrackCompositor(object):
         self.height = height
         self.width = width
 
-    def addTrack(self, tracksvg, name, viewbox=None):
+    @staticmethod
+    def composite(tracks, names, viewboxes=None):
+        tc = TrackCompositor(1200, 300)
+        for track, name in zip(tracks, names):
+            # viewbox = " ".join([0,0,])
+            tc.addTrack(track.render(), name, height=track.height)
+        return tc.render()
+
+    def addTrack(self, tracksvg, name, viewbox=None, height=100):
+        # height = 100
+        # if viewbox is not None:
+        #     x, y, w, h = viewbox.split()
+        #     height = float(h)
         self.tracks[name] = {"svg":tracksvg,
-                             "viewbox":viewbox}
+                             "viewbox":viewbox,
+                             "height": height
+                            }
 
     def render(self):
         n = len(self.tracks)
-        eachHeight = (self.height-20*n)/float(n)
+        # eachHeight = (self.height-20*n)/float(n)
+        heights = dict((name, self.tracks[name]["height"]) for name in self.tracks)
+        totalHeight = float(sum(heights.values()))
+        for name in self.tracks:
+            heights[name] = heights[name]/totalHeight*(self.height-20*n)
+        print heights
         eachWidth = self.width#/float(n)
 
         modTracks = []
@@ -27,15 +46,15 @@ class TrackCompositor(object):
             modTracks.append(label)
             curY += 20
 
-            extra = 'svg x="{}" y="{}" width="{}" height="{}"'.format(curX, curY, eachWidth, eachHeight)
+            extra = 'svg x="{}" y="{}" width="{}" height="{}"'.format(curX, curY, eachWidth, heights[name])
             if trackInfo["viewbox"] is not None:
                 extra += ' viewBox="{}" preserveAspectRatio="xMinYMin"'.format(trackInfo["viewbox"])
             mod = trackInfo["svg"].replace("svg", extra, 1)
             modTracks.append(mod)
 
-            curY += eachHeight
+            curY += heights[name]
 
-        composite = ['<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, self.height)] \
+        composite = ['<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, self.height)] \
                     + modTracks + ["</svg>"]
         return "\n".join(composite)
 

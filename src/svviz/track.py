@@ -41,12 +41,12 @@ class Axis(object):
         self._height = 75
 
     def render(self):
-        svg = SVG(self.scale.pixelWidth, self._height, headerExtras="""preserveAspectRatio="none" """)
-        svg.rect(0, self._height-35, self.scale.pixelWidth, 3)
+        self.svg = SVG(self.scale.pixelWidth, self._height, headerExtras="""preserveAspectRatio="none" """)
+        self.svg.rect(0, self._height-35, self.scale.pixelWidth, 3)
 
         for tick in self.getTicks():
             x = self.scale.topixels(tick)
-            svg.rect(x, self._height-35, 1, 15, fill="black")
+            self.svg.rect(x, self._height-35, 1, 15, fill="black")
             label = tick
             if tick > 1e6:
                 label = "{:.1f}MB".format(tick/1e6)
@@ -57,14 +57,14 @@ class Axis(object):
                 x = 50
             elif x > self.scale.pixelWidth - 50:
                 x = self.scale.pixelWidth - 50
-            svg.text(x, 4, label, size=18)
+            self.svg.text(x, 4, label, size=18)
 
         for vline in self.vlines:
             x = self.scale.topixels(vline)
-            svg.rect(x, self._height-20, 1, 35, fill="red")        
-            svg.text(x, self._height-18, "breakpoint", size=18, fill="red")
+            self.svg.rect(x, self._height-20, 1, 35, fill="red")        
+            self.svg.text(x, self._height-18, "breakpoint", size=18, fill="red")
 
-        return str(svg)
+        return str(self.svg)
 
     def getTicks(self):
         start = self.scale.start
@@ -98,7 +98,9 @@ class ReadRenderer(object):
         yoffset = alignmentSet.yoffset
         pstart = self.scale.topixels(alignmentSet.start)
         pend = self.scale.topixels(alignmentSet.end)
-        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0), pend-pstart, 0.75, fill="gray")
+
+        thinLineWidth = 5
+        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill="#DDDDDD")
 
         positionCounts = collections.Counter()
 
@@ -218,6 +220,11 @@ class Track(object):
 
         self.rows = []
         self._axis = None
+
+        self.xmin = None
+        self.xmax = None
+
+
     def getAxis(self):
         if self._axis is None:
             self._axis = Axis(self.scale, self.vlines)
@@ -243,12 +250,18 @@ class Track(object):
         numRows = int(self.height/(self.rowHeight+self.rowMargin))
         self.rows = [None]#*numRows
 
+        self.xmin = 1e100
+        self.xmax = 0
+
         for alignmentSet in self.getAlignments():
             # if len(alignmentSet.getAlignments()) < 2:
                 # continue
             currow = self.findRow(alignmentSet.start, alignmentSet.end)
             yoffset = (self.rowHeight+self.rowMargin) * currow
             alignmentSet.yoffset = yoffset
+
+            self.xmin = min(self.xmin, self.scale.topixels(alignmentSet.start))
+            self.xmax = max(self.xmax, self.scale.topixels(alignmentSet.end))
 
         self.height = (self.rowHeight+self.rowMargin) * len(self.rows)
 

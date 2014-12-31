@@ -19,6 +19,17 @@ def log2(x):
         return float("nan")
 
 
+def check_swalign():
+    try:
+        from ssw import ssw_wrap
+        aligner = ssw_wrap.Aligner("AGTCGT", report_cigar=True, report_secondary=True)
+        aligner.align("AGTC")
+    except OSError:
+        return False
+
+    return True
+
+
 def findBestAlignment(seq, aligner):
     revseq = reverseComp(seq)
     forward_al = aligner.align(seq)
@@ -73,6 +84,9 @@ def do1remap(refseq, reads):
         logging.info("Removed {} reads with only degenerate nucleotides ('N')".format(originalLength-len(reads)))
 
     remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[refseq], verbose=3, processes=8))
+
+    # mm = Multimap(refseq)
+    # remapped = dict(map(mm.remap, [read.seq for read in reads]))
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:

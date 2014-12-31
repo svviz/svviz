@@ -4,11 +4,11 @@ class SVG(object):
         self.width = width
         self.height = height
 
-        self.header = []
+        # self.header = []
         self.svg = []
         self.footer = ["""</g></svg>"""]
         self.headerExtras = headerExtras
-        self._addHeader()
+        # self._addHeader()
 
     def getDefaultZIndex(self, zindex):
         """ allows insertion at the beginning of the svg list (ie before all the other items, therfore below them) """
@@ -16,11 +16,14 @@ class SVG(object):
             zindex = len(self.svg)
         return zindex
 
-    def _addHeader(self):
-        self.header.append("""<?xml version="1.0" encoding="utf-8" ?><svg baseProfile="full" height="100%" version="1.1" """
-            """width="100%" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg" {extras} """
+    def header(self):
+        header = []
+        # """<?xml version="1.0" encoding="utf-8" ?>"""
+        header.append("""<svg baseProfile="full" version="1.1" """
+            """viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg" {extras} """
             """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(h=self.height, w=self.width, extras=self.headerExtras))
-        self.header.append("<g class=\"svg_viewport\">")
+        header.append("<g class=\"svg_viewport\">")
+        return header
 
     def _addOptions(self, **kwdargs):
         options = []
@@ -44,7 +47,7 @@ class SVG(object):
         self.svg.append("""<text x="{x}" y="{y}" font-size="{size}" text-anchor="{anchor}" {more}>{text}</text>\n""".format(x=x, y=self.height-y, size=size, anchor=anchor, more=more, text=text))
 
     def completed(self):
-        return self.header + self.svg + self.footer
+        return self.header() + self.svg + self.footer
 
     def __str__(self):
         return "".join(self.completed())

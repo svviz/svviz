@@ -62,3 +62,4 @@ TEST
 *.sublime-workspace
 more_test_multiprocessing.py
 test_multiprocessing.py
+.env

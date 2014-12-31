@@ -3,6 +3,7 @@ import logging
 import os
 import pyfaidx
 import pysam
+import sys
 import time
 
 from svviz import debug
@@ -12,6 +13,7 @@ from svviz import StructuralVariants
 from svviz import remap
 from svviz import track
 from svviz.utilities import Locus, reverseComp, nameFromBamPath
+from svviz.export import TrackCompositor
 import misc
 
 
@@ -146,6 +148,10 @@ def getISDs(args):
     return isds
 
 def main():
+    if not remap.check_swalign():
+        print "ERROR: check that svviz is correctly installed -- the 'ssw' Smith-Waterman alignment module does not appear to be functional"
+        sys.exit(1)
+
     args = CommandLine.parseArgs()
     run(args)
 
@@ -210,6 +216,13 @@ def run(args):
                 plotISDs = plotISDs and InsertSizeProbabilities.plotInsertSizeDistribution(isd, name, datasets[name])
             if plotISDs:
                 web.ISIZES = web.SAMPLES
+
+
+        to_export = TrackCompositor.composite([web.TracksByDataset[name]["alt"] for name in datasets], datasets.keys())
+        temp = open("temp.svg", "w")
+        temp.write(to_export)
+        temp.flush()
+        temp.close()
 
         web.run()
 

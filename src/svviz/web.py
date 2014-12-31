@@ -39,7 +39,17 @@ def static_proxy(path):
     # send_static_file will guess the correct MIME type
     return app.send_static_file(path)
 
-     
+   
+def _getsvg(track):
+    xmlHeader = """<?xml version="1.0" encoding="utf-8" ?>"""
+    track.render()
+    svg = track.svg
+    oldHeaders = svg.headerExtras
+    svg.headerExtras = """preserveAspectRatio="none" height="100%" width="100%" """
+    svgText = str(svg)
+    svg.headerExtras = oldHeaders
+    return xmlHeader+svgText
+
 @app.route('/_disp')
 def display():
     req = request.args.get('req', 0)
@@ -52,9 +62,9 @@ def display():
         for name in SAMPLES:
             # svg = open("{}.{}.svg".format(req, name)).read()
             track = TracksByDataset[name][req]
-            svg = track.render()
+            svg = _getsvg(track)
             results.append({"name":name, "svg":svg})
-        axisSVG = track.getAxis().render()
+        axisSVG = _getsvg(track.getAxis())
         results.append({"name":"axis", "svg":axisSVG})
         return jsonify(results=results)
 
