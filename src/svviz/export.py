@@ -66,16 +66,38 @@ def canConvertSVGToPDF():
     else:
         return True
 
-def convertSVGToPDF(inpath):
+def convertSVG(insvg, outformat="pdf"):
     if not canConvertSVGToPDF():
         print "Can't find rsvg-convert; make sure you have librsvg installed"
         return None
 
     outdir = tempfile.mkdtemp()
-    outpath = "{}/converted.pdf".format(outdir)
-    subprocess.check_call("rsvg-convert -f pdf -o {} {}".format(outpath, inpath), shell=True)
+    inpath = "{}/original.svg".format(outdir)
+    infile = open(inpath, "w")
+    infile.write(insvg)
+    infile.flush()
+    infile.close()
 
-    return outpath
+    options = ""
+    if outformat == "png":
+        options = "-a -w 5000 --background-color white"
+
+    outpath = "{}/converted.{}".format(outdir, outformat)
+    subprocess.check_call("rsvg-convert -f {} {} -o {} {}".format(outformat, options, outpath, inpath), shell=True)
+
+    return open(outpath).read()
+
+def convertSVGToPDF2(insvg):
+    import cairosvg
+
+    pdf = cairosvg.svg2pdf(bytestring=insvg)
+    return pdf
+
+def convertSVGToPNG(insvg):
+    import cairosvg
+
+    png = cairosvg.svg2png(bytestring=insvg)
+    return png
 
 
 def test():

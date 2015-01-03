@@ -1,7 +1,9 @@
 import logging
 import os
 import urllib
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, render_template, request, jsonify, Response, session
+
+from svviz import export
 
 RESULTS = {}
 READ_INFO = None
@@ -14,7 +16,7 @@ app = Flask(__name__,
     static_folder=os.path.join(os.path.dirname(__file__), "static"),
     template_folder=os.path.join(os.path.dirname(__file__), "templates")
     )
-
+app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 
 def getport():
     import socket
@@ -28,6 +30,9 @@ def getport():
 @app.route('/')
 def index():
     logging.debug("INDEX")
+    if not "last_format" in session:
+        session["last_format"] = "svg"
+
     try:
         return render_template('index.html', samples=SAMPLES, results_table=RESULTS, insertSizeDistributions=ISIZES)
     except Exception as e:
@@ -38,8 +43,47 @@ def index():
 def static_proxy(path):
     # send_static_file will guess the correct MIME type
     return app.send_static_file(path)
+   
+@app.route('/_export', methods=["POST"])
+def do_export():
+    print "EXPORT REQUESTED:", request.form
+
+    format = request.form.get("format", "svg").lower()
+    session["last_format"] = format
+
+    filename = "export.{}".format(format)
+
+    svg = TEMPSVG
+
+    if format == "svg":
+        mimetype = "image/svg+xml"
+        data = svg
+    elif format == "png":
+        mimetype = "image/png"
+        data = export.convertSVG(svg, "png")
+    elif format == "pdf2":
+        # doesn't work!?
+        mimetype = "application/pdf"
+        data = export.convertSVGToPDF2(svg)
+    elif format == "pdf":
+        mimetype = "application/pdf"
+        data = export.convertSVG(svg, "pdf")
+    else:
+        raise Exception("unknown format")
+
+    response = Response(data,
+                        mimetype=mimetype,
+                        headers={"Content-Disposition": "attachment;filename={}".format(filename)})
+
+    return response
 
    
+@app.route('/_haspdfexport')
+def _hasPDFExport():
+    if export.canConvertSVGToPDF():
+        return jsonify({"haspdfexport":True})
+    return jsonify({"haspdfexport":False})
+
 def _getsvg(track):
     xmlHeader = """<?xml version="1.0" encoding="utf-8" ?>"""
     track.render()

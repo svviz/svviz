@@ -224,6 +224,8 @@ def run(args):
         temp.flush()
         temp.close()
 
+        web.TEMPSVG = to_export
+
         web.run()
 
 

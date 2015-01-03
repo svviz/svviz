@@ -1,4 +1,3 @@
-/*global $:false */
 'use strict';
 
 
@@ -33,24 +32,6 @@ function update () {
   addSVG("alt");
   addSVG("ref");
   addSVG("amb");
-
-  // $.getJSON('/_disp', {"req":"counts"}, function(data) {
-  //   // console.log(data.result);
-  //   var table = $('<table></table>');
-
-  //   var keys = ["AltCount", "RefCount", "AmbCount"];
-
-  //   jQuery.each(keys, function(i, key) {
-  //     var val = data.result[key];
-  //     var row = $('<tr></tr>');
-  //     row.append($("<td>"+key+"</td>"));
-  //     row.append($("<td>"+val+"</td>"));
-
-  //     table.append(row);
-  //     });
-  //   console.log(table);
-  //   $('#description').append(table);
-  // });
 }
 
 
@@ -65,8 +46,20 @@ function loadSVGs() {
   });
 }
 
+function setupExport() {
+  $.getJSON('/_haspdfexport', function(data) {
+    if (data.haspdfexport) {
+      $("#pdfFormat").prop("disabled", false);
+      $("#pdfRequiresText").hide();
+    }
+  });
+
+  $("#runExport").click(function(){
+    $("#exportModal").modal("hide");
+  })
+}
 
 $(function() {
-  console.log("here");
   loadSVGs();
+  setupExport();
 });
