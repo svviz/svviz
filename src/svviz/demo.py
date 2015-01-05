@@ -1,18 +1,43 @@
 import logging
 import os
+import requests
 import sys
 import tempfile
 import urllib
 import zipfile
+
+def downloadWithProgress(url, outpath):
+    link = "https://github.com/svviz/svviz-data/archive/master.zip"
+
+    # print "Downloading %s" % link
+    response = requests.get(link, stream=True)
+    total_length = response.headers.get('content-length')
+
+    with open(outpath, "wb") as outf:
+        if total_length is None: # no content length header
+            outf.write(response.content)
+        else:
+            dl = 0
+            total_length = int(total_length)
+            for data in response.iter_content(chunk_size=1024):
+                dl += len(data)
+                outf.write(data)
+                done = int(50 * dl / total_length)
+                sys.stdout.write("Download progress: \r[%s%s]" % ('=' * done, ' ' * (50-done)) )    
+                sys.stdout.flush()
+
+    outf.close()
 
 def downloadDemos():
     try:
         downloadDir = tempfile.mkdtemp()
         archivePath = "{}/svviz-data.zip".format(downloadDir)
 
-        logging.info("Downloading...")
-        urllib.urlretrieve("https://github.com/svviz/svviz-data/archive/master.zip", archivePath)
+        # logging.info("Downloading...")
+        # urllib.urlretrieve("https://github.com/svviz/svviz-data/archive/master.zip", archivePath)
 
+        downloadWithProgress("https://github.com/svviz/svviz-data/archive/master.zip", archivePath)
+        
         logging.info("Decompressing...")
         archive = zipfile.ZipFile(archivePath)
         archive.extractall()

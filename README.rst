@@ -113,6 +113,7 @@ svviz has been tested on OS X and linux (ubuntu). svviz requires the following p
 - joblib
 - pyfaidx
 - pysam
+- requests
 
 In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see `these directions <http://railsapps.github.io/xcode-command-line-tools.html>`_ for more info).
 
