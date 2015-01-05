@@ -53,8 +53,8 @@ def downloadDemos():
     
 def checkForDemos():
     if not os.path.exists("svviz-data-master"):
-        choice = raw_input("Couldn't find example data in current working directory (svviz-data-master). Shall I download it and decompress it into the current working directory? y/n:")
-        if choice.lower() in ["y", "yes"]:
+        choice = raw_input("Couldn't find example data in current working directory (svviz-data-master). Shall I download it and decompress it into the current working directory? Y/n:")
+        if choice.lower() in ["y", "yes", ""]:
             return downloadDemos()
         else:
             return False

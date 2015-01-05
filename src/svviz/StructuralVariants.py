@@ -24,6 +24,7 @@ class StructuralVariant(object):
     def getAltRelativeBreakpoints(self):
         pass
 
+
 class Deletion(StructuralVariant):
     @classmethod
     def from_breakpoints(class_, chrom, first, second, alignDistance, fasta):
@@ -66,6 +67,55 @@ class Deletion(StructuralVariant):
         return [self.alignDistance]
 
 
+class Inversion(StructuralVariant):
+    def __init__(self, region, alignDistance, fasta):
+        breakpoints = [Locus(region.chr(), region.start(), region.start(), "+"), Locus(region.chr(), region.end(), region.end(), "+")]
+        super(Inversion, self).__init__(breakpoints, alignDistance, fasta)
+
+        self.region = region
+
+    def searchRegions(self, searchDistance):
+        chrom = self.region.chr()
+
+        if len(self.region) < 2*searchDistance:
+            # return a single region
+            return [Locus(chrom, self.region.start()-searchDistance, self.region.end()+searchDistance, "+")]
+        else:
+            # return two regions, each around one of the ends of the inversion
+            searchRegions = []
+            searchRegions.append(Locus(chrom, self.region.start()-searchDistance, self.region.start()+searchDistance, "+"))
+            searchRegions.append(Locus(chrom, self.region.end()-searchDistance, self.region.end()+searchDistance, "+"))
+            return searchRegions
+
+    def getRefSeq(self):
+        if self._refseq is None:
+            chrom = self.region.chr()
+            start = self.region.start() - self.alignDistance
+            end = self.region.end() + self.alignDistance
+
+            self._refseq = self.fasta[chrom][start:end+1].upper()
+        return self._refseq
+
+    def getRefRelativeBreakpoints(self):
+        return [self.alignDistance]
+
+    def getAltRelativeBreakpoints(self):
+        return [self.alignDistance, self.alignDistance+len(self.region)]
+
+    def getAltSeq(self):
+        if self._altseq is None:
+            chrom = self.region.chr()
+            before = self.fasta[chrom][self.region.start()-self.alignDistance:
+                                       self.region.start()]
+            within = reverseComp(self.fasta[chrom][self.region.start():self.region.end()+1])
+            after = self.fasta[chrom][self.region.end()+1:
+                                      self.region.end()+self.alignDistance+1]
+
+            self._altseq = before + within + after
+            self._altseq = self._altseq.upper()                       
+        print self._altseq   
+        return self._altseq
+
 class Insertion(StructuralVariant):
     def __init__(self, breakpoint, insertSeq, alignDistance, fasta):
         super(Insertion, self).__init__([breakpoint], alignDistance, fasta)
@@ -94,6 +144,7 @@ class Insertion(StructuralVariant):
 
     def getAltRelativeBreakpoints(self):
         return [self.alignDistance, self.alignDistance+len(self.insertSeq)]
+
 
 class MobileElementInsertion(Insertion):
     def __init__(self, breakpoint, insertedSeqLocus, insertionFasta, alignDistance, refFasta):

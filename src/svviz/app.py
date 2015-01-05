@@ -75,6 +75,15 @@ def getVariant(args, genome, isds):
             args.min_mapq = -1
 
         variant = StructuralVariants.Insertion(Locus(chrom, pos, pos, "+"), seq, alignDistance, genome)
+    elif args.type.lower().startswith("inv"):
+        assert len(args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <start> <end>'"
+        chrom = args.breakpoints[0]
+        start = int(args.breakpoints[1])
+        end = int(args.breakpoints[2])
+        if args.min_mapq is None:
+            args.min_mapq = -1
+
+        variant = StructuralVariants.Inversion(Locus(chrom, start, end, "+"), alignDistance, genome)
     elif args.type.lower().startswith("mei"):
         assert len(args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
         if args.min_mapq is None:

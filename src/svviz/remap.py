@@ -108,7 +108,8 @@ def do1remap(refseq, reads):
 
 def getReads(variant, bam, minmapq, searchDistance, single_ended=False):
     t0 = time.time()
-    pairFinder = PairFinder(variant.searchRegions(searchDistance), bam, minmapq=minmapq, is_paired=(not single_ended))
+    searchRegions = variant.searchRegions(searchDistance)
+    pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, is_paired=(not single_ended))
     reads = [item for sublist in pairFinder.matched for item in sublist]
     t1 = time.time()
 
