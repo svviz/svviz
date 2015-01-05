@@ -4,59 +4,72 @@ import tempfile
 
 
 class TrackCompositor(object):
-    def __init__(self, width, height):
-        self.tracks = collections.OrderedDict()
-        self.height = height
+    def __init__(self, width):
+        self.sections = collections.OrderedDict()
+        # self.height = height
         self.width = width
 
-    @staticmethod
-    def composite(tracks, names, viewboxes=None):
-        tc = TrackCompositor(1200, 300)
-        for track, name in zip(tracks, names):
-            # viewbox = " ".join([0,0,])
-            tc.addTrack(track.render(), name, height=track.height)
-        return tc.render()
+        self.sectionLabelHeight = 32
+        self.betweenSectionHeight = 30
+        self.trackLabelHeight = 20
 
-    def addTrack(self, tracksvg, name, viewbox=None, height=100):
+    def addTracks(self, section, names, tracks):
+        for track, name in zip(tracks, names):
+            self.addTrackSVG(section, name, track.render(), height=track.height/6.0)
+
+    def addTrackSVG(self, section, name, tracksvg, viewbox=None, height=100):
         # height = 100
         # if viewbox is not None:
         #     x, y, w, h = viewbox.split()
         #     height = float(h)
-        self.tracks[name] = {"svg":tracksvg,
-                             "viewbox":viewbox,
-                             "height": height
-                            }
+        if not section in self.sections:
+            self.sections[section] = collections.OrderedDict()
+        self.sections[section][name] = {"svg":tracksvg,
+                                        "viewbox":viewbox,
+                                        "height": height
+                                       }
+
+    def _svgText(self, x, y, text, height):
+        svg = '<svg x="{x}" y="{y}"><text x="0" y="{padded}" font-size="{textHeight}" font-family="Helvetica">{text}</text></svg>'.format(x=x, y=y, 
+            padded=height, textHeight=(height-2), text=text)
+        return svg
 
     def render(self):
-        n = len(self.tracks)
-        # eachHeight = (self.height-20*n)/float(n)
-        heights = dict((name, self.tracks[name]["height"]) for name in self.tracks)
-        totalHeight = float(sum(heights.values()))
-        for name in self.tracks:
-            heights[name] = heights[name]/totalHeight*(self.height-20*n)
-        print heights
-        eachWidth = self.width#/float(n)
-
         modTracks = []
         curX = 0
         curY = 0
 
-        for name, trackInfo in self.tracks.iteritems():
-            label = '<svg x="{}" y="{}"><text x="0" y="20">{}</text></svg>'.format(curX, curY, name)
+        for i, sectionName in enumerate(self.sections):
+            section = self.sections[sectionName]
+
+            if i > 0:
+                curY += self.betweenSectionHeight
+
+            # label = '<svg x="{}" y="{}"><text x="0" y="30" font-size="28" font-family="Helvetica">{}</text></svg>'.format(curX+10, curY, sectionName)
+            label = self._svgText(curX+10, curY, sectionName, self.sectionLabelHeight)
             modTracks.append(label)
-            curY += 20
+            curY += self.sectionLabelHeight
 
-            extra = 'svg x="{}" y="{}" width="{}" height="{}"'.format(curX, curY, eachWidth, heights[name])
-            if trackInfo["viewbox"] is not None:
-                extra += ' viewBox="{}" preserveAspectRatio="xMinYMin"'.format(trackInfo["viewbox"])
-            mod = trackInfo["svg"].replace("svg", extra, 1)
-            modTracks.append(mod)
+            for trackName in section:
+                trackInfo = section[trackName]
 
-            curY += heights[name]
+                label = self._svgText(curX+10, curY, trackName, self.trackLabelHeight)
+                # label = '<svg x="{}" y="{}"><text x="0" y="{}" font-family="Helvetica">{}</text></svg>'.format(curX+20, curY, curY+self.sectionLabelHeight, trackName)
+                modTracks.append(label)
+                curY += self.sectionLabelHeight
 
-        composite = ['<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, self.height)] \
+                extra = 'svg x="{}" y="{}" width="{}" height="{}"'.format(curX, curY, self.width, trackInfo["height"])
+                if trackInfo["viewbox"] is not None:
+                    extra += ' viewBox="{}" preserveAspectRatio="xMinYMin"'.format(trackInfo["viewbox"])
+                mod = trackInfo["svg"].replace("svg", extra, 1)
+                modTracks.append(mod)
+
+                curY += trackInfo["height"]
+
+        composite = ['<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, curY)] \
                     + modTracks + ["</svg>"]
         return "\n".join(composite)
+
 
 def canConvertSVGToPDF():
     try:

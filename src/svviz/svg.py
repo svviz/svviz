@@ -41,7 +41,7 @@ class SVG(object):
         more = self._addOptions(stroke=stroke, fill=fill, **kwdargs)
         self.svg.insert(zindex, """<rect x="{x}" y="{y}" width="{w}" height="{h}" {more}/>\n""".format(x=x, y=self.height-y, w=width, h=height, more=more))
 
-    def text(self, x, y, text, size=10, anchor="middle", fill="", family="Arial", **kwdargs):
+    def text(self, x, y, text, size=10, anchor="middle", fill="", family="Helvetica", **kwdargs):
         kwdargs["font-family"] = family
         more = self._addOptions(fill=fill, **kwdargs)
         self.svg.append("""<text x="{x}" y="{y}" font-size="{size}" text-anchor="{anchor}" {more}>{text}</text>\n""".format(x=x, y=self.height-y, size=size, anchor=anchor, more=more, text=text))

@@ -46,8 +46,6 @@ def static_proxy(path):
    
 @app.route('/_export', methods=["POST"])
 def do_export():
-    print "EXPORT REQUESTED:", request.form
-
     format = request.form.get("format", "svg").lower()
     session["last_format"] = format
 

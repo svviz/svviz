@@ -218,11 +218,11 @@ def run(args):
                 web.ISIZES = web.SAMPLES
 
 
-        to_export = TrackCompositor.composite([web.TracksByDataset[name]["alt"] for name in datasets], datasets.keys())
-        temp = open("temp.svg", "w")
-        temp.write(to_export)
-        temp.flush()
-        temp.close()
+        tc = TrackCompositor(1200)
+        tc.addTracks("Alternate Allele", datasets.keys(), [web.TracksByDataset[name]["alt"] for name in datasets])
+        tc.addTracks("Reference Allele", datasets.keys(), [web.TracksByDataset[name]["ref"] for name in datasets])
+        to_export = tc.render()
+        
 
         web.TEMPSVG = to_export
 
