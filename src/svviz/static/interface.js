@@ -49,8 +49,8 @@ function loadSVGs() {
 function setupExport() {
   $.getJSON('/_haspdfexport', function(data) {
     if (data.haspdfexport) {
-      $("#pdfFormat").prop("disabled", false);
-      $("#pdfRequiresText").hide();
+      $(".requiresRSVG").prop("disabled", false);
+      $("#requiresRSVGText").hide();
     }
   });
 

@@ -95,19 +95,15 @@
                           <label><input type="radio" name="format" value="svg" {{ 'checked=""' if session.last_format=="svg" else '' }}>svg<br></label>
                         </div>
 
-                        <div class="radio">
-                          <label><input type="radio" name="format" value="png" {{ 'checked=""' if session.last_format=="png" else '' }}>png<br></label>
-                        </div>
-
-                        <div class="radio">
-                          <label><input type="radio" name="format" value="pdf2" {{ 'checked=""' if session.last_format=="pdf2" else '' }}>pdf2<br></label>
+                        <div class="radio disabled">
+                          <label><input type="radio" name="format" value="png" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="png" else '' }}>png<br></label>
                         </div>
 
                         <div class="radio disabled">
-                          <label><input type="radio" name="format" value="pdf" {{ 'checked=""' if session.last_format=="pdf" else '' }} id="pdfFormat" disabled>pdf<br></label>
+                          <label><input type="radio" name="format" value="pdf" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="pdf" else '' }}>pdf<br></label>
                         </div>
 
-                        <span id="pdfRequiresText" class="help-block">pdf export requires librsvg library to be installed. Click <a href="http://www.google.com/">here</a> for instructions.</span>
+                        <span id="requiresRSVGText" class="help-block">pdf and png export requires librsvg library to be installed. Click <a href="http://www.google.com/">here</a> for instructions.</span>
                         PREFERENCE: {{ session.last_format }}
                       </div>
                   </div>

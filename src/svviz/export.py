@@ -60,7 +60,7 @@ class TrackCompositor(object):
 
 def canConvertSVGToPDF():
     try:
-        subprocess.check_call("rsvg-convert -v", shell=True)
+        subprocess.check_call("rsvg-convert -v", stdout=subprocess.PIPE, shell=True)
     except subprocess.CalledProcessError:
         return False
     else:
@@ -87,17 +87,17 @@ def convertSVG(insvg, outformat="pdf"):
 
     return open(outpath).read()
 
-def convertSVGToPDF2(insvg):
-    import cairosvg
+# def convertSVGToPDF2(insvg):
+#     import cairosvg
 
-    pdf = cairosvg.svg2pdf(bytestring=insvg)
-    return pdf
+#     pdf = cairosvg.svg2pdf(bytestring=insvg)
+#     return pdf
 
-def convertSVGToPNG(insvg):
-    import cairosvg
+# def convertSVGToPNG(insvg):
+#     import cairosvg
 
-    png = cairosvg.svg2png(bytestring=insvg)
-    return png
+#     png = cairosvg.svg2png(bytestring=insvg)
+#     return png
 
 
 def test():

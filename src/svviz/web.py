@@ -61,10 +61,6 @@ def do_export():
     elif format == "png":
         mimetype = "image/png"
         data = export.convertSVG(svg, "png")
-    elif format == "pdf2":
-        # doesn't work!?
-        mimetype = "application/pdf"
-        data = export.convertSVGToPDF2(svg)
     elif format == "pdf":
         mimetype = "application/pdf"
         data = export.convertSVG(svg, "pdf")
