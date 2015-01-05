@@ -232,13 +232,13 @@ class Track(object):
 
     def findRow(self, start, end):
         for currow in range(len(self.rows)):
-            if self.rows[currow] is None or self.scale.topixels(start) - self.scale.topixels(self.rows[currow]) >= 2:
+            if self.rows[currow] is None or (self.scale.topixels(start) - self.scale.topixels(self.rows[currow])) >= 2:
+                # print self.rows[currow], end
                 self.rows[currow] = end
                 break
         else:
             self.rows.append(end)
-            currow = len(self.rows)
-        # could dynamically grow the number of rows here...
+            currow = len(self.rows)-1
 
         return currow
 
@@ -247,7 +247,6 @@ class Track(object):
         return sorted(self.alignmentSets, key=lambda x: x.start)
 
     def dolayout(self):
-        numRows = int(self.height/(self.rowHeight+self.rowMargin))
         self.rows = [None]#*numRows
 
         self.xmin = 1e100
@@ -256,9 +255,16 @@ class Track(object):
         for alignmentSet in self.getAlignments():
             # if len(alignmentSet.getAlignments()) < 2:
                 # continue
+            if alignmentSet.getAlignments()[0].name == "D00360:64:HBAP3ADXX:1:1205:4860:67023":
+                print "^"*10, alignmentSet
+                print self.rows
+
             currow = self.findRow(alignmentSet.start, alignmentSet.end)
             yoffset = (self.rowHeight+self.rowMargin) * currow
             alignmentSet.yoffset = yoffset
+
+            if alignmentSet.getAlignments()[0].name == "D00360:64:HBAP3ADXX:1:1205:4860:67023":
+                print self.rows[currow]
 
             self.xmin = min(self.xmin, self.scale.topixels(alignmentSet.start))
             self.xmax = max(self.xmax, self.scale.topixels(alignmentSet.end))

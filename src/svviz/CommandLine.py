@@ -12,6 +12,9 @@ def setDefault(args, key, default):
 def checkDemoMode():
     inputArgs = sys.argv[1:]
 
+    if len(inputArgs) < 1:
+        return []
+        
     if inputArgs[0] == "demo":
         cmd = demo.loadDemo()
         if cmd is not None:
