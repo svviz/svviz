@@ -13,10 +13,10 @@ This software is in active development. Some things may not work as expected. Th
 Quickstart
 ==========
 
-1. (OS X only) Ensure that you have a working compiler by following [these instructions](http://railsapps.github.io/xcode-command-line-tools.html).
-2. Install the latest version of svviz from github using the following terminal command: ```sudo pip install git+https://github.com/svviz/svviz.git#svviz```. (The sudo may not be necessary depending on your setup.)
-3. Run the following command, which downloads example data and runs it through svviz: ```svviz demo```. After several processing steps, a web browser window should open. Click and drag to pan, and zoom using option/alt-scrollwheel.
-4. Please report any issues (after making sure they're not explained in the documentation below) using the [github issue tracker](https://github.com/svviz/svviz/issues).
+1. (OS X only) Ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_.
+2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install git+https://github.com/svviz/svviz.git#svviz``. (The sudo may not be necessary depending on your setup.)
+3. Run the following command, which downloads example data and runs it through svviz: ``svviz demo``. After several processing steps, a web browser window should open. Click and drag to pan, and zoom using option/alt-scrollwheel.
+4. Please report any issues (after making sure they're not explained in the documentation below) using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 
 
 Usage
@@ -78,7 +78,7 @@ Usage
 
   For an example, run 'svviz demo'.
 
-The format for specifying deletion breakpoints is ``chrom start end``. The format for specifying insertions is ``chrom breakpoint <inserted sequence>``. Mobile elements can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where <ME name> must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
+The format for specifying deletion breakpoints is ``chrom start end``. The format for specifying insertions is ``chrom breakpoint <inserted sequence>``. Mobile elements can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
 
 For example:
 
@@ -108,12 +108,13 @@ Requirements
 
 svviz has been tested on OS X and linux (ubuntu). svviz requires the following python packages, which should be automatically installed:
 
+- numpy
 - flask
 - joblib
 - pyfaidx
 - pysam
 
-In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see [these directions](http://railsapps.github.io/xcode-command-line-tools.html) for more info).
+In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see `these directions <http://railsapps.github.io/xcode-command-line-tools.html>`_ for more info).
 
 
 
