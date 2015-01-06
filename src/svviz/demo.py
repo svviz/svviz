@@ -1,19 +1,23 @@
 import logging
 import os
 import requests
+import shutil
 import sys
 import tempfile
 import urllib
 import zipfile
 
-def downloadWithProgress(url, outpath):
-    link = "https://github.com/svviz/svviz-data/archive/master.zip"
+logging.getLogger("requests").setLevel(logging.WARNING)
 
-    # print "Downloading %s" % link
+def downloadWithProgress(link, outpath):
+    print "Downloading %s" % link
     response = requests.get(link, stream=True)
     total_length = response.headers.get('content-length')
 
     with open(outpath, "wb") as outf:
+        sys.stdout.write("\rDownload progress: [%s%s]" % (' ' * (50)) )    
+        sys.stdout.flush()
+
         if total_length is None: # no content length header
             outf.write(response.content)
         else:
@@ -23,12 +27,12 @@ def downloadWithProgress(url, outpath):
                 dl += len(data)
                 outf.write(data)
                 done = int(50 * dl / total_length)
-                sys.stdout.write("Download progress: \r[%s%s]" % ('=' * done, ' ' * (50-done)) )    
+                sys.stdout.write("\rDownload progress: [%s%s]" % ('=' * done, ' ' * (50-done)) )    
                 sys.stdout.flush()
-
+    sys.stdout.write("\n")
     outf.close()
 
-def downloadDemos():
+def downloadDemo(which):
     try:
         downloadDir = tempfile.mkdtemp()
         archivePath = "{}/svviz-data.zip".format(downloadDir)
@@ -36,26 +40,31 @@ def downloadDemos():
         # logging.info("Downloading...")
         # urllib.urlretrieve("https://github.com/svviz/svviz-data/archive/master.zip", archivePath)
 
-        downloadWithProgress("https://github.com/svviz/svviz-data/archive/master.zip", archivePath)
+        downloadWithProgress("https://github.com/svviz/svviz-data/archive/{}.zip".format(which), archivePath)
         
         logging.info("Decompressing...")
         archive = zipfile.ZipFile(archivePath)
-        archive.extractall()
+        archive.extractall("{}".format(downloadDir))
+
+        import subprocess
+        subprocess.call("ls {}/svviz-data-{}".format(downloadDir, which), shell=True)
+        shutil.move("{temp}/svviz-data-{which}/{which}".format(temp=downloadDir, which=which), "svviz-examples/")
     except Exception as e:
         print "error downloading and decompressing example data: {}".format(e)
         return False
 
-    if not os.path.exists("svviz-data-master"):
+    if not os.path.exists("svviz-examples"):
         print "error finding example data after download and decompression"
         return False
     return True
 
     
-def checkForDemos():
-    if not os.path.exists("svviz-data-master"):
-        choice = raw_input("Couldn't find example data in current working directory (svviz-data-master). Shall I download it and decompress it into the current working directory? Y/n:")
+def checkForDemo(which):
+    if not os.path.exists("svviz-examples/{}".format(which)):
+        choice = raw_input("""Couldn't find example data in current working directory (svviz-examples/{}). """
+            """Shall I download it and decompress it into the current working directory? Y/n:""".format(which))
         if choice.lower() in ["y", "yes", ""]:
-            return downloadDemos()
+            return downloadDemo(which)
         else:
             return False
     else:
@@ -63,10 +72,10 @@ def checkForDemos():
 
 
 def loadDemo(which="example1"):
-    if not checkForDemos():
+    if not checkForDemo(which):
         sys.exit(1)
 
-    demodir = "svviz-data-master/{}".format(which)
+    demodir = "svviz-examples/{}".format(which)
     info = open("{}/info.txt".format(demodir))
     cmd = None
     for line in info:

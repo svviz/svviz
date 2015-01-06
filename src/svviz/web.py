@@ -4,11 +4,15 @@ import urllib
 from flask import Flask, render_template, request, jsonify, Response, session
 
 from svviz import export
+logging.getLogger('werkzeug').setLevel(logging.ERROR)
+
 
 RESULTS = {}
 READ_INFO = None
 SAMPLES = []
 ISIZES = False
+VARIANT = None
+TEMPSVG = None
 TracksByDataset = {}
 
 # Initialize the Flask application
@@ -29,12 +33,13 @@ def getport():
 
 @app.route('/')
 def index():
-    logging.debug("INDEX")
     if not "last_format" in session:
         session["last_format"] = "svg"
 
     try:
-        return render_template('index.html', samples=SAMPLES, results_table=RESULTS, insertSizeDistributions=ISIZES)
+        variantDescription = str(VARIANT).replace("::", " ").replace("-", "&ndash;")
+        return render_template('index.html', samples=SAMPLES, 
+            results_table=RESULTS, insertSizeDistributions=ISIZES, variantDescription=variantDescription)
     except Exception as e:
         logging.error("ERROR:{}".format(e))
         raise
@@ -79,14 +84,9 @@ def _hasPDFExport():
     return jsonify({"haspdfexport":False})
 
 def _getsvg(track):
-    xmlHeader = """<?xml version="1.0" encoding="utf-8" ?>"""
     track.render()
-    svg = track.svg
-    oldHeaders = svg.headerExtras
-    svg.headerExtras = """preserveAspectRatio="none" height="100%" width="100%" """
-    svgText = str(svg)
-    svg.headerExtras = oldHeaders
-    return xmlHeader+svgText
+    svgText = track.svg.asString("web")
+    return svgText
 
 @app.route('/_disp')
 def display():

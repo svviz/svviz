@@ -20,8 +20,8 @@ class SVG(object):
         header = []
         # """<?xml version="1.0" encoding="utf-8" ?>"""
         header.append("""<svg baseProfile="full" version="1.1" """
-            """viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg" {extras} """
-            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(h=self.height, w=self.width, extras=self.headerExtras))
+            """xmlns="http://www.w3.org/2000/svg" {extras} """
+            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(extras=self.headerExtras))
         header.append("<g class=\"svg_viewport\">")
         return header
 
@@ -46,12 +46,27 @@ class SVG(object):
         more = self._addOptions(fill=fill, **kwdargs)
         self.svg.append("""<text x="{x}" y="{y}" font-size="{size}" text-anchor="{anchor}" {more}>{text}</text>\n""".format(x=x, y=self.height-y, size=size, anchor=anchor, more=more, text=text))
 
-    def completed(self):
-        return self.header() + self.svg + self.footer
 
     def __str__(self):
-        return "".join(self.completed())
+        return self.asString()
 
-    def write(self, path):
+    def asString(self, headerSet=None):
+        oldHeaderExtras = self.headerExtras
+
+        if headerSet is None:
+            self.headerExtras += """viewBox="0 0 {w} {h}" """.format(w=self.width, h=self.height)
+            header = self.header()
+        elif headerSet == "export":
+            header = self.header()
+        elif headerSet == "web":
+            xmlHeader = """<?xml version="1.0" encoding="utf-8" ?>"""
+            self.headerExtras += """preserveAspectRatio="none" height="100%" width="100%" """
+            header = [xmlHeader] + self.header()
+
+        self.headerExtras = oldHeaderExtras
+
+        return "".join(header + self.svg + self.footer)
+
+    def write(self, path, headerSet=None):
         output = open(path, "w")
-        output.write(str(self))
+        output.write(self.asString(headerSet))

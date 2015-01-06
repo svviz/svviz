@@ -1,21 +1,39 @@
 import collections
+import logging
 import subprocess
 import tempfile
 
 
 class TrackCompositor(object):
-    def __init__(self, width):
+    def __init__(self, width, title=None):
         self.sections = collections.OrderedDict()
         # self.height = height
         self.width = width
+        self.title = title
 
+        self.marginTopBottom = 20
         self.sectionLabelHeight = 32
         self.betweenSectionHeight = 30
         self.trackLabelHeight = 20
 
     def addTracks(self, section, names, tracks):
+        for track in tracks:
+            track.render()
+        xmin = min(track.xmin for track in tracks if track.xmin is not None)
+        xmax = max(track.xmax for track in tracks if track.xmax is not None)
+
+        width = 500
+        if xmin is not None:
+            width = xmax - xmin + 10
+
         for track, name in zip(tracks, names):
-            self.addTrackSVG(section, name, track.render(), height=track.height/6.0)
+            if len(track.alignmentSets) == 0:
+                height = 20
+                viewbox = "0 0 {width} {height}".format(width=track.width, height=track.height)
+            else:
+                height = track.height/6.0
+                viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=height)
+            self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
 
     def addTrackSVG(self, section, name, tracksvg, viewbox=None, height=100):
         # height = 100
@@ -29,15 +47,23 @@ class TrackCompositor(object):
                                         "height": height
                                        }
 
-    def _svgText(self, x, y, text, height):
-        svg = '<svg x="{x}" y="{y}"><text x="0" y="{padded}" font-size="{textHeight}" font-family="Helvetica">{text}</text></svg>'.format(x=x, y=y, 
-            padded=height, textHeight=(height-2), text=text)
+    def _svgText(self, x, y, text, height, bold=False):
+        extras = ""
+        if bold:
+            extras += ' font-weight="bold"'
+        svg = '<svg x="{x}" y="{y}"><text x="0" y="{padded}" font-size="{textHeight}" font-family="Helvetica" {extras}>{text}</text></svg>'.format(x=x, y=y, 
+            padded=height, textHeight=(height-2), text=text, extras=extras)
         return svg
 
     def render(self):
         modTracks = []
         curX = 0
-        curY = 0
+        curY = self.marginTopBottom
+
+        if self.title is not None:
+            header = self._svgText(curX+10, curY, self.title, self.sectionLabelHeight+5, bold=True)
+            modTracks.append(header)
+            curY += self.sectionLabelHeight+5
 
         for i, sectionName in enumerate(self.sections):
             section = self.sections[sectionName]
@@ -66,6 +92,8 @@ class TrackCompositor(object):
 
                 curY += trackInfo["height"]
 
+        curY += self.marginTopBottom
+
         composite = ['<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, curY)] \
                     + modTracks + ["</svg>"]
         return "\n".join(composite)
@@ -81,7 +109,7 @@ def canConvertSVGToPDF():
 
 def convertSVG(insvg, outformat="pdf"):
     if not canConvertSVGToPDF():
-        print "Can't find rsvg-convert; make sure you have librsvg installed"
+        logging.error("Can't find rsvg-convert; make sure you have librsvg installed")
         return None
 
     outdir = tempfile.mkdtemp()

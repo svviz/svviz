@@ -16,7 +16,13 @@ def checkDemoMode():
         return []
         
     if inputArgs[0] == "demo":
-        cmd = demo.loadDemo()
+        which = "example1"
+        if len(inputArgs) > 1:
+            if inputArgs[1] in ["1","2"]:
+                which = "example{}".format(inputArgs[1])
+            else:
+                raise Exception("Don't know how to load this example: {}".format(inputArgs[1]))
+        cmd = demo.loadDemo(which)
         if cmd is not None:
             inputArgs = cmd
             logging.info("Running the following command:")

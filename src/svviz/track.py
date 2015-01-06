@@ -264,27 +264,29 @@ class Track(object):
 
         self.height = (self.rowHeight+self.rowMargin) * len(self.rows)
 
+    def render(self):        
+        if len(self.getAlignments()) == 0:
+            xmiddle = (self.scale.topixels(self.gend)-self.scale.topixels(self.gstart))/2.0
+            self.height = xmiddle/20.0
 
-    def render(self):
+            self.svg = SVG(self.width, self.height)
+            self.svg.text(xmiddle, self.height*0.05, "No reads found", size=self.height*0.9, fill="#999999")
+            self.rendered = self.svg.asString()
+            return self.rendered
+
         self.dolayout()
 
         self.svg = SVG(self.width, self.height)
         self.readRenderer.svg = self.svg
 
+        print self.width
         for alignmentSet in self.getAlignments():
-            # if len(alignmentSet.getAlignments()) < 2:
-            #     continue
             self.readRenderer.render(alignmentSet)
 
-        if len(self.getAlignments()) > 0:
             for vline in self.vlines:
-                self.svg.rect(self.scale.topixels(vline), self.svg.height+20, 1, self.height+40, fill="black")
-        else:
-            xmiddle = (self.scale.topixels(self.gend)-self.scale.topixels(self.gstart))/2.0
-            ymiddle = self.svg.height/2.0
-            self.svg.text(xmiddle, ymiddle, "No reads found", size=xmiddle/20.0)
+                self.svg.rect(self.scale.topixels(vline), self.height+20, self.width*2.5e-4, self.height+40, fill="black")
 
-        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.svg.height+40, opacity=0.0, zindex=0)
+        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
 
         return self.rendered

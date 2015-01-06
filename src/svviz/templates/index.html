@@ -20,12 +20,14 @@
     <body>
     <div class="doc">
 
-        <h2>Overview</h2>
+    <h2>{{ variantDescription | safe }}</h2>
+
+    <a href="#" data-toggle="modal" data-target="#exportModal">Export</a>
+
         <span id="description">
-            
             <table>
                 <tr>
-                    <th></th>
+                    <th>Sample</th>
                     <th>Alt</th>
                     <th>Ref</th>
                     <th>Amb</th>
@@ -41,8 +43,6 @@
                 {% endfor %}
             </table>
         </span>
-
-        <a href="#" data-toggle="modal" data-target="#exportModal">Export</a>
 
         {% for allele in ["alt", "ref", "amb"] %}        
             <h2>{% filter capitalize %}{{ allele }}{% endfilter %}</h2>

@@ -201,6 +201,8 @@ def run(args):
         # launch web view
         import web
 
+        web.VARIANT = variant
+        
         for name in datasets:
             tracks = getTracks(datasets[name]["chosenSets"], variant, name)
             web.TracksByDataset[name] = dict((allele, tracks[allele]) for allele in tracks)

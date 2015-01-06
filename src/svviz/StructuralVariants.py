@@ -97,7 +97,7 @@ class Inversion(StructuralVariant):
         return self._refseq
 
     def getRefRelativeBreakpoints(self):
-        return [self.alignDistance]
+        return [self.alignDistance, self.alignDistance+len(self.region)]
 
     def getAltRelativeBreakpoints(self):
         return [self.alignDistance, self.alignDistance+len(self.region)]
@@ -113,8 +113,11 @@ class Inversion(StructuralVariant):
 
             self._altseq = before + within + after
             self._altseq = self._altseq.upper()                       
-        print self._altseq   
         return self._altseq
+
+    def __str__(self):
+        return "{}::{}:{:,}-{:,}".format(self.__class__.__name__, self.region.chr(), self.region.start(), self.region.end())
+
 
 class Insertion(StructuralVariant):
     def __init__(self, breakpoint, insertSeq, alignDistance, fasta):
