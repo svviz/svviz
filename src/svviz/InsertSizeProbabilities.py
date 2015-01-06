@@ -1,11 +1,7 @@
 import numpy
 
 from svviz.utilities import mean, stddev
-
-try:
-    from scipy.stats import gaussian_kde
-except ImportError:
-    gaussian_kde = None
+from svviz.kde import gaussian_kde
 
 def removeOutliers(data, m = 10.):
     """ a method of trimming outliers from a list/array using 

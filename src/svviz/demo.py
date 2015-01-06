@@ -4,7 +4,7 @@ import requests
 import shutil
 import sys
 import tempfile
-import urllib
+# import urllib
 import zipfile
 
 logging.getLogger("requests").setLevel(logging.WARNING)
@@ -15,7 +15,7 @@ def downloadWithProgress(link, outpath):
     total_length = response.headers.get('content-length')
 
     with open(outpath, "wb") as outf:
-        sys.stdout.write("\rDownload progress: [%s%s]" % (' ' * (50)) )    
+        sys.stdout.write("\rDownload progress: [{}]".format(' '*50))
         sys.stdout.flush()
 
         if total_length is None: # no content length header
@@ -27,7 +27,7 @@ def downloadWithProgress(link, outpath):
                 dl += len(data)
                 outf.write(data)
                 done = int(50 * dl / total_length)
-                sys.stdout.write("\rDownload progress: [%s%s]" % ('=' * done, ' ' * (50-done)) )    
+                sys.stdout.write("\rDownload progress: [{}{}]".format('='*done, ' '*(50-done)))
                 sys.stdout.flush()
     sys.stdout.write("\n")
     outf.close()
@@ -48,6 +48,11 @@ def downloadDemo(which):
 
         import subprocess
         subprocess.call("ls {}/svviz-data-{}".format(downloadDir, which), shell=True)
+        subprocess.call("ls {temp}/svviz-data-{which}/{which}".format(temp=downloadDir, which=which), shell=True)
+
+        if not os.path.exists("svviz-examples"):
+            os.makedirs("svviz-examples/")
+
         shutil.move("{temp}/svviz-data-{which}/{which}".format(temp=downloadDir, which=which), "svviz-examples/")
     except Exception as e:
         print "error downloading and decompressing example data: {}".format(e)
