@@ -19,8 +19,10 @@ class TrackCompositor(object):
     def addTracks(self, section, names, tracks):
         for track in tracks:
             track.render()
-        xmin = min(track.xmin for track in tracks if track.xmin is not None)
-        xmax = max(track.xmax for track in tracks if track.xmax is not None)
+        xmin = [track.xmin for track in tracks if track.xmin is not None]
+        xmin = min(xmin) if len(xmin) > 0 else 0
+        xmax = [track.xmax for track in tracks if track.xmax is not None]
+        xmax = max(xmax) if len(xmax) > 0 else 500
 
         width = 500
         if xmin is not None:

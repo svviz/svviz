@@ -2,18 +2,23 @@ import logging
 import numpy
 import time
 
-def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expectedOrientations="any"):
+def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expectedOrientations="any", singleEnded=False):
     for name, alignmentSet in alnCollection.sets.iteritems():
-        alignmentSet.evidences["insertSizeScore"] = isd.score(len(alignmentSet))
+        if not singleEnded:
+            alignmentSet.evidences["insertSizeScore"] = isd.score(len(alignmentSet))
+        else:
+            alignmentSet.evidences["insertSizeScore"] = None
+
         alignmentSet.evidences["alignmentScore"] = sum(aln.score for aln in alignmentSet.getAlignments())
         alignmentSet.evidences["orientation"] = alignmentSet.orientation()
 
         alignmentSet.evidences["valid"] = (True, )
 
-        if alignmentSet.evidences["insertSizeScore"] <= minInsertSizeScore:
-            alignmentSet.evidences["valid"] = (False, "insertSizeScore")
-        if not checkOrientation(alignmentSet.evidences["orientation"], expectedOrientations):
-            alignmentSet.evidences["valid"] = (False, "orientation")
+        if not singleEnded:
+            if alignmentSet.evidences["insertSizeScore"] <= minInsertSizeScore:
+                alignmentSet.evidences["valid"] = (False, "insertSizeScore")
+            if not checkOrientation(alignmentSet.evidences["orientation"], expectedOrientations):
+                alignmentSet.evidences["valid"] = (False, "orientation")
         if not alignmentSet.allSegmentsWellAligned():
             alignmentSet.evidences["valid"] = (False, "alignmentScore")
 
@@ -24,7 +29,7 @@ def checkOrientation(orientation, expectedOrientations):
         return True
     return False
 
-def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0):
+def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=False):
     def choose(which, why):
         alnCollection.choose(which, why)
         return which
@@ -42,22 +47,23 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0):
     if alnCollection["ref"].evidences["alignmentScore"] > alnCollection["alt"].evidences["alignmentScore"]:
         return choose("ref", "alignmentScore")
 
-    logRatio = numpy.log2(alnCollection["alt"].evidences["insertSizeScore"] / alnCollection["ref"].evidences["insertSizeScore"])
-    if logRatio > insertSizeLogLikelihoodCutoff:
-        return choose("alt", "insertSizeScore")
-    if logRatio < -insertSizeLogLikelihoodCutoff:
-        return choose("ref", "insertSizeScore")
+    if not singleEnded:
+        logRatio = numpy.log2(alnCollection["alt"].evidences["insertSizeScore"] / alnCollection["ref"].evidences["insertSizeScore"])
+        if logRatio > insertSizeLogLikelihoodCutoff:
+            return choose("alt", "insertSizeScore")
+        if logRatio < -insertSizeLogLikelihoodCutoff:
+            return choose("ref", "insertSizeScore")
 
     return choose("amb", "same scores")
 
-def batchDisambiguate(alnCollections, isd, expectedOrientations):
+def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False):
     t0 = time.time()
 
     for alnCollection in alnCollections:
-        scoreAlignmentSetCollection(alnCollection, isd, 0, expectedOrientations)
+        scoreAlignmentSetCollection(alnCollection, isd, 0, expectedOrientations, singleEnded=singleEnded)
 
     for alnCollection in alnCollections:
-        disambiguate(alnCollection)
+        disambiguate(alnCollection, singleEnded=singleEnded)
 
     t1 = time.time()
     logging.info("Time for disambiguation: {:.2f}s".format(t1-t0))

@@ -185,7 +185,7 @@ def run(args):
         expectedOrientations = args.orientation
         if args.single_ended:
             expectedOrientations = "any"
-        disambiguate.batchDisambiguate(alnCollections, curisd, expectedOrientations)
+        disambiguate.batchDisambiguate(alnCollections, curisd, expectedOrientations, singleEnded=args.single_ended)
 
 
         chosenSets = collections.defaultdict(list)
@@ -196,7 +196,7 @@ def run(args):
                           "chosenSets":chosenSets,
                           "isd": curisd,
                           "counts":collections.Counter([x.choice for x in alnCollections])}
-
+    
     if not args.no_web:
         # launch web view
         import web
