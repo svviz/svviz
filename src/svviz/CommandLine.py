@@ -96,6 +96,7 @@ def parseArgs():
 
     if args.orientation is not None:
         args.orientation = args.orientation.replace("r", "-").replace("f", "+")
+        args.orientation = args.orientation.split(",")
 
     if args.aln_quality is not None:
         AlignmentSet.AlnThreshold = args.aln_quality

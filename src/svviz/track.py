@@ -279,7 +279,6 @@ class Track(object):
         self.svg = SVG(self.width, self.height)
         self.readRenderer.svg = self.svg
 
-        print self.width
         for alignmentSet in self.getAlignments():
             self.readRenderer.render(alignmentSet)
 

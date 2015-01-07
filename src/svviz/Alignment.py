@@ -22,6 +22,8 @@ class AlignmentSet(object):
 
     def __init__(self):
         self._alignments = []
+        self.evidences = {}
+        self.parentCollection = None
 
     def is_aligned(self):
         return self.start > 0 and self.end > 0
@@ -60,17 +62,16 @@ class AlignmentSetCollection(object):
     def __init__(self, name=None):
         self.name = name
         self.sets = {}
-        self.evidences = {}
         self.choice = None
+        self.why = None
 
     def addSet(self, newset, name):
         self.sets[name] = newset
+        newset.parentCollection = self
 
-    def addEvidence(self, evidence, key):
-        self.evidences[key] = evidence
-
-    def choose(self, name):
+    def choose(self, name, why=None):
         self.choice = name
+        self.why = why
 
     def chosenSet(self):
         choice = self.choice

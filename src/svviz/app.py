@@ -1,20 +1,17 @@
 import collections
 import logging
-import os
 import pyfaidx
 import pysam
 import sys
-import time
 
-from svviz import debug
 from svviz import InsertSizeProbabilities
 from svviz import CommandLine
 from svviz import StructuralVariants
 from svviz import remap
+from svviz import disambiguate
 from svviz import track
-from svviz.utilities import Locus, reverseComp, nameFromBamPath
+from svviz.utilities import Locus, nameFromBamPath
 from svviz.export import TrackCompositor
-import misc
 
 
 def getListDefault(list_, index, default=None):
@@ -175,8 +172,6 @@ def run(args):
     datasets = collections.OrderedDict()
 
 
-    # from IPython import embed; embed()
-
     for i, bampath in enumerate(args.bam):
         name = nameFromBamPath(bampath)
         bam = pysam.Samfile(bampath, "rb")
@@ -186,7 +181,12 @@ def run(args):
         savereads(args, bam, reads+curisd.reads, i)
 
         alnCollections = remap.do_realign(variant, reads)
-        remap.disambiguate(alnCollections, curisd, args.isize_mean, 2*args.isize_std, args.orientation, bam, args.single_ended)
+        # remap.disambiguate(alnCollections, curisd, args.isize_mean, 2*args.isize_std, args.orientation, bam, args.single_ended)
+        expectedOrientations = args.orientation
+        if args.single_ended:
+            expectedOrientations = "any"
+        disambiguate.batchDisambiguate(alnCollections, curisd, expectedOrientations)
+
 
         chosenSets = collections.defaultdict(list)
         for alnCollection in alnCollections:
@@ -206,8 +206,6 @@ def run(args):
         for name in datasets:
             tracks = getTracks(datasets[name]["chosenSets"], variant, name)
             web.TracksByDataset[name] = dict((allele, tracks[allele]) for allele in tracks)
-
-        print web.TracksByDataset
 
         web.READ_INFO = {}
         web.RESULTS = collections.OrderedDict()

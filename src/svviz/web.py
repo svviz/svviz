@@ -127,7 +127,8 @@ def info():
             result.append(html)
 
         result.append("<br/>Total length={}".format(len(READ_INFO[readid])))
-        result.append(" &nbsp; Log odds={:.3g}".format(float(READ_INFO[readid].prob)))
+        result.append(" &nbsp; Reason={}".format(READ_INFO[readid].parentCollection.why))
+        # result.append(" &nbsp; Log odds={:.3g}".format(float(READ_INFO[readid].prob)))
         result = "".join(result)
         result = "<div style='font-family:Courier;'>" + result + "</div>"
         result = jsonify(result=result)
@@ -164,7 +165,9 @@ def run():
     port = getport()
 
     # load()
-    webbrowser.open_new("http://127.0.0.1:{}".format(port))
+    url = "http://127.0.0.1:{}/".format(port)
+    logging.info("Starting browser at {}".format(url))
+    webbrowser.open_new(url)
 
     app.run(
         port=port#,

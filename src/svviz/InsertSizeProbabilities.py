@@ -1,3 +1,4 @@
+import time
 import numpy
 
 from svviz.utilities import mean, stddev
@@ -75,6 +76,9 @@ class InsertSizeDistribution(object):
     def __init__(self, bam, saveReads=False):
         """ bam must be a sorted, indexed pysam.Samfile """
 
+        self._totalTime = 0
+        self._totalIterations = 0
+
         try:
             self.isizes, self.reads = sampleInsertSizes(bam, saveReads=saveReads)
         except ValueError:
@@ -83,18 +87,20 @@ class InsertSizeDistribution(object):
             
         if len(self.isizes) < 1000:
             self.fail = True
-            self.min = 0
+            # self.min = 0
             return
 
         if gaussian_kde is None:
-            self.min = 0
+            # self.min = 0
             self.fail = True
             return
 
         self.fail = False
         self.kde = gaussian_kde(self.isizes)
-        self.min = numpy.min(self.kde(numpy.linspace(0, max(self.isizes), 100)))
-        print "Min score:", self.min
+
+        self._cache = {}
+        # self.min = numpy.min(self.kde(numpy.linspace(0, max(self.isizes), 100)))
+        # print "Min score:", self.min
 
     def mean(self):
         if len(self.isizes) >= 1000:
@@ -107,11 +113,18 @@ class InsertSizeDistribution(object):
         return None
 
     def score(self, isize):
-        # we don't ever want a 0 probability
         if self.fail:
             return 0
-        score = self.kde(abs(isize))
-        return max(score, self.min)
+
+        # the gaussian kde call is pretty slow with ~50,000 data points in it, so we'll cache the result for a bit of a speed-up
+        isize = abs(isize)
+        if not isize in self._cache:
+            self._cache[isize] = self.kde(isize)
+
+        return self._cache[isize]
+
+        # we don't ever want a 0 probability
+        # return max(score, self.min)
 
 
 def plotInsertSizeDistribution(isd, name, dataset):
