@@ -1,6 +1,15 @@
+def _arrowhead_marker():
+    return """<marker id="arrowhead"
+      viewBox="0 0 10 10" refX="10" refY="5" 
+      markerUnits="strokeWidth"
+      markerWidth="4" markerHeight="3"
+      orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>"""
+
 
 class SVG(object):
-    def __init__(self, width, height, headerExtras=""):
+    def __init__(self, width, height, headerExtras="", markers=None):
         self.width = width
         self.height = height
 
@@ -8,6 +17,9 @@ class SVG(object):
         self.svg = []
         self.footer = ["""</g></svg>"""]
         self.headerExtras = headerExtras
+        if markers is None:
+            markers = {}
+        self.markers = markers
         # self._addHeader()
 
     def getDefaultZIndex(self, zindex):
@@ -21,7 +33,9 @@ class SVG(object):
         # """<?xml version="1.0" encoding="utf-8" ?>"""
         header.append("""<svg baseProfile="full" version="1.1" """
             """xmlns="http://www.w3.org/2000/svg" {extras} """
-            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs />""".format(extras=self.headerExtras))
+            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>{markers}</defs>""".format(extras=self.headerExtras,
+                markers="\n".join(self.markers.values())))
+
         header.append("<g class=\"svg_viewport\">")
         return header
 
@@ -32,9 +46,32 @@ class SVG(object):
                 options.append("""{key}="{arg}" """.format(key=key, arg=arg))
         return " ".join(options)
 
-    def line(self, x1, x2, y1, y2, stroke="", fill="", **kwdargs):
+    def line(self, x1, x2, y1, y2, stroke="", fill="", arrowhead=None, **kwdargs):
         more = self._addOptions(stroke=stroke, fill=fill, **kwdargs)
+
+        if arrowhead is not None:
+            if not "arrowhead" in self.markers:
+                self.markers["arrowhead"] = _arrowhead_marker()
+            if arrowhead in ["end", "both"]:
+                more += """ marker-end="url(#arrowhead)" """
+            if arrowhead in ["start", "both"]:
+                more += """ marker-start="url(#arrowhead)" """
+
         self.svg.append("""<line x1="{x1}" x2="{x2}" y1="{y1}" y2="{y2}" {more}/>""".format(x1=x1, x2=x2, y1=self.height-y1, y2=self.height-y2, more=more))
+
+    def lineWithInternalArrows(self, x1, x2, y1, y2, stroke="", fill="", n=5, **kwdargs):
+        more = self._addOptions(stroke=stroke, fill=fill, **kwdargs)
+
+        if not "arrowhead" in self.markers:
+            self.markers["arrowhead"] = _arrowhead_marker()
+        more += """ marker-mid="url(#arrowhead)" """
+        more += """ marker-end="url(#arrowhead)" """
+
+        path = ["M {} {}".format(x1, self.height-y1)]
+        for i in range(n+1):
+            path.append("L {} {}".format(x1+float(x2-x1)*i/n, self.height-(y1+float(y2-y1)*i/n)))
+
+        self.svg.append("""<path d="{path}" {more}/>""".format(path=" ".join(path), more=more))
 
     def rect(self, x, y, width, height, stroke="", fill="", zindex=None, **kwdargs):
         zindex = self.getDefaultZIndex(zindex)
@@ -57,6 +94,7 @@ class SVG(object):
             self.headerExtras += """viewBox="0 0 {w} {h}" """.format(w=self.width, h=self.height)
             header = self.header()
         elif headerSet == "export":
+            self.headerExtras = ""
             header = self.header()
         elif headerSet == "web":
             xmlHeader = """<?xml version="1.0" encoding="utf-8" ?>"""

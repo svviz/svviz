@@ -1,5 +1,16 @@
 from utilities import Locus, reverseComp
 
+class Segment(object):
+    colors = {0:"red", 1:"blue", 2:"gray", 3:"green", 4:"brown"}
+
+    def __init__(self, start, end, strand, id_):
+        self.start = start
+        self.end = end
+        self.strand = strand
+        self.id = id_
+    def color(self):
+        return self.colors[self.id]
+
 class StructuralVariant(object):
     def __init__(self, breakpoints, alignDistance, fasta):
         self.breakpoints = sorted(breakpoints, key=lambda x: x.start())
@@ -16,14 +27,20 @@ class StructuralVariant(object):
         pass    
     def getRefSeq(self):
         pass
-    def getRefRelativeBreakpoints(self):
-        pass
-
     def getAltSeq(self):
         pass
-    def getAltRelativeBreakpoints(self):
-        pass
 
+    def getRelativeBreakpoints(self, which):
+        if which in ["ref", "amb"]:
+            return self._getRefRelativeBreakpoints()
+        elif which == "alt":
+            return self._getAltRelativeBreakpoints()
+        else:
+            raise Exception("unknown allele {}".format(which))            
+
+    def segments(self, allele):
+        # for visual display of the different segments between breakpoints
+        return None
 
 class Deletion(StructuralVariant):
     @classmethod
@@ -48,8 +65,10 @@ class Deletion(StructuralVariant):
         self._refseq = self.fasta[chrom][start:end+1]
         return self._refseq.upper()
 
-    def getRefRelativeBreakpoints(self):
+    def _getRefRelativeBreakpoints(self):
         return [self.alignDistance, self.alignDistance+self.breakpoints[-1].start()-self.breakpoints[0].end()]
+    def _getAltRelativeBreakpoints(self):
+        return [self.alignDistance]
 
     def getAltSeq(self):
         if self._altseq is not None:
@@ -62,9 +81,6 @@ class Deletion(StructuralVariant):
 
         self._altseq = upstream.upper() + downstream.upper()
         return self._altseq
-
-    def getAltRelativeBreakpoints(self):
-        return [self.alignDistance]
 
 
 class Inversion(StructuralVariant):
@@ -96,10 +112,10 @@ class Inversion(StructuralVariant):
             self._refseq = self.fasta[chrom][start:end+1].upper()
         return self._refseq
 
-    def getRefRelativeBreakpoints(self):
+    def _getRefRelativeBreakpoints(self):
         return [self.alignDistance, self.alignDistance+len(self.region)]
 
-    def getAltRelativeBreakpoints(self):
+    def _getAltRelativeBreakpoints(self):
         return [self.alignDistance, self.alignDistance+len(self.region)]
 
     def getAltSeq(self):
@@ -134,7 +150,7 @@ class Insertion(StructuralVariant):
         end = self.breakpoints[-1].end()+self.alignDistance+1
         return self.fasta[chrom][start:end].upper()
 
-    def getRefRelativeBreakpoints(self):
+    def _getRefRelativeBreakpoints(self):
         return [self.alignDistance]
 
     def getAltSeq(self):
@@ -145,10 +161,20 @@ class Insertion(StructuralVariant):
                                   self.breakpoints[0].start()+self.alignDistance+1]
         return before.upper() + self.insertSeq + after.upper()
 
-    def getAltRelativeBreakpoints(self):
+    def _getAltRelativeBreakpoints(self):
         return [self.alignDistance, self.alignDistance+len(self.insertSeq)]
 
+    def segments(self, allele):
+        # for visual display of the different segments between breakpoints
 
+        if allele in ["ref", "amb"]:
+            return [Segment(0, self.alignDistance, "+", 0),
+                    Segment(self.alignDistance, self.alignDistance*2, "+", 1)]
+        elif allele == "alt":
+            return [Segment(0, self.alignDistance, "+", 0),
+                    Segment(self.alignDistance, self.alignDistance+len(self.insertSeq), "+", 2),
+                    Segment(self.alignDistance+len(self.insertSeq), self.alignDistance*2+len(self.insertSeq), "+", 1)]
+                
 class MobileElementInsertion(Insertion):
     def __init__(self, breakpoint, insertedSeqLocus, insertionFasta, alignDistance, refFasta):
         self.insertedSeqLocus = insertedSeqLocus

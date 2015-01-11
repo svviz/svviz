@@ -35,18 +35,24 @@ class Scale(object):
         return pos
 
 class Axis(object):
-    def __init__(self, scale, vlines):
+    def __init__(self, scale, variant, allele):
         self.scale = scale
-        self.vlines = vlines
-        self._height = 75
+        # self.vlines = vlines
+        self.allele = allele
+        self.variant = variant
+        self.segments = variant.segments(allele)
+        if self.segments is None:
+            self.height = 75
+        else:
+            self.height = 100
 
-    def render(self):
-        self.svg = SVG(self.scale.pixelWidth, self._height, headerExtras="""preserveAspectRatio="none" """)
-        self.svg.rect(0, self._height-35, self.scale.pixelWidth, 3)
+    def render(self, scaleFactor=1.0):
+        self.svg = SVG(self.scale.pixelWidth, self.height, headerExtras="""preserveAspectRatio="none" """)
+        self.svg.rect(0, self.height-(35*scaleFactor), self.scale.pixelWidth, 3*scaleFactor)
 
         for tick in self.getTicks():
             x = self.scale.topixels(tick)
-            self.svg.rect(x, self._height-35, 1, 15, fill="black")
+            self.svg.rect(x, self.height-(35*scaleFactor), 1*scaleFactor, 15*scaleFactor, fill="black")
             label = tick
             if tick > 1e6:
                 label = "{:.1f}MB".format(tick/1e6)
@@ -57,12 +63,30 @@ class Axis(object):
                 x = 50
             elif x > self.scale.pixelWidth - 50:
                 x = self.scale.pixelWidth - 50
-            self.svg.text(x, 4, label, size=18)
+            self.svg.text(x, 4, label, size=18*scaleFactor)
 
-        for vline in self.vlines:
+        if self.segments is not None:
+            for segment in self.segments:
+                start = self.scale.topixels(segment.start)
+                end = self.scale.topixels(segment.end)
+                if segment.strand == "-":
+                    start, end = end, start
+                y = self.height-(30*scaleFactor)
+                # self.svg.line(start, end, y, y, stroke=segment.color(), arrowhead="end", **{"stroke-width":10})
+
+                ## need to draw the arrows without using marker definitions (not supported by librsvg?)
+                ## and then scale them ourselves in the web view 
+                ## then we can also get the color right!
+
+                print "\n"*3
+                print "fix the arrows by drawing and scaling them manually"
+                print "\n"*3
+                self.svg.lineWithInternalArrows(start, end, y, y, stroke=segment.color(), **{"stroke-width":10*scaleFactor})
+
+        for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
-            self.svg.rect(x, self._height-20, 1, 35, fill="red")        
-            self.svg.text(x, self._height-18, "breakpoint", size=18, fill="red")
+            self.svg.rect(x-(scaleFactor/2.0), self.height-(20*scaleFactor), 1*scaleFactor, 35*scaleFactor, fill="red")        
+            self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="red")
 
         return str(self.svg)
 
@@ -193,7 +217,7 @@ class ReadRenderer(object):
                 self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill="lime")
 
 class Track(object):
-    def __init__(self, chrom, alignmentSets, height, width, gstart, gend, vlines=None):
+    def __init__(self, chrom, alignmentSets, height, width, gstart, gend, variant, allele):
         self.chrom = chrom
         self.height = height
         self.width = width
@@ -214,9 +238,11 @@ class Track(object):
         self.svg = None
         self.rendered = None
 
-        if vlines is None:
-            vlines = []
-        self.vlines = vlines
+        self.variant = variant
+        self.allele = allele
+        # if vlines is None:
+        #     vlines = []
+        # self.vlines = vlines
 
         self.rows = []
         self._axis = None
@@ -227,7 +253,7 @@ class Track(object):
 
     def getAxis(self):
         if self._axis is None:
-            self._axis = Axis(self.scale, self.vlines)
+            self._axis = Axis(self.scale, self.variant, self.allele)
         return self._axis
 
     def findRow(self, start, end):
@@ -282,8 +308,8 @@ class Track(object):
         for alignmentSet in self.getAlignments():
             self.readRenderer.render(alignmentSet)
 
-            for vline in self.vlines:
-                self.svg.rect(self.scale.topixels(vline), self.height+20, self.width*2.5e-4, self.height+40, fill="black")
+        for vline in self.variant.getRelativeBreakpoints(self.allele):
+            self.svg.rect(self.scale.topixels(vline), self.height+20, self.width*2.5e-4, self.height+40, fill="black")
 
         self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)

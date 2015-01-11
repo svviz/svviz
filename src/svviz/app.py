@@ -4,6 +4,7 @@ import pyfaidx
 import pysam
 import sys
 
+from svviz import debug
 from svviz import InsertSizeProbabilities
 from svviz import CommandLine
 from svviz import StructuralVariants
@@ -109,14 +110,14 @@ def getTracks(chosenSets, variant, name):
     tracks = {}
 
     ref_chrom = track.ChromosomePart(variant.getRefSeq())
-    ref_track = track.Track(ref_chrom, chosenSets["ref"], 3000, 4000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
+    ref_track = track.Track(ref_chrom, chosenSets["ref"], 3000, 4000, 0, len(variant.getRefSeq()), variant=variant, allele="ref")
     tracks["ref"] = ref_track
 
     alt_chrom = track.ChromosomePart(variant.getAltSeq())
-    alt_track = track.Track(alt_chrom, chosenSets["alt"], 5000, 15000, 0, len(variant.getAltSeq()), vlines=variant.getAltRelativeBreakpoints())
+    alt_track = track.Track(alt_chrom, chosenSets["alt"], 5000, 15000, 0, len(variant.getAltSeq()), variant=variant, allele="alt")
     tracks["alt"] = alt_track
 
-    amb_track = track.Track(ref_chrom, chosenSets["amb"], 4000, 10000, 0, len(variant.getRefSeq()), vlines=variant.getRefRelativeBreakpoints())
+    amb_track = track.Track(ref_chrom, chosenSets["amb"], 4000, 10000, 0, len(variant.getRefSeq()), variant=variant, allele="amb")
     tracks["amb"] = amb_track
 
     return tracks

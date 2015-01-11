@@ -18,7 +18,7 @@ function Scrollbar(scrollpanel, $host, options) {
 
     self.$host.append(self.$scrollbar);
     self.mouseOffset = 0;
-    self.scrollProportion = 0;
+    self.scrollProportion = 0.5;
     self.scrollmax = 0;
     self.pageSize = 0;
 
@@ -217,6 +217,7 @@ function ScrollPanel(element, options, svg_tags) {
             self.isaxis.push(true);
             $(this).height(self.axisHeight+"px");
             self.yviewsizes[i] = bbox.height;
+            newyscrollbar.scrollProportion = 0.0; // because the scrollbar is hidden we need to make sure we're scrolled to the correct position
         } else {
             self.isaxis.push(false);
         }

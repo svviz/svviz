@@ -16,7 +16,7 @@ class TrackCompositor(object):
         self.betweenSectionHeight = 30
         self.trackLabelHeight = 20
 
-    def addTracks(self, section, names, tracks):
+    def addTracks(self, section, names, tracks, includeAxis=True):
         for track in tracks:
             track.render()
         xmin = [track.xmin for track in tracks if track.xmin is not None]
@@ -24,18 +24,39 @@ class TrackCompositor(object):
         xmax = [track.xmax for track in tracks if track.xmax is not None]
         xmax = max(xmax) if len(xmax) > 0 else 500
 
+        hasTrackWithReads = False
         width = 500
         if xmin is not None:
-            width = xmax - xmin + 10
+            width = xmax - xmin
+            xmin -= width * 0.05
+            width *= 1.1
 
         for track, name in zip(tracks, names):
             if len(track.alignmentSets) == 0:
                 height = 20
                 viewbox = "0 0 {width} {height}".format(width=track.width, height=track.height)
             else:
-                height = track.height/6.0
-                viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=height)
+                hasTrackWithReads = True
+                # height = track.height/6.0
+                height = float(track.height+40) * self.width / width
+                viewbox = "{xmin} -20 {width} {height}".format(xmin=xmin, width=width, height=track.height+40)
+
+            print "SVG:", width, height, "viewbox:", width
             self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
+
+        if includeAxis and hasTrackWithReads:
+            scaleFactor = width * 0.0005
+
+            axis = track.getAxis()
+            baseHeight = axis.height
+            axis.height = baseHeight*scaleFactor
+            viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=baseHeight)
+ 
+            axis.render(scaleFactor=scaleFactor)
+            svg = axis.svg.asString("export")
+
+            self.addTrackSVG(section, "xaxis", svg, height=75, viewbox=viewbox)
+            axis.height = baseHeight
 
     def addTrackSVG(self, section, name, tracksvg, viewbox=None, height=100):
         # height = 100
@@ -81,10 +102,10 @@ class TrackCompositor(object):
             for trackName in section:
                 trackInfo = section[trackName]
 
-                label = self._svgText(curX+10, curY, trackName, self.trackLabelHeight)
-                # label = '<svg x="{}" y="{}"><text x="0" y="{}" font-family="Helvetica">{}</text></svg>'.format(curX+20, curY, curY+self.sectionLabelHeight, trackName)
-                modTracks.append(label)
-                curY += self.sectionLabelHeight
+                if trackName != "xaxis":
+                    label = self._svgText(curX+10, curY, trackName, self.trackLabelHeight)
+                    modTracks.append(label)
+                    curY += self.sectionLabelHeight
 
                 extra = 'svg x="{}" y="{}" width="{}" height="{}"'.format(curX, curY, self.width, trackInfo["height"])
                 if trackInfo["viewbox"] is not None:
