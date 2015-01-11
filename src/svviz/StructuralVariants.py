@@ -131,6 +131,16 @@ class Inversion(StructuralVariant):
             self._altseq = self._altseq.upper()                       
         return self._altseq
 
+    def segments(self, allele):
+        if allele in ["ref", "amb"]:
+            return [Segment(0, self.alignDistance, "+", 0),
+                    Segment(self.alignDistance, self.alignDistance+len(self.region), "+", 1),
+                    Segment(self.alignDistance*2+len(self.region), self.alignDistance+len(self.region), "+", 2)]
+        elif allele == "alt":
+            return [Segment(0, self.alignDistance, "+", 0),
+                    Segment(self.alignDistance, self.alignDistance+len(self.region), "-", 1),
+                    Segment(self.alignDistance*2+len(self.region), self.alignDistance+len(self.region), "+", 2)]
+                
     def __str__(self):
         return "{}::{}:{:,}-{:,}".format(self.__class__.__name__, self.region.chr(), self.region.start(), self.region.end())
 

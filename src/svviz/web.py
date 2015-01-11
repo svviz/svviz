@@ -161,13 +161,15 @@ def displayIsizes(name):
 
 
 def run():
-    import webbrowser
+    import webbrowser, threading
     port = getport()
 
     # load()
     url = "http://127.0.0.1:{}/".format(port)
     logging.info("Starting browser at {}".format(url))
-    webbrowser.open_new(url)
+    # webbrowser.open_new(url)
+
+    threading.Timer(1.25, lambda: webbrowser.open(url) ).start()
 
     app.run(
         port=port#,

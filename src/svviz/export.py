@@ -147,7 +147,11 @@ def convertSVG(insvg, outformat="pdf"):
         options = "-a -w 5000 --background-color white"
 
     outpath = "{}/converted.{}".format(outdir, outformat)
-    subprocess.check_call("rsvg-convert -f {} {} -o {} {}".format(outformat, options, outpath, inpath), shell=True)
+
+    try:
+        subprocess.check_call("rsvg-convert -f {} {} -o {} {}".format(outformat, options, outpath, inpath), shell=True)
+    except subprocess.CalledProcessError, e:
+        print "EXPORT ERROR:", str(e)
 
     return open(outpath).read()
 

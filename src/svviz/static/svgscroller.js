@@ -238,6 +238,14 @@ function ScrollPanel(element, options, svg_tags) {
             var matrix = "matrix("+a+" 0 0 1 "+e+" 0)";
             $curElement.attr("transform", matrix);
         });
+
+        self.$element.find(".axis svg .scaleArrow").each(function(i, curElement) {
+            var $curElement = $(curElement);
+            var a = 1 / self.xzoom;
+            var e = ($curElement.attr("xcenter")-$curElement.attr("xcenter")*a)
+            var matrix = "matrix("+a+" 0 0 1 "+e+" 0)";
+            $curElement.attr("transform", matrix);
+        });
     }
 
     self.zoom = function() {

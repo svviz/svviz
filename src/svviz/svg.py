@@ -57,21 +57,40 @@ class SVG(object):
             if arrowhead in ["start", "both"]:
                 more += """ marker-start="url(#arrowhead)" """
 
-        self.svg.append("""<line x1="{x1}" x2="{x2}" y1="{y1}" y2="{y2}" {more}/>""".format(x1=x1, x2=x2, y1=self.height-y1, y2=self.height-y2, more=more))
+        self.svg.append("""<line x1="{x1}" x2="{x2}" y1="{y1}" y2="{y2}" {more} />""".format(x1=x1, x2=x2, y1=self.height-y1, y2=self.height-y2, more=more))
 
-    def lineWithInternalArrows(self, x1, x2, y1, y2, stroke="", fill="", n=5, **kwdargs):
-        more = self._addOptions(stroke=stroke, fill=fill, **kwdargs)
+    def arrow(self, x, y, direction, color="black", scale=1.0, **kwdargs):
+        more = self._addOptions(**kwdargs)
 
-        if not "arrowhead" in self.markers:
-            self.markers["arrowhead"] = _arrowhead_marker()
-        more += """ marker-mid="url(#arrowhead)" """
-        more += """ marker-end="url(#arrowhead)" """
+        if direction == "right":
+            a = """<path d="M {x0} {y0} L {x1} {y1} L {x2} {y2} z" fill="{color}" xcenter="{xcenter}" {more}/>""".format(
+                x0=(x-5*scale), y0=(y-5*scale), 
+                x1=(x+5*scale), y1=y, 
+                x2=(x-5*scale), y2=(y+5*scale),
+                color=color,
+                xcenter=x,
+                more=more)
+        elif direction == "left":
+            a = """<path d="M {x0} {y0} L {x1} {y1} L {x2} {y2} z" fill="{color}" xcenter="{xcenter}" {more}/>""".format(
+                x0=(x+5*scale), y0=(y-5*scale), 
+                x1=(x-5*scale), y1=y, 
+                x2=(x+5*scale), y2=(y+5*scale),
+                color=color,
+                xcenter=x,
+                more=more)
+        self.svg.append(a)
 
-        path = ["M {} {}".format(x1, self.height-y1)]
-        for i in range(n+1):
-            path.append("L {} {}".format(x1+float(x2-x1)*i/n, self.height-(y1+float(y2-y1)*i/n)))
+        # a = """<path d="M 0 0 L 10 5 L 0 10 z" fill={color}/>"""
 
-        self.svg.append("""<path d="{path}" {more}/>""".format(path=" ".join(path), more=more))
+
+    def lineWithInternalArrows(self, x1, x2, y1, y2, stroke="", fill="", n=5, direction="right", arrowKwdArgs=None, **kwdargs):
+        self.line(x1, x2, y1, y2, stroke, fill, **kwdargs)
+        if arrowKwdArgs is None: arrowKwdArgs = {}
+
+        for i in range(1, n+1):
+            x_arrow = x1+float(x2-x1)*i/n
+            y_arrow = self.height-(y1+float(y2-y1)*i/n)
+            self.arrow(x_arrow, y_arrow, direction, color=stroke, scale=kwdargs.get("stroke-width", 1), **arrowKwdArgs)
 
     def rect(self, x, y, width, height, stroke="", fill="", zindex=None, **kwdargs):
         zindex = self.getDefaultZIndex(zindex)

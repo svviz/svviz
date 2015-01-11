@@ -41,10 +41,10 @@ class Axis(object):
         self.allele = allele
         self.variant = variant
         self.segments = variant.segments(allele)
-        if self.segments is None:
-            self.height = 75
-        else:
-            self.height = 100
+        # if self.segments is None:
+        self.height = 75
+        # else:
+            # self.height = 100
 
     def render(self, scaleFactor=1.0):
         self.svg = SVG(self.scale.pixelWidth, self.height, headerExtras="""preserveAspectRatio="none" """)
@@ -69,24 +69,22 @@ class Axis(object):
             for segment in self.segments:
                 start = self.scale.topixels(segment.start)
                 end = self.scale.topixels(segment.end)
+                arrowDirection = "right"
+
                 if segment.strand == "-":
                     start, end = end, start
-                y = self.height-(30*scaleFactor)
-                # self.svg.line(start, end, y, y, stroke=segment.color(), arrowhead="end", **{"stroke-width":10})
+                    arrowDirection = "left"
 
-                ## need to draw the arrows without using marker definitions (not supported by librsvg?)
-                ## and then scale them ourselves in the web view 
-                ## then we can also get the color right!
+                y = self.height-(35*scaleFactor)
 
-                print "\n"*3
-                print "fix the arrows by drawing and scaling them manually"
-                print "\n"*3
-                self.svg.lineWithInternalArrows(start, end, y, y, stroke=segment.color(), **{"stroke-width":10*scaleFactor})
+                self.svg.line(start, end, y, y, stroke=segment.color(), **{"stroke-width":8*scaleFactor})
+                self.svg.lineWithInternalArrows(start, end, y, y, stroke=segment.color(), direction=arrowDirection,
+                    arrowKwdArgs={"class":"scaleArrow"}, **{"stroke-width":3*scaleFactor})
 
         for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
-            self.svg.rect(x-(scaleFactor/2.0), self.height-(20*scaleFactor), 1*scaleFactor, 35*scaleFactor, fill="red")        
-            self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="red")
+            self.svg.rect(x-(scaleFactor/2.0), self.height-(20*scaleFactor), 1*scaleFactor, 35*scaleFactor, fill="black")        
+            self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="black")
 
         return str(self.svg)
 
