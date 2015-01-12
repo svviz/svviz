@@ -6,7 +6,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
         <script src="jquery.mousewheel.js"></script>
@@ -92,18 +92,18 @@
                       Format:
                       <div class="form-group" id="exportFormat">
                         <div class="radio">
-                          <label><input type="radio" name="format" value="svg" {{ 'checked=""' if session.last_format=="svg" else '' }}>svg<br></label>
+                          <label><input type="radio" name="format" value="svg" {{ 'checked=""' if session.last_format=="svg" else '' }}>SVG<br></label>
                         </div>
 
                         <div class="radio disabled">
-                          <label><input type="radio" name="format" value="png" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="png" else '' }}>png<br></label>
+                          <label><input type="radio" name="format" value="png" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="png" else '' }}>PNG<br></label>
                         </div>
 
                         <div class="radio disabled">
-                          <label><input type="radio" name="format" value="pdf" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="pdf" else '' }}>pdf<br></label>
+                          <label><input type="radio" name="format" value="pdf" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="pdf" else '' }}>PDF<br></label>
                         </div>
 
-                        <span id="requiresRSVGText" class="help-block">pdf and png export requires librsvg library to be installed. Click <a href="http://www.google.com/">here</a> for instructions.</span>
+                        <span id="requiresRSVGText" class="help-block">PDF and PNG export requires librsvg library to be installed. Click <a href="installPDFExport.html">here</a> for instructions.</span>
                       </div>
                   </div>
                   <div class="modal-footer">

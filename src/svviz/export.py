@@ -41,7 +41,6 @@ class TrackCompositor(object):
                 height = float(track.height+40) * self.width / width
                 viewbox = "{xmin} -20 {width} {height}".format(xmin=xmin, width=width, height=track.height+40)
 
-            print "SVG:", width, height, "viewbox:", width
             self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
 
         if includeAxis and hasTrackWithReads:
