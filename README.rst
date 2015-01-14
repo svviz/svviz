@@ -48,7 +48,7 @@ Usage
                           read orientation; probably want fr, rf or similar
                           (only needed for paired-end data; default rf)
     -A ANNOTATIONS, --annotations ANNOTATIONS
-                          bed file containing annotations to plot; will be
+                          [in dev] bed file containing annotations to plot; will be
                           compressed and indexed using samtools tabix in place
                           if needed (can specify multiple annotations files)
     -m MEAN, --isize-mean MEAN
@@ -87,7 +87,14 @@ Usage
 
   For an example, run 'svviz demo'.
 
-The format for specifying deletion breakpoints is ``chrom start end``. The format for specifying insertions is ``chrom breakpoint <inserted sequence>``. Mobile elements can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
+Breakpoint specification
+------------------------
+
+
+:Deletions: The format for specifying deletion breakpoints is ``chrom start end``.
+:Inversions: To specify an inverted region, use ``chrom start end``.
+:Insertions: The format for specifying insertions is ``chrom breakpoint <inserted sequence>``.
+:Mobile elements: Mobile element insertions can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
 
 For example:
 
@@ -117,16 +124,16 @@ Requirements
 
 svviz has been tested on OS X and linux (ubuntu). svviz requires the following python packages, which should be automatically installed:
 
-- numpy
 - flask
 - joblib
+- numpy
 - pyfaidx
 - pysam
 - requests
 
 In addition, the ssw alignment module (see below) needs to be compiled using gcc, so Xcode or the command line developer tools need to be installed if you're running OS X (see `these directions <http://railsapps.github.io/xcode-command-line-tools.html>`_ for more info).
 
-
+PDF and PNG export require the optional libRSVG library, which can be installed using ``brew install librsvg`` (using `homebrew <http://brew.sh>`_) on the mac or ``sudo apt-get install librsvg2-dev`` on linux/ubuntu.
 
 Smith-Waterman Alignment
 ------------------------
