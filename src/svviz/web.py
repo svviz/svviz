@@ -113,7 +113,7 @@ def display():
 
 @app.route('/_info')
 def info():
-    import Alignment
+    import alignment
     readid = urllib.unquote(request.args.get('readid', 0))
 
     alnSet = dataHub.getAlignmentSetByName(readid)
@@ -121,7 +121,7 @@ def info():
         reads = alnSet.getAlignments()
         result = []
         for read in reads:
-            html = "{}<br/>".format(Alignment.getBlastRepresentation(read).replace("\n", "<br/>"))
+            html = "{}<br/>".format(alignment.getBlastRepresentation(read).replace("\n", "<br/>"))
             html = html.replace(" ", ".")
             result.append(html)
 

@@ -5,12 +5,11 @@ import time
 import math
 import pyfaidx
 import pysam
-from Multiprocessor import Multiprocessor
+from svviz.multiprocessor import Multiprocessor
 
-from utilities import reverseComp
-import StructuralVariants
-from Alignment import Alignment, AlignmentSet, AlignmentSetCollection
-from PairFinder import PairFinder
+from svviz.utilities import reverseComp
+from svviz.alignment import Alignment, AlignmentSet, AlignmentSetCollection
+from svviz.pairfinder import PairFinder
 
 def log2(x):
     try:

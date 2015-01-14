@@ -3,7 +3,7 @@ import logging
 import sys
 
 from svviz import demo
-from svviz.Alignment import AlignmentSet
+from svviz.alignment import AlignmentSet
 
 def setDefault(args, key, default):
     if args.__dict__[key] is None:

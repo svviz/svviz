@@ -1,4 +1,5 @@
 import logging
+import pysam
 import sys
 
 from svviz import commandline
@@ -119,7 +120,7 @@ def runWebView(dataHub):
         ## TODO: only prepare export SVG when needed
         ensureExportData(dataHub)
         plotInsertSizeDistributions(dataHub)
-        
+
         web.dataHub = dataHub
         web.run()
 
@@ -133,6 +134,33 @@ def plotInsertSizeDistributions(dataHub):
         if not plotISDs:
             for sample in dataHub:
                 sample.insertSizePlot = None
+
+
+def saveReads(dataHub):
+    if dataHub.args.save_reads:
+        logging.info("* Saving relevant reads *")
+        for i, sample in enumerate(dataHub):
+            outbam_path = dataHub.args.save_reads
+            if not outbam_path.endswith(".bam"):
+                outbam_path += ".bam"
+
+            if len(dataHub.samples) > 1:
+                logging.debug("Using i = {}".format(i))
+                outbam_path = outbam_path.replace(".bam", ".{}.bam".format(i))
+
+            # print out just the reads we're interested for use later
+            bam_small = pysam.Samfile(outbam_path, "wb", template=sample.bam)
+            for read in sample.reads:
+                bam_small.write(read)
+
+            for read in sample.insertSizeDistribution.reads:
+                bam_small.write(read)
+
+            bam_small.close()
+            sorted_path = outbam_path.replace(".bam", ".sorted")
+            pysam.sort(outbam_path, sorted_path)
+            pysam.index(sorted_path+".bam")
+
 def main():
     checkRequirements()
 
@@ -153,12 +181,14 @@ def main():
 
     logging.info("* Loading reads and finding mates *")
     loadReads(dataHub)
+    saveReads(dataHub)
 
     logging.info("* Realigning reads *")
     runRemap(dataHub)
 
     logging.info("* Assigning reads to most probable alleles *")
     runDisambiguation(dataHub)
+
 
     logging.info("* Rendering tracks *")
     renderSamples(dataHub)
