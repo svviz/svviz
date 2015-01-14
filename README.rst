@@ -14,7 +14,7 @@ Quickstart
 ==========
 
 1. (OS X only) Ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_.
-2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install git+https://github.com/svviz/svviz.git#svviz``. (The sudo may not be necessary depending on your setup.)
+2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install -U git+https://github.com/svviz/svviz.git#svviz``. (The sudo may not be necessary depending on your setup.)
 3. Run the following command, which downloads example data and runs it through svviz: ``svviz demo``. After several processing steps, a web browser window should open. Click and drag to pan, and zoom using option/alt-scrollwheel.
 4. Please report any issues (after making sure they're not explained in the documentation below) using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 
@@ -47,6 +47,10 @@ Usage
     -o ORIENTATION, --orientation ORIENTATION
                           read orientation; probably want fr, rf or similar
                           (only needed for paired-end data; default rf)
+    -A ANNOTATIONS, --annotations ANNOTATIONS
+                          bed file containing annotations to plot; will be
+                          compressed and indexed using samtools tabix in place
+                          if needed (can specify multiple annotations files)
     -m MEAN, --isize-mean MEAN
                           mean insert size; used to determine concordant read
                           pairs (paired-end)and the size of the flanking region
@@ -65,6 +69,11 @@ Usage
                           minimum score of the Smith-Waterman alignment against
                           the ref or alt allele in order to be considered
                           (multiplied by 2)
+    -e EXPORT, --export EXPORT
+                          export view to file; exported file format is
+                          determined from the filename extension (automatically
+                          sets --no-web)
+    -O, --open-exported   automatically open the exported file (OS X only)
 
   interface parameters:
     --no-web              don't show the web interface
