@@ -4,6 +4,7 @@
 function dohover (svg) {
   $(svg + " .read").mouseover(function(){
     console.log($(this).data("readid"));
+    console.log($(this).parents());
     // $(svg + " .info").text($(this).data("readid"));
 
     $.getJSON('/_info', {"readid":$(this).data("readid")}, function(data) {

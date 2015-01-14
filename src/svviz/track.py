@@ -34,6 +34,11 @@ class Scale(object):
                 return self.pixelWidth
         return pos
 
+    def relpixels(self, g):
+        dist = g / float(self.basesPerPixel)
+        return dist
+
+
 class Axis(object):
     def __init__(self, scale, variant, allele):
         self.scale = scale
@@ -66,9 +71,13 @@ class Axis(object):
             self.svg.text(x, 4, label, size=18*scaleFactor)
 
         if self.segments is not None:
+            curOffset = 0
             for segment in self.segments:
-                start = self.scale.topixels(segment.start)
-                end = self.scale.topixels(segment.end)
+                start = curOffset
+                end = self.scale.relpixels(len(segment)) + curOffset
+                curOffset = end
+
+                # print " :: ", start, end, segment.end-segment.start, curOffset
                 arrowDirection = "right"
 
                 if segment.strand == "-":
@@ -80,6 +89,7 @@ class Axis(object):
                 self.svg.line(start, end, y, y, stroke=segment.color(), **{"stroke-width":8*scaleFactor})
                 self.svg.lineWithInternalArrows(start, end, y, y, stroke=segment.color(), direction=arrowDirection,
                     arrowKwdArgs={"class":"scaleArrow"}, **{"stroke-width":3*scaleFactor})
+
 
         for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
@@ -313,6 +323,24 @@ class Track(object):
         self.rendered = str(self.svg)
 
         return self.rendered
+
+
+class AnnotationTrack(object):
+    def __init__(self, annotations, scale, variant, allele):
+        self.annotations = annotations
+        self.scale = scale
+        self.variant = variant
+        self.allele = allele
+        self.segments = variant.segments(allele)
+
+        self.rows = [None]
+
+    def render(self, scaleFactor=1.0):
+        start = 0
+
+        for segment in self.segments:
+            width = len(segment)
+
 
 
 

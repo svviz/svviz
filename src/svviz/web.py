@@ -6,14 +6,8 @@ from flask import Flask, render_template, request, jsonify, Response, session
 from svviz import export
 logging.getLogger('werkzeug').setLevel(logging.ERROR)
 
+dataHub = None
 
-RESULTS = {}
-READ_INFO = None
-SAMPLES = []
-ISIZES = False
-VARIANT = None
-TEMPSVG = None
-TracksByDataset = {}
 
 # Initialize the Flask application
 app = Flask(__name__,
@@ -21,6 +15,7 @@ app = Flask(__name__,
     template_folder=os.path.join(os.path.dirname(__file__), "templates")
     )
 app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
+
 
 def getport():
     import socket
@@ -37,9 +32,12 @@ def index():
         session["last_format"] = "svg"
 
     try:
-        variantDescription = str(VARIANT).replace("::", " ").replace("-", "&ndash;")
-        return render_template('index.html', samples=SAMPLES, 
-            results_table=RESULTS, insertSizeDistributions=ISIZES, variantDescription=variantDescription)
+        variantDescription = str(dataHub.variant).replace("::", " ").replace("-", "&ndash;")
+        return render_template('index.html',
+            samples=dataHub.samples.keys(), 
+            results_table=dataHub.getCounts(),
+            insertSizeDistributions=[sample.name for sample in dataHub if sample.insertSizePlot], 
+            variantDescription=variantDescription)
     except Exception as e:
         logging.error("ERROR:{}".format(e))
         raise
@@ -56,7 +54,7 @@ def do_export():
 
     filename = "export.{}".format(format)
 
-    svg = TEMPSVG
+    svg = dataHub.trackCompositor.render()
 
     if format == "svg":
         mimetype = "image/svg+xml"
@@ -97,9 +95,9 @@ def display():
 
     if req in ["alt", "ref", "amb"]:
         results = []
-        for name in SAMPLES:
+        for name, sample in dataHub.samples.iteritems():
             # svg = open("{}.{}.svg".format(req, name)).read()
-            track = TracksByDataset[name][req]
+            track = sample.tracks[req]
             svg = _getsvg(track)
             results.append({"name":name, "svg":svg})
         axisSVG = _getsvg(track.getAxis())
@@ -108,7 +106,7 @@ def display():
 
 
     if req == "counts":
-        return jsonify(result=RESULTS)
+        return jsonify(result=dataHub.getCounts())
 
     return jsonify(result="unknown request: {}".format(req))
 
@@ -118,16 +116,17 @@ def info():
     import Alignment
     readid = urllib.unquote(request.args.get('readid', 0))
 
-    if readid in READ_INFO:
-        reads = READ_INFO[readid].getAlignments()
+    alnSet = dataHub.getAlignmentSetByName(readid)
+    if alnSet:
+        reads = alnSet.getAlignments()
         result = []
         for read in reads:
             html = "{}<br/>".format(Alignment.getBlastRepresentation(read).replace("\n", "<br/>"))
             html = html.replace(" ", ".")
             result.append(html)
 
-        result.append("<br/>Total length={}".format(len(READ_INFO[readid])))
-        result.append(" &nbsp; Reason={}".format(READ_INFO[readid].parentCollection.why))
+        result.append("<br/>Total length={}".format(len(alnSet)))
+        result.append(" &nbsp; Reason={}".format(alnSet.parentCollection.why))
         # result.append(" &nbsp; Log odds={:.3g}".format(float(READ_INFO[readid].prob)))
         result = "".join(result)
         result = "<div style='font-family:Courier;'>" + result + "</div>"
@@ -138,11 +137,10 @@ def info():
 
 @app.route('/_isizes/<name>')
 def displayIsizes(name):
-    if not ISIZES:
+    if not dataHub.samples[name].insertSizePlot:
         return None
-    data = open(name).read()
 
-    return Response(data, mimetype="image/svg+xml")
+    return Response(dataHub.samples[name].insertSizePlot, mimetype="image/svg+xml")
 
 # def load():
 #     import remap

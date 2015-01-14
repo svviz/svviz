@@ -1,20 +1,31 @@
 import os
 import string
+import subprocess
+import sys
 
 
+############################ System utilities ############################
+def launchFile(filepath):
+    if sys.platform.startswith('darwin'):
+        subprocess.call(('open', filepath))
+    elif os.name == 'nt':
+        os.startfile(filepath)
+    elif os.name == 'posix':
+        subprocess.call(('xdg-open', filepath))
+
+
+############################ String utilities ############################
 comp = string.maketrans('ATCGNatcgn','TAGCNtagcn')
 def reverseComp(st):
     """ Returns the reverse complement of a DNA sequence; non ACGT bases will be ignored. """
     return reverseString(st).translate(comp)
-
 
 def reverseString(st):
     """ Reverses a string """
     return str(st[::-1])
 
 
-def nameFromBamPath(bampath):
-    return os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
+############################ Statistics utilities ############################
 
 def mean(items):
     return sum(items)/float(len(items) or 1)
@@ -29,6 +40,15 @@ def stddev(items):
     return stddev
 
 
+############################ Collections utilities ############################
+def getListDefault(list_, index, default=None):
+    if len(list_) <= index:
+        return default
+
+    return list_[index]
+
+
+############################ Coordinates utilities ############################
 def unionLoci(loci):
     assert len(set(x.chr() for x in loci)) == 1, "Can only take union of loci on the same chromosome"
     assert len(set(x.strand() for x in loci)) == 1, "Can only take union of loci on the same strand"

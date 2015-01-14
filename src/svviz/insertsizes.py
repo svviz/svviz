@@ -1,3 +1,5 @@
+import os
+import tempfile
 import time
 import numpy
 
@@ -127,17 +129,21 @@ class InsertSizeDistribution(object):
         # return max(score, self.min)
 
 
-def plotInsertSizeDistribution(isd, name, dataset):
+def plotInsertSizeDistribution(isd, sampleName, dataHub):
     try:
         from biorpy import r, plotting
-        filename = name
+        d = tempfile.mkdtemp()
+        filename = os.path.join(d, sampleName)
+
         if not filename.endswith(".svg"):
             filename += ".svg"
+
         r.svg(filename)
 
-        alnsetNames = ["alt", "ref", "amb"]
-        plotting.ecdf([isd.isizes]+[[len(chosenSet) for chosenSet in dataset["chosenSets"][alnsetName]] for alnsetName in alnsetNames],
-            ["average"]+alnsetNames, xlab="Insert size (bp)", main=name)
+        alleles = ["alt", "ref", "amb"]
+        others = [[len(chosenSet) for chosenSet in dataHub.samples[sampleName].chosenSets(allele)] for allele in alleles]
+        plotting.ecdf([isd.isizes]+others,
+            ["average"]+alleles, xlab="Insert size (bp)", main=sampleName)
         
         # x = numpy.arange(0, max(isd.isizes), max(isd.isizes)/250)
         # r.plot(x, isd.kde(x), col="black", xlab="Insert Size (bp)", ylab="Number of reads", main=name, type="l")
@@ -151,9 +157,11 @@ def plotInsertSizeDistribution(isd, name, dataset):
         #     print name
         #     print x, y
         r.devoff()
-        return True
+
+        data = open(filename).read()
+        return data
     except ImportError:
-        return False    
+        return None    
 
 
 if __name__ == '__main__':

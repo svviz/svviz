@@ -22,7 +22,7 @@ class PairFinder(object):
             self.tomatch.update(self.loadRegion(region.chr(), region.start(), region.end()))
 
         if is_paired:
-            logging.debug("To-match: {}, min-mapq: {}".format(len(self.tomatch), self.minmapq))
+            logging.debug("  To-match: {}, min-mapq: {}".format(len(self.tomatch), self.minmapq))
             self.domatching()
 
         # for read in self.tomatch:
@@ -34,7 +34,7 @@ class PairFinder(object):
         # Unclear what to do with supplementary alignments...
         # self.matched = [[read for read in self.readsByID[id_].reads if read.flag&0x800==0] for id_ in matchIDs]
 
-        logging.info("missing pairs: {}".format(sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))))
+        logging.info("  missing pairs: {}".format(sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))))
 
     def domatching(self):
         t0 = None
@@ -48,7 +48,7 @@ class PairFinder(object):
                     t1 = time.time()
                     elapsed = t1-t0
                     t0 = t1
-                logging.info("{} {} {}".format(i, len(self.tomatch), elapsed))
+                logging.info("  {} {} {}".format(i, len(self.tomatch), elapsed))
             if len(self.readsByID[read.qname].reads) < 2:
                 self.findmatch(read)
                 # if len(self.readsByID[read.qname]) < 2:
@@ -66,7 +66,7 @@ class PairFinder(object):
         reads = list(self.sam.fetch(chrom, start, end))
 
         if len(reads) > 100000:
-            logging.warn("LOTS OF READS IN REGION:{} {} {} {}".format(chrom, start, end, len(reads)))
+            logging.warn("  LOTS OF READS IN REGION:{} {} {} {}".format(chrom, start, end, len(reads)))
             # return []
 
         goodReads = []

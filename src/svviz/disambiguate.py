@@ -66,4 +66,4 @@ def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=Fal
         disambiguate(alnCollection, singleEnded=singleEnded)
 
     t1 = time.time()
-    logging.info("Time for disambiguation: {:.2f}s".format(t1-t0))
+    logging.info(" Time for disambiguation: {:.2f}s".format(t1-t0))

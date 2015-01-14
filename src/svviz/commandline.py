@@ -43,12 +43,16 @@ def parseArgs():
     parser.add_argument("breakpoints", nargs="*")
 
     requiredParams = parser.add_argument_group("required parameters")
-    requiredParams.add_argument("-b", "--bam", action="append", help="sorted, indexed bam file containing reads of interest to plot; can be specified multiple times to load multiple samples")
+    requiredParams.add_argument("-b", "--bam", action="append", help="sorted, indexed bam file containing reads of interest to plot; "
+        "can be specified multiple times to load multiple samples")
 
     inputParams = parser.add_argument_group("input parameters")
     inputParams.add_argument("-t", "--type", help="event type: either del[etion], ins[ertion] or mei (mobile element insertion)")
     inputParams.add_argument("-S", "--single-ended", action="store_true", help="single-ended sequencing (default is paired-end)")
     inputParams.add_argument("-o", "--orientation", help="read orientation; probably want fr, rf or similar (only needed for paired-end data; default rf)")
+
+    inputParams.add_argument("-A", "--annotations", action="append", help="bed file containing annotations to plot; will be compressed and indexed "
+        "using samtools tabix in place if needed (can specify multiple annotations files)")
 
     inputParams.add_argument("-m", "--isize-mean", metavar="MEAN", type=float, help="mean insert size; used to determine concordant read pairs (paired-end)"
         "and the size of the flanking region to align against around breakpoints (default: inferred from input bam)")
@@ -63,6 +67,9 @@ def parseArgs():
     interfaceParams = parser.add_argument_group("interface parameters")
     interfaceParams.add_argument("--no-web", action="store_true", help="don't show the web interface")
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help="save relevant reads to this file (bam)")
+    inputParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help="export view to file; exported file format is determined "
+        "from the filename extension (automatically sets --no-web)")
+    inputParams.add_argument("-O", "--open-exported", action="store_true", help="automatically open the exported file (OS X only)")
 
     defaults = parser.add_argument_group("presets")
     defaults.add_argument("--mate-pair", action="store_true", help="sets defaults for ~6.5kb insert mate pair libraries")
@@ -100,7 +107,13 @@ def parseArgs():
 
     if args.aln_quality is not None:
         AlignmentSet.AlnThreshold = args.aln_quality
-        
+    
+    if args.export is not None:
+        args.no_web = True
+        if not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
+            print "Export filename must end with one of .svg, .png or .pdf"
+            sys.exit(1)
+
     return args
 
 if __name__ == '__main__':
