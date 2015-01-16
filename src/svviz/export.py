@@ -115,7 +115,6 @@ class TrackCompositor(object):
             if i > 0:
                 curY += self.betweenSectionHeight
 
-            # label = '<svg x="{}" y="{}"><text x="0" y="30" font-size="28" font-family="Helvetica">{}</text></svg>'.format(curX+10, curY, sectionName)
             label = self._svgText(curX+10, curY, sectionName, self.sectionLabelHeight)
             modTracks.append(label)
             curY += self.sectionLabelHeight
@@ -123,7 +122,7 @@ class TrackCompositor(object):
             for trackName in section:
                 trackInfo = section[trackName]
 
-                if trackName != "xaxis":
+                if trackName != "axis":
                     label = self._svgText(curX+10, curY, trackName, self.trackLabelHeight)
                     modTracks.append(label)
                     curY += self.sectionLabelHeight
