@@ -5,10 +5,11 @@ import tempfile
 
 
 class TrackCompositor(object):
-    def __init__(self, width, title=None):
+    def __init__(self, dataHub, title=None):
+    # def __init__(self, width, title=None): 
+        self.dataHub = dataHub
         self.sections = collections.OrderedDict()
-        # self.height = height
-        self.width = width
+        self.width = 1200
         self.title = title
 
         self.marginTopBottom = 20
@@ -16,7 +17,18 @@ class TrackCompositor(object):
         self.betweenSectionHeight = 30
         self.trackLabelHeight = 20
 
-    def addTracks(self, section, names, tracks, includeAxis=True):
+        self._fromDataHub()
+
+    def _fromDataHub(self):
+        for longAlleleName in ["Alternate Allele", "Reference Allele"]:
+            allele = longAlleleName[:3].lower()
+
+            sampleNames = self.dataHub.samples.keys()
+            tracks = [sample.tracks[allele] for sample in self.dataHub]
+
+            self.addTracks(longAlleleName, sampleNames, tracks, alleleTracks=self.dataHub.alleleTracks[allele])
+
+    def addTracks(self, section, names, tracks, alleleTracks):
         for track in tracks:
             track.render()
         xmin = [track.xmin for track in tracks if track.xmin is not None]
@@ -43,19 +55,29 @@ class TrackCompositor(object):
 
             self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
 
-        if includeAxis and hasTrackWithReads:
+        if hasTrackWithReads:
             scaleFactor = width * 0.0005
+            for name, track in alleleTracks.iteritems():
+                track.render(scaleFactor=scaleFactor)
+                height = track.height/scaleFactor
+                viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=height)
+                svg = track.svg.asString("export")
 
-            axis = track.getAxis()
-            baseHeight = axis.height
-            axis.height = baseHeight*scaleFactor
-            viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=baseHeight)
+                self.addTrackSVG(section, name, svg, height=height, viewbox=viewbox)
+
+        # if includeAxis and hasTrackWithReads:
+        #     scaleFactor = width * 0.0005
+
+        #     axis = track.getAxis()
+        #     baseHeight = axis.height
+        #     axis.height = baseHeight*scaleFactor
+        #     viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=baseHeight)
  
-            axis.render(scaleFactor=scaleFactor)
-            svg = axis.svg.asString("export")
+        #     axis.render(scaleFactor=scaleFactor)
+        #     svg = axis.svg.asString("export")
 
-            self.addTrackSVG(section, "xaxis", svg, height=75, viewbox=viewbox)
-            axis.height = baseHeight
+        #     self.addTrackSVG(section, "xaxis", svg, height=75, viewbox=viewbox)
+        #     axis.height = baseHeight
 
     def addTrackSVG(self, section, name, tracksvg, viewbox=None, height=100):
         # height = 100

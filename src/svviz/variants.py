@@ -74,6 +74,8 @@ class Segment(object):
 
     def __init__(self, chrom, start, end, strand, id_, source="genome"):
         self.chrom = chrom
+        if start > end:
+            start, end = end, start
         self.start = start
         self.end = end
         self.strand = strand
@@ -146,33 +148,44 @@ class Deletion(StructuralVariant):
         deletionRegion = Locus(chrom, self.breakpoints[0].start()-searchDistance, self.breakpoints[-1].end()+searchDistance, "+")
         return [deletionRegion]
 
-    def getRefSeq(self):
-        if self._refseq is not None:
-            return self._refseq
-
+    def segments(self, allele):
         chrom = self.breakpoints[0].chr()
-        start = self.breakpoints[0].start() - self.alignDistance
-        end = self.breakpoints[-1].end() + self.alignDistance
 
-        self._refseq = self.fasta[chrom][start:end+1]
-        return self._refseq.upper()
+        if allele in ["ref", "amb"]:
+            return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
+                    Segment(chrom, self.breakpoints[0].start(), self.breakpoints[1].end(), "+", 1),
+                    Segment(chrom, self.breakpoints[1].end()+1, self.breakpoints[1].end()+self.alignDistance, "+", 2)]
+        elif allele == "alt":
+            return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
+                    Segment(chrom, self.breakpoints[1].end()+1, self.breakpoints[1].end()+self.alignDistance, "+", 2)]
 
-    def _getRefRelativeBreakpoints(self):
-        return [self.alignDistance, self.alignDistance+self.breakpoints[-1].start()-self.breakpoints[0].end()]
-    def _getAltRelativeBreakpoints(self):
-        return [self.alignDistance]
+    # def getRefSeq(self):
+    #     if self._refseq is not None:
+    #         return self._refseq
 
-    def getAltSeq(self):
-        if self._altseq is not None:
-            return self._altseq
-        chrom = self.breakpoints[0].chr()
-        upstream = self.fasta[chrom][self.breakpoints[0].start()-self.alignDistance:
-                                     self.breakpoints[0].end()+1]
-        downstream = self.fasta[chrom][self.breakpoints[-1].start():
-                                       self.breakpoints[-1].end()+self.alignDistance+1]
+    #     chrom = self.breakpoints[0].chr()
+    #     start = self.breakpoints[0].start() - self.alignDistance
+    #     end = self.breakpoints[-1].end() + self.alignDistance
 
-        self._altseq = upstream.upper() + downstream.upper()
-        return self._altseq
+    #     self._refseq = self.fasta[chrom][start:end+1]
+    #     return self._refseq.upper()
+
+    # def _getRefRelativeBreakpoints(self):
+    #     return [self.alignDistance, self.alignDistance+self.breakpoints[-1].start()-self.breakpoints[0].end()]
+    # def _getAltRelativeBreakpoints(self):
+    #     return [self.alignDistance]
+
+    # def getAltSeq(self):
+    #     if self._altseq is not None:
+    #         return self._altseq
+    #     chrom = self.breakpoints[0].chr()
+    #     upstream = self.fasta[chrom][self.breakpoints[0].start()-self.alignDistance:
+    #                                  self.breakpoints[0].end()+1]
+    #     downstream = self.fasta[chrom][self.breakpoints[-1].start():
+    #                                    self.breakpoints[-1].end()+self.alignDistance+1]
+
+    #     self._altseq = upstream.upper() + downstream.upper()
+    #     return self._altseq
 
 
 class Inversion(StructuralVariant):

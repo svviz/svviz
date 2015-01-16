@@ -84,19 +84,21 @@ def renderSamples(dataHub):
 
 def renderAxesAndAnnotations(dataHub):
     for allele in ["alt", "ref"]:
-        # TEMP XXX
+        # TODO: store width somewhere better
         t = dataHub.samples.values()[0].tracks[allele]
-        axis = track.Axis(t.width, dataHub.variant, allele)
-        dataHub.alleleTracks[allele]["axis"] = axis
 
-        # for annotationSet in dataHub.annotationSets:
-            # dataHub.alleleTracks[allele]["axis"] = annotationSet
+        for name, annotationSet in dataHub.annotationSets.iteritems():
+            dataHub.alleleTracks[allele][name] = track.AnnotationTrack(annotationSet, t.scale, dataHub.variant, allele)
+
+        axis = track.Axis(t.scale, dataHub.variant, allele)
+        dataHub.alleleTracks[allele]["axis"] = axis
 
 def ensureExportData(dataHub):
     if dataHub.trackCompositor is None:
-        dataHub.trackCompositor = export.TrackCompositor(1200)
-        dataHub.trackCompositor.addTracks("Alternate Allele", dataHub.samples.keys(), [sample.tracks["alt"] for sample in dataHub])
-        dataHub.trackCompositor.addTracks("Reference Allele", dataHub.samples.keys(), [sample.tracks["ref"] for sample in dataHub])
+        dataHub.trackCompositor = export.TrackCompositor(dataHub)
+        # TODO: make TrackCompositor take a DataHub object directly
+        # dataHub.trackCompositor.addTracks("Alternate Allele", dataHub.samples.keys(), [sample.tracks["alt"] for sample in dataHub])
+        # dataHub.trackCompositor.addTracks("Reference Allele", dataHub.samples.keys(), [sample.tracks["ref"] for sample in dataHub])
 
 
 def runDirectExport(dataHub):
@@ -106,7 +108,7 @@ def runDirectExport(dataHub):
 
         exportFormat = dataHub.args.export.split(".")[-1]
         exportData = dataHub.trackCompositor.render()
-        if exportFormat != "png":
+        if exportFormat != "svg":
             exportData = export.convertSVG(exportData, exportFormat)
         outf = open(dataHub.args.export, "w")
         outf.write(exportData)

@@ -100,7 +100,11 @@ def display():
             track = sample.tracks[req]
             svg = _getsvg(track)
             results.append({"name":name, "svg":svg})
-        axisSVG = _getsvg(track.getAxis())
+
+        allele = req
+        if allele == "amb": allele = "ref"
+        axisSVG = _getsvg(dataHub.alleleTracks[allele]["axis"])
+        # axisSVG = _getsvg(track.getAxis())
         results.append({"name":"axis", "svg":axisSVG})
         return jsonify(results=results)
 

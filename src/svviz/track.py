@@ -2,8 +2,8 @@ import collections
 import itertools
 import math
 import re
-from svg import SVG
-
+from svviz.svg import SVG
+from svviz import utilities
 
 class Chromosome(object):
     def __init__(self, length):
@@ -52,6 +52,7 @@ class Axis(object):
             # self.height = 100
 
     def render(self, scaleFactor=1.0):
+        self.height = 75 * scaleFactor
         self.svg = SVG(self.scale.pixelWidth, self.height, headerExtras="""preserveAspectRatio="none" """)
         self.svg.rect(0, self.height-(35*scaleFactor), self.scale.pixelWidth, 3*scaleFactor)
 
@@ -258,11 +259,10 @@ class Track(object):
         self.xmin = None
         self.xmax = None
 
-
-    def getAxis(self):
-        if self._axis is None:
-            self._axis = Axis(self.scale, self.variant, self.allele)
-        return self._axis
+    # def getAxis(self):
+    #     if self._axis is None:
+    #         self._axis = Axis(self.scale, self.variant, self.allele)
+    #     return self._axis
 
     def findRow(self, start, end):
         for currow in range(len(self.rows)):
@@ -326,21 +326,85 @@ class Track(object):
 
 
 class AnnotationTrack(object):
-    def __init__(self, annotations, scale, variant, allele):
-        self.annotations = annotations
+    def __init__(self, annotationSet, scale, variant, allele):
+        self.annotationSet = annotationSet
         self.scale = scale
+        self.height = None
         self.variant = variant
         self.allele = allele
         self.segments = variant.segments(allele)
 
+        self._annos = None
+        self.rows = [None]
+        self.svg = None
+
+        self.rowheight = 20
+
+    def _topixels(self, gpos, segment, psegoffset):
+        if segment.strand == "+":
+            pos = self.scale.relpixels(gpos - segment.start) + psegoffset
+        elif segment.strand == "-":
+            pos = self.scale.relpixels(segment.end - gpos) + psegoffset
+        return pos
+
+    def findRow(self, start, end):
+        for currow in range(len(self.rows)):
+            if self.rows[currow] is None or (start - self.rows[currow]) >= 2:
+                self.rows[currow] = end
+                break
+        else:
+            self.rows.append(end)
+            currow = len(self.rows)-1
+
+        return currow
+
+    def dolayout(self, scaleFactor):
+        # coordinates are in pixels not base pairs
         self.rows = [None]
 
-    def render(self, scaleFactor=1.0):
-        start = 0
+        segmentStart = 0
 
+        self._annos = []
         for segment in self.segments:
-            width = len(segment)
+            curWidth = len(segment)
+            curAnnos = self.annotationSet.getAnnotations(segment.chrom, segment.start, segment.end, clip=True)
+            if segment.strand == "-":
+                curAnnos = sorted(curAnnos, key=lambda x:x.end, reverse=True)
 
+            for anno in curAnnos:
+                start = self._topixels(anno.start, segment, segmentStart)
+                end = self._topixels(anno.end, segment, segmentStart)
+                if end < start:
+                    start, end = end, start
+                textLength = len(anno.name)*self.rowheight/1.0*scaleFactor
+                rowNum = self.findRow(start, end+textLength)
 
+                anno.coords = {}
+                anno.coords["row"] = rowNum
+                anno.coords["start"] = start
+                anno.coords["end"] = end
+                anno.coords["strand"] = anno.strand if segment.strand=="+" else utilities.switchStrand(anno.strand)
+
+                self._annos.append(anno)
+
+            segmentStart += self.scale.relpixels(curWidth)
+
+    def render(self, scaleFactor=1.0):
+        self.dolayout(scaleFactor)
+
+        self.height = ((len(self.rows)+2) * self.rowheight)*scaleFactor
+        self.svg = SVG(self.scale.pixelWidth, self.height)
+
+        for anno in self._annos:
+            color = "blue" if anno.coords["strand"] == "+" else "darkorange"
+            y = ((anno.coords["row"]+1) * self.rowheight) * scaleFactor
+            width = anno.coords["end"] - anno.coords["start"]
+
+            self.svg.rect(anno.coords["start"], y, width, self.rowheight*scaleFactor, fill=color)
+            self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
+                anno.name, size=(self.rowheight-2)*scaleFactor, anchor="start", fill=color)
+
+        for vline in self.variant.getRelativeBreakpoints(self.allele):
+            self.svg.rect(self.scale.topixels(vline)-scaleFactor/2.0, self.height+20, scaleFactor, self.height+40, fill="black")
 
 

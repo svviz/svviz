@@ -49,6 +49,12 @@ def getListDefault(list_, index, default=None):
 
 
 ############################ Coordinates utilities ############################
+def switchStrand(x):
+    if x == "+":
+        return "-"
+    elif x == "-":
+        return "+"
+    
 def unionLoci(loci):
     assert len(set(x.chr() for x in loci)) == 1, "Can only take union of loci on the same chromosome"
     assert len(set(x.strand() for x in loci)) == 1, "Can only take union of loci on the same strand"

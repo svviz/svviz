@@ -95,12 +95,12 @@ class SVG(object):
     def rect(self, x, y, width, height, stroke="", fill="", zindex=None, **kwdargs):
         zindex = self.getDefaultZIndex(zindex)
         more = self._addOptions(stroke=stroke, fill=fill, **kwdargs)
-        self.svg.insert(zindex, """<rect x="{x}" y="{y}" width="{w}" height="{h}" {more}/>\n""".format(x=x, y=self.height-y, w=width, h=height, more=more))
+        self.svg.insert(zindex, """<rect x="{x}" y="{y}" width="{w}" height="{h}" {more}/>""".format(x=x, y=self.height-y, w=width, h=height, more=more))
 
     def text(self, x, y, text, size=10, anchor="middle", fill="", family="Helvetica", **kwdargs):
         kwdargs["font-family"] = family
         more = self._addOptions(fill=fill, **kwdargs)
-        self.svg.append("""<text x="{x}" y="{y}" font-size="{size}" text-anchor="{anchor}" {more}>{text}</text>\n""".format(x=x, y=self.height-y, size=size, anchor=anchor, more=more, text=text))
+        self.svg.append("""<text x="{x}" y="{y}" font-size="{size}" text-anchor="{anchor}" {more}>{text}</text>""".format(x=x, y=self.height-y, size=size, anchor=anchor, more=more, text=text))
 
 
     def __str__(self):
@@ -122,7 +122,7 @@ class SVG(object):
 
         self.headerExtras = oldHeaderExtras
 
-        return "".join(header + self.svg + self.footer)
+        return "\n".join(header + self.svg + self.footer)
 
     def write(self, path, headerSet=None):
         output = open(path, "w")

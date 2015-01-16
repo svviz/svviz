@@ -3,8 +3,12 @@ import os
 import pyfaidx
 import pysam
 
+from svviz import annotations
+
 def nameFromBamPath(bampath):
     return os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
+def nameFromBedPath(bampath):
+    return os.path.basename(bampath).replace(".bed", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_").replace(".gz", "")
 
 
 class DataHub(object):
@@ -13,7 +17,7 @@ class DataHub(object):
         self.samples = collections.OrderedDict()
         self.variant = None
         self.genome = None
-        self.annotations = collections.OrderedDict()
+        self.annotationSets = collections.OrderedDict()
 
         # for storing axes, annotations, etc, by allele
         self.alleleTracks = collections.defaultdict(collections.OrderedDict)
@@ -35,6 +39,11 @@ class DataHub(object):
 
             sample = Sample(name, bamPath)
             self.samples[name] = sample
+
+        if self.args.annotations:
+            for annoPath in self.args.annotations:
+                name = nameFromBedPath(annoPath)
+                self.annotationSets[name] = annotations.AnnotationSet(annoPath)
 
     def getCounts(self):
         if self._counts is None:
