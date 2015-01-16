@@ -98,10 +98,7 @@ def parseArgs():
     if args.single_ended:
         setDefault(args, "search_dist", 1000)
         setDefault(args, "orientation", "any")
-    else:
-        args.orientation = "-+"
-
-    if args.orientation is not None:
+    elif args.orientation is not None:
         args.orientation = args.orientation.replace("r", "-").replace("f", "+")
         args.orientation = args.orientation.split(",")
 
@@ -114,6 +111,7 @@ def parseArgs():
             print "Export filename must end with one of .svg, .png or .pdf"
             sys.exit(1)
 
+    logging.info(str(args))
     return args
 
 if __name__ == '__main__':
