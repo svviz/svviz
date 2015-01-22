@@ -47,7 +47,8 @@ def loadISDs(dataHub):
 def loadReads(dataHub):
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
-        sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, sample.searchDistance, sample.singleEnded)
+        sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, sample.searchDistance, 
+            sample.singleEnded, dataHub.args.include_supplementary)
 
 ## TODO: fix this: tempSetSampleParams()
 def tempSetSampleParams(dataHub):
@@ -83,7 +84,7 @@ def renderSamples(dataHub):
         sample.tracks["amb"] = amb_track
 
 def renderAxesAndAnnotations(dataHub):
-    for allele in ["alt", "ref"]:
+    for allele in ["alt", "ref", "amb"]:
         # TODO: store width somewhere better
         t = dataHub.samples.values()[0].tracks[allele]
 

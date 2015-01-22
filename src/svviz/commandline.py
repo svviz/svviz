@@ -63,6 +63,8 @@ def parseArgs():
     inputParams.add_argument("-q", "--min-mapq", metavar="MAPQ", type=float, help="minimum mapping quality for reads")
     inputParams.add_argument("-a", "--aln-quality", metavar="QUALITY", type=float, 
         help="minimum score of the Smith-Waterman alignment against the ref or alt allele in order to be considered (multiplied by 2)")
+    inputParams.add_argument("--include-supplementary", action="store_true", help="include supplementary alignments "
+        "(ie, those with the 0x800 bit set in the bam flags); default: false")
 
     interfaceParams = parser.add_argument_group("interface parameters")
     interfaceParams.add_argument("--no-web", action="store_true", help="don't show the web interface")

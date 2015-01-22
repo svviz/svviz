@@ -12,7 +12,8 @@ class ReadSet(object):
             self.reads.append(newread)
 
 class PairFinder(object):
-    def __init__(self, regions, sam, minmapq=-1, is_paired=True):
+    def __init__(self, regions, sam, minmapq=-1, is_paired=True, include_supplementary=False):
+        self.include_supplementary = include_supplementary
         self.regions = regions
         self.sam = sam
         self.minmapq = minmapq
@@ -72,6 +73,8 @@ class PairFinder(object):
         goodReads = []
         for read in reads:
             if read.mapq >= self.minmapq and not read.is_secondary:
+                if (read.flag & 0x800) != 0 and not self.include_supplementary:
+                    continue
                 # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
                 goodReads.append(read)

@@ -102,7 +102,6 @@ def display():
             results.append({"name":name, "svg":svg})
 
         allele = req
-        if allele == "amb": allele = "ref"
         axisSVG = _getsvg(dataHub.alleleTracks[allele]["axis"])
         # axisSVG = _getsvg(track.getAxis())
         results.append({"name":"axis", "svg":axisSVG})

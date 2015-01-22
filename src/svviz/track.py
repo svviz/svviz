@@ -216,6 +216,10 @@ class ReadRenderer(object):
         if highlightOverlaps:
             overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
 
+            # if len(overlapSegments):
+            #     for pos in positionCounts:
+            #         print pos, positionCounts[pos]
+            #     print overlapSegments
             for segment in overlapSegments:
                 start = min(segment)
                 end = max(segment)

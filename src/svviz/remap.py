@@ -105,10 +105,11 @@ def do1remap(refseq, reads):
     return alignmentSets
 
 
-def getReads(variant, bam, minmapq, searchDistance, single_ended=False):
+def getReads(variant, bam, minmapq, searchDistance, single_ended=False, include_supplementary=False):
     t0 = time.time()
     searchRegions = variant.searchRegions(searchDistance)
-    pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, is_paired=(not single_ended))
+    pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, 
+        is_paired=(not single_ended), include_supplementary=include_supplementary)
     reads = [item for sublist in pairFinder.matched for item in sublist]
     t1 = time.time()
 
