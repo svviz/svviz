@@ -51,7 +51,7 @@ class Axis(object):
         # else:
             # self.height = 100
 
-    def render(self, scaleFactor=1.0):
+    def render(self, scaleFactor=1.0, spacing=1.0):
         self.height = 75 * scaleFactor
         self.svg = SVG(self.scale.pixelWidth, self.height, headerExtras="""preserveAspectRatio="none" """)
         self.svg.rect(0, self.height-(35*scaleFactor), self.scale.pixelWidth, 3*scaleFactor)
@@ -362,7 +362,7 @@ class AnnotationTrack(object):
 
         return currow
 
-    def dolayout(self, scaleFactor):
+    def dolayout(self, scaleFactor, spacing):
         # coordinates are in pixels not base pairs
         self.rows = [None]
 
@@ -380,7 +380,7 @@ class AnnotationTrack(object):
                 end = self._topixels(anno.end, segment, segmentStart)
                 if end < start:
                     start, end = end, start
-                textLength = len(anno.name)*self.rowheight/1.0*scaleFactor
+                textLength = len(anno.name)*self.rowheight/1.0*scaleFactor*spacing
                 rowNum = self.findRow(start, end+textLength)
 
                 anno.coords = {}
@@ -393,8 +393,8 @@ class AnnotationTrack(object):
 
             segmentStart += self.scale.relpixels(curWidth)
 
-    def render(self, scaleFactor=1.0):
-        self.dolayout(scaleFactor)
+    def render(self, scaleFactor=1.0, spacing=1):
+        self.dolayout(scaleFactor, spacing)
 
         self.height = ((len(self.rows)+2) * self.rowheight)*scaleFactor
         self.svg = SVG(self.scale.pixelWidth, self.height)

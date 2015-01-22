@@ -55,10 +55,15 @@
                                 <div style="position:absolute; z-index:1;left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
                                 <div class="track"></div>
                             </div>
-                            {% if not loop.last %}
-                                <div style="height:2px; background-color:gray;"></div>
-                            {% endif %}
+                            <div style="height:2px; background-color:gray;"></div>
+                        {% endfor %}
 
+                        {% for annotation in annotations %}
+                            <div class="one_svg anno {{ annotation }}">
+                                <div style="position:absolute; z-index:1;left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ annotation }}</div>
+                                <div class="track"></div>
+                            </div>
+                            <div style="height:2px; background-color:gray;"></div>
                         {% endfor %}
 
                         <div class="one_svg axis">

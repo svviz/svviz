@@ -180,6 +180,7 @@ function ScrollPanel(element, options, svg_tags) {
     self.ymax = 0;
 
     self.axisHeight = 75;
+    self.annoHeight = 0;
 
     self.yviewsizes = [];
 
@@ -190,13 +191,16 @@ function ScrollPanel(element, options, svg_tags) {
     self.yscrollbars = [];
 
     self.yviewables = [];
-    self.isaxis = [];
+    // self.isaxis = [];
+    self.types = []
+    self.bboxes = []
 
     self.$views.each(function(i){
         var newyscrollbar = new Scrollbar(self, $(this), {"vertical":true, "endSpace":0});
         self.yscrollbars.push(newyscrollbar);
 
         var bbox = $(this).find(".svg_viewport")[0].getBBox();
+        self.bboxes.push(bbox);
 
         self.xmin = Math.min(self.xmin, bbox.x);
         self.xmax = Math.max(self.xmax, bbox.x+bbox.width);
@@ -211,15 +215,20 @@ function ScrollPanel(element, options, svg_tags) {
 
         $(this).width("100%");
         // $(this).height(100.0/self.nviews+"%");
-        $(this).height("calc("+100.0/(self.nviews-1)+"% - "+((10 + self.axisHeight +(self.nviews-2)*2.0)/(self.nviews-1))+"px)");
+        $(this).height("calc("+100.0/(self.nviews-1)+"% - "+((10 + self.axisHeight + self.annoHeight +(self.nviews-2)*2.0)/(self.nviews-1))+"px)");
 
         if ($(this).hasClass("axis")) {
-            self.isaxis.push(true);
+            // self.isaxis.push(true);
+            self.types.push("axis");
             $(this).height(self.axisHeight+"px");
             self.yviewsizes[i] = bbox.height;
             newyscrollbar.scrollProportion = 0.0; // because the scrollbar is hidden we need to make sure we're scrolled to the correct position
+        } else if ($(this).hasClass("anno")) {
+            self.types.push("anno");
+            self.annoHeight += 100;
         } else {
-            self.isaxis.push(false);
+            self.types.push("sample");
+            // self.isaxis.push(false);
         }
 
         self.yviewables.push(0);
@@ -231,7 +240,7 @@ function ScrollPanel(element, options, svg_tags) {
 
     self.unscale = function() {
 
-        self.$element.find(".axis svg text").each(function(i, curElement) {
+        self.$element.find(".axis svg text, .anno svg text").each(function(i, curElement) {
             var $curElement = $(curElement);
             var a = 1 / self.xzoom;
             var e = ($curElement.attr("x")-$curElement.attr("x")*a)
@@ -252,8 +261,11 @@ function ScrollPanel(element, options, svg_tags) {
         self.xviewable = self.containerwidth / self.xzoom;
         for (var i=0; i < self.yviewables.length; i++) {
             self.yviewables[i] = self.containerheight / self.yzooms[i] / self.nviews;
-            if (self.isaxis[i]) {
+            if (self.types[i] == "axis") {
+            // if (self.isaxis[i]) {
                 self.yviewables[i] = self.axisHeight;
+            } else if (self.types[i] == "anno") {
+                self.yviewables[i] = 100;
             }
         }
     }
@@ -299,9 +311,12 @@ function ScrollPanel(element, options, svg_tags) {
         self.xscrollbar.resize($(self.$views[0]).width(), self.xviewable, self.xmax-self.xmin);
 
         self.yscrollbars.forEach(function(scrollbar, i){
-            if (!self.isaxis[i]) {
+            // if (!self.isaxis[i]) {
+            if (self.types[i] == "sample") {
                 scrollbar.resize($(self.$views[i]).height(), self.yviewables[i], self.ymax-self.ymin); //self.yviewsizes[i]);
-            } else {
+            } else if (self.types[i] == "anno") {
+                scrollbar.resize($(self.$views[i]).height(), self.yviewables[i], self.bboxes[i].height); //self.yviewsizes[i]);
+            } else if (self.types[i] == "axis") {
                 scrollbar.resize($(self.$views[i]).height(), self.axisHeight, self.axisHeight);
             }
         });

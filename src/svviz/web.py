@@ -35,6 +35,7 @@ def index():
         variantDescription = str(dataHub.variant).replace("::", " ").replace("-", "&ndash;")
         return render_template('index.html',
             samples=dataHub.samples.keys(), 
+            annotations=dataHub.annotationSets,
             results_table=dataHub.getCounts(),
             insertSizeDistributions=[sample.name for sample in dataHub if sample.insertSizePlot], 
             variantDescription=variantDescription)
@@ -94,17 +95,21 @@ def display():
         return jsonify(result="done")
 
     if req in ["alt", "ref", "amb"]:
+        allele = req
         results = []
         for name, sample in dataHub.samples.iteritems():
             # svg = open("{}.{}.svg".format(req, name)).read()
-            track = sample.tracks[req]
-            svg = _getsvg(track)
+            track = sample.tracks[allele]
+            track.render()
+            svg = track.svg.asString("web")
             results.append({"name":name, "svg":svg})
 
-        allele = req
-        axisSVG = _getsvg(dataHub.alleleTracks[allele]["axis"])
-        # axisSVG = _getsvg(track.getAxis())
-        results.append({"name":"axis", "svg":axisSVG})
+        for annotation in dataHub.alleleTracks[allele]:
+            track = dataHub.alleleTracks[allele][annotation]
+            track.render(spacing=5)
+            annoSVG = track.svg.asString("web")
+            results.append({"name":annotation, "svg":annoSVG})
+
         return jsonify(results=results)
 
 
