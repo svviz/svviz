@@ -191,7 +191,6 @@ function ScrollPanel(element, options, svg_tags) {
     self.yscrollbars = [];
 
     self.yviewables = [];
-    // self.isaxis = [];
     self.types = []
     self.bboxes = []
 
@@ -205,20 +204,13 @@ function ScrollPanel(element, options, svg_tags) {
         self.xmin = Math.min(self.xmin, bbox.x);
         self.xmax = Math.max(self.xmax, bbox.x+bbox.width);
 
-        self.ymin = Math.min(self.ymin, bbox.y);
-        self.ymax = Math.max(self.ymax, bbox.y+bbox.height);
-
         self.yviewsizes.push(bbox.height + 550);
-
-        // $(this).width(self.$element.width());
-        // $(this).height((self.$element.height()-12)/self.nviews);
 
         $(this).width("100%");
         // $(this).height(100.0/self.nviews+"%");
         $(this).height("calc("+100.0/(self.nviews-1)+"% - "+((10 + self.axisHeight + self.annoHeight +(self.nviews-2)*2.0)/(self.nviews-1))+"px)");
 
         if ($(this).hasClass("axis")) {
-            // self.isaxis.push(true);
             self.types.push("axis");
             $(this).height(self.axisHeight+"px");
             self.yviewsizes[i] = bbox.height;
@@ -227,8 +219,10 @@ function ScrollPanel(element, options, svg_tags) {
             self.types.push("anno");
             self.annoHeight += 100;
         } else {
+            self.ymin = Math.min(self.ymin, bbox.y);
+            self.ymax = Math.max(self.ymax, bbox.y+bbox.height);
+            
             self.types.push("sample");
-            // self.isaxis.push(false);
         }
 
         self.yviewables.push(0);

@@ -8,10 +8,18 @@ class AnnotationError(Exception):
 def ensureIndexed(bedPath):
     if not bedPath.endswith(".gz"):
         if not os.path.exists(bedPath+".gz"):
+            logging.info("bgzf compressing {}".format(bedPath))
             pysam.tabix_compress(bedPath, bedPath+".gz")
+            if not os.path.exists(bedPath+".gz"):
+                raise Exception("Failed to create compress bed file for {}; make sure the bed file is "
+                    "sorted and the directory is writeable".format(bedPath))
         bedPath += ".gz"
     if not os.path.exists(bedPath+".tbi"):
+        logging.info("creating tabix index for {}".format(bedPath))
         pysam.tabix_index(bedPath, preset="bed")
+        if not os.path.exists(bedPath+".tbi"):
+            raise Exception("Failed to create tabix index file for {}; make sure the bed file is "
+                "sorted and the directory is writeable".format(bedPath))
 
     line = pysam.Tabixfile(bedPath).fetch().next()
     if len(line.strip().split("\t")) < 6:
