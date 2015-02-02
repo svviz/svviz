@@ -113,6 +113,11 @@ def getReads(variant, bam, minmapq, searchDistance, single_ended=False, include_
     reads = [item for sublist in pairFinder.matched for item in sublist]
     t1 = time.time()
 
+    if pairFinder.supplementaryAlignmentsFound:
+        logging.warn("  ** Supplementary alignments found: these alignments (with sam flag 0x800) are poorly documented "
+            "among mapping software and may result in missing portions of reads; consider using the --is-secondary "
+            "command line argument if you think this is happening **")
+        
     logging.debug("  time to find reads and mates:{}".format(t1 - t0))
     logging.info("  number of reads found: {}".format(len(reads)))
 

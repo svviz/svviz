@@ -19,6 +19,8 @@ class PairFinder(object):
         self.minmapq = minmapq
         self.readsByID = collections.defaultdict(ReadSet)
         self.tomatch = set()
+        self.supplementaryAlignmentsFound = False
+
         for region in self.regions:
             self.tomatch.update(self.loadRegion(region.chr(), region.start(), region.end()))
 
@@ -74,6 +76,7 @@ class PairFinder(object):
         for read in reads:
             if read.mapq >= self.minmapq and not read.is_secondary:
                 if (read.flag & 0x800) != 0 and not self.include_supplementary:
+                    self.supplementaryAlignmentsFound = True
                     continue
                 # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
