@@ -78,6 +78,10 @@ def parseArgs():
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
     defaults.add_argument("--moleculo", action="store_true", help="sets defaults for moleculo libraries")
 
+    if len(sys.argv)==1:
+        parser.print_help()
+        sys.exit(1)
+        
     args = parser.parse_args(inputArgs)
 
     # Presets
