@@ -9,8 +9,8 @@ svviz - a read visualizer for structural variants
    :maxdepth: 2
 
    self
-   features
    intro
+   features
    install
    webinterface
    commandline
