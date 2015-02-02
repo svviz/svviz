@@ -30,6 +30,7 @@ def getport():
 def index():
     if not "last_format" in session:
         session["last_format"] = "svg"
+        session.permanent = True
 
     try:
         variantDescription = str(dataHub.variant).replace("::", " ").replace("-", "&ndash;")

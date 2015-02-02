@@ -11,6 +11,7 @@ class TrackCompositor(object):
         self.sections = collections.OrderedDict()
         self.width = 1200
         self.title = title
+        self.descriptions = []
 
         self.marginTopBottom = 20
         self.sectionLabelHeight = 32
@@ -20,6 +21,12 @@ class TrackCompositor(object):
         self._fromDataHub()
 
     def _fromDataHub(self):
+        if self.title is None:
+            self.title = str(self.dataHub.variant)
+        counts = self.dataHub.getCounts()
+        for name, curcounts in counts.iteritems():
+            self.descriptions.append("{}: {} {} {}".format(name, curcounts["alt"], curcounts["ref"], curcounts["amb"]))
+
         for longAlleleName in ["Alternate Allele", "Reference Allele"]:
             allele = longAlleleName[:3].lower()
 
@@ -108,6 +115,11 @@ class TrackCompositor(object):
             header = self._svgText(curX+10, curY, self.title, self.sectionLabelHeight+5, bold=True)
             modTracks.append(header)
             curY += self.sectionLabelHeight+5
+
+        for description in self.descriptions:
+            header = self._svgText(curX+20, curY, description, self.trackLabelHeight)
+            modTracks.append(header)
+            curY += self.trackLabelHeight+5
 
         for i, sectionName in enumerate(self.sections):
             section = self.sections[sectionName]

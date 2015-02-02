@@ -248,10 +248,12 @@ class Insertion(StructuralVariant):
                     Segment(chrom, self.breakpoints[0].end()+1, self.breakpoints[0].end()+self.alignDistance, "+", 2)]
         elif allele == "alt":
             return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
-                    Segment("insertion", 0, len(self.insertionLength), "+", 1, source="insertion"),
+                    Segment("insertion", 0, self.insertionLength, "+", 1, source="insertion"),
                     Segment(chrom, self.breakpoints[0].end()+1, self.breakpoints[0].end()+self.alignDistance, "+", 2)]
 
-                
+    def __str__(self):
+        return "{}::{}:{:,};len={}".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), self.insertionLength)
+       
 class MobileElementInsertion(StructuralVariant):
     def __init__(self, breakpoint, insertedSeqLocus, insertionFasta, alignDistance, refFasta):
         super(MobileElementInsertion, self).__init__([breakpoint], alignDistance, refFasta)

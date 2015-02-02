@@ -74,7 +74,7 @@ class PairFinder(object):
 
         goodReads = []
         for read in reads:
-            if read.mapq >= self.minmapq and not read.is_secondary:
+            if read.mapq >= self.minmapq and not read.is_secondary and not read.is_duplicate:
                 if (read.flag & 0x800) != 0 and not self.include_supplementary:
                     self.supplementaryAlignmentsFound = True
                     continue
