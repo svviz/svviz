@@ -23,26 +23,60 @@ def loadISDs(dataHub):
     """ Load the Insert Size Distributions """
 
     for sample in dataHub:
-        sample.insertSizeDistribution = insertsizes.InsertSizeDistribution(sample.bam, saveReads=True)
+        logging.info(" > {} <".format(sample.name))
+        sample.readStatistics = insertsizes.ReadStatistics(sample.bam, keepReads=True)
 
-    if dataHub.args.isize_mean is None or dataHub.args.isize_std is None:
-        mean_isizes = [sample.insertSizeDistribution.mean() for sample in dataHub.samples.values()]
-        std_isizes = [sample.insertSizeDistribution.std() for sample in dataHub.samples.values()]
+        if sample.readStatistics.orientations != "any":
+            if len(sample.readStatistics.orientations) > 1:
+                logging.warn("  ! multiple read pair orientations found within factor !\n  ! of 2x of one another; if you aren't expecting "
+                    "your !\n  !input data to contain multiple orientations, this !\n  !could be a bug in the mapping software or svviz !")
+            if len(sample.readStatistics.orientations) < 1:
+                # if dataHub.args.orientations is None:
+                logging.error("  No valid read orientations found for dataset:{}".format(sample.name))
+                # else:
+                    # sample.orientations = dataHub.args.orientation
 
-        logging.debug(" calculated isize (mean, std): {}".format(zip(mean_isizes, std_isizes)))
 
-        mean_isizes = [mean for mean in mean_isizes if mean is not None]
-        std_isizes = [std for std in std_isizes if std is not None]
+        sample.orientations = sample.readStatistics.orientations
+        if sample.orientations == "any":
+            sample.singleEnded = True
+        logging.info("  valid orientations: {}".format(",".join(sample.orientations)))
 
-        if len(mean_isizes) > 0 and len(std_isizes) > 0:
-            if dataHub.args.isize_mean is None:
-                dataHub.args.isize_mean = max(mean_isizes)
-                logging.info(" isize-mean not specified; using value {} inferred from input data".format(dataHub.args.isize_mean))
-            if dataHub.args.isize_std is None:
-                dataHub.args.isize_std = max(std_isizes)
-                logging.info(" isize-std not specified; using value {} inferred from input data".format(dataHub.args.isize_std))
+        if sample.orientations == "any":
+            searchDist = sample.readStatistics.readLengthUpperQuantile()
+            alignDist = sample.readStatistics.readLengthUpperQuantile()*1.25
+            # searchDist = sample.readStatistics.meanReadLength()+sample.readStatistics.stddevReadLength()*2
+            # alignDist = sample.readStatistics.meanReadLength()+sample.readStatistics.stddevReadLength()*2
         else:
-            raise Exception("Could not infer isize-mean from input files; make sure you have genome-wide read coverage in the input bams, or pass in the --isize-mean option on the command line")
+            searchDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*2
+            alignDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*4
+
+        sample.searchDistance = int(searchDist)
+        dataHub.alignDistance = max(dataHub.alignDistance, int(alignDist))
+
+        logging.info("  Using search distance: {}".format(sample.searchDistance))
+
+    logging.info(" Using align distance: {}".format(dataHub.alignDistance))
+
+    # print dataHub.searchDistance, dataHub.alignDistance
+    # if dataHub.args.isize_mean is None or dataHub.args.isize_std is None:
+    #     mean_isizes = [sample.readStatistics.mean() for sample in dataHub.samples.values()]
+    #     std_isizes = [sample.readStatistics.std() for sample in dataHub.samples.values()]
+
+    #     logging.debug(" calculated isize (mean, std): {}".format(zip(mean_isizes, std_isizes)))
+
+    #     mean_isizes = [mean for mean in mean_isizes if mean is not None]
+    #     std_isizes = [std for std in std_isizes if std is not None]
+
+    #     if len(mean_isizes) > 0 and len(std_isizes) > 0:
+    #         if dataHub.args.isize_mean is None:
+    #             dataHub.args.isize_mean = max(mean_isizes)
+    #             logging.info(" isize-mean not specified; using value {} inferred from input data".format(dataHub.args.isize_mean))
+    #         if dataHub.args.isize_std is None:
+    #             dataHub.args.isize_std = max(std_isizes)
+    #             logging.info(" isize-std not specified; using value {} inferred from input data".format(dataHub.args.isize_std))
+    #     else:
+    #         raise Exception("Could not infer isize-mean from input files; make sure you have genome-wide read coverage in the input bams, or pass in the --isize-mean option on the command line")
 
 def loadReads(dataHub):
     for sample in dataHub:
@@ -53,11 +87,11 @@ def loadReads(dataHub):
 ## TODO: fix this: tempSetSampleParams()
 def tempSetSampleParams(dataHub):
     for sample in dataHub:
-        sample.searchDistance = dataHub.args.search_dist
-        sample.singleEnded = dataHub.args.single_ended
+        # sample.searchDistance = dataHub.args.search_dist
+        # sample.singleEnded = dataHub.args.single_ended
         sample.minMapq = dataHub.args.min_mapq
 
-        sample.orientations = dataHub.args.orientation
+        # sample.orientations = dataHub.args.orientation
         if sample.singleEnded:
             sample.orientations = "any"
 
@@ -67,7 +101,7 @@ def runRemap(dataHub):
 
 def runDisambiguation(dataHub):
     for sample in dataHub:
-        disambiguate.batchDisambiguate(sample.alnCollections, sample.insertSizeDistribution, 
+        disambiguate.batchDisambiguate(sample.alnCollections, sample.readStatistics, 
             sample.orientations, singleEnded=sample.singleEnded)
 
 def renderSamples(dataHub):
@@ -128,10 +162,11 @@ def runWebView(dataHub):
         web.run()
 
 def plotInsertSizeDistributions(dataHub):
-    if all(not sample.insertSizeDistribution.fail for sample in dataHub):
+    # TODO: show only for samples with insert size distributions (ie paired end)
+    if all(sample.readStatistics.hasInsertSizeDistribution() for sample in dataHub):
         plotISDs = True
         for name, sample in dataHub.samples.iteritems():
-            isd = sample.insertSizeDistribution
+            isd = sample.readStatistics
             sample.insertSizePlot = insertsizes.plotInsertSizeDistribution(isd, name, dataHub)
             plotISDs = plotISDs and sample.insertSizePlot
         if not plotISDs:
@@ -156,7 +191,7 @@ def saveReads(dataHub):
             for read in sample.reads:
                 bam_small.write(read)
 
-            for read in sample.insertSizeDistribution.reads:
+            for read in sample.readStatistics.reads:
                 bam_small.write(read)
 
             bam_small.close()

@@ -1,3 +1,5 @@
+import collections
+import logging
 import os
 import tempfile
 import time
@@ -17,7 +19,28 @@ def removeOutliers(data, m = 10.):
     s = d/mdev if mdev else 0.
     return data[s<m]
 
-def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=20000, saveReads=False):
+def chooseOrientation(orientations):
+    logging.info("  counts +/-:{:<6} -/+:{:<6} +/+:{:<6} -/-:{:<6} unpaired:{:<6}".format(orientations[False, True], 
+                                                    orientations[True, False], 
+                                                    orientations[True, True],
+                                                    orientations[False, False],
+                                                    orientations["unpaired"]))
+    ranked = sorted(orientations, key=lambda x: orientations[x])
+    chosenOrientations = [ranked.pop()]
+    while len(ranked) > 0:
+        candidate = ranked.pop()
+        if orientations[chosenOrientations[-1]] < 2* orientations[candidate]:
+            chosenOrientations.append(candidate)
+        else:
+            break
+    if chosenOrientations[0] == "unpaired":
+        chosenOrientations = "any"
+    else:
+        d = {False: "+", True:"-"}
+        chosenOrientations = ["".join(d[x] for x in o) for o in chosenOrientations]
+    return chosenOrientations
+
+def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=20000, keepReads=False):
     """ get the insert size distribution, cutting off the tail at the high end, 
     and removing most oddly mapping pairs
 
@@ -25,7 +48,10 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
         don't tend to change the distribution much """
 
     inserts = []
+    readLengths  = []
     
+    # TODO: should create a more complete list of searchable regions, for general use over smaller genomes
+
     count = 0
     start = 2500000
     end = 50000000
@@ -37,10 +63,33 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
         if bam.lengths[i] > start:
             chromosomes.append(bam.getrname(i))
 
+    orientations = collections.Counter()
+    NMs = []
+    INDELs = []
+
     for chrom in sorted(chromosomes):
         for read in bam.fetch(chrom, start, end):
             if skip > 0:
                 skip -= 1
+                continue
+
+            try:
+                NMs.append(read.opt("NM")/float(len(read.seq)))
+            except KeyError:
+                pass
+
+            try:
+                INDELs.append(sum(1 for i in zip(*read.cigartuples)[1] if i in[1,2])/float(len(read.seq)))
+            except TypeError:
+                pass
+
+            if orientations["unpaired"] > 2500 and count < 1000:
+                # bail out early if it looks like it's single-ended
+                break
+
+            if not read.is_paired:
+                orientations["unpaired"] += 1
+                readLengths.append(len(read.seq))
                 continue
                 
             if not read.is_read1:
@@ -56,9 +105,15 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
                 continue
             
             # if abs(read.isize) < 20000:
-            inserts.append(abs(read.isize)) 
+            inserts.append(abs(read.isize))
 
-            if saveReads:
+            curOrient = (read.is_reverse, read.mate_is_reverse)
+            if read.reference_start > read.next_reference_start:
+                curOrient = not curOrient[0], not curOrient[1]
+            orientations[curOrient] += 1
+            readLengths.append(len(read.seq))
+
+            if keepReads:
                 reads.append(read)
 
             count += 1
@@ -67,66 +122,145 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
         if count > maxreads:
             break
 
-    return removeOutliers(inserts), reads
+    print "NM:", mean(NMs), stddev(NMs)
+    print "INDELs:", mean(INDELs), stddev(INDELs)
+
+    chosenOrientations = chooseOrientation(orientations)
+
+    return removeOutliers(inserts), reads, chosenOrientations, numpy.array(readLengths)
 
 
+class ReadStatistics(object):
+    def __init__(self, bam, keepReads=False):
+        self.insertSizes = []
+        self.readLengths = []
+        self.orientations = []
+        self._insertSizeKDE = None
+        self.singleEnded = False
 
-class InsertSizeDistribution(object):
-    """ Use this class to calculate the distribution of insert sizes from a bam;
-    then score new read pairs for the likelihood that the insert size came from this distribution """
-
-    def __init__(self, bam, saveReads=False):
-        """ bam must be a sorted, indexed pysam.Samfile """
-
-        self._totalTime = 0
-        self._totalIterations = 0
+        self._insertSizeScores = {} # cache
 
         try:
-            self.isizes, self.reads = sampleInsertSizes(bam, saveReads=saveReads)
+            self.insertSizes, self.reads, self.orientations, self.readLengths = sampleInsertSizes(bam, keepReads=keepReads)
         except ValueError:
-            self.isizes = []
-            self.reads = []
-            
-        if len(self.isizes) < 1000:
-            self.fail = True
-            # self.min = 0
-            return
+            print "*"*100, "here"
 
-        if gaussian_kde is None:
-            # self.min = 0
-            self.fail = True
-            return
+    def hasInsertSizeDistribution(self):
+        if len(self.insertSizes) > 1000:
+            return True
+        return False
 
-        self.fail = False
-        self.kde = gaussian_kde(self.isizes)
-
-        self._cache = {}
-        # self.min = numpy.min(self.kde(numpy.linspace(0, max(self.isizes), 100)))
-        # print "Min score:", self.min
-
-    def mean(self):
-        if len(self.isizes) >= 1000:
-             return mean(self.isizes)
+    def meanInsertSize(self):
+        if self.hasInsertSizeDistribution():
+            return mean(self.insertSizes)
         return None
 
-    def std(self):
-        if len(self.isizes) >= 1000:
-             return stddev(self.isizes)
+    def stddevInsertSize(self):
+        if self.hasInsertSizeDistribution():
+            return stddev(self.insertSizes)
         return None
 
-    def score(self, isize):
-        if self.fail:
+    # def insertSizeKDE(self):
+    #     if self.hasInsertSizeDistribution() and self._insertSizeKDE is None:
+    #         self._insertSizeKDE = gaussian_kde(self.insertSizes)
+    #     return self._insertSizeKDE
+
+    def scoreInsertSize(self, isize):
+        if not self.hasInsertSizeDistribution():
             return 0
 
+        if self._insertSizeKDE is None:
+            self._insertSizeKDE = gaussian_kde(self.insertSizes)
         # the gaussian kde call is pretty slow with ~50,000 data points in it, so we'll cache the result for a bit of a speed-up
         isize = abs(isize)
-        if not isize in self._cache:
-            self._cache[isize] = self.kde(isize)
+        if not isize in self._insertSizeScores:
+            self._insertSizeScores[isize] = self._insertSizeKDE(isize)
 
-        return self._cache[isize]
+        return self._insertSizeScores[isize]
 
-        # we don't ever want a 0 probability
-        # return max(score, self.min)
+
+    def hasReadLengthDistribution(self):
+        if len(self.readLengths) > 1000:
+            return True
+        return False
+
+    def meanReadLength(self):
+        if self.hasReadLengthDistribution():
+            return mean(self.readLengths)
+        return None
+
+    def stddevReadLength(self):
+        if self.hasReadLengthDistribution():
+            return stddev(self.readLengths)
+        return None
+
+    def readLengthUpperQuantile(self):
+        if self.hasReadLengthDistribution():
+            return numpy.percentile(self.readLengths, 99)
+        return None
+
+
+
+
+# class InsertSizeDistribution(object):
+
+#     """ Use this class to calculate the distribution of insert sizes from a bam;
+#     then score new read pairs for the likelihood that the insert size came from this distribution """
+
+#     def __init__(self, bam, saveReads=False):
+#         """ bam must be a sorted, indexed pysam.Samfile """
+
+#         self._totalTime = 0
+#         self._totalIterations = 0
+
+#         try:
+#             self.isizes, self.reads, self.orientations, self.readLengths = sampleInsertSizes(bam, saveReads=saveReads)
+#         except ValueError:
+#             self.isizes = []
+#             self.readLengths = []
+#             self.reads = []
+#             self.orientations = []
+        
+#         if len(self.isizes) < 1000:
+#             self.fail = True
+#             # self.min = 0
+#             return
+
+#         if gaussian_kde is None:
+#             # self.min = 0
+#             self.fail = True
+#             return
+
+#         self.fail = False
+#         self.kde = gaussian_kde(self.isizes)
+
+#         self._cache = {}
+#         # self.min = numpy.min(self.kde(numpy.linspace(0, max(self.isizes), 100)))
+#         # print "Min score:", self.min
+
+#     def mean(self):
+#         if len(self.isizes) >= 1000:
+#              return mean(self.isizes)
+#         return None
+
+#     def std(self):
+#         if len(self.isizes) >= 1000:
+#              return stddev(self.isizes)
+#         return None
+
+#     def score(self, isize):
+#         if self.fail:
+#             return 0
+
+#         # the gaussian kde call is pretty slow with ~50,000 data points in it, so we'll cache the result for a bit of a speed-up
+#         isize = abs(isize)
+#         if not isize in self._cache:
+#             self._cache[isize] = self.kde(isize)
+
+#         return self._cache[isize]
+
+#         # we don't ever want a 0 probability
+#         # return max(score, self.min)
 
 
 def plotInsertSizeDistribution(isd, sampleName, dataHub):
@@ -142,7 +276,7 @@ def plotInsertSizeDistribution(isd, sampleName, dataHub):
 
         alleles = ["alt", "ref", "amb"]
         others = [[len(chosenSet) for chosenSet in dataHub.samples[sampleName].chosenSets(allele)] for allele in alleles]
-        plotting.ecdf([isd.isizes]+others,
+        plotting.ecdf([isd.insertSizes]+others,
             ["average"]+alleles, xlab="Insert size (bp)", main=sampleName)
         
         # x = numpy.arange(0, max(isd.isizes), max(isd.isizes)/250)

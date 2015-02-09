@@ -14,6 +14,8 @@ def nameFromBedPath(bampath):
 class DataHub(object):
     def __init__(self):
         self.args = None
+        self.searchDistance = None
+        self.alignDistance = None
         self.samples = collections.OrderedDict()
         self.variant = None
         self.genome = None
@@ -32,18 +34,23 @@ class DataHub(object):
     def setArgs(self, args):
         self.args = args
 
-        self.genome = pyfaidx.Fasta(args.ref, as_raw=True)
+        try:
+            self.genome = pyfaidx.Fasta(args.ref, as_raw=True)
 
-        for bamPath in self.args.bam:
-            name = nameFromBamPath(bamPath)
+            for bamPath in self.args.bam:
+                name = nameFromBamPath(bamPath)
 
-            sample = Sample(name, bamPath)
-            self.samples[name] = sample
+                sample = Sample(name, bamPath)
+                self.samples[name] = sample
 
-        if self.args.annotations:
-            for annoPath in self.args.annotations:
-                name = nameFromBedPath(annoPath)
-                self.annotationSets[name] = annotations.AnnotationSet(annoPath)
+            if self.args.annotations:
+                for annoPath in self.args.annotations:
+                    name = nameFromBedPath(annoPath)
+                    self.annotationSets[name] = annotations.AnnotationSet(annoPath)
+        except:
+            self.args._parser.print_help()
+            print ""
+            raise
 
     def getCounts(self):
         if self._counts is None:
@@ -82,7 +89,7 @@ class Sample(object):
         self.reads = []
         self.alnCollections = []
 
-        self.insertSizeDistribution = None
+        self.readStatistics = None
         self.insertSizePlot = None
 
         self.tracks = collections.OrderedDict()

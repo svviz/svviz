@@ -23,9 +23,9 @@ class TrackCompositor(object):
     def _fromDataHub(self):
         if self.title is None:
             self.title = str(self.dataHub.variant)
-        counts = self.dataHub.getCounts()
-        for name, curcounts in counts.iteritems():
-            self.descriptions.append("{}: {} {} {}".format(name, curcounts["alt"], curcounts["ref"], curcounts["amb"]))
+        # counts = self.dataHub.getCounts()
+        # for name, curcounts in counts.iteritems():
+        #     self.descriptions.append("{}: {} {} {}".format(name, curcounts["alt"], curcounts["ref"], curcounts["amb"]))
 
         for longAlleleName in ["Alternate Allele", "Reference Allele"]:
             allele = longAlleleName[:3].lower()
@@ -33,15 +33,25 @@ class TrackCompositor(object):
             sampleNames = self.dataHub.samples.keys()
             tracks = [sample.tracks[allele] for sample in self.dataHub]
 
-            self.addTracks(longAlleleName, sampleNames, tracks, alleleTracks=self.dataHub.alleleTracks[allele])
+            self.addTracks(longAlleleName, sampleNames, tracks, allele)
 
-    def addTracks(self, section, names, tracks, alleleTracks):
+    def addTracks(self, section, names, tracks, allele):
+        alleleTracks = self.dataHub.alleleTracks[allele]
+        segments = segments=self.dataHub.variant.segments(allele)
+        alleleLength = self.dataHub.variant.getLength(allele)
+
         for track in tracks:
             track.render()
         xmin = [track.xmin for track in tracks if track.xmin is not None]
         xmin = min(xmin) if len(xmin) > 0 else 0
+        # xmin = min(max(0, len(segments[0])-100), xmin)
+
         xmax = [track.xmax for track in tracks if track.xmax is not None]
         xmax = max(xmax) if len(xmax) > 0 else 500
+        # xmax = max(alleleLength-len(segments[-1])+100, xmax)
+        # xmax = min(xmax, alleleLength)
+
+        print xmin, xmax
 
         hasTrackWithReads = False
         width = 500
@@ -98,13 +108,46 @@ class TrackCompositor(object):
                                         "height": height
                                        }
 
-    def _svgText(self, x, y, text, height, bold=False):
+    def _svgText(self, x, y, text, height, bold=False, anchor=None):
         extras = ""
         if bold:
             extras += ' font-weight="bold"'
+        if anchor:
+            extras += ' anchor="{}"'.format(anchor)
         svg = '<svg x="{x}" y="{y}"><text x="0" y="{padded}" font-size="{textHeight}" font-family="Helvetica" {extras}>{text}</text></svg>'.format(x=x, y=y, 
             padded=height, textHeight=(height-2), text=text, extras=extras)
         return svg
+
+    def renderCountsTable(self, modTracks, ystart, fontsize=18):
+        charWidth = fontsize/2
+        ystart += 5
+        counts = self.dataHub.getCounts()
+        columns = ["Sample", "Alt", "Ref", "Amb"]
+
+        columnWidths = []
+        longestRowHeader = max(max(counts, key=lambda x: len(x)), len(columns[0]))
+        columnWidths.append(len(longestRowHeader)*charWidth)
+        columnWidths.extend([7*charWidth]*3)
+
+        rows = [columns]
+        for sample, curcounts in counts.iteritems():
+            rows.append([sample, curcounts["alt"], curcounts["ref"], curcounts["amb"]])
+
+        for i, row in enumerate(rows):
+            xstart = 10
+            for j, value in enumerate(row):
+                width = columnWidths[j]
+                if j == 0:
+                    # row header
+                    modTracks.append(self._svgText(xstart, ystart, value, fontsize, bold=True, anchor="start"))
+                    xstart += width
+                else:
+                    xstart += width
+                    modTracks.append(self._svgText(xstart, ystart, value, fontsize, bold=i==0, anchor="end"))
+            ystart += fontsize * 1.25
+
+        return ystart + 10
+            # self.descriptions.append("{}: {} {} {}".format(name, curcounts["alt"], curcounts["ref"], curcounts["amb"]))
 
     def render(self):
         modTracks = []
@@ -114,12 +157,14 @@ class TrackCompositor(object):
         if self.title is not None:
             header = self._svgText(curX+10, curY, self.title, self.sectionLabelHeight+5, bold=True)
             modTracks.append(header)
-            curY += self.sectionLabelHeight+5
+            curY += self.sectionLabelHeight+10
 
-        for description in self.descriptions:
-            header = self._svgText(curX+20, curY, description, self.trackLabelHeight)
-            modTracks.append(header)
-            curY += self.trackLabelHeight+5
+        curY = self.renderCountsTable(modTracks, curY)
+
+        # for description in self.descriptions:
+        #     header = self._svgText(curX+20, curY, description, self.trackLabelHeight)
+        #     modTracks.append(header)
+        #     curY += self.trackLabelHeight+5
 
         for i, sectionName in enumerate(self.sections):
             section = self.sections[sectionName]

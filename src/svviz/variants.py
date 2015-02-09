@@ -4,17 +4,31 @@ import pyfaidx
 from svviz.utilities import Locus, reverseComp, getListDefault
 
 
-def getVariant(dataHub):
-    if dataHub.args.search_dist is None:
-        dataHub.args.search_dist = dataHub.args.isize_mean * 2
+def getBreakpointFormatsStr(which=None):
+    formats = []
+    if which in ["del", None]:
+        formats.append("Format for deletion breakpoints is '<chrom> <start> <end>'")
+    if which in ["ins", None]:
+        formats.append("Format for insertion breakpoints is '<chrom> <pos> <seq>'")
+    if which in ["inv", None]:
+        formats.append("Format for insertion breakpoints is '<chrom> <start> <end>'")
+    if which in ["mei", None]:
+        formats.append( "Format for mobile element insertion is '<mobile_elements.fasta> "
+            "<chrom> <pos> <ME name> [ME strand [start [end]]]'")
+    return "\n".join(formats)
 
-    alignDistance = int(max(dataHub.args.search_dist, dataHub.args.isize_mean*2))
+
+def getVariant(dataHub):
+    # if dataHub.args.search_dist is None:
+    #     dataHub.args.search_dist = dataHub.args.isize_mean * 2
+
+    # alignDistance = int(max(dataHub.search_dist, dataHub.args.isize_mean*2))
 
     if dataHub.args.type.lower().startswith("del"):
         # if dataHub.args.deldemo:
         #     chrom, start, end = "chr1", 72766323, 72811840
         # else:
-        assert len(dataHub.args.breakpoints) == 3, "Format for deletion breakpoints is '<chrom> <start> <end>'"
+        assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("del")
         chrom = dataHub.args.breakpoints[0]
         start = int(dataHub.args.breakpoints[1])
         end = int(dataHub.args.breakpoints[2])
@@ -22,30 +36,30 @@ def getVariant(dataHub):
         if dataHub.args.min_mapq is None:
             dataHub.args.min_mapq = 30
 
-        variant = Deletion.from_breakpoints(chrom, start-1, end-1, alignDistance, dataHub.genome)
+        variant = Deletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("ins"):
         # if dataHub.args.insdemo:
         #     chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
         # else:
-        assert len(dataHub.args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <pos> <seq>'"
+        assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("ins")
         chrom = dataHub.args.breakpoints[0]
         pos = int(dataHub.args.breakpoints[1])
         seq = dataHub.args.breakpoints[2]
         if dataHub.args.min_mapq is None:
             dataHub.args.min_mapq = -1
 
-        variant = Insertion(Locus(chrom, pos, pos, "+"), seq, alignDistance, dataHub.genome)
+        variant = Insertion(Locus(chrom, pos, pos, "+"), seq, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("inv"):
-        assert len(dataHub.args.breakpoints) == 3, "Format for insertion breakpoints is '<chrom> <start> <end>'"
+        assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("inv")
         chrom = dataHub.args.breakpoints[0]
         start = int(dataHub.args.breakpoints[1])
         end = int(dataHub.args.breakpoints[2])
         if dataHub.args.min_mapq is None:
             dataHub.args.min_mapq = -1
 
-        variant = Inversion(Locus(chrom, start, end, "+"), alignDistance, dataHub.genome)
+        variant = Inversion(Locus(chrom, start, end, "+"), dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("mei"):
-        assert len(dataHub.args.breakpoints) >= 4, "Format for mobile element insertion is '<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]'"
+        assert len(dataHub.args.breakpoints) >= 4, getBreakpointFormatsStr("mei")
         if dataHub.args.min_mapq is None:
             dataHub.args.min_mapq = -1
 
@@ -59,7 +73,7 @@ def getVariant(dataHub):
         meCoords = Locus(meName, meStart, meEnd, meStrand)
         meFasta = pyfaidx.Fasta(dataHub.args.breakpoints[0], as_raw=True)
 
-        variant = MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, alignDistance, dataHub.genome)
+        variant = MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, dataHub.alignDistance, dataHub.genome)
     else:
         raise Exception("only accept event types of deletion, insertion or mei")
 
@@ -95,8 +109,9 @@ class StructuralVariant(object):
 
         self.sources = {"genome":fasta}
 
-        self._refseq = None
-        self._altseq = None
+        # self._refseq = None
+        # self._altseq = None
+        self._seqs = {}
 
     def __str__(self):
         return "{}({};{})".format(self.__class__.__name__, self.breakpoints, self.alignDistance)
@@ -109,20 +124,24 @@ class StructuralVariant(object):
         return self.getSeq("alt")
 
     def getSeq(self, allele):
-        segments = self.segments(allele)
-        seqs = []
-        for segment in segments:
-            # if segment.source == "genome":
-            #     seq = self.fasta[segment.chrom][segment.start:segment.end+1]
-            # else:
-            seq = self.sources[segment.source][segment.chrom][segment.start:segment.end+1]
-                # raise Exception("not yet implemented: non-genomic segments")
+        if allele not in self._seqs:
+            segments = self.segments(allele)
+            seqs = []
+            for segment in segments:
+                # if segment.source == "genome":
+                #     seq = self.fasta[segment.chrom][segment.start:segment.end+1]
+                # else:
+                seq = self.sources[segment.source][segment.chrom][segment.start:segment.end+1]
+                    # raise Exception("not yet implemented: non-genomic segments")
 
-            if segment.strand == "-":
-                seq = reverseComp(seq)
-            seqs.append(seq)
-        return "".join(seqs).upper()
+                if segment.strand == "-":
+                    seq = reverseComp(seq)
+                seqs.append(seq)
+            self._seqs[allele] = "".join(seqs).upper()
+        return self._seqs[allele]
 
+    def getLength(self, allele):
+        return len(self.getSeq(allele))
     def getRelativeBreakpoints(self, which):
         segments = self.segments(which)
         breakpoints = []
