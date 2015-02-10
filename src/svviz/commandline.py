@@ -56,8 +56,7 @@ def parseArgs():
     inputParams.add_argument("-A", "--annotations", action="append", help="bed file containing annotations to plot; will be compressed and indexed \n"
         "using samtools tabix in place if needed (can specify multiple annotations files)")
 
-    # inputParams.add_argument("-o", "--orientation", help="read orientation; probably want fr, rf or similar; \n"
-        # "only applies to paired-end data (default: inferred from input)")
+    inputParams.add_argument("-o", "--orientation", help=argparse.SUPPRESS)
     # inputParams.add_argument("-m", "--isize-mean", metavar="MEAN", type=float, help="mean insert size; used to determine concordant read pairs (paired-end)\n"
         # "and the size of the flanking region to align against around breakpoints \n(default: inferred from input bam)")
     # inputParams.add_argument("-s", "--isize-std", metavar="STD", type=float, help="stdev of the insert size (default: inferred from input bam)")
