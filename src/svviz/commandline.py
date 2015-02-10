@@ -51,15 +51,11 @@ def parseArgs():
 
     inputParams = parser.add_argument_group("input parameters")
     inputParams.add_argument("-t", "--type", help="event type: either del[etion], ins[ertion] or mei (mobile element insertion)")
-    # inputParams.add_argument("-S", "--single-ended", action="store_true", help="single-ended sequencing (default is paired-end)")
 
     inputParams.add_argument("-A", "--annotations", action="append", help="bed file containing annotations to plot; will be compressed and indexed \n"
         "using samtools tabix in place if needed (can specify multiple annotations files)")
 
     inputParams.add_argument("-o", "--orientation", help=argparse.SUPPRESS)
-    # inputParams.add_argument("-m", "--isize-mean", metavar="MEAN", type=float, help="mean insert size; used to determine concordant read pairs (paired-end)\n"
-        # "and the size of the flanking region to align against around breakpoints \n(default: inferred from input bam)")
-    # inputParams.add_argument("-s", "--isize-std", metavar="STD", type=float, help="stdev of the insert size (default: inferred from input bam)")
     # inputParams.add_argument("-d", "--search-dist", metavar="DISTANCE", type=int, help="distance in base-pairs from the breakpoints to search for reads; \n"
         # "default: 2x the isize-mean (paired end) or 1000 (single-end)")
 
@@ -77,9 +73,7 @@ def parseArgs():
     inputParams.add_argument("-O", "--open-exported", action="store_true", help="automatically open the exported file")
 
     defaults = parser.add_argument_group("presets")
-    defaults.add_argument("--mate-pair", action="store_true", help="sets defaults for ~6.5kb insert mate pair libraries")
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
-    defaults.add_argument("--moleculo", action="store_true", help="sets defaults for moleculo libraries")
 
     if len(sys.argv)==1:
         parser.print_help()
@@ -89,31 +83,9 @@ def parseArgs():
     args._parser = parser
 
     if args.pacbio:
+        # TODO: should infer this from the input if possible, per-sample
         setDefault(args, "aln_quality", 0.65)
 
-    # # Presets
-    # if args.mate_pair:
-    #     args.orientation = "-+"
-    #     args.isize_mean = 6500
-    #     args.isize_std = 1100
-    # elif args.pacbio:
-    #     args.single_ended = True
-    #     setDefault(args, "aln_quality", 0.65)
-    #     setDefault(args, "isize_mean", 10000)
-    #     setDefault(args, "isize_std", 200000)
-    # elif args.moleculo:
-    #     args.single_ended = True
-    #     setDefault(args, "aln_quality", 0.85)
-    #     setDefault(args, "isize_mean", 20000)
-    #     setDefault(args, "isize_std", 200000)
-
-
-    # if args.single_ended:
-    #     setDefault(args, "search_dist", 1000)
-    #     setDefault(args, "orientation", "any")
-    # elif args.orientation is not None:
-    #     args.orientation = args.orientation.replace("r", "-").replace("f", "+")
-    #     args.orientation = args.orientation.split(",")
 
     if args.aln_quality is not None:
         AlignmentSet.AlnThreshold = args.aln_quality

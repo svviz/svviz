@@ -17,7 +17,7 @@ To visualize your structural variant of interest, you will need at least the fol
 
 For example, a deletion might be called as:
 
-``svviz -t del -b ~/data/sample1.sorted.bam ~/data/hg19.fasta chr7 153757067 153758235``
+``svviz -t del -b ~/data/sample1.sorted.bam -b ~/data/sample2.sorted.bam ~/data/hg19.fasta chr7 153757067 153758235``
 
 
 Displaying annotations
@@ -30,11 +30,9 @@ TODO: change default orientation to +-
 Additional options
 ------------------
 
-The default settings are typically correct for paired-end Illumina data. To specify single-ended data, specify the --single-ended option, or use one of the following presets:
+The default settings are typically correct for Illumina data. Read orientation and insert sizes will be inferred for each input library. Sequencing platforms that have a substantially higher error rate than Illumina may need adjusting of the ``--aln-quality`` option.
 
 - ``--pacbio`` for pacific biosciences sequencing (because PacBio sequencing is typically of lower base-quality than Illumina sequencing, this preset changes the ``--aln-quality`` option as well to retain lower quality alignments as support for the Ref and Alt alleles)
-- ``--moleculo`` for Moleculo (now called TruSeq synthetic long reads)
-- ``--mate-pair`` which specifies that the orientation of the reads is outward facing (ie -/+) rather than inward facing (ie +/-)
 
 The ``--min-mapq`` option specifies the mapping quality threshold; reads with mapq (this is set during the original genome-wide mapping by bwa, bowtie, etc) below this threshold will be discarded during pre-processing.
 
