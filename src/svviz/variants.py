@@ -9,12 +9,14 @@ def getBreakpointFormatsStr(which=None):
     if which in ["del", None]:
         formats.append("Format for deletion breakpoints is '<chrom> <start> <end>'")
     if which in ["ins", None]:
-        formats.append("Format for insertion breakpoints is '<chrom> <pos> <seq>'")
+        formats.append("Format for insertion breakpoints is '<chrom> <pos> [end] <seq>'; \n"
+            "  specify 'end' to create a compound deletion-insertion, otherwise insertion \n"
+            "  position is before 'pos'")
     if which in ["inv", None]:
-        formats.append("Format for insertion breakpoints is '<chrom> <start> <end>'")
+        formats.append("Format for inversion breakpoints is '<chrom> <start> <end>'")
     if which in ["mei", None]:
-        formats.append( "Format for mobile element insertion is '<mobile_elements.fasta> "
-            "<chrom> <pos> <ME name> [ME strand [start [end]]]'")
+        formats.append( "Format for mobile element insertion is '<mobile_elements.fasta> \n"
+            "  <chrom> <pos> <ME name> [ME strand [start [end]]]'")
     return "\n".join(formats)
 
 
@@ -41,14 +43,20 @@ def getVariant(dataHub):
         # if dataHub.args.insdemo:
         #     chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
         # else:
-        assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("ins")
+        assert len(dataHub.args.breakpoints) in [3,4], getBreakpointFormatsStr("ins")
         chrom = dataHub.args.breakpoints[0]
         pos = int(dataHub.args.breakpoints[1])
-        seq = dataHub.args.breakpoints[2]
+        if len(dataHub.args.breakpoints) == 3:
+            seq = dataHub.args.breakpoints[2]
+            end = pos
+        else:
+            end = int(dataHub.args.breakpoints[2])
+            seq = dataHub.args.breakpoints[3]
+
         if dataHub.args.min_mapq is None:
             dataHub.args.min_mapq = -1
 
-        variant = Insertion(Locus(chrom, pos, pos, "+"), seq, dataHub.alignDistance, dataHub.genome)
+        variant = Insertion(Locus(chrom, pos, end, "+"), seq, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("inv"):
         assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("inv")
         chrom = dataHub.args.breakpoints[0]
@@ -178,34 +186,6 @@ class Deletion(StructuralVariant):
             return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
                     Segment(chrom, self.breakpoints[1].end()+1, self.breakpoints[1].end()+self.alignDistance, "+", 2)]
 
-    # def getRefSeq(self):
-    #     if self._refseq is not None:
-    #         return self._refseq
-
-    #     chrom = self.breakpoints[0].chr()
-    #     start = self.breakpoints[0].start() - self.alignDistance
-    #     end = self.breakpoints[-1].end() + self.alignDistance
-
-    #     self._refseq = self.fasta[chrom][start:end+1]
-    #     return self._refseq.upper()
-
-    # def _getRefRelativeBreakpoints(self):
-    #     return [self.alignDistance, self.alignDistance+self.breakpoints[-1].start()-self.breakpoints[0].end()]
-    # def _getAltRelativeBreakpoints(self):
-    #     return [self.alignDistance]
-
-    # def getAltSeq(self):
-    #     if self._altseq is not None:
-    #         return self._altseq
-    #     chrom = self.breakpoints[0].chr()
-    #     upstream = self.fasta[chrom][self.breakpoints[0].start()-self.alignDistance:
-    #                                  self.breakpoints[0].end()+1]
-    #     downstream = self.fasta[chrom][self.breakpoints[-1].start():
-    #                                    self.breakpoints[-1].end()+self.alignDistance+1]
-
-    #     self._altseq = upstream.upper() + downstream.upper()
-    #     return self._altseq
-
 
 class Inversion(StructuralVariant):
     def __init__(self, region, alignDistance, fasta):
@@ -260,19 +240,33 @@ class Insertion(StructuralVariant):
         return [Locus(chrom, self.breakpoints[0].start()-searchDistance, self.breakpoints[-1].end()+searchDistance, "+")]
 
     def segments(self, allele):
-        chrom = self.breakpoints[0].chr()
+        breakpoint = self.breakpoints[0]
+        chrom = breakpoint.chr()
+
+        # If breakpoint has no length, we make the insertion before the breakpoint coordinate
+        deletionOffset = 0
+        if len(breakpoint) > 1:
+            # If we're deleting some bases in addition to inserting, we'll make sure to start
+            # the last segment after the deleted bases
+            deletionOffset = 1
 
         if allele in ["ref", "amb"]:
-            return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
-                    Segment(chrom, self.breakpoints[0].end()+1, self.breakpoints[0].end()+self.alignDistance, "+", 2)]
+            refSegments = []
+            refSegments.append(Segment(chrom, breakpoint.start()-self.alignDistance, breakpoint.start()-1, "+", 0))
+            if len(breakpoint) > 1:
+                refSegments.append(Segment(chrom, breakpoint.start(), breakpoint.end(), "+", 3))
+
+            refSegments.append(Segment(chrom, breakpoint.end()+deletionOffset, breakpoint.end()+self.alignDistance, "+", 2))
+            return refSegments
         elif allele == "alt":
-            return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
+            return [Segment(chrom, breakpoint.start()-self.alignDistance, breakpoint.start()-1, "+", 0),
                     Segment("insertion", 0, self.insertionLength, "+", 1, source="insertion"),
-                    Segment(chrom, self.breakpoints[0].end()+1, self.breakpoints[0].end()+self.alignDistance, "+", 2)]
+                    Segment(chrom, breakpoint.end()+deletionOffset, breakpoint.end()+self.alignDistance, "+", 2)]
 
     def __str__(self):
         return "{}::{}:{:,};len={}".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), self.insertionLength)
        
+
 class MobileElementInsertion(StructuralVariant):
     def __init__(self, breakpoint, insertedSeqLocus, insertionFasta, alignDistance, refFasta):
         super(MobileElementInsertion, self).__init__([breakpoint], alignDistance, refFasta)
@@ -293,12 +287,12 @@ class MobileElementInsertion(StructuralVariant):
 
         if allele in ["ref", "amb"]:
             return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
-                    Segment(chrom, self.breakpoints[0].end()+1, self.breakpoints[0].end()+self.alignDistance, "+", 2)]
+                    Segment(chrom, self.breakpoints[0].end(), self.breakpoints[0].end()+self.alignDistance, "+", 2)]
         elif allele == "alt":
             return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
                     Segment(self.insertedSeqLocus.chr(), self.insertedSeqLocus.start(), 
                         self.insertedSeqLocus.end(), self.insertedSeqLocus.strand(), 1, source="repeats"),
-                    Segment(chrom, self.breakpoints[0].end()+1, self.breakpoints[0].end()+self.alignDistance, "+", 2)]
+                    Segment(chrom, self.breakpoints[0].end(), self.breakpoints[0].end()+self.alignDistance, "+", 2)]
 
     def __str__(self):
         return "{}::{}({});{})".format(self.__class__.__name__, self.insertedSeqLocus.chr(), self.breakpoints, self.alignDistance)
