@@ -122,9 +122,6 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
         if count >= maxreads:
             break
 
-    print "NM:", mean(NMs), stddev(NMs)
-    print "INDELs:", mean(INDELs), stddev(INDELs)
-
     chosenOrientations = chooseOrientation(orientations)
 
     return removeOutliers(inserts), reads, chosenOrientations, numpy.array(readLengths)
@@ -167,7 +164,7 @@ class ReadStatistics(object):
 
         if self._insertSizeKDE is None:
             self._insertSizeKDE = gaussian_kde(self.insertSizes)
-            
+
         # the gaussian kde call is pretty slow with ~50,000 data points in it, so we'll cache the result for a bit of a speed-up
         isize = abs(isize)
         if not isize in self._insertSizeScores:

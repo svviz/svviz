@@ -214,7 +214,7 @@ class _multiProgressBar(object):
         else:
             self.status = "+"
             
-        text = [self.status]
+        text = [" ", self.status]
         text.append(self._getBar("total", overallCompleted, overallTotal, 25))
 
         text.append("left:%s"%self.timeRemaining)

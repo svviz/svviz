@@ -91,11 +91,13 @@ class Axis(object):
                 self.svg.lineWithInternalArrows(start, end, y, y, stroke=segment.color(), direction=arrowDirection,
                     arrowKwdArgs={"class":"scaleArrow"}, **{"stroke-width":3*scaleFactor})
 
-
+        previousPosition = None
         for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
-            self.svg.rect(x-(scaleFactor/2.0), self.height-(20*scaleFactor), 1*scaleFactor, 35*scaleFactor, fill="black")        
-            self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="black")
+            self.svg.rect(x-(scaleFactor/2.0), self.height-(20*scaleFactor), 1*scaleFactor, 35*scaleFactor, fill="black")
+            if previousPosition is None or vline-previousPosition > 250:     
+                self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="black")
+            previousPosition = vline
 
         return str(self.svg)
 

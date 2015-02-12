@@ -64,10 +64,13 @@ def downloadDemo(which):
     return True
 
     
-def checkForDemo(which):
+def checkForDemo(which, autoDownload):
     if not os.path.exists("svviz-examples/{}".format(which)):
-        choice = raw_input("""Couldn't find example data in current working directory (svviz-examples/{}). """
-            """Shall I download it and decompress it into the current working directory? Y/n:""".format(which))
+        if autoDownload:
+            choice = "y"
+        else:
+            choice = raw_input("""Couldn't find example data in current working directory (svviz-examples/{}). """
+                """Shall I download it and decompress it into the current working directory? Y/n:""".format(which))
         if choice.lower() in ["y", "yes", ""]:
             return downloadDemo(which)
         else:
@@ -76,8 +79,8 @@ def checkForDemo(which):
         return True
 
 
-def loadDemo(which="example1"):
-    if not checkForDemo(which):
+def loadDemo(which="example1", autoDownload=False):
+    if not checkForDemo(which, autoDownload):
         sys.exit(1)
 
     demodir = "svviz-examples/{}".format(which)
