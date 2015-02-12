@@ -48,7 +48,7 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
         return choose("ref", "alignmentScore")
 
     if not singleEnded:
-        logRatio = numpy.log2(alnCollection["alt"].evidences["insertSizeScore"] / alnCollection["ref"].evidences["insertSizeScore"])
+        logRatio = numpy.log10(alnCollection["alt"].evidences["insertSizeScore"] / alnCollection["ref"].evidences["insertSizeScore"])
         if logRatio > insertSizeLogLikelihoodCutoff:
             return choose("alt", "insertSizeScore")
         if logRatio < -insertSizeLogLikelihoodCutoff:

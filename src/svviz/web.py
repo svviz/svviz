@@ -134,8 +134,19 @@ def info():
             html = html.replace(" ", ".")
             result.append(html)
 
+
         result.append("<br/>Total length={}".format(len(alnSet)))
         result.append(" &nbsp; Reason={}".format(alnSet.parentCollection.why))
+
+        if len(alnSet.getAlignments()) > 1:
+            result += " &nbsp; Insert Size Scores: ref={} alt={}".format(
+                alnSet.parentCollection.sets["ref"].evidences["insertSizeScore"],
+                alnSet.parentCollection.sets["alt"].evidences["insertSizeScore"])
+
+            result += " &nbsp; Lengths: ref={} alt={}".format(
+                len(alnSet.parentCollection.sets["ref"]),
+                len(alnSet.parentCollection.sets["alt"]))
+
         # result.append(" &nbsp; Log odds={:.3g}".format(float(READ_INFO[readid].prob)))
         result = "".join(result)
         result = "<div style='font-family:Courier;'>" + result + "</div>"
@@ -150,21 +161,6 @@ def displayIsizes(name):
         return None
 
     return Response(dataHub.samples[name].insertSizePlot, mimetype="image/svg+xml")
-
-# def load():
-#     import remap
-#     global RESULTS, READ_INFO
-
-#     results, refalns, altalns, ambalns = remap.main()
-#     RESULTS.update(results)
-
-#     READ_INFO = {}
-
-#     for readset in refalns + altalns + ambalns:
-#         READ_INFO[readset.getAlignments()[0].name] = readset
-
-#     # RESULTS = {"AltCount":523345, "RefCount":23522, "AmbCount":9999}
-
 
 
 def run():
