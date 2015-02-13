@@ -90,7 +90,6 @@ def parseArgs(args):
         parser.print_help()
         sys.exit(1)
 
-    print inputArgs
     args = parser.parse_args(inputArgs)
     args._parser = parser
 

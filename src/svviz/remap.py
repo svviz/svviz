@@ -7,7 +7,7 @@ import pyfaidx
 import pysam
 from svviz.multiprocessor import Multiprocessor
 
-from svviz.utilities import reverseComp
+from svviz.utilities import reverseComp, Locus
 from svviz.alignment import Alignment, AlignmentSet, AlignmentSetCollection
 from svviz.pairfinder import PairFinder
 
@@ -105,12 +105,37 @@ def do1remap(refseq, reads):
     return alignmentSets
 
 
-def getReads(variant, bam, minmapq, searchDistance, single_ended=False, include_supplementary=False):
-    t0 = time.time()
-    searchRegions = variant.searchRegions(searchDistance)
+def _getreads(searchRegions, bam, minmapq, single_ended, include_supplementary):
     pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, 
         is_paired=(not single_ended), include_supplementary=include_supplementary)
     reads = [item for sublist in pairFinder.matched for item in sublist]
+    return reads, pairFinder
+
+def getReads(variant, bam, minmapq, searchDistance, single_ended=False, include_supplementary=False):
+    t0 = time.time()
+    searchRegions = variant.searchRegions(searchDistance)
+
+    # This cludge tries the chromosomes as given ('chr4' or '4') and if that doesn't work
+    # tries to switch to the other variation ('4' or 'chr4')
+    try:
+        reads, pairFinder = _getreads(searchRegions, bam, minmapq, single_ended, include_supplementary)
+    except ValueError, e:
+        oldchrom = searchRegions[0].chr()
+        try:
+            if "chr" in oldchrom:
+                newchrom = oldchrom.replace("chr", "")
+                searchRegions = [Locus(l.chr().replace("chr", ""), l.start(), l.end(), l.strand()) for l in searchRegions]
+            else:
+                newchrom = "chr{}".format(oldchrom)
+                searchRegions = [Locus("chr{}".format(l.chr()), l.start(), l.end(), l.strand()) for l in searchRegions]
+
+            logging.warn("  Couldn't find reads on chromosome '{}'; trying instead '{}'".format(oldchrom, newchrom))
+
+            reads, pairFinder = _getreads(searchRegions, bam, minmapq, single_ended, include_supplementary)
+
+        except ValueError:
+            raise e
+        # if "chr" in searchRegions[0].chr
     t1 = time.time()
 
     if pairFinder.supplementaryAlignmentsFound:

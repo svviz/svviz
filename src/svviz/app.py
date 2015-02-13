@@ -40,7 +40,7 @@ def loadISDs(dataHub):
         sample.orientations = sample.readStatistics.orientations
         if sample.orientations == "any":
             sample.singleEnded = True
-        logging.info("  valid orientations: {}".format(",".join(sample.orientations)))
+        logging.info("  valid orientations: {}".format(",".join(sample.orientations) if sample.orientations!="any" else "any"))
 
         if sample.orientations == "any":
             searchDist = sample.readStatistics.readLengthUpperQuantile()
