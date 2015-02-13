@@ -84,14 +84,10 @@ def loadReads(dataHub):
         sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, sample.searchDistance, 
             sample.singleEnded, dataHub.args.include_supplementary)
 
-## TODO: fix this: tempSetSampleParams()
-def tempSetSampleParams(dataHub):
+def setSampleParams(dataHub):
     for sample in dataHub:
-        # sample.searchDistance = dataHub.args.search_dist
-        # sample.singleEnded = dataHub.args.single_ended
         sample.minMapq = dataHub.args.min_mapq
 
-        # sample.orientations = dataHub.args.orientation
         if sample.singleEnded:
             sample.orientations = "any"
 
@@ -131,10 +127,6 @@ def renderAxesAndAnnotations(dataHub):
 def ensureExportData(dataHub):
     if dataHub.trackCompositor is None:
         dataHub.trackCompositor = export.TrackCompositor(dataHub)
-        # TODO: make TrackCompositor take a DataHub object directly
-        # dataHub.trackCompositor.addTracks("Alternate Allele", dataHub.samples.keys(), [sample.tracks["alt"] for sample in dataHub])
-        # dataHub.trackCompositor.addTracks("Reference Allele", dataHub.samples.keys(), [sample.tracks["ref"] for sample in dataHub])
-
 
 def runDirectExport(dataHub):
     if dataHub.args.export:
@@ -199,10 +191,11 @@ def saveReads(dataHub):
             pysam.sort(outbam_path, sorted_path)
             pysam.index(sorted_path+".bam")
 
-def main():
+def run(args):
+    # entry point from python
     checkRequirements()
 
-    args = commandline.parseArgs()
+    args = commandline.parseArgs(args)
 
     dataHub = datahub.DataHub()
     dataHub.setArgs(args)
@@ -213,9 +206,7 @@ def main():
     logging.info("* Loading variant *")
     dataHub.variant = variants.getVariant(dataHub)
 
-    ## TODO: set parameters by sample separately
-    logging.info("* TEMP: should set these parameters separately for each sample (tempSetSampleParams()) *")
-    tempSetSampleParams(dataHub)
+    setSampleParams(dataHub)
 
     logging.info("* Loading reads and finding mates *")
     loadReads(dataHub)
@@ -235,6 +226,10 @@ def main():
     runDirectExport(dataHub)
 
     runWebView(dataHub)
+
+def main():
+    # entry point for shell script
+    run(sys.argv)
 
 if __name__ == '__main__':
     main()

@@ -10,18 +10,23 @@ def setDefault(args, key, default):
     if args.__dict__[key] is None:
         args.__dict__[key] = default
 
-def checkDemoMode():
-    inputArgs = sys.argv[1:]
+def checkDemoMode(args):
+    inputArgs = args[1:]
 
     if len(inputArgs) < 1:
         return []
-        
+    
+    if inputArgs[0] == "test":
+        inputArgs = "demo 1 -a --no-web".split(" ")
+
     if inputArgs[0] == "demo":
         options = [x for x in inputArgs if x.startswith("-")]
         inputArgs = [x for x in inputArgs if not x.startswith("-")]
 
         which = "example1"
         autoDownload = ("--auto-download" in options or "-a" in options)
+        noweb = ("--no-web" in options or "-n" in options)
+
         if len(inputArgs) > 1:
             if inputArgs[1] in ["1","2"]:
                 which = "example{}".format(inputArgs[1])
@@ -30,6 +35,8 @@ def checkDemoMode():
         cmd = demo.loadDemo(which, autoDownload)
         if cmd is not None:
             inputArgs = cmd
+            if noweb:
+                inputArgs.append("--no-web")
             logging.info("Running the following command:")
             logging.info("{} {}".format(sys.argv[0], " ".join(inputArgs)))
             logging.info("")
@@ -38,8 +45,8 @@ def checkDemoMode():
 
     return inputArgs
 
-def parseArgs():
-    inputArgs = checkDemoMode()
+def parseArgs(args):
+    inputArgs = checkDemoMode(args)
 
     parser = argparse.ArgumentParser(usage="%(prog)s [options] [demo] [ref breakpoint...]",
         formatter_class=argparse.RawTextHelpFormatter,
@@ -79,10 +86,11 @@ def parseArgs():
     defaults = parser.add_argument_group("presets")
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
 
-    if len(sys.argv)==1:
+    if len(inputArgs)==1:
         parser.print_help()
         sys.exit(1)
 
+    print inputArgs
     args = parser.parse_args(inputArgs)
     args._parser = parser
 
