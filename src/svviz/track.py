@@ -4,6 +4,7 @@ import math
 import re
 from svviz.svg import SVG
 from svviz import utilities
+from svviz import variants
 
 class Chromosome(object):
     def __init__(self, length):
@@ -338,7 +339,10 @@ class AnnotationTrack(object):
         self.height = None
         self.variant = variant
         self.allele = allele
-        self.segments = variant.segments(allele)
+        self.segments = variants.mergedSegments(variant.segments(allele))
+
+        for segment in self.segments:
+            print "^"*20, allele, segment
 
         self._annos = None
         self.rows = [None]
