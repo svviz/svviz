@@ -200,6 +200,13 @@ function ScrollPanel(element, options, svg_tags) {
     self.types = []
     self.bboxes = []
 
+    self.$element.find(".zoomin").on("mouseup", function(){
+        self.doZoom(1.25);
+    });
+    self.$element.find(".zoomout").on("mouseup", function(){
+        self.doZoom(0.80);
+    });
+
     self.$views.each(function(i){
         var newyscrollbar = new Scrollbar(self, $(this), {"vertical":true, "endSpace":0});
         self.yscrollbars.push(newyscrollbar);
@@ -239,7 +246,6 @@ function ScrollPanel(element, options, svg_tags) {
 
 
     self.unscale = function() {
-
         self.$element.find(".axis svg text, .anno svg text").each(function(i, curElement) {
             var $curElement = $(curElement);
             var a = 1 / self.xzoom;
@@ -268,6 +274,15 @@ function ScrollPanel(element, options, svg_tags) {
                 self.yviewables[i] = 100;
             }
         }
+    }
+
+    self.doZoom = function(zoomFactor) {
+        self.xzoom *= zoomFactor;
+        for (var i=0; i < self.yzooms.length; i++){
+            self.yzooms[i] *= zoomFactor;
+        }
+
+        self.update();
     }
 
     $( window ).resize(function() {
@@ -355,12 +370,7 @@ function ScrollPanel(element, options, svg_tags) {
         if (event.altKey){
             var zoomFactor;
             zoomFactor = event.deltaY > 0 ? Math.pow(1.25, Math.min(3,event.deltaY)) : Math.pow(0.8, -(Math.max(-3, event.deltaY)));
-            self.xzoom *= zoomFactor;
-            for (var i=0; i < self.yzooms.length; i++){
-                self.yzooms[i] *= zoomFactor;
-            }
-
-            self.update();
+            self.doZoom(zoomFactor);
             didScroll = true;
         } else {
             if (event.deltaX != 0) {

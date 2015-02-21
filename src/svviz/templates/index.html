@@ -50,7 +50,14 @@
 
                         {% for sample in samples %}
                             <div class="one_svg {{ sample }}">
-                                <div style="position:absolute; z-index:1;left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
+                                <div style="position:absolute; z-index:1; left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
+
+                                {% if loop.first %}
+                                    <div style="position:absolute; z-index:1; right:10px; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">
+                                        <button class="zoomin">+</button>
+                                        <button class="zoomout">&minus;</button>
+                                    </div>
+                                {% endif %}
                                 <div class="track"></div>
                             </div>
                             <div style="height:2px; background-color:gray;"></div>
