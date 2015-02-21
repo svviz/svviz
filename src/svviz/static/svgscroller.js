@@ -83,7 +83,13 @@ function Scrollbar(scrollpanel, $host, options) {
     }
 
     self.page = function(pages) {
-        self.scrollTo(self.scrollProportion + pages*self.pageSize);
+        // console.log("Pages:" + pages + " scrollProportion:"+self.scrollProportion);
+        if ((!self.active) || (pages > 0 & self.scrollProportion == 1.0) || (pages < 0 & self.scrollProportion == 0.0)){
+            return false;
+        } else {
+            self.scrollTo(self.scrollProportion + pages*self.pageSize);
+            return true;
+        }
     }
 
     self.coordToProportion = function(coord) {
@@ -344,6 +350,7 @@ function ScrollPanel(element, options, svg_tags) {
     });
 
     self.$element.on("mousewheel", function(event){
+        var didScroll = false;
 
         if (event.altKey){
             var zoomFactor;
@@ -354,19 +361,22 @@ function ScrollPanel(element, options, svg_tags) {
             }
 
             self.update();
+            didScroll = true;
         } else {
             if (event.deltaX != 0) {
-                self.xscrollbar.page(event.deltaX*0.05);
+                didScroll |= self.xscrollbar.page(event.deltaX*0.03);
             }
             if (event.deltaY != 0) {
                 for (var i=0; i < self.yscrollbars.length; i++) {
-                    self.yscrollbars[i].page(-event.deltaY*0.05);
+                    didScroll |= self.yscrollbars[i].page(-event.deltaY*0.03);
                 }
             }
         }
 
-        event.preventDefault();
-        event.stopPropagation();
+        if (didScroll){
+            event.preventDefault();
+            event.stopPropagation();
+        }
     });
     // Initial update.
     self.update();
