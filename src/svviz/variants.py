@@ -35,8 +35,6 @@ def getVariant(dataHub):
         start = int(dataHub.args.breakpoints[1])
         end = int(dataHub.args.breakpoints[2])
         assert start < end
-        if dataHub.args.min_mapq is None:
-            dataHub.args.min_mapq = 30
 
         variant = Deletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("ins"):
@@ -53,9 +51,6 @@ def getVariant(dataHub):
             end = int(dataHub.args.breakpoints[2])
             seq = dataHub.args.breakpoints[3]
 
-        if dataHub.args.min_mapq is None:
-            dataHub.args.min_mapq = -1
-
         variant = Insertion(Locus(chrom, pos, end, "+"), seq, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("inv"):
         assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("inv")
@@ -68,8 +63,6 @@ def getVariant(dataHub):
         variant = Inversion(Locus(chrom, start, end, "+"), dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("mei"):
         assert len(dataHub.args.breakpoints) >= 4, getBreakpointFormatsStr("mei")
-        if dataHub.args.min_mapq is None:
-            dataHub.args.min_mapq = -1
 
         insertionBreakpoint = Locus(dataHub.args.breakpoints[1], dataHub.args.breakpoints[2], dataHub.args.breakpoints[2], "+")
 

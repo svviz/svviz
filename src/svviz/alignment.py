@@ -5,7 +5,7 @@ from utilities import reverseComp
 
 
 class Alignment(object):
-    def __init__(self, name, start, end, strand, seq, cigar, score, genome_seq, score2):
+    def __init__(self, name, start, end, strand, seq, cigar, score, genome_seq, score2, mapq):
         self.name = name
         self.start = start
         self.end = end
@@ -15,6 +15,7 @@ class Alignment(object):
         self.cigar = cigar
         self.score = score
         self.score2 = score2
+        self.mapq = mapq
 
 
 class AlignmentSet(object):
