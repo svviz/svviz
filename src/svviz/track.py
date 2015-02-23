@@ -323,7 +323,10 @@ class Track(object):
             self.readRenderer.render(alignmentSet)
 
         for vline in self.variant.getRelativeBreakpoints(self.allele):
-            self.svg.rect(self.scale.topixels(vline), self.height+20, self.width*2.5e-4, self.height+40, fill="black")
+            x = self.scale.topixels(vline)
+            y1 = -20
+            y2 = self.height+20
+            self.svg.line(x, y1, x, y2, fill="black")
 
         self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
