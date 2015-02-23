@@ -327,7 +327,7 @@ class Track(object):
             x = self.scale.topixels(vline)
             y1 = -20
             y2 = self.height+20
-            self.svg.line(x, y1, x, y2, fill="black")
+            self.svg.line(x, x, y1, y2, stroke="black", **{"stroke-width":1})
 
         self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
