@@ -63,12 +63,17 @@ class TrackCompositor(object):
         for track, name in zip(tracks, names):
             if len(track.alignmentSets) == 0:
                 height = 20
-                viewbox = "0 0 {width} {height}".format(width=track.width, height=track.height)
+                viewbox = '0 0 {width} {height}" preserveAspectRatio="xMinYMin'.format(width=track.width, height=track.height)
             else:
                 hasTrackWithReads = True
-                # height = track.height/6.0
-                height = float(track.height+40) * self.width / width
-                viewbox = "{xmin} -20 {width} {height}".format(xmin=xmin, width=width, height=track.height+40)
+                # this is for proportional scaling                
+                # height = float(track.height+40) * self.width / width
+                # preserveAspectRatio="xMinYMin"
+                height = float(track.height+40)/2.0
+                preserveAspectRatio="none"
+
+                viewbox = '{xmin} -20 {width} {height}" preserveAspectRatio="{par}'.format(xmin=xmin, 
+                    width=width, height=track.height+40, par=preserveAspectRatio)
 
             self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
 
@@ -77,7 +82,7 @@ class TrackCompositor(object):
             for name, track in alleleTracks.iteritems():
                 track.render(scaleFactor=scaleFactor)
                 height = track.height/scaleFactor
-                viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=height)
+                viewbox = '{xmin} 0 {width} {height}" preserveAspectRatio="xMinYMin'.format(xmin=xmin, width=width, height=height)
                 svg = track.svg.asString("export")
 
                 self.addTrackSVG(section, name, svg, height=height, viewbox=viewbox)
@@ -186,7 +191,7 @@ class TrackCompositor(object):
 
                 extra = 'svg x="{}" y="{}" width="{}" height="{}"'.format(curX, curY, self.width, trackInfo["height"])
                 if trackInfo["viewbox"] is not None:
-                    extra += ' viewBox="{}" preserveAspectRatio="xMinYMin"'.format(trackInfo["viewbox"])
+                    extra += ' viewBox="{}"'.format(trackInfo["viewbox"])
                 mod = trackInfo["svg"].replace("svg", extra, 1)
                 modTracks.append(mod)
 
