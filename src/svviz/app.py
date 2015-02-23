@@ -81,8 +81,8 @@ def loadISDs(dataHub):
 def loadReads(dataHub):
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
-        sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, sample.searchDistance, 
-            sample.singleEnded, dataHub.args.include_supplementary)
+        sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, dataHub.args.pair_min_mapq,
+            sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary)
 
 def setSampleParams(dataHub):
     for sample in dataHub:

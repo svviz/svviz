@@ -64,18 +64,6 @@ class Multimap(Multiprocessor):
         return seq, findBestAlignment(seq, self.aligner)
 
 def do1remap(refseq, reads):
-    # mm = Multimap(refseq)
-    # remapped = dict(map(mm.remap, [read.seq for read in reads]))
-
-    # tempf = open("reads.txt", "w")
-    # for read in reads:
-    #     tempf.write(read.seq+"\n")
-
-    # tempg = open("genome.txt", "w")
-    # tempg.write(refseq)
-
-    # return
-
     degenerateOnly = set("N")
     originalLength = len(reads)
     reads = [read for read in reads if set(read.seq) != degenerateOnly]
@@ -99,26 +87,26 @@ def do1remap(refseq, reads):
             # genome_seq = reverseComp(genome_seq)
         if read.is_reverse:
             strand = "+" if strand=="-" else "-"
-        aln = Alignment(read.qname, aln.ref_begin, aln.ref_end, strand, seq, aln.cigar_string, aln.score, genome_seq, aln.score2)
+        aln = Alignment(read.qname, aln.ref_begin, aln.ref_end, strand, seq, aln.cigar_string, aln.score, genome_seq, aln.score2, read.mapq)
         alignmentSets[read.qname].addAlignment(aln)
 
     return alignmentSets
 
 
-def _getreads(searchRegions, bam, minmapq, single_ended, include_supplementary):
-    pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, 
+def _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary):
+    pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, pair_minmapq=pair_minmapq,
         is_paired=(not single_ended), include_supplementary=include_supplementary)
     reads = [item for sublist in pairFinder.matched for item in sublist]
-    return reads, pairFinder
+    return reads, pairFinder.supplementaryAlignmentsFound
 
-def getReads(variant, bam, minmapq, searchDistance, single_ended=False, include_supplementary=False):
+def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=False, include_supplementary=False):
     t0 = time.time()
     searchRegions = variant.searchRegions(searchDistance)
 
     # This cludge tries the chromosomes as given ('chr4' or '4') and if that doesn't work
     # tries to switch to the other variation ('4' or 'chr4')
     try:
-        reads, pairFinder = _getreads(searchRegions, bam, minmapq, single_ended, include_supplementary)
+        reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary)
     except ValueError, e:
         oldchrom = searchRegions[0].chr()
         try:
@@ -131,17 +119,17 @@ def getReads(variant, bam, minmapq, searchDistance, single_ended=False, include_
 
             logging.warn("  Couldn't find reads on chromosome '{}'; trying instead '{}'".format(oldchrom, newchrom))
 
-            reads, pairFinder = _getreads(searchRegions, bam, minmapq, single_ended, include_supplementary)
+            reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary)
 
         except ValueError:
             raise e
         # if "chr" in searchRegions[0].chr
     t1 = time.time()
 
-    if pairFinder.supplementaryAlignmentsFound:
+    if supplementaryAlignmentsFound:
         logging.warn("  ** Supplementary alignments found: these alignments (with sam flag 0x800) **\n"
                      "  ** are poorly documented among mapping software and may result in missing **\n"
-                     "  ** portions of reads; consider using the --is-secondary command line      **\n"
+                     "  ** portions of reads; consider using the --include-secondary command line **\n"
                      "  ** argument if you think this is happening                                **")
         
     logging.debug("  time to find reads and mates:{}".format(t1 - t0))

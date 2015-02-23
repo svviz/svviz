@@ -70,7 +70,10 @@ def parseArgs(args):
     # inputParams.add_argument("-d", "--search-dist", metavar="DISTANCE", type=int, help="distance in base-pairs from the breakpoints to search for reads; \n"
         # "default: 2x the isize-mean (paired end) or 1000 (single-end)")
 
-    inputParams.add_argument("-q", "--min-mapq", metavar="MAPQ", type=float, help="minimum mapping quality for reads")
+    inputParams.add_argument("-q", "--min-mapq", metavar="MAPQ", default=0, type=float, 
+        help="minimum mapping quality for reads")
+    inputParams.add_argument("--pair-min-mapq", metavar="PAIR_MAPQ", default=0,
+        type=float, help="include only read pairs where at least one read end exceeds PAIR_MAPQ")
     inputParams.add_argument("-a", "--aln-quality", metavar="QUALITY", type=float, 
         help="minimum score of the Smith-Waterman alignment against the ref or alt allele \nin order to be considered (multiplied by 2)")
     inputParams.add_argument("--include-supplementary", action="store_true", help="include supplementary alignments "
@@ -86,7 +89,7 @@ def parseArgs(args):
     defaults = parser.add_argument_group("presets")
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
 
-    if len(inputArgs)==1:
+    if len(inputArgs)<=1:
         parser.print_help()
         sys.exit(1)
 

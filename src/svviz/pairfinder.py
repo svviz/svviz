@@ -12,7 +12,7 @@ class ReadSet(object):
             self.reads.append(newread)
 
 class PairFinder(object):
-    def __init__(self, regions, sam, minmapq=-1, is_paired=True, include_supplementary=False):
+    def __init__(self, regions, sam, minmapq=-1, pair_minmapq=-1, is_paired=True, include_supplementary=False):
         self.include_supplementary = include_supplementary
         self.regions = regions
         self.sam = sam
@@ -33,6 +33,10 @@ class PairFinder(object):
 
         matchIDs = set(read.qname for read in self.tomatch)
         self.matched = [self.readsByID[id_].reads for id_ in matchIDs]
+
+        if pair_minmapq > 0:
+            self.matched = [self.readsByID[id_].reads for id_ in matchIDs 
+                            if max(read.mapq for read in self.readsByID[id_].reads)>pair_minmapq]
 
         # Unclear what to do with supplementary alignments...
         # self.matched = [[read for read in self.readsByID[id_].reads if read.flag&0x800==0] for id_ in matchIDs]

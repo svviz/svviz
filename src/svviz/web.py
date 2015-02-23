@@ -139,6 +139,10 @@ def info():
         result.append(" &nbsp; Reason={}".format(alnSet.parentCollection.why))
 
         if len(alnSet.getAlignments()) > 1:
+            result += " &nbsp; Alignment Scores: ref={} alt={}".format(
+                alnSet.parentCollection.sets["ref"].evidences["alignmentScore"],
+                alnSet.parentCollection.sets["alt"].evidences["alignmentScore"])
+
             result += " &nbsp; Insert Size Scores: ref={} alt={}".format(
                 alnSet.parentCollection.sets["ref"].evidences["insertSizeScore"],
                 alnSet.parentCollection.sets["alt"].evidences["insertSizeScore"])
@@ -146,6 +150,8 @@ def info():
             result += " &nbsp; Lengths: ref={} alt={}".format(
                 len(alnSet.parentCollection.sets["ref"]),
                 len(alnSet.parentCollection.sets["alt"]))
+
+        result += " &nbsp; mapq={}".format(",".join(str(read.mapq) for read in reads))
 
         # result.append(" &nbsp; Log odds={:.3g}".format(float(READ_INFO[readid].prob)))
         result = "".join(result)

@@ -4,6 +4,7 @@ import subprocess
 import sys
 
 
+
 ############################ System utilities ############################
 def launchFile(filepath):
     if sys.platform.startswith('darwin'):
@@ -49,6 +50,8 @@ def getListDefault(list_, index, default=None):
 
 
 ############################ Coordinates utilities ############################
+
+
 def switchStrand(x):
     if x == "+":
         return "-"
@@ -169,17 +172,26 @@ class Locus:
     def __str__(self):
         return "(" + self._chr +":" + str(self.start()) + "-" + str(self.end()) + self._strand + ")"
 
-
-
 if __name__ == '__main__':
-    loci = [Locus("chr1", 10, 20, "+"),
-            Locus("chr1", 18, 22, "+"),
-            Locus("chr1", 22, 25, "+"),
-            Locus("chr1", 27, 30, "+"),
-            Locus("chr1", 28, 31, "+"),
-            Locus("chr1", 35, 40, "+"),
-            Locus("chr1", 42, 45, "+"),
-            Locus("chr1", 43, 44, "+")]
+    # loci = [Locus("chr1", 10, 20, "+"),
+    #         Locus("chr1", 18, 22, "+"),
+    #         Locus("chr1", 22, 25, "+"),
+    #         Locus("chr1", 27, 30, "+"),
+    #         Locus("chr1", 28, 31, "+"),
+    #         Locus("chr1", 35, 40, "+"),
+    #         Locus("chr1", 42, 45, "+"),
+    #         Locus("chr1", 43, 44, "+")]
 
-    print unionLoci(loci)
+    # print unionLoci(loci)
+
+    from svviz.variants import Segment, mergedSegments
+    segments = [Segment("chr100", 1,3, "+", 0),
+                Segment("chr100", 5, 9, "+", 1), 
+                Segment("chr100", 11, 15, "+", 2), 
+                Segment("chr100", 17, 19, "+", 3), 
+                Segment("chr100", 21, 31, "+", 4),
+                Segment("chr100", 33, 34, "+", 5)]
+
+    print segments
+    print mergedSegments(segments)
 

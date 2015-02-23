@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" href="jquery-ui.css" />
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="jquery.js"></script>
+        <script src="jquery-ui.js"></script>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="bootstrap.css">
+        <script src="bootstrap.js"></script>
 
         <script src="jquery.mousewheel.js"></script>
         <script src="svgscroller.js"></script>
-
-        <!--<script src="svg-pan-zoom.js"></script>-->
 
         <link href="main.css" rel="stylesheet" />
     </head>
@@ -52,7 +50,14 @@
 
                         {% for sample in samples %}
                             <div class="one_svg {{ sample }}">
-                                <div style="position:absolute; z-index:1;left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
+                                <div style="position:absolute; z-index:1; left:0; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">{{ sample }}</div>
+
+                                {% if loop.first %}
+                                    <div style="position:absolute; z-index:1; right:10px; top:0; padding: 2px; background-color: rgba(255,255,255,0.7);">
+                                        <button class="zoomin">+</button>
+                                        <button class="zoomout">&minus;</button>
+                                    </div>
+                                {% endif %}
                                 <div class="track"></div>
                             </div>
                             <div style="height:2px; background-color:gray;"></div>
@@ -79,9 +84,7 @@
         {% if insertSizeDistributions %}
             {% for name in insertSizeDistributions %}
               <image src="_isizes/{{ name }}" width="500" height="500" />
-<!--               <object type="image/svg+xml" data="_isizes/{{ name }}.svg">
-              </object>
- -->            {% endfor %}
+            {% endfor %}
         {% endif %}
 
         <form action="/_export" method="POST" id="exportForm">

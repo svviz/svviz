@@ -35,8 +35,6 @@ def getVariant(dataHub):
         start = int(dataHub.args.breakpoints[1])
         end = int(dataHub.args.breakpoints[2])
         assert start < end
-        if dataHub.args.min_mapq is None:
-            dataHub.args.min_mapq = 30
 
         variant = Deletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("ins"):
@@ -53,9 +51,6 @@ def getVariant(dataHub):
             end = int(dataHub.args.breakpoints[2])
             seq = dataHub.args.breakpoints[3]
 
-        if dataHub.args.min_mapq is None:
-            dataHub.args.min_mapq = -1
-
         variant = Insertion(Locus(chrom, pos, end, "+"), seq, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("inv"):
         assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("inv")
@@ -68,8 +63,6 @@ def getVariant(dataHub):
         variant = Inversion(Locus(chrom, start, end, "+"), dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("mei"):
         assert len(dataHub.args.breakpoints) >= 4, getBreakpointFormatsStr("mei")
-        if dataHub.args.min_mapq is None:
-            dataHub.args.min_mapq = -1
 
         insertionBreakpoint = Locus(dataHub.args.breakpoints[1], dataHub.args.breakpoints[2], dataHub.args.breakpoints[2], "+")
 
@@ -110,6 +103,28 @@ class Segment(object):
     def color(self):
         return self.colors[self.id]
 
+    def __repr__(self):
+        return "<Segment {} {}:{}-{}{} ({})>".format(self.id, self.chrom, self.start, self.end, self.strand, self.source)
+
+def mergedSegments(segments):
+    # quick-and-dirty recursive function to merge adjacent variant.Segment's
+    if len(segments) == 1:
+        return segments
+
+    done = []
+    for i in range(len(segments)-1):
+        first = segments[i]
+        second = segments[i+1]
+        if first.chrom==second.chrom and first.strand==second.strand and first.end == second.start-1 and first.source==second.source:
+            merged = Segment(first.chrom, first.start, second.end, second.strand, "{}_{}".format(first.id, second.id), first.source)
+            result = done + mergedSegments([merged]+segments[i+2:])
+            return result
+        else:
+            done.append(segments[i])
+
+    done.append(segments[-1])
+    return done
+    
 class StructuralVariant(object):
     def __init__(self, breakpoints, alignDistance, fasta):
         self.breakpoints = sorted(breakpoints, key=lambda x: x.start())
