@@ -3,7 +3,7 @@ Installation
 
 A single command should typically suffice to install ``svviz``:
 
-``pip install git+https://github.com/svviz/svviz.git#svviz``
+``pip install svviz``
 
 If that command gives a permissions error, you can try adding ``sudo`` to the beginnning of the command in order to run the command as super-user (often required for a system-wide installation). If you get an error that ``pip`` is missing, assuming python is already installed, you can run ``sudo easy_install pip`` and then run the above command (see `here <https://pip.pypa.io/en/latest/installing.html>`_ for more info on installing pip).
 
