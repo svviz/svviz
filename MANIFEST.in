@@ -1,2 +1,6 @@
+include src/ssw/*.c
+include src/ssw/*.h
 include src/svviz/static/*
 include src/svviz/templates/*
+
+include LICENSE

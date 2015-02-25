@@ -5,17 +5,11 @@ svviz
 Author: Noah Spies
 
 
-Notice
-======
-
-This software is in active development. See the the `issues <https://github.com/svviz/svviz/issues>`_ page for a list of outstanding bugs and planned features. Please feel free to comment on planned or potential features or submit new feature requests.
-
-
 Quickstart
 ==========
 
 1. Ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_ (OS X only) and that the python package `pip <https://pip.pypa.io/en/latest/installing.html>`_ is installed.
-2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install -U git+https://github.com/svviz/svviz.git#svviz``. (The sudo may not be necessary depending on your setup.)
+2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install -U svviz``. (The sudo may not be necessary depending on your setup.)
 3. Run the following command, which downloads example data and runs it through svviz: ``svviz demo``. After several processing steps, a web browser window should open. Click and drag to pan, and zoom using option/alt-scrollwheel.
 4. Please report any issues (after making sure they're not explained in the documentation below) using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 
