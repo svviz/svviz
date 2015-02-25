@@ -16,7 +16,9 @@ If that command gives a permissions error, you can try adding ``sudo`` to the be
 - pysam
 - requests
 
-Finally, in order to export the visualizations into PDF or PNG format, you will need to install libRsvg. On the Mac, first install and update `homebrew <http://brew.sh>`_ and then run ``brew install librsvg``; on linux (ubuntu and similar), you can run ``sudo apt-get install librsvg2-dev``.
+In order to export the visualizations into PDF or PNG format, you will need to install libRsvg. On the Mac, first install and update `homebrew <http://brew.sh>`_ and then run ``brew install librsvg``; on linux (ubuntu and similar), you can run ``sudo apt-get install librsvg2-dev``.
+
+Finally, some optional graphs are produced using the python `rpy2 <https://bitbucket.org/rpy2/rpy2>`_ package, which can be installed by typing ``sudo pip install rpy2``, assuming `R <http://www.r-project.org>`_ is installed. If rpy2 is not installed, these graphs will not be produced, but all core features will be functional.
 
 Running the demos
 -----------------
