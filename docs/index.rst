@@ -14,6 +14,7 @@ svviz - a read visualizer for structural variants
    install
    webinterface
    commandline
+   changelog
    license
 
 

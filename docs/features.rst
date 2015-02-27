@@ -3,7 +3,9 @@ Features
 
 * built-in support for:
     * deletions
-    * insertions (including mobile element insertions)
+    * insertions
+        * including mobile element insertions
+        * complex insertions (where some sequence is deleted)
     * inversions
     * ``svviz`` can easily be extended to analyze translocations and complex variants, but these types are not yet implemented.
 * builds reference and alternate allele sequences from genome fasta file and structural variant annotation
@@ -14,3 +16,4 @@ Features
 * provides a (locally-running) browser-based front-end for inspecting visualizations
 * visualizes reads for multiple samples in SVG format (an open-source, web-standard vector graphics format)
 * options to export to PDF or PNG
+* batch mode to calculate summary statistics for many events from a VCF file
