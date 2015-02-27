@@ -218,6 +218,7 @@ def run(args):
     summaryStats = summarystats.Summary()
     for i, variant in enumerate(svs):
         logging.info("* Running for variant {}/{} {} *".format(i, len(svs), variant))
+        dataHub.reset()
 
         dataHub.variant = variant
         setSampleParams(dataHub)
@@ -239,14 +240,14 @@ def run(args):
 
         runDirectExport(dataHub)
 
-        runWebView(dataHub)
-
         summaryStats.addVariantResults(dataHub)
-        dataHub.reset()
 
     summaryStats.display()
     if dataHub.args.summary is not None:
         summaryStats.saveToPath(dataHub.args.summary)
+
+    runWebView(dataHub)
+    
 def main():
     # entry point for shell script
     run(sys.argv)
