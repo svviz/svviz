@@ -85,7 +85,7 @@ def getVariant(dataHub):
 
 
 class Segment(object):
-    colors = {0:"red", 1:"blue", 2:"gray", 3:"green", 4:"brown"}
+    colors = {0:"red", 1:"blue", 2:"gray", 3:"orange", 4:"brown"}
 
     def __init__(self, chrom, start, end, strand, id_, source="genome"):
         self.chrom = chrom

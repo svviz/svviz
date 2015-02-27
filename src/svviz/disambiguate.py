@@ -42,9 +42,10 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
     if not alnCollection["ref"].evidences["valid"][0] and not alnCollection["alt"].evidences["valid"][0]:
         return choose("amb", str(alnCollection["ref"].evidences["valid"][1])+"_"+str(alnCollection["alt"].evidences["valid"][1]))
 
-    if alnCollection["alt"].evidences["alignmentScore"] > alnCollection["ref"].evidences["alignmentScore"]:
+    # TODO: this is kind of arbitrary, how to decide that the alignment scores must differ by at least 2 (or whatever)
+    if alnCollection["alt"].evidences["alignmentScore"]-2 > alnCollection["ref"].evidences["alignmentScore"]:
         return choose("alt", "alignmentScore")
-    if alnCollection["ref"].evidences["alignmentScore"] > alnCollection["alt"].evidences["alignmentScore"]:
+    if alnCollection["ref"].evidences["alignmentScore"]-2 > alnCollection["alt"].evidences["alignmentScore"]:
         return choose("ref", "alignmentScore")
 
     if not singleEnded:
