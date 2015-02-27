@@ -48,7 +48,7 @@ def checkDemoMode(args):
 def parseArgs(args):
     inputArgs = checkDemoMode(args)
 
-    parser = argparse.ArgumentParser(usage="%(prog)s [options] [demo] [ref breakpoint...]",
+    parser = argparse.ArgumentParser(usage="%(prog)s [options] [demo] [ref breakpoint...] [ref vcf]",
         formatter_class=argparse.RawTextHelpFormatter,
         epilog="Breakpoint formats:\n{}\n\nFor an example, run 'svviz demo'.".format(getBreakpointFormatsStr()))
 
@@ -61,7 +61,8 @@ def parseArgs(args):
         "can be specified multiple times to load multiple samples")
 
     inputParams = parser.add_argument_group("input parameters")
-    inputParams.add_argument("-t", "--type", help="event type: either del[etion], ins[ertion] or mei (mobile element insertion)")
+    inputParams.add_argument("-t", "--type", help="event type: either del[etion], ins[ertion], mei (mobile element insertion), or \n"
+        "batch (for reading variants from a VCF file in batch mode)")
 
     inputParams.add_argument("-A", "--annotations", action="append", help="bed file containing annotations to plot; will be compressed and indexed \n"
         "using samtools tabix in place if needed (can specify multiple annotations files)")
@@ -69,6 +70,9 @@ def parseArgs(args):
     inputParams.add_argument("-o", "--orientation", help=argparse.SUPPRESS)
     # inputParams.add_argument("-d", "--search-dist", metavar="DISTANCE", type=int, help="distance in base-pairs from the breakpoints to search for reads; \n"
         # "default: 2x the isize-mean (paired end) or 1000 (single-end)")
+
+    inputParams.add_argument("--fasta", help="An additional indexable fasta file specifying insertion sequences \n"
+        "(eg mobile element sequences)")
 
     inputParams.add_argument("-q", "--min-mapq", metavar="MAPQ", default=0, type=float, 
         help="minimum mapping quality for reads")

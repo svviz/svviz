@@ -12,6 +12,7 @@ from svviz import remap
 from svviz import track
 from svviz import utilities
 from svviz import variants
+from svviz import vcf
 from svviz import web
 
 def checkRequirements():
@@ -203,29 +204,43 @@ def run(args):
     logging.info("* Sampling reads to calculate Insert Size Distributions *")
     loadISDs(dataHub)
 
-    logging.info("* Loading variant *")
-    dataHub.variant = variants.getVariant(dataHub)
+    if args.type == "batch":
+        logging.info("* Loading variants from input VCF file *")
+        dataHub.args.no_web = True
+        svs = vcf.getVariants(dataHub)
 
-    setSampleParams(dataHub)
+        logging.info(" Loaded {} variants".format(len(svs)))
+    else:
+        logging.info("* Loading variant *")
+        svs = [variants.getVariant(dataHub)]
 
-    logging.info("* Loading reads and finding mates *")
-    loadReads(dataHub)
-    saveReads(dataHub)
+    for i, variant in enumerate(svs):
+        logging.info("* Running for variant {}/{} {} *".format(i, len(svs), variant))
 
-    logging.info("* Realigning reads *")
-    runRemap(dataHub)
+        dataHub.variant = variant
+        setSampleParams(dataHub)
 
-    logging.info("* Assigning reads to most probable alleles *")
-    runDisambiguation(dataHub)
+        logging.info("* Loading reads and finding mates *")
+        loadReads(dataHub)
+        saveReads(dataHub)
+
+        logging.info("* Realigning reads *")
+        runRemap(dataHub)
+
+        logging.info("* Assigning reads to most probable alleles *")
+        runDisambiguation(dataHub)
 
 
-    logging.info("* Rendering tracks *")
-    renderSamples(dataHub)
-    renderAxesAndAnnotations(dataHub)
+        logging.info("* Rendering tracks *")
+        renderSamples(dataHub)
+        renderAxesAndAnnotations(dataHub)
 
-    runDirectExport(dataHub)
+        runDirectExport(dataHub)
 
-    runWebView(dataHub)
+        runWebView(dataHub)
+
+        print dataHub.getCounts()
+        dataHub.reset()
 
 def main():
     # entry point for shell script

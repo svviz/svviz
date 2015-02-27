@@ -17,8 +17,8 @@ class DataHub(object):
         self.searchDistance = None
         self.alignDistance = None
         self.samples = collections.OrderedDict()
-        self.variant = None
         self.genome = None
+        self.sources = {}
         self.annotationSets = collections.OrderedDict()
 
         # for storing axes, annotations, etc, by allele
@@ -27,9 +27,15 @@ class DataHub(object):
 
         self.info = {}
 
+        self.reset()
+
+    def reset(self):
+        """ reset for a new variant; keeps the ReadStatistics """
+        self.variant = None
         self._counts = None
         self._alignmentSetsByName = None
-
+        for sampleName, sample in self.samples.iteritems():
+            sample.reset()
 
     def setArgs(self, args):
         self.args = args
@@ -86,12 +92,14 @@ class Sample(object):
         self.bamPath = bamPath
         self.bam = pysam.Samfile(self.bamPath, "rb") if self.bamPath else None
 
-        self.reads = []
-        self.alnCollections = []
-
         self.readStatistics = None
         self.insertSizePlot = None
 
+        self.reset()
+
+    def reset(self):
+        self.reads = []
+        self.alnCollections = []
         self.tracks = collections.OrderedDict()
 
 
