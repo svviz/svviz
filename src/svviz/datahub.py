@@ -64,7 +64,7 @@ class DataHub(object):
             for name, sample in self.samples.iteritems():
                 self._counts[name] = collections.Counter([alnCollection.choice for alnCollection in sample.alnCollections])
             self._counts["Total"] = dict((allele, sum(self._counts[name][allele] for name in self.samples)) 
-                for allele in ["alt", "ref", "amb"])
+                                          for allele in ["alt", "ref", "amb"])
 
         return self._counts
 

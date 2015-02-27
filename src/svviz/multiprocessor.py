@@ -100,7 +100,7 @@ class Multiprocessor(object):
         if verbose > 2:
             sys.stderr.write("\n")
             t1 = time.time()
-            print "total time elapsed:", t1-t0
+            print "  total time elapsed:", t1-t0
         return mappedValues
 
 

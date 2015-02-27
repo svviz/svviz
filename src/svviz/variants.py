@@ -201,6 +201,11 @@ class Deletion(StructuralVariant):
             return [Segment(chrom, self.breakpoints[0].start()-self.alignDistance, self.breakpoints[0].start()-1, "+", 0),
                     Segment(chrom, self.breakpoints[1].end()+1, self.breakpoints[1].end()+self.alignDistance, "+", 2)]
 
+    def __str__(self):
+        deletionLength = self.breakpoints[1].end() - self.breakpoints[0].start()
+        return "{}::{}:{:,}-{:,}({})".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), 
+            self.breakpoints[1].end(), deletionLength)
+
 
 class Inversion(StructuralVariant):
     def __init__(self, region, alignDistance, fasta):

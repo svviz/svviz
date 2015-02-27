@@ -9,6 +9,7 @@ from svviz import datahub
 from svviz import export
 from svviz import insertsizes
 from svviz import remap
+from svviz import summarystats
 from svviz import track
 from svviz import utilities
 from svviz import variants
@@ -214,6 +215,7 @@ def run(args):
         logging.info("* Loading variant *")
         svs = [variants.getVariant(dataHub)]
 
+    summaryStats = summarystats.Summary()
     for i, variant in enumerate(svs):
         logging.info("* Running for variant {}/{} {} *".format(i, len(svs), variant))
 
@@ -230,18 +232,21 @@ def run(args):
         logging.info("* Assigning reads to most probable alleles *")
         runDisambiguation(dataHub)
 
-
-        logging.info("* Rendering tracks *")
-        renderSamples(dataHub)
-        renderAxesAndAnnotations(dataHub)
+        if not dataHub.args.no_web:
+            logging.info("* Rendering tracks *")
+            renderSamples(dataHub)
+            renderAxesAndAnnotations(dataHub)
 
         runDirectExport(dataHub)
 
         runWebView(dataHub)
 
-        print dataHub.getCounts()
+        summaryStats.addVariantResults(dataHub)
         dataHub.reset()
 
+    summaryStats.display()
+    if dataHub.args.summary is not None:
+        summaryStats.saveToPath(dataHub.args.summary)
 def main():
     # entry point for shell script
     run(sys.argv)

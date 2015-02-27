@@ -54,7 +54,7 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
         if logRatio < -insertSizeLogLikelihoodCutoff:
             return choose("ref", "insertSizeScore")
 
-    return choose("amb", "same scores")
+    return choose("amb", "same_scores")
 
 def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False):
     t0 = time.time()

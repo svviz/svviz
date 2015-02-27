@@ -68,7 +68,7 @@ def do1remap(refseq, reads):
     originalLength = len(reads)
     reads = [read for read in reads if set(read.seq) != degenerateOnly]
     if len(reads) < originalLength:
-        logging.info("Removed {} reads with only degenerate nucleotides ('N')".format(originalLength-len(reads)))
+        logging.info("  Removed {} reads with only degenerate nucleotides ('N')".format(originalLength-len(reads)))
 
     remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[refseq], verbose=3, processes=8))
 
@@ -145,7 +145,7 @@ def do_realign(variant, reads):
     altalignments = do1remap(variant.getAltSeq(), reads)
     t1 = time.time()
 
-    logging.debug("time for realigning:{}".format(t1-t0))
+    logging.debug("  time for realigning:{}".format(t1-t0))
 
     assert refalignments.keys() == altalignments.keys()
 

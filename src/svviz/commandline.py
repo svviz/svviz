@@ -90,6 +90,8 @@ def parseArgs(args):
         "from the filename extension (automatically sets --no-web)")
     inputParams.add_argument("-O", "--open-exported", action="store_true", help="automatically open the exported file")
 
+    interfaceParams.add_argument("--summary", metavar="SUMMARY_FILE", help="save summary statistics to this (tab-delimited) file")
+
     defaults = parser.add_argument_group("presets")
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
 
