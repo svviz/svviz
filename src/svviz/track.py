@@ -344,9 +344,6 @@ class AnnotationTrack(object):
         self.allele = allele
         self.segments = variants.mergedSegments(variant.segments(allele))
 
-        for segment in self.segments:
-            print "^"*20, allele, segment
-
         self._annos = None
         self.rows = [None]
         self.svg = None

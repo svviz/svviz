@@ -1,3 +1,4 @@
+
 (function () {
 'use strict';
 
@@ -83,7 +84,6 @@ function Scrollbar(scrollpanel, $host, options) {
     }
 
     self.page = function(pages) {
-        // console.log("Pages:" + pages + " scrollProportion:"+self.scrollProportion);
         if ((!self.active) || (pages > 0 & self.scrollProportion == 1.0) || (pages < 0 & self.scrollProportion == 0.0)){
             return false;
         } else {
@@ -229,6 +229,7 @@ function ScrollPanel(element, options, svg_tags) {
             self.yviewsizes[i] = bbox.height;
             newyscrollbar.scrollProportion = 0.0; // because the scrollbar is hidden we need to make sure we're scrolled to the correct position
         } else if ($(this).hasClass("anno")) {
+            newyscrollbar.scrollProportion = 0.0; // because the scrollbar is hidden we need to make sure we're scrolled to the correct position
             self.types.push("anno");
             self.annoHeight += 100;
         } else {
@@ -268,7 +269,6 @@ function ScrollPanel(element, options, svg_tags) {
         for (var i=0; i < self.yviewables.length; i++) {
             self.yviewables[i] = self.containerheight / self.yzooms[i] / self.nviews;
             if (self.types[i] == "axis") {
-            // if (self.isaxis[i]) {
                 self.yviewables[i] = self.axisHeight;
             } else if (self.types[i] == "anno") {
                 self.yviewables[i] = 100;
@@ -295,11 +295,19 @@ function ScrollPanel(element, options, svg_tags) {
             xscroll = ((self.xmax-self.xmin) - self.xviewable) / 2.0;
         }
 
-        self.$views.each(function(i, j){
-            var yscroll = ((self.ymax - self.ymin) - self.yviewables[i]) * (self.yscrollbars[i].scrollProportion);
+        self.$views.each(function(i, view){
+            var ymin = self.ymin;
+            var ymax = self.ymax;
 
-            if (self.yviewables[i] > (self.ymax-self.ymin)) {
-                yscroll = ((self.ymax-self.ymin) - self.yviewables[i]) / 2.0;
+            if (self.types[i] == "anno") {
+                ymin = 0;
+                ymax = self.bboxes[i].height;
+            }
+
+            var yscroll = ((ymax - ymin) - self.yviewables[i]) * (self.yscrollbars[i].scrollProportion);
+
+            if (self.yviewables[i] > (ymax-ymin)) {
+                yscroll = ((ymax-ymin) - self.yviewables[i]) / 2.0;
             }
             var viewBox = [xscroll, yscroll, self.xviewable, self.yviewables[i]];
 
@@ -326,7 +334,6 @@ function ScrollPanel(element, options, svg_tags) {
         self.xscrollbar.resize($(self.$views[0]).width(), self.xviewable, self.xmax-self.xmin);
 
         self.yscrollbars.forEach(function(scrollbar, i){
-            // if (!self.isaxis[i]) {
             if (self.types[i] == "sample") {
                 scrollbar.resize($(self.$views[i]).height(), self.yviewables[i], self.ymax-self.ymin); //self.yviewsizes[i]);
             } else if (self.types[i] == "anno") {
