@@ -1,7 +1,7 @@
 Change log
 ==========
 
-1.0.5
+1.0.6
 -----
 
 - fixed bug that prevented --export option from working
