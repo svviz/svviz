@@ -233,7 +233,7 @@ def run(args):
         logging.info("* Assigning reads to most probable alleles *")
         runDisambiguation(dataHub)
 
-        if not dataHub.args.no_web:
+        if not dataHub.args.no_web or dataHub.args.export:
             logging.info("* Rendering tracks *")
             renderSamples(dataHub)
             renderAxesAndAnnotations(dataHub)

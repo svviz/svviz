@@ -1,6 +1,7 @@
 import argparse
 import logging
 import sys
+import tempfile
 
 from svviz import demo
 from svviz.alignment import AlignmentSet
@@ -26,17 +27,25 @@ def checkDemoMode(args):
         which = "example1"
         autoDownload = ("--auto-download" in options or "-a" in options)
         noweb = ("--no-web" in options or "-n" in options)
+        autoExport = ("--auto-export" in options)
 
         if len(inputArgs) > 1:
             if inputArgs[1] in ["1","2"]:
                 which = "example{}".format(inputArgs[1])
             else:
                 raise Exception("Don't know how to load this example: {}".format(inputArgs[1]))
+
         cmd = demo.loadDemo(which, autoDownload)
         if cmd is not None:
             inputArgs = cmd
             if noweb:
                 inputArgs.append("--no-web")
+            if autoExport:
+                # put this as a global in demo module so that it persists until we
+                # run the "open" command on the file
+                demo.TEMPDIR = tempfile.mkdtemp()
+                inputArgs.extend(["--export", "{}/temp.pdf".format(demo.TEMPDIR), "-O"])
+
             logging.info("Running the following command:")
             logging.info("{} {}".format(sys.argv[0], " ".join(inputArgs)))
             logging.info("")
