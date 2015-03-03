@@ -101,6 +101,8 @@ def parseArgs(args):
     interfaceParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help="export view to file; exported file format is determined \n"
         "from the filename extension (automatically sets --no-web)")
     interfaceParams.add_argument("-O", "--open-exported", action="store_true", help="automatically open the exported file")
+    interfaceParams.add_argument("--thicker-lines", action="store_true", help="Reads are shown with thicker lines, potentially overlapping \n"
+        "one another, but increasing contrast when zoomed out")
 
     interfaceParams.add_argument("--summary", metavar="SUMMARY_FILE", help="save summary statistics to this (tab-delimited) file")
 

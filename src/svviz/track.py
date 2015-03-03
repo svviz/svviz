@@ -95,7 +95,9 @@ class Axis(object):
         previousPosition = None
         for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
-            self.svg.rect(x-(scaleFactor/2.0), self.height-(20*scaleFactor), 1*scaleFactor, 35*scaleFactor, fill="black")
+            self.svg.line(x, x, self.height-(20*scaleFactor), self.height-55*scaleFactor, 
+                stroke="black", **{"stroke-width":1*scaleFactor})
+            
             if previousPosition is None or vline-previousPosition > 250:     
                 self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="black")
             previousPosition = vline
@@ -122,11 +124,12 @@ class Axis(object):
         return ticks
 
 class ReadRenderer(object):
-    def __init__(self, rowHeight, scale, chrom):
+    def __init__(self, rowHeight, scale, chrom, thickerLines=False):
         self.rowHeight = rowHeight
         self.svg = None
         self.scale = scale
         self.chrom = chrom
+        self.thickerLines = thickerLines
 
         self._nucColors = {"A":"blue", "C":"orange", "G":"green", "T":"black", "N":"gray"}
 
@@ -154,9 +157,16 @@ class ReadRenderer(object):
             # color = alignmentSet.color
             # color = "gray"
 
-            self.svg.rect(pstart, yoffset, pend-pstart, self.rowHeight, fill=color, **{"class":"read", "data-cigar":alignment.cigar,
-                "data-readid":alignment.name#, "opacity":0.75
-                })
+            if self.thickerLines:
+                # extra "bold":
+                self.svg.rect(pstart, yoffset+3, pend-pstart, self.rowHeight+6, fill=color, **{"class":"read", "data-cigar":alignment.cigar,
+                    "data-readid":alignment.name#, "opacity":0.75
+                    })
+            else:
+                self.svg.rect(pstart, yoffset, pend-pstart, self.rowHeight, fill=color, **{"class":"read", "data-cigar":alignment.cigar,
+                    "data-readid":alignment.name#, "opacity":0.75
+                    })
+
 
             colorCigar = True
             eachNuc = False
@@ -233,7 +243,7 @@ class ReadRenderer(object):
                 self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill="lime")
 
 class Track(object):
-    def __init__(self, chrom, alignmentSets, height, width, gstart, gend, variant, allele):
+    def __init__(self, chrom, alignmentSets, height, width, gstart, gend, variant, allele, thickerLines):
         self.chrom = chrom
         self.height = height
         self.width = width
@@ -247,7 +257,7 @@ class Track(object):
         self.rowHeight = 5
         self.rowMargin = 1
 
-        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chrom)
+        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chrom, thickerLines)
 
         self.alignmentSets = alignmentSets
 
@@ -265,6 +275,8 @@ class Track(object):
 
         self.xmin = None
         self.xmax = None
+
+        self.thickerLines = thickerLines
 
     # def getAxis(self):
     #     if self._axis is None:
@@ -323,13 +335,15 @@ class Track(object):
         for alignmentSet in self.getAlignments():
             self.readRenderer.render(alignmentSet)
 
+        lineWidth = 1 if not self.thickerLines else 10
         for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
             y1 = -20
             y2 = self.height+20
-            self.svg.line(x, x, y1, y2, stroke="black", **{"stroke-width":1})
+            self.svg.line(x, x, y1, y2, stroke="black", **{"stroke-width":lineWidth})
 
-        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), self.height+40, opacity=0.0, zindex=0)
+        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), 
+            self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
 
         return self.rendered
