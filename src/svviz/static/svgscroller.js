@@ -315,6 +315,11 @@ function ScrollPanel(element, options, svg_tags) {
         })
     }
 
+    self.scrollToTop = function() {
+        self.yscrollbars.forEach(function(scrollbar){
+            scrollbar.scrollTo(0.0);
+        });
+    }
     self.scrollToBottom = function() {
         self.yscrollbars.forEach(function(scrollbar){
             scrollbar.scrollTo(1.0);
@@ -409,7 +414,7 @@ $.fn[name] = function (options, options2) {
         if (!scrollpanel) {
             scrollpanel = new ScrollPanel(this, options);
             scrollpanel.update();
-            scrollpanel.scrollToBottom();
+            scrollpanel.scrollToTop();
             $this.data(name, scrollpanel);
         }
 
