@@ -35,30 +35,45 @@ class TrackCompositor(object):
 
             self.addTracks(longAlleleName, sampleNames, tracks, allele)
 
-    def addTracks(self, section, names, tracks, allele):
-        alleleTracks = self.dataHub.alleleTracks[allele]
+    def getBounds(self, tracks, allele):
+        """ calculate left and right bounds for the allele; this is based on the variant segments
+        as well as the positions of the reads (we want to be able to see all the breakpoints as 
+        well as all the reads) """
+
+        scale = tracks[0].scale
         segments = segments=self.dataHub.variant.segments(allele)
         alleleLength = self.dataHub.variant.getLength(allele)
+
+        axisMin = max(0, scale.topixels(len(segments[0])-100))
+        axisMax = scale.topixels(min(alleleLength-len(segments[-1])+100, alleleLength))
 
         for track in tracks:
             track.render()
         xmin = [track.xmin for track in tracks if track.xmin is not None]
         xmin = min(xmin) if len(xmin) > 0 else 0
-        # xmin = min(max(0, len(segments[0])-100), xmin)
+        xmin = min(axisMin, xmin)
 
         xmax = [track.xmax for track in tracks if track.xmax is not None]
         xmax = max(xmax) if len(xmax) > 0 else 500
-        # xmax = max(alleleLength-len(segments[-1])+100, xmax)
-        # xmax = min(xmax, alleleLength)
+        xmax = max(axisMax, xmax)
 
-        print xmin, xmax
-
-        hasTrackWithReads = False
         width = 500
         if xmin is not None:
             width = xmax - xmin
             xmin -= width * 0.05
+            xmin = max(0, xmin)
             width *= 1.1
+            width = min(width, xmin+scale.topixels(alleleLength))
+        return xmin, width
+
+    def addTracks(self, section, names, tracks, allele):
+        alleleTracks = self.dataHub.alleleTracks[allele]
+
+        for track in tracks:
+            track.render()
+        xmin, width = self.getBounds(tracks, allele)
+
+        hasTrackWithReads = False
 
         for track, name in zip(tracks, names):
             if len(track.alignmentSets) == 0:
@@ -79,33 +94,21 @@ class TrackCompositor(object):
 
         if hasTrackWithReads:
             scaleFactor = width * 0.0005
+            size = 1.0
+            if self.dataHub.args.thicker_lines:
+                size *= 2.0
+
             for name, track in alleleTracks.iteritems():
-                track.render(scaleFactor=scaleFactor)
+                track.render(scaleFactor=scaleFactor*size)
                 height = track.height/scaleFactor
                 viewbox = '{xmin} 0 {width} {height}" preserveAspectRatio="xMinYMin'.format(xmin=xmin, width=width, height=height)
                 svg = track.svg.asString("export")
 
                 self.addTrackSVG(section, name, svg, height=height, viewbox=viewbox)
 
-        # if includeAxis and hasTrackWithReads:
-        #     scaleFactor = width * 0.0005
 
-        #     axis = track.getAxis()
-        #     baseHeight = axis.height
-        #     axis.height = baseHeight*scaleFactor
-        #     viewbox = "{xmin} 0 {width} {height}".format(xmin=xmin, width=width, height=baseHeight)
- 
-        #     axis.render(scaleFactor=scaleFactor)
-        #     svg = axis.svg.asString("export")
-
-        #     self.addTrackSVG(section, "xaxis", svg, height=75, viewbox=viewbox)
-        #     axis.height = baseHeight
 
     def addTrackSVG(self, section, name, tracksvg, viewbox=None, height=100):
-        # height = 100
-        # if viewbox is not None:
-        #     x, y, w, h = viewbox.split()
-        #     height = float(h)
         if not section in self.sections:
             self.sections[section] = collections.OrderedDict()
         self.sections[section][name] = {"svg":tracksvg,
