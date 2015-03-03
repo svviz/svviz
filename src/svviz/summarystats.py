@@ -64,7 +64,7 @@ class Summary(object):
             pandas.options.display.max_rows = 400
             df = pandas.DataFrame(self.stats, columns=self.header)
             print df.pivot_table(values="value", index=["variant","sample","allele"], columns="key")
-        except ImportError:
+        except:
             print str(self)
 
 
