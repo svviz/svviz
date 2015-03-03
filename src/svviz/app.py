@@ -200,7 +200,7 @@ def saveReads(dataHub):
 def run(args):
     # entry point from python
     args = commandline.parseArgs(args)
-    checkRequirements()
+    checkRequirements(args)
 
     dataHub = datahub.DataHub()
     dataHub.setArgs(args)
