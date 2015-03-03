@@ -16,10 +16,14 @@ from svviz import variants
 from svviz import vcf
 from svviz import web
 
-def checkRequirements():
+def checkRequirements(args):
     if not remap.check_swalign():
         print "ERROR: check that svviz is correctly installed -- the 'ssw' Smith-Waterman alignment module does not appear to be functional"
         sys.exit(1)
+    if args.export and (args.export.lower().endswith("pdf") or args.export.lower().endswith("png")):
+        if not export.canConvertSVGToPDF():
+            print "ERROR: librsvg needs to be installed in order to export to pdf and png format."
+            sys.exit(1)
 
 def loadISDs(dataHub):
     """ Load the Insert Size Distributions """
@@ -195,9 +199,8 @@ def saveReads(dataHub):
 
 def run(args):
     # entry point from python
-    checkRequirements()
-
     args = commandline.parseArgs(args)
+    checkRequirements()
 
     dataHub = datahub.DataHub()
     dataHub.setArgs(args)

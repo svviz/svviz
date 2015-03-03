@@ -1,6 +1,13 @@
 Change log
 ==========
 
+1.0.7
+-----
+
+- demo data now gets downloaded from Stanford webspace
+- added ``--version`` command line option
+- no longer fails if pandas is an older version
+
 1.0.6
 -----
 

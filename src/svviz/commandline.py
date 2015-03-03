@@ -3,6 +3,7 @@ import logging
 import sys
 import tempfile
 
+import svviz
 from svviz import demo
 from svviz.alignment import AlignmentSet
 from svviz.variants import getBreakpointFormatsStr
@@ -93,18 +94,21 @@ def parseArgs(args):
         "(ie, those with the 0x800 bit set in the bam flags); \ndefault: false")
 
     interfaceParams = parser.add_argument_group("interface parameters")
+    interfaceParams.add_argument("-v", "--version", action="version", version="svviz version {}".format(svviz.__version__),
+        help="show svviz version number and exit")
     interfaceParams.add_argument("--no-web", action="store_true", help="don't show the web interface")
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help="save relevant reads to this file (bam)")
-    inputParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help="export view to file; exported file format is determined \n"
+
+    interfaceParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help="export view to file; exported file format is determined \n"
         "from the filename extension (automatically sets --no-web)")
-    inputParams.add_argument("-O", "--open-exported", action="store_true", help="automatically open the exported file")
+    interfaceParams.add_argument("-O", "--open-exported", action="store_true", help="automatically open the exported file")
 
     interfaceParams.add_argument("--summary", metavar="SUMMARY_FILE", help="save summary statistics to this (tab-delimited) file")
 
     defaults = parser.add_argument_group("presets")
     defaults.add_argument("--pacbio", action="store_true", help="sets defaults for pacbio libraries")
 
-    if len(inputArgs)<=1:
+    if len(inputArgs)<1:
         parser.print_help()
         sys.exit(1)
 
