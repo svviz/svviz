@@ -7,6 +7,7 @@ Change log
 - demo data now gets downloaded from Stanford webspace
 - added ``--version`` command line option
 - no longer fails if pandas is an older version
+- check for librsvg before we do the analysis
 
 1.0.6
 -----

@@ -77,9 +77,8 @@ def parseArgs(args):
     inputParams.add_argument("-A", "--annotations", action="append", help="bed file containing annotations to plot; will be compressed and indexed \n"
         "using samtools tabix in place if needed (can specify multiple annotations files)")
 
+    # Obsolete
     inputParams.add_argument("-o", "--orientation", help=argparse.SUPPRESS)
-    # inputParams.add_argument("-d", "--search-dist", metavar="DISTANCE", type=int, help="distance in base-pairs from the breakpoints to search for reads; \n"
-        # "default: 2x the isize-mean (paired end) or 1000 (single-end)")
 
     inputParams.add_argument("--fasta", help="An additional indexable fasta file specifying insertion sequences \n"
         "(eg mobile element sequences)")

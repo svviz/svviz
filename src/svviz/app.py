@@ -37,10 +37,7 @@ def loadISDs(dataHub):
                 logging.warn("  ! multiple read pair orientations found within factor !\n  ! of 2x of one another; if you aren't expecting "
                     "your !\n  !input data to contain multiple orientations, this !\n  !could be a bug in the mapping software or svviz !")
             if len(sample.readStatistics.orientations) < 1:
-                # if dataHub.args.orientations is None:
                 logging.error("  No valid read orientations found for dataset:{}".format(sample.name))
-                # else:
-                    # sample.orientations = dataHub.args.orientation
 
 
         sample.orientations = sample.readStatistics.orientations
