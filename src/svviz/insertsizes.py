@@ -139,6 +139,7 @@ class ReadStatistics(object):
 
         try:
             self.insertSizes, self.reads, self.orientations, self.readLengths = sampleInsertSizes(bam, keepReads=keepReads)
+            logging.info("  insert size mean: {:.2f} std: {:.2f}".format(numpy.mean(self.insertSizes), numpy.std(self.insertSizes)))
         except ValueError:
             print "*"*100, "here"
 

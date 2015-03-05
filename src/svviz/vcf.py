@@ -12,7 +12,10 @@ class VCFRecord(object):
         self.start = int(fields[1])
         self.end = info["END"]
         self.svtype = info["SVTYPE"]
-        self.svlen = info["SVLEN"]
+        # if "SVLEN" in info:
+        #     self.svlen = info["SVLEN"]
+        # else:
+        #     self.svlen = self.end - self.start
         self.alt = fields[4]
 
         self.fields = fields
