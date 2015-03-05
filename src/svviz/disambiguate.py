@@ -14,6 +14,10 @@ def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expect
 
         alignmentSet.evidences["valid"] = (True, )
 
+        for read in alignmentSet.getAlignments():
+            if read.score - read.score2 <= 2:
+                alignmentSet.evidences["multimapping"] = True
+
         if not singleEnded:
             if alignmentSet.evidences["insertSizeScore"] <= minInsertSizeScore:
                 alignmentSet.evidences["valid"] = (False, "insertSizeScore")
@@ -35,6 +39,8 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
         return which
 
     # check the validity of the alignment sets (see scoreAlignmentSetCollection())
+    if "multimapping" in alnCollection["alt"].evidences or "multimapping" in alnCollection["ref"].evidences:
+        return choose("amb", "multimapping")
     if alnCollection["alt"].evidences["valid"][0] and not alnCollection["ref"].evidences["valid"][0]:
         return choose("alt", alnCollection["ref"].evidences["valid"][1])
     if alnCollection["ref"].evidences["valid"][0] and not alnCollection["alt"].evidences["valid"][0]:
