@@ -56,7 +56,38 @@ To run batch mode, use ``--type batch``, and specify (1) the reference genome (i
 
 You will probably also wish to use the ``--summary`` option to specify a tab-delimited output file with the full summary statistics describing each variant and allele.
 
-For example:
+The following columns are required in the input VCF files:
+
+Deletions
+^^^^^^^^^
+
+chromosome (column 0), start coordinate (column 1), SVTYPE=DEL;END=<end coordinate> (column 7). For example:
+
+
+Insertions
+^^^^^^^^^^
+
+chromosome (column 0), start coordinate (column 1), SVTYPE=INS;END=<end coordinate> (column 7)
+The inserted sequence must be specified:
+
+- either in column 4 (alt allele)
+- or by specifying MEINFO=<seqName>, and passing the ``--fasta insertionSequences.fasta`` command-line argument containing seqName
+- optional coordinates within the insertionSequences.fasta file can be specified as MEINFO=<seqName,start,end,strand>
+
+END=end coordinate can optionally be specified to make a compound deletion/insertion event; if END is not specified, it is set to the same value as start
+
+Examples
+^^^^^^^^
+
+.. code-block:: none
+
+    chr1 2827693   . .  . . . SVTYPE=DEL;END=2827680
+    chr3 9425916   . . ATGGCTTCGATTAGCGTCGATGCTTCGTAGAGAGTCTGCTA .  .  SVTYPE=INS;END=9425916
+    chr3 22371722   . . . .  .  SVTYPE=INS;MEINFO=L1HS;END=22371722
+    chr5 46572873   . . . .  .  SVTYPE=INS;MEINFO=L1HS,33,5030,-
+    chr6 36167622   . . TGATCGTCTTTTCTGAGAGCTGCTA .  .  SVTYPE=INS;END=36167671
+
+
 
 .. code-block:: bash
 
