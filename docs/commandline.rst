@@ -72,8 +72,8 @@ Insertions
 - chromosome (column 0)
 - start coordinate (column 1)
 - SVTYPE=INS;END=<end coordinate> (column 7)
-- the inserted sequence must be specified:
-    - either in column 4 (alt allele)
+- the inserted sequence must be specified either: 
+    - in column 4 (alt allele)
     - or by specifying MEINFO=<seqName>, and passing the ``--fasta insertionSequences.fasta`` command-line argument containing seqName
     - optional coordinates within the insertionSequences.fasta file can be specified as MEINFO=<seqName,start,end,strand>
 - END=end coordinate can optionally be specified to make a compound deletion/insertion event
@@ -132,7 +132,7 @@ A partial description of the summary output follows:
 - **count**: the number of reads supporting the given allele
 - **alnScore_mean** and **alnScore_std**: the mean and standard deviation of the alignment scores; note that the alignment scores will vary substantially if there is heterogeneity of sequencing read lengths, as there is in, for example, PacBio data, or Illumina data when adapter sequences have been stripped
 - **insertSize_mean** and **insertSize_std**: the mean and standard deviation of the insert sizes (if the data is paired-ended) or the length of the reads (if the data is single-ended); this is calculated *after* realignment, and so includes all gaps in the alignments, but does not include any clipped bases if the alignment does not include the entire read sequence
-- **reason_***: these lines count how many reads were assigned to the given allele because of the given "reason":
+- **reason_***: these lines count how many reads were assigned to the given allele because of the given "reason": 
     - **reason_alignmentScore**: the alignment score for this allele was better than for the other
     - **reason_insertSizeScore**: the insert size for this allele was a better match to the background distribution
     - **reason_orientation**: this allele had the correct paired-end read orientation but the other allele did not
