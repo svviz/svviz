@@ -30,10 +30,11 @@ class VCFRecord(object):
         return "{}::{}:{}-{},{}".format(self.svtype, self.chrom, self.start, self.end, self.svlen)
 
 def getVariants(dataHub):
+    vcfpath = dataHub.args.breakpoints[0]
     try:
-        vcfFile = open(dataHub.args.breakpoints[0])
+        vcfFile = open(vcfpath)
     except IOError:
-        raise Exception("Could not open vcf file:{}".format(dataHub.args.vcf))
+        raise Exception("Could not open vcf file:{}".format(vcfpath))
 
     svs = []
     for line in vcfFile:

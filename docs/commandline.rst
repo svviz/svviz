@@ -117,9 +117,9 @@ Each line describes a single summary statistics for a single allele in a single 
 
 .. code-block:: none
 
-    variant                                                                   sample      allele  key     value
-    MobileElementInsertion::L1HS([Locus(chr22:22715518-22715518+)]);11454)    mei_chr22_0 alt     count   331
-    MobileElementInsertion::L1HS([Locus(chr22:22715518-22715518+)]);11454)    mei_chr22_0 ref     count   5
+    variant                                 sample          allele  key     value
+    Deletion::chr1:724,921-726,121(1200)    HG002_MP_L1_L2  alt     count   4
+    Deletion::chr1:724,921-726,121(1200)    HG002_MP_L1_L2  ref     count   75
 
 The following code illustrates one approach to analyzing this summary file from python (using the `pandas <http://pandas.pydata.org>`_ library)::
 
