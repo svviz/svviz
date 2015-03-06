@@ -61,25 +61,6 @@ def loadISDs(dataHub):
 
     logging.info(" Using align distance: {}".format(dataHub.alignDistance))
 
-    # print dataHub.searchDistance, dataHub.alignDistance
-    # if dataHub.args.isize_mean is None or dataHub.args.isize_std is None:
-    #     mean_isizes = [sample.readStatistics.mean() for sample in dataHub.samples.values()]
-    #     std_isizes = [sample.readStatistics.std() for sample in dataHub.samples.values()]
-
-    #     logging.debug(" calculated isize (mean, std): {}".format(zip(mean_isizes, std_isizes)))
-
-    #     mean_isizes = [mean for mean in mean_isizes if mean is not None]
-    #     std_isizes = [std for std in std_isizes if std is not None]
-
-    #     if len(mean_isizes) > 0 and len(std_isizes) > 0:
-    #         if dataHub.args.isize_mean is None:
-    #             dataHub.args.isize_mean = max(mean_isizes)
-    #             logging.info(" isize-mean not specified; using value {} inferred from input data".format(dataHub.args.isize_mean))
-    #         if dataHub.args.isize_std is None:
-    #             dataHub.args.isize_std = max(std_isizes)
-    #             logging.info(" isize-std not specified; using value {} inferred from input data".format(dataHub.args.isize_std))
-    #     else:
-    #         raise Exception("Could not infer isize-mean from input files; make sure you have genome-wide read coverage in the input bams, or pass in the --isize-mean option on the command line")
 
 def loadReads(dataHub):
     for sample in dataHub:

@@ -1,3 +1,4 @@
+import logging
 import pyfaidx
 
 from svviz import utilities
@@ -10,16 +11,20 @@ class VCFRecord(object):
     def __init__(self, fields, info):
         self.chrom = fields[0]
         self.start = int(fields[1])
-        self.end = info["END"]
-        self.svtype = info["SVTYPE"]
-        # if "SVLEN" in info:
-        #     self.svlen = info["SVLEN"]
-        # else:
-        #     self.svlen = self.end - self.start
+
+        self.svtype = info["SVTYPE"].upper()
         self.alt = fields[4]
 
         self.fields = fields
         self.info = info
+
+        self.end = self.start
+        if "END" in info:
+            self.end = int(info["END"])
+
+        if self.svtype in ["INV", "DEL"]:
+            if self.end - self.start <= 0:
+                raise VCFParserError("Inversions and deletions need to have start < end")
 
     def __str__(self):
         return "{}::{}:{}-{},{}".format(self.svtype, self.chrom, self.start, self.end, self.svlen)
@@ -71,7 +76,8 @@ def parseVCFLine(line, dataHub):
             return parseInversion(record, dataHub)
         raise VCFParserError("Unsupported variant type:{}".format(record.svtype))
     except Exception, e:
-        print e
+        logging.error("\n== Failed to load variant: {} ==".format(e))
+        logging.error(str(line.strip()))
         return None
 
 def parseDeletion(record, dataHub):
