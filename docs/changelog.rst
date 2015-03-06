@@ -4,6 +4,9 @@ Change log
 1.0.8
 -----
 
+- filter out reads that align multiple times within the region of the structural variant ("multimapping")
+- many minor bug-fixes and interface tweaks
+
 1.0.7
 -----
 
