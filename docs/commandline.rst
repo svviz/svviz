@@ -61,23 +61,37 @@ The following columns are required in the input VCF files:
 Deletions
 ^^^^^^^^^
 
-chromosome (column 0), start coordinate (column 1), SVTYPE=DEL;END=<end coordinate> (column 7). For example:
+- chromosome (column 0)
+- start coordinate (column 1)
+- SVTYPE=DEL;END=<end coordinate> (column 7)
 
 
 Insertions
 ^^^^^^^^^^
 
-chromosome (column 0), start coordinate (column 1), SVTYPE=INS;END=<end coordinate> (column 7)
-The inserted sequence must be specified:
+- chromosome (column 0)
+- start coordinate (column 1)
+- SVTYPE=INS;END=<end coordinate> (column 7)
+- the inserted sequence must be specified:
+    - either in column 4 (alt allele)
+    - or by specifying MEINFO=<seqName>, and passing the ``--fasta insertionSequences.fasta`` command-line argument containing seqName
+    - optional coordinates within the insertionSequences.fasta file can be specified as MEINFO=<seqName,start,end,strand>
+- END=end coordinate can optionally be specified to make a compound deletion/insertion event
+    - if END is not specified, it is set to the same value as start
 
-- either in column 4 (alt allele)
-- or by specifying MEINFO=<seqName>, and passing the ``--fasta insertionSequences.fasta`` command-line argument containing seqName
-- optional coordinates within the insertionSequences.fasta file can be specified as MEINFO=<seqName,start,end,strand>
 
-END=end coordinate can optionally be specified to make a compound deletion/insertion event; if END is not specified, it is set to the same value as start
+Inversions
+^^^^^^^^^^
+
+- chromosome (column 0)
+- start coordinate (column 1)
+- SVTYPE=INV;END=<end coordinate> (column 7)
+
 
 Examples
 ^^^^^^^^
+
+``events.vcf`` (note ``.`` indicates a field that is ignored by svviz):
 
 .. code-block:: none
 
@@ -86,16 +100,43 @@ Examples
     chr3 22371722   . . . .  .  SVTYPE=INS;MEINFO=L1HS;END=22371722
     chr5 46572873   . . . .  .  SVTYPE=INS;MEINFO=L1HS,33,5030,-
     chr6 36167622   . . TGATCGTCTTTTCTGAGAGCTGCTA .  .  SVTYPE=INS;END=36167671
+    chr9 458616733   . . . .  .  SVTYPE=INV;END=458617412
 
 
+Shell command:
 
 .. code-block:: bash
 
     svviz --type batch --summary events_summary.tsv -b sample1.sorted.bam hg19.fasta events.vcf
+
+
+Summary output
+^^^^^^^^^^^^^^
+
+Each line describes a single summary statistics for a single allele in a single sample for one variant. For example, 
+
+.. code-block:: none
+
+    variant                                                                   sample      allele  key     value
+    MobileElementInsertion::L1HS([Locus(chr22:22715518-22715518+)]);11454)    mei_chr22_0 alt     count   331
+    MobileElementInsertion::L1HS([Locus(chr22:22715518-22715518+)]);11454)    mei_chr22_0 ref     count   5
 
 The following code illustrates one approach to analyzing this summary file from python (using the `pandas <http://pandas.pydata.org>`_ library)::
 
     import pandas as pd
     summary = pd.read_table("events_summary.tsv", sep="\t")
     print summary.pivot_table(values="value", index=["variant","sample","allele"], columns="key")
+
+A partial description of the summary output follows:
+
+- **count**: the number of reads supporting the given allele
+- **alnScore_mean** and **alnScore_std**: the mean and standard deviation of the alignment scores; note that the alignment scores will vary substantially if there is heterogeneity of sequencing read lengths, as there is in, for example, PacBio data, or Illumina data when adapter sequences have been stripped
+- **insertSize_mean** and **insertSize_std**: the mean and standard deviation of the insert sizes (if the data is paired-ended) or the length of the reads (if the data is single-ended); this is calculated *after* realignment, and so includes all gaps in the alignments, but does not include any clipped bases if the alignment does not include the entire read sequence
+- **reason_***: these lines count how many reads were assigned to the given allele because of the given "reason":
+    - **reason_alignmentScore**: the alignment score for this allele was better than for the other
+    - **reason_insertSizeScore**: the insert size for this allele was a better match to the background distribution
+    - **reason_orientation**: this allele had the correct paired-end read orientation but the other allele did not
+    - **reason_multimapping**: these reads were assigned to ambiguous because it aligned well in two locations near the structural variant
+
+
 
