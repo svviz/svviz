@@ -15,3 +15,10 @@ Quickstart
 2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install -U svviz``. (The sudo may not be necessary depending on your setup.)
 3. Run the following command, which downloads example data and runs it through svviz: ``svviz demo``. After several processing steps, a web browser window should open, with separate, interactive views of the reference and alternate alleles.
 4. Please report any issues using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
+
+Manuscript
+----------
+
+A preprint manuscript describing svviz is `available on bioRxiv <http://dx.doi.org/10.1101/016063>`_:
+
+Spies N, Zook JM, Salit M, Sidow A. svviz: a read viewer for validating structural variants. bioRxiv doi:10.1101/016063.

@@ -34,3 +34,11 @@ Quick-start
 2. Run the following command: ``svviz demo``
 
 (Mac OS X Users must first ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_.)
+
+
+Citation
+--------
+
+A preprint manuscript describing svviz is `available on bioRxiv <http://dx.doi.org/10.1101/016063>`_:
+
+Spies N, Zook JM, Salit M, Sidow A. svviz: a read viewer for validating structural variants. bioRxiv doi:10.1101/016063.
