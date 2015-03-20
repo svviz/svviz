@@ -47,6 +47,7 @@ function loadSVGs() {
   });
 }
 
+
 function setupExport() {
   $.getJSON('/_haspdfexport', function(data) {
     if (data.haspdfexport) {

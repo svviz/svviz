@@ -39,6 +39,7 @@ def index():
             annotations=dataHub.annotationSets,
             results_table=dataHub.getCounts(),
             insertSizeDistributions=[sample.name for sample in dataHub if sample.insertSizePlot], 
+            dotplots=dataHub.dotplots,
             variantDescription=variantDescription)
     except Exception as e:
         logging.error("ERROR:{}".format(e))
@@ -48,7 +49,7 @@ def index():
 def static_proxy(path):
     # send_static_file will guess the correct MIME type
     return app.send_static_file(path)
-   
+
 @app.route('/_export', methods=["POST"])
 def do_export():
     format = request.form.get("format", "svg").lower()
@@ -168,6 +169,11 @@ def displayIsizes(name):
 
     return Response(dataHub.samples[name].insertSizePlot, mimetype="image/svg+xml")
 
+@app.route("/_dotplots/<name>")
+def get_dotplot(name):
+    if name in dataHub.dotplots:
+        return Response(dataHub.dotplots[name], mimetype="image/png")
+    return None
 
 def run():
     import webbrowser, threading

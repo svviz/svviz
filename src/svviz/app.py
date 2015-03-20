@@ -7,6 +7,7 @@ from svviz import commandline
 from svviz import disambiguate
 from svviz import debug
 from svviz import datahub
+from svviz import dotplots
 from svviz import export
 from svviz import insertsizes
 from svviz import remap
@@ -164,6 +165,13 @@ def plotInsertSizeDistributions(dataHub):
             for sample in dataHub:
                 sample.insertSizePlot = None
 
+def generateDotplots(dataHub):
+    if dataHub.args.dotplots:
+        logging.info(" * Generating dotplots *")
+        ref = dataHub.variant.getSeq("ref")
+        dotplotPngData = dotplots.dotplot(ref, ref)
+        if dotplotPngData is not None:
+            dataHub.dotplots["ref vs ref"] = dotplotPngData
 
 def saveReads(dataHub):
     if dataHub.args.save_reads:
@@ -233,6 +241,7 @@ def run(args):
             logging.info("* Rendering tracks *")
             renderSamples(dataHub)
             renderAxesAndAnnotations(dataHub)
+        generateDotplots(dataHub)
 
         runDirectExport(dataHub)
 

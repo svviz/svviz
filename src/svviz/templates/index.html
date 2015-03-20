@@ -87,6 +87,15 @@
             {% endfor %}
         {% endif %}
 
+        {% if dotplots %}
+            {% for name in dotplots %}
+                <hr>
+              <h3>{{name}} dotplot</h3>
+              <image src="_dotplots/{{ name }}" width="500" height="500" />
+            {% endfor %}
+        {% endif %}
+
+
         <form action="/_export" method="POST" id="exportForm">
 
         <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportLabel" aria-hidden="true">

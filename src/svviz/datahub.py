@@ -25,6 +25,7 @@ class DataHub(object):
         self.alleleTracks = collections.defaultdict(collections.OrderedDict)
         self.trackCompositor = None
 
+        self.dotplots = {}
         self.info = {}
 
         self.reset()
