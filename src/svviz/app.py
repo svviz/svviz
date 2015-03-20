@@ -1,4 +1,5 @@
 import logging
+import os
 import pysam
 import sys
 
@@ -120,11 +121,22 @@ def runDirectExport(dataHub):
         logging.info("* Exporting views *")
         ensureExportData(dataHub)
 
-        exportFormat = dataHub.args.export.split(".")[-1]
+        if dataHub.args.type == "batch" or dataHub.args.format is not None:
+            exportFormat = dataHub.args.format
+            if exportFormat is None:
+                exportFormat = "pdf"
+            if not os.path.exists(dataHub.args.export):
+                os.makedirs(dataHub.args.export)
+
+            path = os.path.join(dataHub.args.export, "{}.{}".format(dataHub.variant.shortName(), exportFormat))
+        else:
+            exportFormat = dataHub.args.export.split(".")[-1]
+            path = dataHub.args.export
+
         exportData = dataHub.trackCompositor.render()
-        if exportFormat != "svg":
+        if exportFormat.lower() != "svg":
             exportData = export.convertSVG(exportData, exportFormat)
-        outf = open(dataHub.args.export, "w")
+        outf = open(path, "w")
         outf.write(exportData)
         outf.close()
 

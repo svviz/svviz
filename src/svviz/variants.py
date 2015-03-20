@@ -138,6 +138,8 @@ class StructuralVariant(object):
 
     def __str__(self):
         return "{}({};{})".format(self.__class__.__name__, self.breakpoints, self.alignDistance)
+    def shortName(self):
+        return "{}_{}_{}".format(self.__class__.__name__[:3].lower(), self.breakpoints[0].chr(), self.breakpoints[0].start())
 
     def searchRegions(self):
         pass    
@@ -178,6 +180,7 @@ class StructuralVariant(object):
     def segments(self, allele):
         # for visual display of the different segments between breakpoints
         return None
+
 
 class Deletion(StructuralVariant):
     @classmethod
@@ -316,6 +319,8 @@ class MobileElementInsertion(StructuralVariant):
 
     def __str__(self):
         return "{}::{}({});{})".format(self.__class__.__name__, self.insertedSeqLocus.chr(), self.breakpoints, self.alignDistance)
+    def shortName(self):
+        return "{}_{}_{}".format("mei", self.breakpoints[0].chr(), self.breakpoints[0].start())
 
 
 

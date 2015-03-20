@@ -36,6 +36,7 @@ class DataHub(object):
         self._alignmentSetsByName = None
         for sampleName, sample in self.samples.iteritems():
             sample.reset()
+        self.trackCompositor = None
 
     def setArgs(self, args):
         self.args = args

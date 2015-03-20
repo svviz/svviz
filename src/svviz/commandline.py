@@ -102,7 +102,8 @@ def parseArgs(args):
         "default: false")
 
     interfaceParams = parser.add_argument_group("interface parameters")
-    interfaceParams.add_argument("-v", "--version", action="version", version="svviz version {}".format(svviz.__version__), help=
+    interfaceParams.add_argument("-v", "--version", action="version", 
+        version="svviz version {}".format(svviz.__version__), help=
         "show svviz version number and exit")
     interfaceParams.add_argument("--no-web", action="store_true", help=
         "don't show the web interface")
@@ -110,9 +111,13 @@ def parseArgs(args):
         "save relevant reads to this file (bam)")
 
     interfaceParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help=
-        "export view to file; exported file format is determined \n"
-        "from the filename extension unless --format is specified;"
-        "(automatically sets --no-web)")
+        "export view to file; in single variant-mode, the exported file format is determined from \n"
+        "the filename extension unless --format is specified; in batch mode, this should be the name \n"
+        "of a directory into which to save the files (use --format to set format); setting --export \n"
+        "automatically sets --no-web")
+    interfaceParams.add_argument("--format", type=str, help="file export format, either svg, png or \n"
+        "pdf; by default, this is pdf (batch mode) or automatically identified from the file \n"
+        "extension of --export")
     interfaceParams.add_argument("-O", "--open-exported", action="store_true", help=
         "automatically open the exported file")
     interfaceParams.add_argument("--thicker-lines", action="store_true", help=
@@ -143,7 +148,7 @@ def parseArgs(args):
     
     if args.export is not None:
         args.no_web = True
-        if not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
+        if args.type!="batch" and not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
             print "Export filename must end with one of .svg, .png or .pdf"
             sys.exit(1)
 

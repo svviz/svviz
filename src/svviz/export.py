@@ -228,6 +228,7 @@ def convertSVG(insvg, outformat="pdf"):
     infile.close()
 
     options = ""
+    outformat = outformat.lower()
     if outformat == "png":
         options = "-a -w 5000 --background-color white"
 
