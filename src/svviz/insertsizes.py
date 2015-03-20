@@ -12,6 +12,9 @@ def removeOutliers(data, m = 10.):
     """ a method of trimming outliers from a list/array using 
     outlier-safe methods of calculating the center and variance;
     only removes the upper tail, not the lower tail """
+    if len(data) < 2:
+        return data
+        
     data = numpy.array(data)
     d_abs = numpy.abs(data - numpy.median(data))
     d = data - numpy.median(data)
@@ -139,7 +142,8 @@ class ReadStatistics(object):
 
         try:
             self.insertSizes, self.reads, self.orientations, self.readLengths = sampleInsertSizes(bam, keepReads=keepReads)
-            logging.info("  insert size mean: {:.2f} std: {:.2f}".format(numpy.mean(self.insertSizes), numpy.std(self.insertSizes)))
+            if len(self.insertSizes) > 1:
+                logging.info("  insert size mean: {:.2f} std: {:.2f}".format(numpy.mean(self.insertSizes), numpy.std(self.insertSizes)))
         except ValueError:
             print "*"*100, "here"
 
