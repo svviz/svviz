@@ -52,8 +52,14 @@ class Axis(object):
         # else:
             # self.height = 100
 
-    def render(self, scaleFactor=1.0, spacing=1.0):
-        self.height = 75 * scaleFactor
+    def baseHeight(self):
+        return 75
+
+    def render(self, scaleFactor=1.0, spacing=1.0, height=None, thickerLines=False):
+        self.height = height
+        if height == None:
+            self.height = 75 * scaleFactor
+
         self.svg = SVG(self.scale.pixelWidth, self.height, headerExtras="""preserveAspectRatio="none" """)
         self.svg.rect(0, self.height-(35*scaleFactor), self.scale.pixelWidth, 3*scaleFactor)
 
@@ -70,7 +76,10 @@ class Axis(object):
                 x = 50
             elif x > self.scale.pixelWidth - 50:
                 x = self.scale.pixelWidth - 50
-            self.svg.text(x, 4, label, size=18*scaleFactor)
+            extras = {}
+            if thickerLines:
+                extras["font-weight"] = "bold"
+            self.svg.text(x, 14, label, size=18*scaleFactor, **extras)
 
         if self.segments is not None:
             curOffset = 0
@@ -94,9 +103,12 @@ class Axis(object):
 
         previousPosition = None
         for vline in self.variant.getRelativeBreakpoints(self.allele):
+            thickness = 1*scaleFactor
+            if thickerLines:
+                thickness *= 2
             x = self.scale.topixels(vline)
             self.svg.line(x, x, self.height-(20*scaleFactor), self.height-55*scaleFactor, 
-                stroke="black", **{"stroke-width":1*scaleFactor})
+                stroke="black", **{"stroke-width":thickness})
             
             if previousPosition is None or vline-previousPosition > 250:     
                 self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="black")
@@ -335,7 +347,8 @@ class Track(object):
         for alignmentSet in self.getAlignments():
             self.readRenderer.render(alignmentSet)
 
-        lineWidth = 1 if not self.thickerLines else 10
+        lineWidth = 1 if not self.thickerLines else 3
+        lineWidth = lineWidth * ((self.xmax-self.xmin)/1200.0)
         for vline in self.variant.getRelativeBreakpoints(self.allele):
             x = self.scale.topixels(vline)
             y1 = -20
@@ -382,6 +395,11 @@ class AnnotationTrack(object):
 
         return currow
 
+    def baseHeight(self):
+        if self._annos is not None and len(self._annos) == 0:
+            return 0
+        return ((len(self.rows)+2) * self.rowheight) + 20
+
     def dolayout(self, scaleFactor, spacing):
         # coordinates are in pixels not base pairs
         self.rows = [None]
@@ -413,15 +431,15 @@ class AnnotationTrack(object):
 
             segmentStart += self.scale.relpixels(curWidth)
 
-    def render(self, scaleFactor=1.0, spacing=1):
+    def render(self, scaleFactor=1.0, spacing=1, height=None, thickerLines=False):
         self.dolayout(scaleFactor, spacing)
 
-        self.height = ((len(self.rows)+2) * self.rowheight)*scaleFactor
+        self.height = self.baseHeight()*scaleFactor
         self.svg = SVG(self.scale.pixelWidth, self.height)
 
         for anno in self._annos:
             color = "blue" if anno.coords["strand"] == "+" else "darkorange"
-            y = ((anno.coords["row"]+1) * self.rowheight) * scaleFactor
+            y = ((anno.coords["row"]+1) * self.rowheight + 20) * scaleFactor
             width = anno.coords["end"] - anno.coords["start"]
 
             self.svg.rect(anno.coords["start"], y, width, self.rowheight*scaleFactor, fill=color)
@@ -429,6 +447,13 @@ class AnnotationTrack(object):
                 anno.name, size=(self.rowheight-2)*scaleFactor, anchor="start", fill=color)
 
         for vline in self.variant.getRelativeBreakpoints(self.allele):
-            self.svg.rect(self.scale.topixels(vline)-scaleFactor/2.0, self.height+20, scaleFactor, self.height+40, fill="black")
+            x = self.scale.topixels(vline)-scaleFactor/2.0
+            y1 = 0
+            y2 = self.height
+            thickness = 1*scaleFactor
+            if thickerLines:
+                thickness *= 2
+            self.svg.line(x, x, y1, y2, stroke="black", **{"stroke-width":thickness})
+            # self.svg.rect(self.scale.topixels(vline)-scaleFactor/2.0, self.height, scaleFactor, self.height+40, fill="black")
 
 

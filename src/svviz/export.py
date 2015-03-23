@@ -93,18 +93,26 @@ class TrackCompositor(object):
             self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
 
         if hasTrackWithReads:
-            scaleFactor = width * 0.0005
+            scaleFactor = float(width) / self.width
             size = 1.0
             if self.dataHub.args.thicker_lines:
                 size *= 2.0
 
             for name, track in alleleTracks.iteritems():
-                track.render(scaleFactor=scaleFactor*size)
+                # this is awkward: baseHeight() and imageHeight are used
+                # for Axis tracks but not Annotation tracks
+                imageHeight = width * (track.baseHeight()/float(self.width))
+                track.render(scaleFactor=scaleFactor, height=imageHeight,  
+                    thickerLines=self.dataHub.args.thicker_lines)
                 height = track.height/scaleFactor
-                viewbox = '{xmin} 0 {width} {height}" preserveAspectRatio="xMinYMin'.format(xmin=xmin, width=width, height=height)
+
+                viewbox = '{xmin} 0 {width} {height}" preserveAspectRatio="{par}'.format(xmin=xmin, 
+                    width=width, height=track.height,
+                    par="none")
                 svg = track.svg.asString("export")
 
-                self.addTrackSVG(section, name, svg, height=height, viewbox=viewbox)
+                self.addTrackSVG(section, name, svg, height=track.baseHeight(),#height, 
+                    viewbox=viewbox)
 
 
 
