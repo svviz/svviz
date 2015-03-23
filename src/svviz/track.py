@@ -79,7 +79,7 @@ class Axis(object):
             extras = {}
             if thickerLines:
                 extras["font-weight"] = "bold"
-            self.svg.text(x, 14, label, size=18*scaleFactor, **extras)
+            self.svg.text(x, 4*scaleFactor, label, size=18*scaleFactor, **extras)
 
         if self.segments is not None:
             curOffset = 0

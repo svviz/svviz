@@ -299,7 +299,7 @@ function ScrollPanel(element, options, svg_tags) {
             var ymin = self.ymin;
             var ymax = self.ymax;
 
-            if (self.types[i] == "anno") {
+            if (self.types[i] == "anno" || self.types[i] == "axis") {
                 ymin = 0;
                 ymax = self.bboxes[i].height;
             }
