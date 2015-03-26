@@ -228,7 +228,7 @@ class ReadRenderer(object):
                     elif code in "IHS":
                         curstart = self.scale.topixels(genomePosition-0.5)
                         curend = self.scale.topixels(genomePosition+0.5)
-                        color = "red"
+                        color = "cyan"
                         self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
 
                         sequencePosition += length
