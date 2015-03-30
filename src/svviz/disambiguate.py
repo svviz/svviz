@@ -15,7 +15,7 @@ def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expect
         alignmentSet.evidences["valid"] = (True, )
 
         for read in alignmentSet.getAlignments():
-            if read.score - read.score2 <= 2:
+            if read.score2 is not None and read.score - read.score2 <= 2:
                 alignmentSet.evidences["multimapping"] = True
 
         if not singleEnded:
