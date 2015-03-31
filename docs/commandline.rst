@@ -56,6 +56,8 @@ To run batch mode, use ``--type batch``, and specify (1) the reference genome (i
 
 You will probably also wish to use the ``--summary`` option to specify a tab-delimited output file with the full summary statistics describing each variant and allele.
 
+The visualizations can still be created and exported in batch mode. While in batch mode, the ``--export`` command-line option specifies a directory into which to place the exported visualizations. These files are named by the type and position of the event, so there will be one file per event. The default is PDF format (this can be changed by using the ``--format`` option).
+
 The following columns are required in the input VCF files:
 
 Deletions
