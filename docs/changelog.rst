@@ -4,6 +4,10 @@ Change log
 1.0.9
 -----
 
+- added link to preprint on bioRxiv
+- added support for exporting one pdf per event in batch mode
+- tweaks and fixes for visualizations
+- changed coloring of insertions in reads to cyan
 
 1.0.8
 -----
