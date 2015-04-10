@@ -43,14 +43,11 @@ class Scale(object):
 class Axis(object):
     def __init__(self, scale, variant, allele):
         self.scale = scale
-        # self.vlines = vlines
         self.allele = allele
         self.variant = variant
         self.segments = variant.segments(allele)
-        # if self.segments is None:
         self.height = 75
-        # else:
-            # self.height = 100
+
 
     def baseHeight(self):
         return 75
@@ -60,12 +57,12 @@ class Axis(object):
         if height == None:
             self.height = 75 * scaleFactor
 
-        self.svg = SVG(self.scale.pixelWidth, self.height, headerExtras="""preserveAspectRatio="none" """)
-        self.svg.rect(0, self.height-(35*scaleFactor), self.scale.pixelWidth, 3*scaleFactor)
+        self.svg = SVG(self.scale.pixelWidth, self.height, yrelto="top", headerExtras="""preserveAspectRatio="none" """)
+        self.svg.rect(0, 35*scaleFactor, self.scale.pixelWidth, 3*scaleFactor)
 
         for tick in self.getTicks():
             x = self.scale.topixels(tick)
-            self.svg.rect(x, self.height-(35*scaleFactor), 1*scaleFactor, 15*scaleFactor, fill="black")
+            self.svg.rect(x, 35*scaleFactor, 1*scaleFactor, 15*scaleFactor, fill="black")
             label = tick
             if tick > 1e6:
                 label = "{:.1f}MB".format(tick/1e6)
@@ -79,7 +76,7 @@ class Axis(object):
             extras = {}
             if thickerLines:
                 extras["font-weight"] = "bold"
-            self.svg.text(x, 4*scaleFactor, label, size=18*scaleFactor, **extras)
+            self.svg.text(x, self.height-4*scaleFactor, label, size=18*scaleFactor, **extras)
 
         if self.segments is not None:
             curOffset = 0
@@ -95,10 +92,10 @@ class Axis(object):
                     start, end = end, start
                     arrowDirection = "left"
 
-                y = self.height-(35*scaleFactor)
+                y = 35*scaleFactor
 
-                self.svg.line(start, end, y, y, stroke=segment.color(), **{"stroke-width":8*scaleFactor})
-                self.svg.lineWithInternalArrows(start, end, y, y, stroke=segment.color(), direction=arrowDirection,
+                self.svg.line(start, y, end, y, stroke=segment.color(), **{"stroke-width":8*scaleFactor})
+                self.svg.lineWithInternalArrows(start, y, end, y, stroke=segment.color(), direction=arrowDirection,
                     arrowKwdArgs={"class":"scaleArrow"}, **{"stroke-width":3*scaleFactor})
 
         previousPosition = None
@@ -107,11 +104,11 @@ class Axis(object):
             if thickerLines:
                 thickness *= 2
             x = self.scale.topixels(vline)
-            self.svg.line(x, x, self.height-(20*scaleFactor), self.height-55*scaleFactor, 
+            self.svg.line(x, 20*scaleFactor, x, 55*scaleFactor, 
                 stroke="black", **{"stroke-width":thickness})
             
             if previousPosition is None or vline-previousPosition > 250:     
-                self.svg.text(x-(scaleFactor/2.0), self.height-(18*scaleFactor), "breakpoint", size=18*scaleFactor, fill="black")
+                self.svg.text(x-(scaleFactor/2.0), 18*scaleFactor, "breakpoint", size=18*scaleFactor, fill="black")
             previousPosition = vline
 
         return str(self.svg)
@@ -353,7 +350,7 @@ class Track(object):
             x = self.scale.topixels(vline)
             y1 = -20
             y2 = self.height+20
-            self.svg.line(x, x, y1, y2, stroke="black", **{"stroke-width":lineWidth})
+            self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":lineWidth})
 
         self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), 
             self.height+40, opacity=0.0, zindex=0)
@@ -453,7 +450,7 @@ class AnnotationTrack(object):
             thickness = 1*scaleFactor
             if thickerLines:
                 thickness *= 2
-            self.svg.line(x, x, y1, y2, stroke="black", **{"stroke-width":thickness})
+            self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":thickness})
             # self.svg.rect(self.scale.topixels(vline)-scaleFactor/2.0, self.height, scaleFactor, self.height+40, fill="black")
 
 

@@ -200,11 +200,8 @@ def saveReads(dataHub):
 
 def saveState(dataHub):
     import cPickle as pickle
-    for name, sample in dataHub.samples.iteritems():
-        sample.reads = None
-        sample.bam = None
 
-    pickle.dump(dataHub, open("temp.dataHub.pickle", "w"))
+    pickle.dump(dataHub, open(dataHub.args.save_state, "w"))
     logging.warn("^"*20 + " saving state to pickle and exiting " + "^"*20)
 
 def run(args):
@@ -260,7 +257,7 @@ def run(args):
     if dataHub.args.summary is not None:
         summaryStats.saveToPath(dataHub.args.summary)
 
-    if dataHub.args.save_state:
+    if dataHub.args.save_state is not None:
         saveState(dataHub)
         return
 

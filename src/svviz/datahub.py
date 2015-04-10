@@ -111,6 +111,7 @@ class Sample(object):
         """ allows pickling of Samples()s """
         state = self.__dict__.copy()
         del state["bam"]
+        del state["reads"]
         return state
 
     def reset(self):

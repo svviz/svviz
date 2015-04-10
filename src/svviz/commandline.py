@@ -111,7 +111,7 @@ def parseArgs(args):
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help=
         "save relevant reads to this file (bam)")
 
-    inputParams.add_argument("--save-state", action="store_true", help=argparse.SUPPRESS)
+    inputParams.add_argument("--save-state", help=argparse.SUPPRESS)
 
     interfaceParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help=
         "export view to file; in single variant-mode, the exported file format is determined from \n"
