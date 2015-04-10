@@ -140,7 +140,11 @@ class ReadRenderer(object):
         self.chrom = chrom
         self.thickerLines = thickerLines
 
-        self._nucColors = {"A":"blue", "C":"orange", "G":"green", "T":"black", "N":"gray"}
+        self.nucColors = {"A":"blue", "C":"orange", "G":"green", "T":"black", "N":"gray"}
+        self.colorsByStrand = {"+":"purple", "-":"red"}
+        self.insertionColor = "cyan"
+        self.deletionColor = "gray"
+        self.overlapColor = "lime"
 
     def render(self, alignmentSet):
         yoffset = alignmentSet.yoffset
@@ -159,97 +163,72 @@ class ReadRenderer(object):
             pstart = self.scale.topixels(alignment.start)
             pend = self.scale.topixels(alignment.end)
 
-            color = "purple"
-            if alignment.strand == "-":
-                color = "red"
-
-            # color = alignmentSet.color
-            # color = "gray"
-
             if self.thickerLines:
                 # extra "bold":
-                self.svg.rect(pstart, yoffset+3, pend-pstart, self.rowHeight+6, fill=color, **{"class":"read", "data-cigar":alignment.cigar,
-                    "data-readid":alignment.name#, "opacity":0.75
-                    })
+                ystart = yoffset+3
             else:
-                self.svg.rect(pstart, yoffset, pend-pstart, self.rowHeight, fill=color, **{"class":"read", "data-cigar":alignment.cigar,
-                    "data-readid":alignment.name#, "opacity":0.75
-                    })
+                ystart = yoffset
+                height = self.rowHeight
 
+            self.svg.rect(pstart, ystart, pend-pstart, height, fill=self.colorsByStrand[alignment.strand], 
+                          **{"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name})
 
             colorCigar = True
-            eachNuc = False
             if colorCigar:
-
-                # print "\n"*3
-                # print alignment.cigar
-                # print alignment.seq
-                # out = []
-                # out2 = []
-
-                pattern = re.compile('([0-9]*)([MIDNSHP=X])')
-
-                genomePosition = alignment.start
-                sequencePosition = 0
-
-                # print alignment.name
-                # print alignment.seq
-                # print self.chrom.seq[genomePosition:genomePosition+len(alignment.seq)]
-                # print ""
-
-                for length, code in pattern.findall(alignment.cigar):
-                    length = int(length)
-                    if code == "M":
-                        for i in range(length):
-                            curstart = self.scale.topixels(genomePosition+i)
-                            curend = self.scale.topixels(genomePosition+i+1)
-
-                            color = self._nucColors[alignment.seq[sequencePosition+i]]
-
-                            alt = alignment.seq[sequencePosition+i]
-                            ref = self.chrom.seq[genomePosition+i]
-                            if eachNuc or alt!=ref:
-                                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
-
-                                # out.append()
-                                # out2.append(self.chrom.seq[genomePosition+i])
-                        sequencePosition += length
-                        genomePosition += length
-                    elif code in "D":
-                        curstart = self.scale.topixels(genomePosition)
-                        curend = self.scale.topixels(genomePosition+length+1)
-                        color = "gray"
-                        self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
-
-                        genomePosition += length
-                    elif code in "IHS":
-                        curstart = self.scale.topixels(genomePosition-0.5)
-                        curend = self.scale.topixels(genomePosition+0.5)
-                        color = "cyan"
-                        self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
-
-                        sequencePosition += length
-                        # out.append("-"*length)
-
-                # print "".join(out)
-                # print "".join(out2)
-
+                self._drawCigar(alignment, yoffset)
+                
         highlightOverlaps = True
         if highlightOverlaps:
-            overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
+            self._highlightOverlaps(positionCounts, yoffset)
 
-            # if len(overlapSegments):
-            #     for pos in positionCounts:
-            #         print pos, positionCounts[pos]
-            #     print overlapSegments
-            for segment in overlapSegments:
-                start = min(segment)
-                end = max(segment)
 
-                curstart = self.scale.topixels(start)
-                curend = self.scale.topixels(end)
+    def _drawCigar(self, alignment, yoffset):
+        eachNuc = False # this gets to be computationally infeasible to display in the browser
+        pattern = re.compile('([0-9]*)([MIDNSHP=X])')
 
-                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill="lime")
+        genomePosition = alignment.start
+        sequencePosition = 0
+
+        for length, code in pattern.findall(alignment.cigar):
+            length = int(length)
+            if code == "M":
+                for i in range(length):
+                    curstart = self.scale.topixels(genomePosition+i)
+                    curend = self.scale.topixels(genomePosition+i+1)
+
+                    color = self.nucColors[alignment.seq[sequencePosition+i]]
+
+                    alt = alignment.seq[sequencePosition+i]
+                    ref = self.chrom.seq[genomePosition+i]
+                    if eachNuc or alt!=ref:
+                        self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
+
+                sequencePosition += length
+                genomePosition += length
+            elif code in "D":
+                curstart = self.scale.topixels(genomePosition)
+                curend = self.scale.topixels(genomePosition+length+1)
+                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.deletionColor)
+
+                genomePosition += length
+            elif code in "IHS":
+                curstart = self.scale.topixels(genomePosition-0.5)
+                curend = self.scale.topixels(genomePosition+0.5)
+                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.insertionColor)
+
+                sequencePosition += length
+
+    def _highlightOverlaps(self, positionCounts, yoffset):
+        overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
+
+        for segment in overlapSegments:
+            start = min(segment)
+            end = max(segment)
+
+            curstart = self.scale.topixels(start)
+            curend = self.scale.topixels(end)
+
+            self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.overlapColor)
 
 class Track(object):
     def __init__(self, chrom, alignmentSets, height, width, gstart, gend, variant, allele, thickerLines):
@@ -257,8 +236,6 @@ class Track(object):
         self.height = height
         self.width = width
 
-        # self.gstart = 0
-        # self.gend = chrom.length
         self.gstart = gstart
         self.gend = gend
         self.scale = Scale(self.gstart, self.gend, width)
@@ -275,9 +252,6 @@ class Track(object):
 
         self.variant = variant
         self.allele = allele
-        # if vlines is None:
-        #     vlines = []
-        # self.vlines = vlines
 
         self.rows = []
         self._axis = None
@@ -287,10 +261,6 @@ class Track(object):
 
         self.thickerLines = thickerLines
 
-    # def getAxis(self):
-    #     if self._axis is None:
-    #         self._axis = Axis(self.scale, self.variant, self.allele)
-    #     return self._axis
 
     def findRow(self, start, end):
         for currow in range(len(self.rows)):

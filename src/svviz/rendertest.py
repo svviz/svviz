@@ -16,7 +16,7 @@ class MockArgs(object):
 
 timings = {}
 
-for testName in ["mei", "inv", "ins_moleculo"]:
+for testName in ["mei", "inv", "ins_moleculo", "ins_pacbio"]:
     print ">", testName, "<"
 
     exportPath = "tests/export_{}_new.svg".format(testName)
@@ -57,14 +57,20 @@ for testName in ["mei", "inv", "ins_moleculo"]:
 
 
 timingsPath = "tests/renderTimings.json.txt"
+regenerateTimings = False
 try:
     oldTimings = json.load(open(timingsPath))
     print "{:<20}{:>20}{:>20}".format("Test Name", "Previous", "New")
     for testName in sorted(timings):
-        print "{:<20}{:>19.2f}s{:>19.2f}s".format(testName, oldTimings[testName], timings[testName])
+        try:
+            print "{:<20}{:>19.2f}s{:>19.2f}s".format(testName, oldTimings[testName], timings[testName])
+        except KeyError:
+            print "{:<20}{:>20}s{:>19.2f}s".format(testName, "", timings[testName])
+            regenerateTimings = True
+
 except IOError:
     print "unable to load previous timings..."
 
-if not os.path.exists(timingsPath):
+if not os.path.exists(timingsPath) or regenerateTimings:
     json.dump(timings, open(timingsPath, "w"))
     
