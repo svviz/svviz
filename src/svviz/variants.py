@@ -136,6 +136,15 @@ class StructuralVariant(object):
         # self._altseq = None
         self._seqs = {}
 
+    def __getstate__(self):
+        """ allows pickling of StructuralVariant()s """
+        for allele in ["alt", "ref"]:
+            self.getSeq(allele)
+        state = self.__dict__.copy()
+        del state['sources']
+        return state
+
+
     def __str__(self):
         return "{}({};{})".format(self.__class__.__name__, self.breakpoints, self.alignDistance)
     def shortName(self):

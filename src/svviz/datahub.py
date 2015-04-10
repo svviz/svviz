@@ -30,6 +30,13 @@ class DataHub(object):
 
         self.reset()
 
+    def __getstate__(self):
+        """ allows pickling of DataHub()s """
+        state = self.__dict__.copy()
+        del state["args"]
+        del state["genome"]
+        return state
+
     def reset(self):
         """ reset for a new variant; keeps the ReadStatistics """
         self.variant = None
@@ -98,6 +105,13 @@ class Sample(object):
         self.insertSizePlot = None
 
         self.reset()
+
+
+    def __getstate__(self):
+        """ allows pickling of Samples()s """
+        state = self.__dict__.copy()
+        del state["bam"]
+        return state
 
     def reset(self):
         self.reads = []

@@ -58,7 +58,8 @@ def checkDemoMode(args):
 def parseArgs(args):
     inputArgs = checkDemoMode(args)
 
-    parser = argparse.ArgumentParser(usage="%(prog)s [options] [demo] [ref breakpoint...] [ref vcf]",
+    parser = argparse.ArgumentParser(description="svviz version {}".format(svviz.__version__),
+        usage="%(prog)s [options] [demo] [ref breakpoint...] [ref vcf]",
         formatter_class=argparse.RawTextHelpFormatter,
         epilog="Breakpoint formats:\n{}\n\nFor an example, run 'svviz demo'.".format(getBreakpointFormatsStr()))
 
@@ -109,6 +110,8 @@ def parseArgs(args):
         "don't show the web interface")
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help=
         "save relevant reads to this file (bam)")
+
+    inputParams.add_argument("--save-state", action="store_true", help=argparse.SUPPRESS)
 
     interfaceParams.add_argument("-e", "--export", metavar="EXPORT", type=str, help=
         "export view to file; in single variant-mode, the exported file format is determined from \n"

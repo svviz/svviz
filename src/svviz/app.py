@@ -32,7 +32,7 @@ def loadISDs(dataHub):
 
     for sample in dataHub:
         logging.info(" > {} <".format(sample.name))
-        sample.readStatistics = insertsizes.ReadStatistics(sample.bam, keepReads=True)
+        sample.readStatistics = insertsizes.ReadStatistics(sample.bam, keepReads=dataHub.args.save_reads)
 
         if sample.readStatistics.orientations != "any":
             if len(sample.readStatistics.orientations) > 1:
@@ -198,6 +198,15 @@ def saveReads(dataHub):
             pysam.sort(outbam_path, sorted_path)
             pysam.index(sorted_path+".bam")
 
+def saveState(dataHub):
+    import cPickle as pickle
+    for name, sample in dataHub.samples.iteritems():
+        sample.reads = None
+        sample.bam = None
+
+    pickle.dump(dataHub, open("temp.dataHub.pickle", "w"))
+    logging.warn("^"*20 + " saving state to pickle and exiting " + "^"*20)
+
 def run(args):
     # entry point from python
     args = commandline.parseArgs(args)
@@ -250,6 +259,10 @@ def run(args):
     summaryStats.display()
     if dataHub.args.summary is not None:
         summaryStats.saveToPath(dataHub.args.summary)
+
+    if dataHub.args.save_state:
+        saveState(dataHub)
+        return
 
     runWebView(dataHub)
     
