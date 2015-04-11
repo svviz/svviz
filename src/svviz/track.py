@@ -166,6 +166,7 @@ class ReadRenderer(object):
             if self.thickerLines:
                 # extra "bold":
                 ystart = yoffset+3
+                height = self.rowHeight+6
             else:
                 ystart = yoffset
                 height = self.rowHeight
@@ -229,6 +230,7 @@ class ReadRenderer(object):
             curend = self.scale.topixels(end)
 
             self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.overlapColor)
+
 
 class Track(object):
     def __init__(self, chrom, alignmentSets, height, width, gstart, gend, variant, allele, thickerLines):

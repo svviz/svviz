@@ -1,5 +1,6 @@
 import collections
 import logging
+import os
 import subprocess
 import tempfile
 
@@ -217,11 +218,15 @@ class TrackCompositor(object):
 
 def canConvertSVGToPDF():
     try:
-        subprocess.check_call("rsvg-convert -v", stdout=subprocess.PIPE, shell=True)
-    except subprocess.CalledProcessError:
-        return False
-    else:
+        subprocess.check_call("webkitToPDF", stderr=subprocess.PIPE, shell=True)
         return True
+    except subprocess.CalledProcessError:
+        try:
+            subprocess.check_call("rsvg-convert -v", stdout=subprocess.PIPE, shell=True)
+        except subprocess.CalledProcessError:
+            return False
+        else:
+            return True
 
 def convertSVG(insvg, outformat="pdf"):
     if not canConvertSVGToPDF():
@@ -235,12 +240,32 @@ def convertSVG(insvg, outformat="pdf"):
     infile.flush()
     infile.close()
 
+    outpath = "{}/converted.{}".format(outdir, outformat)
+
+    exportData = _convertSVG_webkitToPDF(inpath, outpath, outformat)
+    if exportData is not None:
+        return exportData
+    else:
+        exportData = _convertSVG_rsvg_convert(inpath, outpath, outformat)
+        return exportData
+
+def _convertSVG_webkitToPDF(inpath, outpath, outformat):
+    if outformat.lower() != "pdf":
+        return None
+
+    try:
+        cmd = "webkitToPDF {} {}".format(inpath, outpath)
+        subprocess.check_call(cmd, shell=True, stderr=subprocess.PIPE)
+    except subprocess.CalledProcessError:
+        return None
+
+    return open(outpath).read()
+
+def _convertSVG_rsvg_convert(inpath, outpath, outformat):
     options = ""
     outformat = outformat.lower()
     if outformat == "png":
         options = "-a -w 5000 --background-color white"
-
-    outpath = "{}/converted.{}".format(outdir, outformat)
 
     try:
         subprocess.check_call("rsvg-convert -f {} {} -o {} {}".format(outformat, options, outpath, inpath), shell=True)
@@ -249,17 +274,6 @@ def convertSVG(insvg, outformat="pdf"):
 
     return open(outpath).read()
 
-# def convertSVGToPDF2(insvg):
-#     import cairosvg
-
-#     pdf = cairosvg.svg2pdf(bytestring=insvg)
-#     return pdf
-
-# def convertSVGToPNG(insvg):
-#     import cairosvg
-
-#     png = cairosvg.svg2png(bytestring=insvg)
-#     return png
 
 
 def test():
