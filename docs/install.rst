@@ -16,7 +16,9 @@ If that command gives a permissions error, you can try adding ``sudo`` to the be
 - `pysam <http://pysam.readthedocs.org/>`_
 - `requests <http://docs.python-requests.org/en/latest/>`_
 
-In order to export the visualizations into PDF or PNG format, you will need to install `libRsvg <https://wiki.gnome.org/action/show/Projects/LibRsvg>`_. On the Mac, first install and update `homebrew <http://brew.sh>`_ and then run ``brew install librsvg``; on linux (ubuntu and similar), you can run ``sudo apt-get install librsvg2-dev``.
+In order to export the visualizations into PDF or PNG format, you will need to install additional software. On the Mac, we recommend using `webkitToPDF <https://github.com/nspies/webkitToPDF/tree/master>`_, a simple homegrown command-line program that uses OS X's built-in web rendering engine to convert SVGs (``svviz``'s native format) into PDF. As its name implies, ``webkitToPDF`` does not support PNG support. To use ``webkitToPDF`` with ``svviz``, simply `download <https://github.com/nspies/webkitToPDF/releases/latest>`_ the OS X app and add it to your `PATH <http://hathaway.cc/post/69201163472/how-to-edit-your-path-environment-variables-on-mac>`_.
+
+Another option for export is `libRsvg <https://wiki.gnome.org/action/show/Projects/LibRsvg>`_. On the Mac, first install and update `homebrew <http://brew.sh>`_ and then run ``brew install librsvg``; on linux (ubuntu and similar), you can run ``sudo apt-get install librsvg2-dev``. Export using ``libRsvg`` supports both PNG and PDF formats.
 
 Finally, some optional functionality is provided by the following python packages:
 
