@@ -1,6 +1,13 @@
 Change log
 ==========
 
+1.1.0
+-----
+
+- code refactoring and new tests that should make it easier to modify and improve the visualizations produced by svviz
+- added experimental support for webkitToPDF, a command-line tool that uses OS X's built-in SVG support (part of Safari's webpage rendering code) to convert SVGs to PDFs; this currently requires a separate install of webkitToPDF. webkitToPDF produces much better PDFs than rsvg-convert does (for example, fonts are converted properly)
+- 
+
 1.0.9
 -----
 
