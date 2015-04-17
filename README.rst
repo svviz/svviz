@@ -8,6 +8,10 @@ Author: Noah Spies
 
 See the `documentation <http://svviz.readthedocs.org/>`_ for more detailed help, or run ``svviz -h`` to get help on command line arguments.
 
+.. image:: docs/example.png
+    :width: 80%
+    :align: center
+    
 Quickstart
 ==========
 
