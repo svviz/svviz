@@ -1,3 +1,7 @@
+.. image:: docs/example.png
+    :width: 80%
+    :align: center
+
 *****
 svviz
 *****
@@ -7,10 +11,6 @@ Author: Noah Spies
 ``svviz`` visualizes high-throughput sequencing data relevant to a structural variant. Only reads supporting the variant or the reference allele will be shown. ``svviz`` can operate in both an interactive web browser view to closely inspect individual variants, or in batch mode, allowing multiple variants (annotated in a VCF file) to be analyzed simultaneously.
 
 See the `documentation <http://svviz.readthedocs.org/>`_ for more detailed help, or run ``svviz -h`` to get help on command line arguments.
-
-.. image:: docs/example.png
-    :width: 80%
-    :align: center
     
 Quickstart
 ==========
