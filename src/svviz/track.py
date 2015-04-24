@@ -277,7 +277,8 @@ class Track(object):
 
     def getAlignments(self):
         # check which reads are overlapping (self.gstart, self.gend)
-        return sorted(self.alignmentSets, key=lambda x: x.start)
+        # sorting by name makes the layout process deterministic
+        return sorted(self.alignmentSets, key=lambda x: (x.start, x.end, x.name()))
 
     def dolayout(self):
         self.rows = [None]#*numRows

@@ -4,6 +4,7 @@ import pyfaidx
 import pysam
 
 from svviz import annotations
+from svviz import genomesource
 
 def nameFromBamPath(bampath):
     return os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
@@ -50,7 +51,7 @@ class DataHub(object):
         self.args = args
 
         try:
-            self.genome = pyfaidx.Fasta(args.ref, as_raw=True)
+            self.genome = genomesource.FastaGenomeSource(args.ref)
 
             for bamPath in self.args.bam:
                 name = nameFromBamPath(bamPath)

@@ -1,6 +1,7 @@
 import logging
 import pyfaidx
 
+from svviz import genomesource
 from svviz import utilities
 from svviz import variants
 
@@ -47,7 +48,8 @@ def getVariants(dataHub):
 
 def getMobileElementFasta(dataHub):
     if not "repeats" in dataHub.sources:
-        dataHub.sources["repeats"] = pyfaidx.Fasta(dataHub.args.fasta, as_raw=True)
+        dataHub.sources["repeats"] = genomesource.GenomeSource(dataHub.args.fasta)
+        # dataHub.sources["repeats"] = pyfaidx.Fasta(dataHub.args.fasta, as_raw=True)
     return dataHub.sources["repeats"]
 
 def parseInfo(infoString):

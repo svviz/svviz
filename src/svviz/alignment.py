@@ -58,6 +58,12 @@ class AlignmentSet(object):
     def orientation(self):
         return "".join(aln.strand for aln in self.getAlignments())
 
+    def name(self):
+        names = set(aln.name for aln in self.getAlignments())
+        if len(names) == 1:
+            return names.pop()
+        raise Exception("names are not consistent")
+
 
 class AlignmentSetCollection(object):
     def __init__(self, name=None):

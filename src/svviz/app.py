@@ -89,16 +89,16 @@ def runDisambiguation(dataHub):
 def renderSamples(dataHub):
     for sample in dataHub:
         ref_chrom = track.ChromosomePart(dataHub.variant.getRefSeq())
-        ref_track = track.Track(ref_chrom, sample.chosenSets("ref"), 3000, 4000, 0, len(dataHub.variant.getRefSeq()), 
+        ref_track = track.Track(ref_chrom, sample.chosenSets("ref"), 3000, 4000, 0, dataHub.variant.getLength("ref"), 
             variant=dataHub.variant, allele="ref", thickerLines=dataHub.args.thicker_lines)
         sample.tracks["ref"] = ref_track
 
         alt_chrom = track.ChromosomePart(dataHub.variant.getAltSeq())
-        alt_track = track.Track(alt_chrom, sample.chosenSets("alt"), 5000, 15000, 0, len(dataHub.variant.getAltSeq()), 
+        alt_track = track.Track(alt_chrom, sample.chosenSets("alt"), 5000, 15000, 0, dataHub.variant.getLength("alt"), 
             variant=dataHub.variant, allele="alt", thickerLines=dataHub.args.thicker_lines)
         sample.tracks["alt"] = alt_track
 
-        amb_track = track.Track(ref_chrom, sample.chosenSets("amb"), 4000, 10000, 0, len(dataHub.variant.getRefSeq()), 
+        amb_track = track.Track(ref_chrom, sample.chosenSets("amb"), 4000, 10000, 0, dataHub.variant.getLength("ref"), 
             variant=dataHub.variant, allele="amb", thickerLines=dataHub.args.thicker_lines)
         sample.tracks["amb"] = amb_track
 

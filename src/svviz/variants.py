@@ -1,7 +1,10 @@
 import logging
 import pyfaidx
 
-from svviz.utilities import Locus, reverseComp, getListDefault
+from svviz.utilities import Locus, getListDefault
+from svviz import genomesource
+
+
 
 
 def getBreakpointFormatsStr(which=None):
@@ -21,15 +24,7 @@ def getBreakpointFormatsStr(which=None):
 
 
 def getVariant(dataHub):
-    # if dataHub.args.search_dist is None:
-    #     dataHub.args.search_dist = dataHub.args.isize_mean * 2
-
-    # alignDistance = int(max(dataHub.search_dist, dataHub.args.isize_mean*2))
-
     if dataHub.args.type.lower().startswith("del"):
-        # if dataHub.args.deldemo:
-        #     chrom, start, end = "chr1", 72766323, 72811840
-        # else:
         assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("del")
         chrom = dataHub.args.breakpoints[0]
         start = int(dataHub.args.breakpoints[1])
@@ -38,9 +33,6 @@ def getVariant(dataHub):
 
         variant = Deletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("ins"):
-        # if dataHub.args.insdemo:
-        #     chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
-        # else:
         assert len(dataHub.args.breakpoints) in [3,4], getBreakpointFormatsStr("ins")
         chrom = dataHub.args.breakpoints[0]
         pos = int(dataHub.args.breakpoints[1])
@@ -72,7 +64,7 @@ def getVariant(dataHub):
         meEnd = getListDefault(dataHub.args.breakpoints, 6, 1e100)
 
         meCoords = Locus(meName, meStart, meEnd, meStrand)
-        meFasta = pyfaidx.Fasta(dataHub.args.breakpoints[0], as_raw=True)
+        meFasta = genomesource.FastaGenomeSource(dataHub.args.breakpoints[0])
 
         variant = MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, dataHub.alignDistance, dataHub.genome)
     else:
@@ -126,14 +118,12 @@ def mergedSegments(segments):
     return done
     
 class StructuralVariant(object):
-    def __init__(self, breakpoints, alignDistance, fasta):
+    def __init__(self, breakpoints, alignDistance, genomeSource):
         self.breakpoints = sorted(breakpoints, key=lambda x: x.start())
         self.alignDistance = alignDistance
 
-        self.sources = {"genome":fasta}
+        self.sources = {"genome":genomeSource}
 
-        # self._refseq = None
-        # self._altseq = None
         self._seqs = {}
 
     def __getstate__(self):
@@ -162,14 +152,7 @@ class StructuralVariant(object):
             segments = self.segments(allele)
             seqs = []
             for segment in segments:
-                # if segment.source == "genome":
-                #     seq = self.fasta[segment.chrom][segment.start:segment.end+1]
-                # else:
-                seq = self.sources[segment.source][segment.chrom][segment.start:segment.end+1]
-                    # raise Exception("not yet implemented: non-genomic segments")
-
-                if segment.strand == "-":
-                    seq = reverseComp(seq)
+                seq = self.sources[segment.source].getSeq(segment.chrom, segment.start, segment.end, segment.strand)
                 seqs.append(seq)
             self._seqs[allele] = "".join(seqs).upper()
         return self._seqs[allele]
@@ -262,8 +245,7 @@ class Inversion(StructuralVariant):
 class Insertion(StructuralVariant):
     def __init__(self, breakpoint, insertSeq, alignDistance, fasta):
         super(Insertion, self).__init__([breakpoint], alignDistance, fasta)
-        self.sources["insertion"] = {}
-        self.sources["insertion"]["insertion"] = insertSeq
+        self.sources["insertion"] = genomesource.GenomeSource(insertSeq)
         self.insertionLength = len(insertSeq)
 
 
@@ -306,9 +288,6 @@ class MobileElementInsertion(StructuralVariant):
         self.sources["repeats"] = insertionFasta
         self.insertedSeqLocus = insertedSeqLocus
 
-        # insertionSequence = insertionFasta[insertedSeqLocus.chr()][insertedSeqLocus.start():insertedSeqLocus.end()+1].upper()
-        # if insertedSeqLocus.strand() == "-":
-        #     insertionSequence = reverseComp(insertionSequence)
 
     def searchRegions(self, searchDistance):
         chrom = self.breakpoints[0].chr()
@@ -334,17 +313,17 @@ class MobileElementInsertion(StructuralVariant):
 
 
 
-if __name__ == '__main__':
-    import pyfaidx
-    from hts.GenomeFetch import GenomeFetch
+# if __name__ == '__main__':
+#     import pyfaidx
+#     from hts.GenomeFetch import GenomeFetch
 
-    genomeFetch = GenomeFetch("/Users/nspies/Data/hg19-no-newlines/")
-    genome = pyfaidx.Fasta("/Users/nspies/Data/hg19/hg19.fasta", as_raw=True)
+#     genomeFetch = GenomeFetch("/Users/nspies/Data/hg19-no-newlines/")
+#     genome = pyfaidx.Fasta("/Users/nspies/Data/hg19/hg19.fasta", as_raw=True)
 
-    deletion = Deletion([Locus("chr1", 72766323-1, 72766323-1, "+"), Locus("chr1", 72811840-1, 72811840-1, "+")],
-        100, genome)
+#     deletion = Deletion([Locus("chr1", 72766323-1, 72766323-1, "+"), Locus("chr1", 72811840-1, 72811840-1, "+")],
+#         100, genome)
 
-    print deletion.getAltSeq()
+#     print deletion.getAltSeq()
 
-    print genomeFetch.get_seq_from_to("chr1", 72766323-1-100, 72766323-1, "+").upper() + \
-                genomeFetch.get_seq_from_to("chr1", 72811840-1, 72811840-1+100).upper()
+#     print genomeFetch.get_seq_from_to("chr1", 72766323-1-100, 72766323-1, "+").upper() + \
+#                 genomeFetch.get_seq_from_to("chr1", 72811840-1, 72811840-1+100).upper()
