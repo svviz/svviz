@@ -36,8 +36,10 @@ def loadISDs(dataHub):
 
         if sample.readStatistics.orientations != "any":
             if len(sample.readStatistics.orientations) > 1:
-                logging.warn("  ! multiple read pair orientations found within factor !\n  ! of 2x of one another; if you aren't expecting "
-                    "your !\n  !input data to contain multiple orientations, this !\n  !could be a bug in the mapping software or svviz !")
+                logging.warn("  ! multiple read pair orientations found within factor !\n"
+                             "  ! of 2x of one another; if you aren't expecting your  !\n"
+                             "  ! input data to contain multiple orientations, this   !\n"
+                             "  ! could be a bug in the mapping software or svviz     !")
             if len(sample.readStatistics.orientations) < 1:
                 logging.error("  No valid read orientations found for dataset:{}".format(sample.name))
 
@@ -88,17 +90,17 @@ def runDisambiguation(dataHub):
 
 def renderSamples(dataHub):
     for sample in dataHub:
-        ref_chrom = track.ChromosomePart(dataHub.variant.getRefSeq())
-        ref_track = track.Track(ref_chrom, sample.chosenSets("ref"), 3000, 4000, 0, dataHub.variant.getLength("ref"), 
+        # ref_chrom = track.ChromosomePart(dataHub.variant.getRefSeq())
+        ref_track = track.Track(dataHub.variant.chromParts("ref"), sample.chosenSets("ref"), 3000, 4000, 
             variant=dataHub.variant, allele="ref", thickerLines=dataHub.args.thicker_lines)
         sample.tracks["ref"] = ref_track
 
-        alt_chrom = track.ChromosomePart(dataHub.variant.getAltSeq())
-        alt_track = track.Track(alt_chrom, sample.chosenSets("alt"), 5000, 15000, 0, dataHub.variant.getLength("alt"), 
+        # alt_chrom = track.ChromosomePart(dataHub.variant.getAltSeq())
+        alt_track = track.Track(dataHub.variant.chromParts("alt"), sample.chosenSets("alt"), 5000, 15000, 
             variant=dataHub.variant, allele="alt", thickerLines=dataHub.args.thicker_lines)
         sample.tracks["alt"] = alt_track
 
-        amb_track = track.Track(ref_chrom, sample.chosenSets("amb"), 4000, 10000, 0, dataHub.variant.getLength("ref"), 
+        amb_track = track.Track(dataHub.variant.chromParts("ref"), sample.chosenSets("amb"), 4000, 10000,
             variant=dataHub.variant, allele="amb", thickerLines=dataHub.args.thicker_lines)
         sample.tracks["amb"] = amb_track
 

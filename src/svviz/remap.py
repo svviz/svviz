@@ -54,43 +54,83 @@ def findBestAlignment(seq, aligner):
         return "-", reverse_al
 
 
+
 class Multimap(Multiprocessor):
-    def __init__(self, refseq):
+    def __init__(self, namesToReferences):
         from ssw import ssw_wrap
-        self.aligner = ssw_wrap.Aligner(refseq, report_cigar=True, report_secondary=True)
+
+        self.namesToAligners = {}
+        for name, ref in namesToReferences.iteritems():
+            self.namesToAligners[name] = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
 
     def remap(self, seq):
-        # print seq
-        return seq, findBestAlignment(seq, self.aligner)
+        results = {}
+        for name, aligner in self.namesToAligners.iteritems():
+            results[name] = findBestAlignment(seq, aligner)
+        return seq, results
 
-def do1remap(refseq, reads):
+
+def filterDegenerateOnly(reads):
     degenerateOnly = set("N")
-    originalLength = len(reads)
-    reads = [read for read in reads if set(read.seq) != degenerateOnly]
-    if len(reads) < originalLength:
-        logging.info("  Removed {} reads with only degenerate nucleotides ('N')".format(originalLength-len(reads)))
+    filtered = [read for read in reads if set(read.seq) != degenerateOnly]
+    if len(filtered) < len(reads):
+        logging.info("  Removed {} reads with only degenerate nucleotides ('N')".format(len(reads)-len(filtered)))
+    return filtered
 
-    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[refseq], verbose=3, processes=8))
+def chooseBestAlignment(read, mappings, chromPartsCollection):
+    # TODO: this is kind of ridiculous; we need to make pickleable reads that can be sent to 
+    # and from the Multimapper
+    # mappings: name -> (strand, aln)
+    bestName = None
+    bestAln = None
+    bestStrand = None
+    secondScore = None
 
-    # mm = Multimap(refseq)
-    # remapped = dict(map(mm.remap, [read.seq for read in reads]))
+    for name, mapping in mappings.iteritems():
+        strand, aln = mapping
+        if bestAln is None or aln.score > bestAln.score:
+            bestName = name
+            bestAln = aln
+            bestStrand = strand
+
+    for name, mapping in mappings.iteritems():
+        strand, aln = mapping
+        if name == bestName:
+            if secondScore is None or bestAln.score2 > secondScore:
+                secondScore = bestAln.score2
+        else:
+            if secondScore is None or aln.score > secondScore:
+                secondScore = aln.score
+
+    seq = read.seq
+    genome_seq = chromPartsCollection.getPart(bestName).getSeq()[bestAln.ref_begin:bestAln.ref_end+1].upper()
+
+    if bestStrand == "-":
+        seq = reverseComp(seq)
+    if read.is_reverse:
+        bestStrand = "+" if bestStrand=="-" else "-"
+    bestAln = Alignment(read.qname, bestName, bestAln.ref_begin, bestAln.ref_end, bestStrand, seq, bestAln.cigar_string, 
+                    bestAln.score, genome_seq, secondScore, read.mapq)
+    return bestAln
+
+
+def do1remap(chromPartsCollection, reads):
+    reads = filterDegenerateOnly(reads)
+
+    namesToReferences = {}
+    for name, chromPart in chromPartsCollection.parts.iteritems():
+        namesToReferences[chromPart.id] = chromPart.getSeq()
+
+    # map each read sequence against each chromosome part (the current allele only)
+    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], verbose=3, processes=8))
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:
-        strand, aln = remapped[read.seq]
-        seq = read.seq
-
-        genome_seq = refseq[aln.ref_begin:aln.ref_end+1].upper()
-
-        if strand == "-":
-            seq = reverseComp(seq)
-            # genome_seq = reverseComp(genome_seq)
-        if read.is_reverse:
-            strand = "+" if strand=="-" else "-"
-        aln = Alignment(read.qname, aln.ref_begin, aln.ref_end, strand, seq, aln.cigar_string, aln.score, genome_seq, aln.score2, read.mapq)
+        aln = chooseBestAlignment(read, remapped[read.seq], chromPartsCollection)
         alignmentSets[read.qname].addAlignment(aln)
 
     return alignmentSets
+
 
 
 def _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary):
@@ -141,8 +181,8 @@ def do_realign(variant, reads):
     # reads = reads[:25]
 
     t0 = time.time()
-    refalignments = do1remap(variant.getRefSeq(), reads)
-    altalignments = do1remap(variant.getAltSeq(), reads)
+    refalignments = do1remap(variant.chromParts("ref"), reads)
+    altalignments = do1remap(variant.chromParts("alt"), reads)
     t1 = time.time()
 
     logging.debug("  time for realigning:{}".format(t1-t0))

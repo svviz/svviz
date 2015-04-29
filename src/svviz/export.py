@@ -24,9 +24,6 @@ class TrackCompositor(object):
     def _fromDataHub(self):
         if self.title is None:
             self.title = str(self.dataHub.variant)
-        # counts = self.dataHub.getCounts()
-        # for name, curcounts in counts.iteritems():
-        #     self.descriptions.append("{}: {} {} {}".format(name, curcounts["alt"], curcounts["ref"], curcounts["amb"]))
 
         for longAlleleName in ["Alternate Allele", "Reference Allele"]:
             allele = longAlleleName[:3].lower()
@@ -42,8 +39,13 @@ class TrackCompositor(object):
         well as all the reads) """
 
         scale = tracks[0].scale
-        segments = segments=self.dataHub.variant.segments(allele)
-        alleleLength = self.dataHub.variant.getLength(allele)
+
+        # bail if there are multiple sections; could do this more nicely
+        if len(self.dataHub.variant.chromParts(allele).parts) > 1:
+            return 0, scale.pixelWidth
+
+        segments = list(self.dataHub.variant.chromParts(allele))[0].segments
+        alleleLength = len(list(self.dataHub.variant.chromParts(allele))[0])
 
         axisMin = max(0, scale.topixels(len(segments[0])-100))
         axisMax = scale.topixels(min(alleleLength-len(segments[-1])+100, alleleLength))

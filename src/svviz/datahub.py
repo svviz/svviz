@@ -1,7 +1,9 @@
 import collections
+import logging
 import os
 import pyfaidx
 import pysam
+import sys
 
 from svviz import annotations
 from svviz import genomesource
@@ -67,6 +69,14 @@ class DataHub(object):
             self.args._parser.print_help()
             print ""
             raise
+
+        for bamPath in self.args.bam:
+            try:
+                bam = pysam.AlignmentFile(bamPath)
+                bam.fetch()
+            except ValueError:
+                logging.error("\nERROR: Need to create index for input bam file: {}".format(bamPath))
+                sys.exit(0)
 
     def getCounts(self):
         if self._counts is None:

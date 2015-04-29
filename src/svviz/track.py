@@ -6,38 +6,54 @@ from svviz.svg import SVG
 from svviz import utilities
 from svviz import variants
 
-class Chromosome(object):
-    def __init__(self, length):
-        self.length = length
-    def getSeq(self, start, end):
-        pass
-
-class ChromosomePart(Chromosome):
-    def __init__(self, seq):
-        self.length = len(seq)
-        self.seq = seq.upper()
-    def getSeq(self, start, end):
-        return self.seq[start:end+1]
 
 class Scale(object):
-    def __init__(self, start, end, pixelWidth):
-        self.start = start
-        self.end = end
-        self.pixelWidth = pixelWidth
-        self.basesPerPixel = (end - start + 1) / float(pixelWidth)
+    def __init__(self, chromPartsCollection, pixelWidth, dividerSize=25):
+        # length is in genomic coordinates, starts is in pixels
+        self.dividerSize = dividerSize
+        self.partsToLengths = collections.OrderedDict()
+        self.partsToStartPixels = collections.OrderedDict()
+        self.chromPartsCollection = chromPartsCollection
 
-    def topixels(self, g, clip=False):
-        pos = (g-self.start) /float(self.basesPerPixel)
-        if clip:
-            if pos < 0:
-                return 0
-            elif pos > self.pixelWidth:
-                return self.pixelWidth
+        for part in chromPartsCollection:
+            self.partsToLengths[part.id] = len(part)
+
+        self.pixelWidth = pixelWidth
+
+        totalLength = sum(self.partsToLengths.values()) + (len(self.partsToLengths)-1)*dividerSize
+        self.basesPerPixel = totalLength / float(pixelWidth)
+
+        curStart = 0
+        for regionID in self.partsToLengths:
+            self.partsToStartPixels[regionID] = curStart
+            curStart += (self.partsToLengths[regionID]+dividerSize) / self.basesPerPixel
+
+    def topixels(self, g, regionID=None):
+        pts = 0
+        if regionID != None:
+            pts = self.partsToStartPixels[regionID]
+        else:
+            assert len(self.partsToStartPixels) == 1
+
+
+        pos = g / float(self.basesPerPixel) + pts
         return pos
 
     def relpixels(self, g):
         dist = g / float(self.basesPerPixel)
         return dist
+
+    def getBreakpointPositions(self, regionID):
+        breakpoints = []
+
+        part = self.chromPartsCollection.parts[regionID]
+
+        curpos = 0
+        for segment in part.segments[:-1]:
+            curpos += len(segment)
+            breakpoints.append(curpos)
+
+        return breakpoints
 
 
 class Axis(object):
@@ -45,7 +61,7 @@ class Axis(object):
         self.scale = scale
         self.allele = allele
         self.variant = variant
-        self.segments = variant.segments(allele)
+        self.chromPartsCollection = variant.chromParts(allele)
         self.height = 75
 
 
@@ -58,34 +74,57 @@ class Axis(object):
             self.height = 75 * scaleFactor
 
         self.svg = SVG(self.scale.pixelWidth, self.height, yrelto="top", headerExtras="""preserveAspectRatio="none" """)
-        self.svg.rect(0, 35*scaleFactor, self.scale.pixelWidth, 3*scaleFactor)
 
-        for tick in self.getTicks():
-            x = self.scale.topixels(tick)
-            self.svg.rect(x, 35*scaleFactor, 1*scaleFactor, 15*scaleFactor, fill="black")
-            label = tick
-            if tick > 1e6:
-                label = "{:.1f}MB".format(tick/1e6)
-            elif tick > 1e3:
-                label = "{:.1f}KB".format(tick/1e3)
+        # dividers! (multi-part only)
+        if len(self.chromPartsCollection) > 1:
+            for part in list(self.chromPartsCollection)[1:]:
+                divWidth = self.scale.relpixels(self.scale.dividerSize)
+                x = self.scale.partsToStartPixels[part.id] - divWidth
+                self.svg.rect(x, 0, divWidth, self.height, fill="#B2B2B2")
+                self.svg.line(x, 0, x, self.height, stroke="black", **{"stroke-width":1*scaleFactor})
+                self.svg.line(x+divWidth, 0, x+divWidth, self.height, stroke="black", **{"stroke-width":1*scaleFactor})
 
-            if x < 50:
-                x = 50
-            elif x > self.scale.pixelWidth - 50:
-                x = self.scale.pixelWidth - 50
-            extras = {}
-            if thickerLines:
-                extras["font-weight"] = "bold"
-            self.svg.text(x, self.height-4*scaleFactor, label, size=18*scaleFactor, **extras)
+            for i, part in enumerate(self.chromPartsCollection):
+                if i == 0:
+                    x = self.scale.topixels(self.scale.partsToLengths[part.id], part.id) - 15
+                    anchor = "end"
+                else:
+                    x = self.scale.partsToStartPixels[part.id] + 15
+                    anchor = "start"
+                self.svg.text(x, 18*scaleFactor, part.id, anchor=anchor, size=18*scaleFactor)
 
-        if self.segments is not None:
-            curOffset = 0
-            for segment in self.segments:
+
+
+        # tick marks and coordinates
+        for regionID in self.scale.partsToStartPixels:
+            for tick in self.getTicks(regionID):
+                x = self.scale.topixels(tick, regionID)
+
+                self.svg.rect(x, 35*scaleFactor, 1*scaleFactor, 15*scaleFactor, fill="black")
+                label = tick
+                if tick > 1e6:
+                    label = "{:.1f}MB".format(tick/1e6)
+                elif tick > 1e3:
+                    label = "{:.1f}KB".format(tick/1e3)
+
+                if x < 50:
+                    x = 50
+                elif x > self.scale.pixelWidth - 50:
+                    x = self.scale.pixelWidth - 50
+                extras = {}
+                if thickerLines:
+                    extras["font-weight"] = "bold"
+                self.svg.text(x, self.height-4*scaleFactor, label, size=18*scaleFactor, **extras)
+
+
+        # segment arrows
+        for part in self.chromPartsCollection:
+            curOffset = self.scale.partsToStartPixels[part.id]
+            for segment in part.segments:
                 start = curOffset
                 end = self.scale.relpixels(len(segment)) + curOffset
                 curOffset = end
 
-                # print " :: ", start, end, segment.end-segment.start, curOffset
                 arrowDirection = "right"
 
                 if segment.strand == "-":
@@ -98,25 +137,29 @@ class Axis(object):
                 self.svg.lineWithInternalArrows(start, y, end, y, stroke=segment.color(), direction=arrowDirection,
                     arrowKwdArgs={"class":"scaleArrow"}, **{"stroke-width":3*scaleFactor})
 
+        # breakpoints
         previousPosition = None
-        for vline in self.variant.getRelativeBreakpoints(self.allele):
-            thickness = 1*scaleFactor
-            if thickerLines:
-                thickness *= 2
-            x = self.scale.topixels(vline)
-            self.svg.line(x, 20*scaleFactor, x, 55*scaleFactor, 
-                stroke="black", **{"stroke-width":thickness})
-            
-            if previousPosition is None or vline-previousPosition > 250:     
-                self.svg.text(x-(scaleFactor/2.0), 18*scaleFactor, "breakpoint", size=18*scaleFactor, fill="black")
-            previousPosition = vline
+        for part in self.chromPartsCollection:
+            for vline in self.scale.getBreakpointPositions(part.id):
+                thickness = 1*scaleFactor
+                if thickerLines:
+                    thickness *= 2
+                x = self.scale.topixels(vline, part.id)
+                self.svg.line(x, 20*scaleFactor, x, 55*scaleFactor, 
+                    stroke="black", **{"stroke-width":thickness})
+                
+                if previousPosition is None or x-previousPosition > 250*scaleFactor:     
+                    self.svg.text(x-(scaleFactor/2.0), 18*scaleFactor, "breakpoint", size=18*scaleFactor, fill="black")
+                previousPosition = x
+
 
         return str(self.svg)
 
-    def getTicks(self):
-        start = self.scale.start
-        end = self.scale.end
-        width = end - start
+    def getTicks(self, regionID):
+        ticks = []
+        start = 0
+        width = self.scale.partsToLengths[regionID]
+        end = start + width
 
         res = (10 ** round(math.log10(end - start))) / 10.0
         if width / res > 15:
@@ -125,19 +168,19 @@ class Axis(object):
             res /= 2.0
 
         roundStart = start - (start%res)
-        ticks = []
 
         for i in range(int(roundStart), end, int(res)):
             ticks.append(i)
 
         return ticks
 
+NYIWarned = False
 class ReadRenderer(object):
-    def __init__(self, rowHeight, scale, chrom, thickerLines=False):
+    def __init__(self, rowHeight, scale, chromPartsCollection, thickerLines=False):
         self.rowHeight = rowHeight
         self.svg = None
         self.scale = scale
-        self.chrom = chrom
+        self.chromPartsCollection = chromPartsCollection
         self.thickerLines = thickerLines
 
         self.nucColors = {"A":"blue", "C":"orange", "G":"green", "T":"black", "N":"gray"}
@@ -148,8 +191,19 @@ class ReadRenderer(object):
 
     def render(self, alignmentSet):
         yoffset = alignmentSet.yoffset
-        pstart = self.scale.topixels(alignmentSet.start)
-        pend = self.scale.topixels(alignmentSet.end)
+        if len(set([x.regionID for x in alignmentSet.getAlignments()]))!=1:
+            global NYIWarned
+            
+            if not NYIWarned:            
+                NYIWarned = True
+                print "\n"*5
+                print "WARNING! Not yet implemented: ambiguous track display of read pairs mapping to different chromosomes"
+                print "\n"*5
+            return
+
+        regionID = alignmentSet.getAlignments()[0].regionID
+        pstart = self.scale.topixels(alignmentSet.start, regionID)
+        pend = self.scale.topixels(alignmentSet.end, regionID)
 
         thinLineWidth = 5
         self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill="#DDDDDD")
@@ -160,8 +214,8 @@ class ReadRenderer(object):
             for position in range(alignment.start, alignment.end+1):
                 positionCounts[position] += 1
 
-            pstart = self.scale.topixels(alignment.start)
-            pend = self.scale.topixels(alignment.end)
+            pstart = self.scale.topixels(alignment.start, regionID)
+            pend = self.scale.topixels(alignment.end, regionID)
 
             if self.thickerLines:
                 # extra "bold":
@@ -180,7 +234,7 @@ class ReadRenderer(object):
                 
         highlightOverlaps = True
         if highlightOverlaps:
-            self._highlightOverlaps(positionCounts, yoffset)
+            self._highlightOverlaps(positionCounts, yoffset, regionID)
 
 
     def _drawCigar(self, alignment, yoffset):
@@ -194,58 +248,58 @@ class ReadRenderer(object):
             length = int(length)
             if code == "M":
                 for i in range(length):
-                    curstart = self.scale.topixels(genomePosition+i)
-                    curend = self.scale.topixels(genomePosition+i+1)
+                    curstart = self.scale.topixels(genomePosition+i, alignment.regionID)
+                    curend = self.scale.topixels(genomePosition+i+1, alignment.regionID)
 
                     color = self.nucColors[alignment.seq[sequencePosition+i]]
 
                     alt = alignment.seq[sequencePosition+i]
-                    ref = self.chrom.seq[genomePosition+i]
+
+                    # TODO: this lookup is pretty complicated and in an inner loop -- can we maybe cache the sequences locally?
+                    ref = self.chromPartsCollection.getSeq(alignment.regionID)[genomePosition+i]
                     if eachNuc or alt!=ref:
                         self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
 
                 sequencePosition += length
                 genomePosition += length
             elif code in "D":
-                curstart = self.scale.topixels(genomePosition)
-                curend = self.scale.topixels(genomePosition+length+1)
+                curstart = self.scale.topixels(genomePosition, alignment.regionID)
+                curend = self.scale.topixels(genomePosition+length+1, alignment.regionID)
                 self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.deletionColor)
 
                 genomePosition += length
             elif code in "IHS":
-                curstart = self.scale.topixels(genomePosition-0.5)
-                curend = self.scale.topixels(genomePosition+0.5)
+                curstart = self.scale.topixels(genomePosition-0.5, alignment.regionID)
+                curend = self.scale.topixels(genomePosition+0.5, alignment.regionID)
                 self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.insertionColor)
 
                 sequencePosition += length
 
-    def _highlightOverlaps(self, positionCounts, yoffset):
+    def _highlightOverlaps(self, positionCounts, yoffset, regionID):
         overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
 
         for segment in overlapSegments:
             start = min(segment)
             end = max(segment)
 
-            curstart = self.scale.topixels(start)
-            curend = self.scale.topixels(end)
+            curstart = self.scale.topixels(start, regionID)
+            curend = self.scale.topixels(end, regionID)
 
             self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.overlapColor)
 
 
 class Track(object):
-    def __init__(self, chrom, alignmentSets, height, width, gstart, gend, variant, allele, thickerLines):
-        self.chrom = chrom
+    def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, allele, thickerLines):
+        self.chromPartsCollection = chromPartsCollection
         self.height = height
         self.width = width
 
-        self.gstart = gstart
-        self.gend = gend
-        self.scale = Scale(self.gstart, self.gend, width)
+        self.scale = Scale(chromPartsCollection, width)
 
         self.rowHeight = 5
         self.rowMargin = 1
 
-        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chrom, thickerLines)
+        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chromPartsCollection, thickerLines)
 
         self.alignmentSets = alignmentSets
 
@@ -264,9 +318,9 @@ class Track(object):
         self.thickerLines = thickerLines
 
 
-    def findRow(self, start, end):
+    def findRow(self, start, end, regionID):
         for currow in range(len(self.rows)):
-            if self.rows[currow] is None or (self.scale.topixels(start) - self.scale.topixels(self.rows[currow])) >= 2:
+            if self.rows[currow] is None or (start - self.rows[currow]) >= 2:
                 self.rows[currow] = end
                 break
         else:
@@ -278,7 +332,8 @@ class Track(object):
     def getAlignments(self):
         # check which reads are overlapping (self.gstart, self.gend)
         # sorting by name makes the layout process deterministic
-        return sorted(self.alignmentSets, key=lambda x: (x.start, x.end, x.name()))
+        regionIDsToPositions = dict((part.id, i) for i, part in enumerate(self.chromPartsCollection))
+        return sorted(self.alignmentSets, key=lambda x: (regionIDsToPositions[x.getAlignments()[0].regionID], x.start, x.end, x.name()))
 
     def dolayout(self):
         self.rows = [None]#*numRows
@@ -290,18 +345,26 @@ class Track(object):
             # if len(alignmentSet.getAlignments()) < 2:
                 # continue
 
-            currow = self.findRow(alignmentSet.start, alignmentSet.end)
+            regionIDs = set([x.regionID for x in alignmentSet.getAlignments()])
+            assert self.allele=="amb" or len(regionIDs)==1, alignmentSet.getAlignments()
+            regionID = regionIDs.pop()
+
+            start = self.scale.topixels(alignmentSet.start, regionID)
+            end = self.scale.topixels(alignmentSet.end, regionID)
+
+            currow = self.findRow(start, end, regionID)
             yoffset = (self.rowHeight+self.rowMargin) * currow
             alignmentSet.yoffset = yoffset
 
-            self.xmin = min(self.xmin, self.scale.topixels(alignmentSet.start))
-            self.xmax = max(self.xmax, self.scale.topixels(alignmentSet.end))
+            self.xmin = min(self.xmin, self.scale.topixels(alignmentSet.start, regionID))
+            self.xmax = max(self.xmax, self.scale.topixels(alignmentSet.end, regionID))
 
         self.height = (self.rowHeight+self.rowMargin) * len(self.rows)
 
     def render(self):        
         if len(self.getAlignments()) == 0:
-            xmiddle = (self.scale.topixels(self.gend)-self.scale.topixels(self.gstart))/2.0
+            xmiddle = self.scale.pixelWidth / 2.0
+
             self.height = xmiddle/20.0
 
             self.svg = SVG(self.width, self.height)
@@ -319,13 +382,24 @@ class Track(object):
 
         lineWidth = 1 if not self.thickerLines else 3
         lineWidth = lineWidth * ((self.xmax-self.xmin)/1200.0)
-        for vline in self.variant.getRelativeBreakpoints(self.allele):
-            x = self.scale.topixels(vline)
-            y1 = -20
-            y2 = self.height+20
-            self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":lineWidth})
 
-        self.svg.rect(0, self.svg.height+20, self.scale.topixels(self.gend)-self.scale.topixels(self.gstart), 
+        for part in self.chromPartsCollection:
+            for vline in self.scale.getBreakpointPositions(part.id):
+                x = self.scale.topixels(vline, part.id)
+                y1 = -20
+                y2 = self.height+20
+                self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":lineWidth})
+
+
+        # dividers!
+        for part in list(self.chromPartsCollection)[1:]:
+            divWidth = self.scale.relpixels(self.scale.dividerSize)
+            x = self.scale.partsToStartPixels[part.id] - divWidth
+            self.svg.rect(x, self.height+40, divWidth, self.height+40, fill="#B2B2B2")
+            self.svg.line(x, 0, x, self.height+40, stroke="black", **{"stroke-width":4})
+            self.svg.line(x+divWidth, 0, x+divWidth, self.height+40, stroke="black", **{"stroke-width":4})
+
+        self.svg.rect(0, self.svg.height+20, self.scale.pixelWidth, 
             self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
 
@@ -424,6 +498,5 @@ class AnnotationTrack(object):
             if thickerLines:
                 thickness *= 2
             self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":thickness})
-            # self.svg.rect(self.scale.topixels(vline)-scaleFactor/2.0, self.height, scaleFactor, self.height+40, fill="black")
 
 

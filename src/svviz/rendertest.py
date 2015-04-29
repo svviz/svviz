@@ -16,7 +16,7 @@ class MockArgs(object):
 
 timings = {}
 
-for testName in ["mei", "inv", "ins_moleculo", "ins_pacbio"]:
+for testName in ["mei", "inv", "ins_moleculo", "ins_pacbio", "del_chr1"]:
     print ">", testName, "<"
 
     exportPath = "tests/export_{}_new.svg".format(testName)
@@ -63,7 +63,10 @@ try:
     print "{:<20}{:>20}{:>20}".format("Test Name", "Previous", "New")
     for testName in sorted(timings):
         try:
-            print "{:<20}{:>19.2f}s{:>19.2f}s".format(testName, oldTimings[testName], timings[testName])
+            remark = "ok"
+            if timings[testName] > oldTimings[testName] * 1.1:
+                remark = "** slower! **"
+            print "{:<20}{:>19.2f}s{:>19.2f}s\t{}".format(testName, oldTimings[testName], timings[testName], remark)
         except KeyError:
             print "{:<20}{:>20}s{:>19.2f}s".format(testName, "", timings[testName])
             regenerateTimings = True
@@ -72,5 +75,6 @@ except IOError:
     print "unable to load previous timings..."
 
 if not os.path.exists(timingsPath) or regenerateTimings:
+    print "overwriting previous timings..."
     json.dump(timings, open(timingsPath, "w"))
     
