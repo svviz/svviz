@@ -31,11 +31,32 @@ class AnnotationSet(object):
     def __init__(self, bedPath):
         self.bedPath = ensureIndexed(bedPath)
         self.bed = pysam.Tabixfile(self.bedPath)
+        self.usingChromFormat = False
+
+        self._checkChromFormat()
+
+    def _checkChromFormat(self):
+        usingChromFormat = 0
+        count = 0
+        for anno in self.bed.fetch():
+            if anno.startswith("#"):
+                continue
+            if anno.startswith("chr"):
+                self.usingChromFormat += 1
+            if count > 10:
+                break
+            count += 1
+
+        if usingChromFormat / float(count) > 0.8:
+            self.usingChromFormat = True
 
     def getAnnotations(self, chrom, start, end, clip=False):
         """ Returns annotations, in genome order, from the requested genomic region """
         annotations = []
         
+        if not chrom.startswith("chr") and self.usingChromFormat:
+            chrom = "chr" + str(chrom)
+
         if chrom not in self.bed.contigs:
             return []
             

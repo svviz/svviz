@@ -161,10 +161,16 @@ def mergedSegments(segments):
     for i in range(len(segments)-1):
         first = segments[i]
         second = segments[i+1]
-        if first.chrom==second.chrom and first.strand==second.strand and first.end == second.start-1 and first.source==second.source:
-            merged = Segment(first.chrom, first.start, second.end, second.strand, "{}_{}".format(first.id, second.id), first.source)
-            result = done + mergedSegments([merged]+segments[i+2:])
-            return result
+
+        if first.strand == "+" and first.chrom==second.chrom and first.strand==second.strand and first.end == second.start-1 and first.source==second.source:
+                merged = Segment(first.chrom, first.start, second.end, second.strand, "{}_{}".format(first.id, second.id), first.source)
+                result = done + mergedSegments([merged]+segments[i+2:])
+                return result
+        elif first.strand == "-" and first.chrom==second.chrom and first.strand==second.strand and first.start == second.end+1 and first.source==second.source:
+                merged = Segment(first.chrom, first.end, second.start, second.strand, "{}_{}".format(first.id, second.id), first.source)
+                result = done + mergedSegments([merged]+segments[i+2:])
+                return result
+
         else:
             done.append(segments[i])
 

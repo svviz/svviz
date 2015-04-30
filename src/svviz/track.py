@@ -408,12 +408,12 @@ class Track(object):
 
 class AnnotationTrack(object):
     def __init__(self, annotationSet, scale, variant, allele):
+        self.chromPartsCollection = variant.chromParts(allele)
         self.annotationSet = annotationSet
         self.scale = scale
         self.height = None
         self.variant = variant
         self.allele = allele
-        self.segments = variants.mergedSegments(variant.segments(allele))
 
         self._annos = None
         self.rows = [None]
@@ -448,32 +448,35 @@ class AnnotationTrack(object):
         # coordinates are in pixels not base pairs
         self.rows = [None]
 
-        segmentStart = 0
 
         self._annos = []
-        for segment in self.segments:
-            curWidth = len(segment)
-            curAnnos = self.annotationSet.getAnnotations(segment.chrom, segment.start, segment.end, clip=True)
-            if segment.strand == "-":
-                curAnnos = sorted(curAnnos, key=lambda x:x.end, reverse=True)
+        for part in self.chromPartsCollection:
+            segmentStart = self.scale.partsToStartPixels[part.id]
+            print part.segments, variants.mergedSegments(part.segments)
 
-            for anno in curAnnos:
-                start = self._topixels(anno.start, segment, segmentStart)
-                end = self._topixels(anno.end, segment, segmentStart)
-                if end < start:
-                    start, end = end, start
-                textLength = len(anno.name)*self.rowheight/1.0*scaleFactor*spacing
-                rowNum = self.findRow(start, end+textLength)
+            for segment in variants.mergedSegments(part.segments):
+                curWidth = len(segment)
+                curAnnos = self.annotationSet.getAnnotations(segment.chrom, segment.start, segment.end, clip=True)
+                if segment.strand == "-":
+                    curAnnos = sorted(curAnnos, key=lambda x:x.end, reverse=True)
 
-                anno.coords = {}
-                anno.coords["row"] = rowNum
-                anno.coords["start"] = start
-                anno.coords["end"] = end
-                anno.coords["strand"] = anno.strand if segment.strand=="+" else utilities.switchStrand(anno.strand)
+                for anno in curAnnos:
+                    start = self._topixels(anno.start, segment, segmentStart)
+                    end = self._topixels(anno.end, segment, segmentStart)
+                    if end < start:
+                        start, end = end, start
+                    textLength = len(anno.name)*self.rowheight/1.0*scaleFactor*spacing
+                    rowNum = self.findRow(start, end+textLength)
 
-                self._annos.append(anno)
+                    anno.coords = {}
+                    anno.coords["row"] = rowNum
+                    anno.coords["start"] = start
+                    anno.coords["end"] = end
+                    anno.coords["strand"] = anno.strand if segment.strand=="+" else utilities.switchStrand(anno.strand)
 
-            segmentStart += self.scale.relpixels(curWidth)
+                    self._annos.append(anno)
+
+                segmentStart += self.scale.relpixels(curWidth)
 
     def render(self, scaleFactor=1.0, spacing=1, height=None, thickerLines=False):
         self.dolayout(scaleFactor, spacing)
@@ -490,13 +493,14 @@ class AnnotationTrack(object):
             self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
                 anno.name, size=(self.rowheight-2)*scaleFactor, anchor="start", fill=color)
 
-        for vline in self.variant.getRelativeBreakpoints(self.allele):
-            x = self.scale.topixels(vline)-scaleFactor/2.0
-            y1 = 0
-            y2 = self.height
-            thickness = 1*scaleFactor
-            if thickerLines:
-                thickness *= 2
-            self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":thickness})
+        for part in self.chromPartsCollection:
+            for vline in self.scale.getBreakpointPositions(part.id):
+                x = self.scale.topixels(vline, part.id)-scaleFactor/2.0
+                y1 = 0
+                y2 = self.height
+                thickness = 1*scaleFactor
+                if thickerLines:
+                    thickness *= 2
+                self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":thickness})
 
 
