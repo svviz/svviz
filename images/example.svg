@@ -1,0 +1,1593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1807.409px" height="1459.427px" viewBox="0 0 1807.409 1459.427" enable-background="new 0 0 1807.409 1459.427"
+	 xml:space="preserve">
+<rect x="302.364" y="27.374" fill="none" stroke="#000000" stroke-width="4" stroke-miterlimit="10" width="1200" height="1323"/>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="312.364" y="35.373" width="1190" height="1315"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_2_)">
+		<text transform="matrix(1 0 0 1 312.3643 82.373)" font-family="'Helvetica-Bold'" font-size="35">Inversion::chr4:88,847,163-88,858,699</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_3_" x="312.364" y="72.373" width="1190" height="1278"/>
+	</defs>
+	<clipPath id="SVGID_4_">
+		<use xlink:href="#SVGID_3_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_4_)">
+		<text transform="matrix(1 0 0 1 312.3643 110.373)" font-family="'Helvetica-Bold'" font-size="16">Sample</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_5_" x="519.364" y="72.373" width="983" height="1278"/>
+	</defs>
+	<clipPath id="SVGID_6_">
+		<use xlink:href="#SVGID_5_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_6_)">
+		<text transform="matrix(1 0 0 1 519.3643 110.373)" font-family="'Helvetica-Bold'" font-size="16">Alt</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_7_" x="582.364" y="72.373" width="920" height="1278"/>
+	</defs>
+	<clipPath id="SVGID_8_">
+		<use xlink:href="#SVGID_7_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_8_)">
+		<text transform="matrix(1 0 0 1 582.3643 110.373)" font-family="'Helvetica-Bold'" font-size="16">Ref</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_9_" x="645.364" y="72.373" width="857" height="1278"/>
+	</defs>
+	<clipPath id="SVGID_10_">
+		<use xlink:href="#SVGID_9_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_10_)">
+		<text transform="matrix(1 0 0 1 645.3643 110.373)" font-family="'Helvetica-Bold'" font-size="16">Amb</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_11_" x="312.364" y="94.873" width="1190" height="1255.5"/>
+	</defs>
+	<clipPath id="SVGID_12_">
+		<use xlink:href="#SVGID_11_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_12_)">
+		<text transform="matrix(1 0 0 1 312.3643 132.873)" font-family="'Helvetica-Bold'" font-size="16">HG002</text>
+	</g>
+	<g clip-path="url(#SVGID_12_)">
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_13_" x="519.364" y="94.873" width="983" height="1255.5"/>
+	</defs>
+	<clipPath id="SVGID_14_">
+		<use xlink:href="#SVGID_13_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_14_)">
+		<text transform="matrix(1 0 0 1 519.3643 132.873)" font-family="'Helvetica'" font-size="16">131</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_15_" x="582.364" y="94.873" width="920" height="1255.5"/>
+	</defs>
+	<clipPath id="SVGID_16_">
+		<use xlink:href="#SVGID_15_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_16_)">
+		<text transform="matrix(1 0 0 1 582.3643 132.873)" font-family="'Helvetica'" font-size="16">134</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_17_" x="645.364" y="94.873" width="857" height="1255.5"/>
+	</defs>
+	<clipPath id="SVGID_18_">
+		<use xlink:href="#SVGID_17_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_18_)">
+		<text transform="matrix(1 0 0 1 645.3643 132.873)" font-family="'Helvetica'" font-size="16">624</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_19_" x="312.364" y="117.373" width="1190" height="1233"/>
+	</defs>
+	<clipPath id="SVGID_20_">
+		<use xlink:href="#SVGID_19_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_20_)">
+		<text transform="matrix(1 0 0 1 312.3643 155.373)"><tspan x="0" y="0" font-family="'Helvetica-Bold'" font-size="16" letter-spacing="-1">T</tspan><tspan x="8.605" y="0" font-family="'Helvetica-Bold'" font-size="16">otal</tspan></text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_21_" x="519.364" y="117.373" width="983" height="1233"/>
+	</defs>
+	<clipPath id="SVGID_22_">
+		<use xlink:href="#SVGID_21_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_22_)">
+		<text transform="matrix(1 0 0 1 519.3643 155.373)" font-family="'Helvetica'" font-size="16">131</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_23_" x="582.364" y="117.373" width="920" height="1233"/>
+	</defs>
+	<clipPath id="SVGID_24_">
+		<use xlink:href="#SVGID_23_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_24_)">
+		<text transform="matrix(1 0 0 1 582.3643 155.373)" font-family="'Helvetica'" font-size="16">134</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_25_" x="645.364" y="117.373" width="857" height="1233"/>
+	</defs>
+	<clipPath id="SVGID_26_">
+		<use xlink:href="#SVGID_25_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_26_)">
+		<text transform="matrix(1 0 0 1 645.3643 155.373)" font-family="'Helvetica'" font-size="16">624</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_27_" x="312.364" y="149.873" width="1190" height="1200.5"/>
+	</defs>
+	<clipPath id="SVGID_28_">
+		<use xlink:href="#SVGID_27_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_28_)">
+		<text transform="matrix(1 0 0 1 312.3643 201.873)" font-family="'Helvetica'" font-size="30">Alternate Allele</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_29_" x="312.364" y="181.873" width="1190" height="1168.5"/>
+	</defs>
+	<clipPath id="SVGID_30_">
+		<use xlink:href="#SVGID_29_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_30_)">
+		<text transform="matrix(1 0 0 1 312.3643 231.873)" font-family="'Helvetica'" font-size="18">HG002</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_31_" x="302.364" y="213.873" width="1200" height="230"/>
+	</defs>
+	<clipPath id="SVGID_32_">
+		<use xlink:href="#SVGID_31_"  overflow="visible"/>
+	</clipPath>
+	<g opacity="0" clip-path="url(#SVGID_32_)" enable-background="new    ">
+		<g>
+			<defs>
+				<rect id="SVGID_33_" x="302.364" y="213.373" width="1200" height="231"/>
+			</defs>
+			<clipPath id="SVGID_34_">
+				<use xlink:href="#SVGID_33_"  overflow="visible"/>
+			</clipPath>
+			<g clip-path="url(#SVGID_34_)">
+				<defs>
+					<rect id="SVGID_35_" x="302.364" y="213.373" width="1200" height="231"/>
+				</defs>
+				<clipPath id="SVGID_36_">
+					<use xlink:href="#SVGID_35_"  overflow="visible"/>
+				</clipPath>
+				<rect x="197.958" y="213.873" clip-path="url(#SVGID_36_)" width="1405.669" height="230"/>
+			</g>
+		</g>
+	</g>
+	<rect x="356.91" y="433.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="313.373" height="2.5"/>
+	<rect x="356.91" y="432.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.428" height="5.5"/>
+	<rect x="666.202" y="432.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="667.589" y="433.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="404.208" y="430.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="295.662" height="2.5"/>
+	<rect x="404.208" y="429.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="695.789" y="429.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="697.707" y="430.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="699.543" y="430.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="404.33" y="427.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="311.251" height="2.5"/>
+	<rect x="404.33" y="426.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="712.275" y="426.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.306" height="5.5"/>
+	<rect x="404.33" y="424.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="311.251" height="2.5"/>
+	<rect x="404.33" y="423.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="712.275" y="423.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.306" height="5.5"/>
+	<rect x="410.737" y="421.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="265.586" height="2.5"/>
+	<rect x="410.737" y="420.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="672.242" y="420.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="410.737" y="418.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="265.586" height="2.5"/>
+	<rect x="410.737" y="417.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="672.242" y="417.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="417.185" y="415.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="274.033" height="2.5"/>
+	<rect x="417.185" y="414.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="689.259" y="414.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.958" height="5.5"/>
+	<rect x="417.185" y="412.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="274.033" height="2.5"/>
+	<rect x="417.185" y="411.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="689.259" y="411.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.958" height="5.5"/>
+	<rect x="419.021" y="409.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="283.583" height="2.5"/>
+	<rect x="419.021" y="408.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="698.604" y="408.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.999" height="5.5"/>
+	<rect x="699.543" y="409.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="699.951" y="409.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="700.114" y="409.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="700.196" y="409.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="700.481" y="409.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="700.686" y="409.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="700.89" y="409.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="702.624" y="409.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="419.225" y="406.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="279.706" height="2.5"/>
+	<rect x="419.225" y="405.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="695.666" y="405.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.265" height="5.5"/>
+	<rect x="697.707" y="406.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="425.143" y="403.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="285.133" height="2.5"/>
+	<rect x="425.143" y="402.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="708.97" y="402.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.306" height="5.5"/>
+	<rect x="427.795" y="400.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="339.573" height="2.5"/>
+	<rect x="427.795" y="399.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="763.695" y="399.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.673" height="5.5"/>
+	<rect x="764.797" y="400.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="766.225" y="400.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="436.161" y="397.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="251.343" height="2.5"/>
+	<rect x="436.161" y="396.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.509" height="5.5"/>
+	<rect x="683.995" y="396.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.51" height="5.5"/>
+	<rect x="686.076" y="397.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="436.161" y="394.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="251.343" height="2.5"/>
+	<rect x="436.161" y="393.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.509" height="5.5"/>
+	<rect x="683.995" y="393.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.51" height="5.5"/>
+	<rect x="686.076" y="394.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="436.977" y="391.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="322.27" height="2.5"/>
+	<rect x="436.977" y="390.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="758.063" y="390.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.183" height="5.5"/>
+	<rect x="437.712" y="388.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="258.648" height="2.5"/>
+	<rect x="437.712" y="387.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="694.523" y="387.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.836" height="5.5"/>
+	<rect x="694.768" y="388.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="438.202" y="385.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="260.199" height="2.5"/>
+	<rect x="438.202" y="384.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="694.319" y="384.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="694.768" y="385.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="697.707" y="385.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="439.344" y="382.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="285.827" height="2.5"/>
+	<rect x="439.344" y="381.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="0.938" height="5.5"/>
+	<rect x="721.09" y="381.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="439.589" y="379.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="333.655" height="2.5"/>
+	<rect x="439.589" y="378.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="1.632" height="5.5"/>
+	<rect x="769.164" y="378.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="772.428" y="379.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="441.181" y="376.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="288.112" height="2.5"/>
+	<rect x="441.181" y="375.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="725.212" y="375.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="726.64" y="376.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="441.181" y="373.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="288.112" height="2.5"/>
+	<rect x="441.181" y="372.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="725.212" y="372.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="726.64" y="373.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="728.395" y="373.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="728.762" y="373.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="452.811" y="370.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="321.535" height="2.5"/>
+	<rect x="452.811" y="369.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="770.265" y="369.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="772.428" y="370.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="456.28" y="367.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="250.323" height="2.5"/>
+	<rect x="456.28" y="366.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.53" height="5.5"/>
+	<rect x="702.767" y="366.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.836" height="5.5"/>
+	<rect x="702.747" y="367.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="703.053" y="367.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="703.256" y="367.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="703.542" y="367.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="706.236" y="367.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="706.378" y="367.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="460.401" y="364.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="288.072" height="2.5"/>
+	<rect x="460.401" y="363.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="744.392" y="363.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="745.657" y="364.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="460.401" y="361.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="288.072" height="2.5"/>
+	<rect x="460.401" y="360.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="744.392" y="360.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="745.657" y="361.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="462.483" y="358.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.935" height="2.5"/>
+	<rect x="462.483" y="357.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="713.336" y="357.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="462.483" y="355.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.935" height="2.5"/>
+	<rect x="462.483" y="354.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="713.336" y="354.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="476.48" y="352.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="341.735" height="2.5"/>
+	<rect x="476.48" y="351.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="814.135" y="351.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="816.257" y="352.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="488.519" y="349.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="231.388" height="2.5"/>
+	<rect x="488.519" y="348.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.285" height="5.5"/>
+	<rect x="715.867" y="348.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.04" height="5.5"/>
+	<rect x="718.193" y="349.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="719.927" y="349.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="492.273" y="346.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="225.634" height="2.5"/>
+	<rect x="492.273" y="345.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="715.581" y="345.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.326" height="5.5"/>
+	<rect x="493.539" y="343.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="178.172" height="2.5"/>
+	<rect x="493.539" y="342.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="667.63" y="342.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="671.018" y="343.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="520.023" y="340.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="244.651" height="2.5"/>
+	<rect x="520.023" y="339.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="761.042" y="339.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.632" height="5.5"/>
+	<rect x="761.614" y="340.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="538.714" y="337.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="291.5" height="2.5"/>
+	<rect x="538.714" y="336.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="826.133" y="336.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="828.051" y="337.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="828.296" y="337.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="829.928" y="337.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="538.714" y="334.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="291.5" height="2.5"/>
+	<rect x="538.714" y="333.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="540.836" y="334.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="826.133" y="333.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="541.612" y="331.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="240.978" height="2.5"/>
+	<rect x="541.612" y="330.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="778.509" y="330.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="543.611" y="328.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="236.285" height="2.5"/>
+	<rect x="543.611" y="327.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="545.693" y="328.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="776.754" y="327.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.142" height="5.5"/>
+	<rect x="546.509" y="325.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="259.709" height="2.5"/>
+	<rect x="546.509" y="324.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="802.137" y="324.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="547.774" y="322.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="294.274" height="2.5"/>
+	<rect x="547.774" y="321.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="837.967" y="321.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="555.895" y="319.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="269.095" height="2.5"/>
+	<rect x="555.895" y="318.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="820.909" y="318.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="559.078" y="316.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="283.909" height="2.5"/>
+	<rect x="559.078" y="315.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="838.906" y="315.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="560.221" y="313.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="227.144" height="2.5"/>
+	<rect x="560.221" y="312.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="784.916" y="312.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.449" height="5.5"/>
+	<rect x="786.833" y="313.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="560.261" y="310.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="227.103" height="2.5"/>
+	<rect x="560.261" y="309.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.041" height="5.5"/>
+	<rect x="560.241" y="310.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="784.916" y="309.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.449" height="5.5"/>
+	<rect x="786.833" y="310.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="566.464" y="307.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.853" height="2.5"/>
+	<rect x="566.464" y="306.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="566.444" y="307.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="819.032" y="306.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.285" height="5.5"/>
+	<rect x="566.464" y="304.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.853" height="2.5"/>
+	<rect x="566.464" y="303.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="566.444" y="304.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="819.032" y="303.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.285" height="5.5"/>
+	<rect x="578.625" y="301.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="301.416" height="2.5"/>
+	<rect x="578.625" y="300.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="875.961" y="300.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="581.604" y="298.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="241.549" height="2.5"/>
+	<rect x="581.604" y="297.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="819.073" y="297.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="581.604" y="295.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="241.549" height="2.5"/>
+	<rect x="581.604" y="294.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="819.073" y="294.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="591.521" y="292.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="309.496" height="2.5"/>
+	<rect x="591.521" y="291.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="593.725" y="292.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="898.202" y="291.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.816" height="5.5"/>
+	<rect x="603.315" y="289.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="307.416" height="2.5"/>
+	<rect x="603.315" y="288.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="603.295" y="289.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="605.315" y="289.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="906.649" y="288.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="608.008" y="286.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="232.775" height="2.5"/>
+	<rect x="608.008" y="285.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="838.702" y="285.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.081" height="5.5"/>
+	<rect x="610.498" y="283.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="322.269" height="2.5"/>
+	<rect x="610.498" y="282.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="0.775" height="5.5"/>
+	<rect x="928.687" y="282.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.08" height="5.5"/>
+	<rect x="610.661" y="280.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="295.989" height="2.5"/>
+	<rect x="610.661" y="279.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.265" height="5.5"/>
+	<rect x="613.681" y="280.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="902.568" y="279.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="613.762" y="277.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="240.203" height="2.5"/>
+	<rect x="613.762" y="276.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="616.945" y="277.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="617.272" y="277.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="617.394" y="277.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="849.884" y="276.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="616.251" y="274.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="286.154" height="2.5"/>
+	<rect x="616.251" y="273.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="616.945" y="274.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="617.272" y="274.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="898.324" y="273.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="616.537" y="271.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="199.148" height="2.5"/>
+	<rect x="616.537" y="270.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.306" height="5.5"/>
+	<rect x="616.945" y="271.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="617.272" y="271.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="812.829" y="270.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.856" height="5.5"/>
+	<rect x="618.863" y="268.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="238.978" height="2.5"/>
+	<rect x="618.863" y="267.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="620.944" y="268.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="853.761" y="267.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="620.863" y="265.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="282.235" height="2.5"/>
+	<rect x="620.863" y="264.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.122" height="5.5"/>
+	<rect x="620.944" y="265.873" clip-path="url(#SVGID_32_)" fill="#808080" width="0.082" height="2.5"/>
+	<rect x="624.291" y="265.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="899.018" y="264.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="624.373" y="262.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="310.761" height="2.5"/>
+	<rect x="624.373" y="261.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="625.801" y="262.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="625.842" y="262.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="628.127" y="262.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="931.053" y="261.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="626.209" y="259.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="322.229" height="2.5"/>
+	<rect x="626.209" y="258.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.122" height="5.5"/>
+	<rect x="628.127" y="259.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="628.494" y="259.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="629.882" y="259.873" clip-path="url(#SVGID_32_)" fill="#808080" width="0.082" height="2.5"/>
+	<rect x="944.356" y="258.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="628.78" y="256.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="244.977" height="2.5"/>
+	<rect x="628.78" y="255.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.122" height="5.5"/>
+	<rect x="629.882" y="256.873" clip-path="url(#SVGID_32_)" fill="#808080" width="0.082" height="2.5"/>
+	<rect x="631.27" y="256.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="869.676" y="255.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="870.656" y="256.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="632.126" y="253.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="328.635" height="2.5"/>
+	<rect x="632.126" y="252.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="633.351" y="253.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="956.681" y="252.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="633.473" y="250.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="278.196" height="2.5"/>
+	<rect x="633.473" y="249.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="636.248" y="250.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="636.575" y="250.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="637.146" y="250.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="907.588" y="249.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="646.695" y="247.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="228.449" height="2.5"/>
+	<rect x="646.695" y="246.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="649.144" y="247.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="650.49" y="247.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="873.553" y="246.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.591" height="5.5"/>
+	<rect x="647.471" y="244.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="246.813" height="2.5"/>
+	<rect x="647.471" y="243.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="649.144" y="244.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="650.49" y="244.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="890.203" y="243.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="647.471" y="241.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="246.813" height="2.5"/>
+	<rect x="647.471" y="240.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="649.144" y="241.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="649.919" y="241.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="650.49" y="241.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="890.203" y="240.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="649.429" y="238.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="180.581" height="2.5"/>
+	<rect x="649.429" y="237.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="650.49" y="238.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="653.143" y="238.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="825.929" y="237.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="652.653" y="235.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="350.346" height="2.5"/>
+	<rect x="652.653" y="234.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="653.143" y="235.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="998.919" y="234.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="653.592" y="232.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="241.835" height="2.5"/>
+	<rect x="653.592" y="231.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="891.346" y="231.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="657.387" y="229.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="236.856" height="2.5"/>
+	<rect x="657.387" y="228.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.958" height="5.5"/>
+	<rect x="657.367" y="229.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="659.02" y="229.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="659.061" y="229.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="659.836" y="229.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="660.897" y="229.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="661.223" y="229.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="890.162" y="228.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="661.019" y="226.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="246.814" height="2.5"/>
+	<rect x="661.019" y="225.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.122" height="5.5"/>
+	<rect x="661.223" y="226.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="662.448" y="226.873" clip-path="url(#SVGID_32_)" fill="#808080" width="0.082" height="2.5"/>
+	<rect x="903.752" y="225.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="826.418" y="433.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="342.878" height="2.5"/>
+	<rect x="826.418" y="432.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.163" height="5.5"/>
+	<rect x="1167.583" y="432.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.714" height="5.5"/>
+	<rect x="835.438" y="430.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="328.677" height="2.5"/>
+	<rect x="835.438" y="429.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.142" height="5.5"/>
+	<rect x="1160.033" y="429.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="837.804" y="427.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="321.943" height="2.5"/>
+	<rect x="837.804" y="426.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1157.992" y="426.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.755" height="5.5"/>
+	<rect x="864.697" y="424.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="294.806" height="2.5"/>
+	<rect x="864.697" y="423.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1155.422" y="423.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="866.044" y="421.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="344.348" height="2.5"/>
+	<rect x="866.044" y="420.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1208.963" y="420.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.429" height="5.5"/>
+	<rect x="866.044" y="418.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="344.348" height="2.5"/>
+	<rect x="866.044" y="417.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1208.963" y="417.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.429" height="5.5"/>
+	<rect x="869.268" y="415.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="313.455" height="2.5"/>
+	<rect x="869.268" y="414.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="870.656" y="415.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1179.295" y="414.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.428" height="5.5"/>
+	<rect x="870.084" y="412.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="324.759" height="2.5"/>
+	<rect x="870.084" y="411.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="1.021" height="5.5"/>
+	<rect x="870.656" y="412.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1190.762" y="411.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="874.94" y="409.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="327.575" height="2.5"/>
+	<rect x="874.94" y="408.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1201.209" y="408.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.306" height="5.5"/>
+	<rect x="878.817" y="406.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="309.904" height="2.5"/>
+	<rect x="878.817" y="405.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.795" height="5.5"/>
+	<rect x="1184.641" y="405.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="878.817" y="403.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="309.904" height="2.5"/>
+	<rect x="878.817" y="402.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.795" height="5.5"/>
+	<rect x="1184.641" y="402.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="887.469" y="400.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="262.525" height="2.5"/>
+	<rect x="887.469" y="399.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="889.04" y="400.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1145.913" y="399.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="892.692" y="397.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="338.389" height="2.5"/>
+	<rect x="892.692" y="396.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1227.001" y="396.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="896.161" y="394.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="259.709" height="2.5"/>
+	<rect x="896.161" y="393.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1151.789" y="393.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="903.221" y="391.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="286.644" height="2.5"/>
+	<rect x="903.221" y="390.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1187.375" y="390.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.489" height="5.5"/>
+	<rect x="914.484" y="388.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="239.427" height="2.5"/>
+	<rect x="914.484" y="387.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.999" height="5.5"/>
+	<rect x="914.464" y="388.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1149.831" y="387.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.08" height="5.5"/>
+	<rect x="1153.83" y="388.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="915.383" y="385.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="274.686" height="2.5"/>
+	<rect x="915.383" y="384.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="915.362" y="385.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.04" height="2.5"/>
+	<rect x="1185.987" y="384.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="919.015" y="382.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="273.829" height="2.5"/>
+	<rect x="919.015" y="381.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="919.075" y="382.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="921.096" y="382.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1190.966" y="381.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.878" height="5.5"/>
+	<rect x="919.015" y="379.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="273.829" height="2.5"/>
+	<rect x="919.015" y="378.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.04" height="5.5"/>
+	<rect x="919.075" y="379.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="921.096" y="379.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1190.966" y="378.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.878" height="5.5"/>
+	<rect x="920.238" y="376.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="299.58" height="2.5"/>
+	<rect x="920.238" y="375.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="921.096" y="376.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1215.737" y="375.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="921.137" y="373.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.607" height="2.5"/>
+	<rect x="921.137" y="372.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1171.663" y="372.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="921.137" y="370.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.607" height="2.5"/>
+	<rect x="921.137" y="369.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1171.663" y="369.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="922.075" y="367.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="253.18" height="2.5"/>
+	<rect x="922.075" y="366.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.611" height="5.5"/>
+	<rect x="1171.174" y="366.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="922.075" y="364.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="253.18" height="2.5"/>
+	<rect x="922.075" y="363.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.611" height="5.5"/>
+	<rect x="1171.174" y="363.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="929.013" y="361.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="315.25" height="2.5"/>
+	<rect x="929.013" y="360.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1240.182" y="360.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="937.582" y="358.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="252.323" height="2.5"/>
+	<rect x="937.582" y="357.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="1.511" height="5.5"/>
+	<rect x="1185.824" y="357.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="966.476" y="355.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="204.127" height="2.5"/>
+	<rect x="966.476" y="354.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1166.521" y="354.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="968.475" y="352.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="269.463" height="2.5"/>
+	<rect x="968.475" y="351.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1233.856" y="351.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="968.475" y="349.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="269.463" height="2.5"/>
+	<rect x="968.475" y="348.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1233.856" y="348.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="978.882" y="346.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="232.04" height="2.5"/>
+	<rect x="978.882" y="345.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.774" height="5.5"/>
+	<rect x="1206.841" y="345.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="978.882" y="343.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="232.04" height="2.5"/>
+	<rect x="978.882" y="342.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.774" height="5.5"/>
+	<rect x="1206.841" y="342.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1208.515" y="343.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="981.86" y="340.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="231.021" height="2.5"/>
+	<rect x="981.86" y="339.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1208.8" y="339.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="981.942" y="337.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="345.775" height="2.5"/>
+	<rect x="981.942" y="336.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.02" height="5.5"/>
+	<rect x="1324.534" y="336.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.184" height="5.5"/>
+	<rect x="1325.718" y="337.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.04" height="2.5"/>
+	<rect x="993.042" y="334.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="281.746" height="2.5"/>
+	<rect x="993.042" y="333.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="2.204" height="5.5"/>
+	<rect x="1270.707" y="333.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1003.53" y="331.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="284.194" height="2.5"/>
+	<rect x="1003.53" y="330.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.08" height="5.5"/>
+	<rect x="1283.644" y="330.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1003.53" y="328.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="284.194" height="2.5"/>
+	<rect x="1003.53" y="327.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.08" height="5.5"/>
+	<rect x="1283.644" y="327.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1006.428" y="325.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="282.889" height="2.5"/>
+	<rect x="1006.428" y="324.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1285.235" y="324.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1006.428" y="322.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="282.889" height="2.5"/>
+	<rect x="1006.428" y="321.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1285.235" y="321.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1033.157" y="319.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="306.925" height="2.5"/>
+	<rect x="1033.157" y="318.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="1.102" height="5.5"/>
+	<rect x="1033.933" y="319.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="1336.042" y="318.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.04" height="5.5"/>
+	<rect x="1338.287" y="319.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1340.104" y="319.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1036.014" y="316.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="166.338" height="2.5"/>
+	<rect x="1036.014" y="315.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="1.633" height="5.5"/>
+	<rect x="1198.271" y="315.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.08" height="5.5"/>
+	<rect x="1199.903" y="316.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1037.442" y="313.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="202.658" height="2.5"/>
+	<rect x="1037.442" y="312.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1236.02" y="312.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1052.297" y="310.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="282.521" height="2.5"/>
+	<rect x="1052.297" y="309.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1333.228" y="309.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.591" height="5.5"/>
+	<rect x="1052.909" y="307.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="315.821" height="2.5"/>
+	<rect x="1052.909" y="306.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1364.65" y="306.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.08" height="5.5"/>
+	<rect x="1365.14" y="307.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1365.915" y="307.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="1366.69" y="307.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1366.812" y="307.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1368.241" y="307.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1368.282" y="307.873" clip-path="url(#SVGID_32_)" width="0.04" height="2.5"/>
+	<rect x="1368.322" y="307.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1368.445" y="307.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1055.685" y="304.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="323.737" height="2.5"/>
+	<rect x="1055.685" y="303.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.08" height="5.5"/>
+	<rect x="1375.343" y="303.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.079" height="5.5"/>
+	<rect x="1055.97" y="301.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="269.381" height="2.5"/>
+	<rect x="1055.97" y="300.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1321.27" y="300.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1065.887" y="298.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="236.284" height="2.5"/>
+	<rect x="1065.887" y="297.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1299.6" y="297.373" clip-path="url(#SVGID_32_)" fill="#800080" width="2.571" height="5.5"/>
+	<rect x="1066.947" y="295.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="216.615" height="2.5"/>
+	<rect x="1066.947" y="294.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1279.481" y="294.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1071.6" y="292.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="248.445" height="2.5"/>
+	<rect x="1071.6" y="291.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1315.964" y="291.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1317.189" y="292.873" clip-path="url(#SVGID_32_)" width="0.04" height="2.5"/>
+	<rect x="1073.722" y="289.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="248.2" height="2.5"/>
+	<rect x="1073.722" y="288.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1076.537" y="289.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1077.231" y="289.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="1317.841" y="288.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1321.065" y="289.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1073.722" y="286.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="248.2" height="2.5"/>
+	<rect x="1073.722" y="285.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1076.537" y="286.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1077.231" y="286.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="1317.841" y="285.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1321.065" y="286.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1076.578" y="283.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="254.2" height="2.5"/>
+	<rect x="1076.578" y="282.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1077.231" y="283.873" clip-path="url(#SVGID_32_)" width="0.041" height="2.5"/>
+	<rect x="1326.697" y="282.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1077.64" y="280.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="280.317" height="2.5"/>
+	<rect x="1077.64" y="279.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1353.917" y="279.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.04" height="5.5"/>
+	<rect x="1353.896" y="280.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1354.529" y="280.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1354.57" y="280.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1355.264" y="280.873" clip-path="url(#SVGID_32_)" width="0.04" height="2.5"/>
+	<rect x="1356.488" y="280.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1356.529" y="280.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="1356.61" y="280.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1357.264" y="280.873" clip-path="url(#SVGID_32_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="1078.7" y="277.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="259.015" height="2.5"/>
+	<rect x="1078.7" y="276.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1333.636" y="276.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.079" height="5.5"/>
+	<rect x="1084.495" y="274.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="328.921" height="2.5"/>
+	<rect x="1084.495" y="273.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1409.335" y="273.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1086.087" y="271.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="59.867" height="2.5"/>
+	<rect x="1086.087" y="270.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1141.873" y="270.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1090.086" y="268.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="229.796" height="2.5"/>
+	<rect x="1090.086" y="267.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1315.802" y="267.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.08" height="5.5"/>
+	<rect x="1096.819" y="265.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="292.357" height="2.5"/>
+	<rect x="1096.819" y="264.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1388.115" y="264.373" clip-path="url(#SVGID_32_)" fill="#800080" width="1.062" height="5.5"/>
+	<rect x="1116.734" y="262.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="233.714" height="2.5"/>
+	<rect x="1116.734" y="261.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1349.673" y="261.373" clip-path="url(#SVGID_32_)" fill="#800080" width="0.775" height="5.5"/>
+	<rect x="1126.447" y="259.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="304.028" height="2.5"/>
+	<rect x="1126.447" y="258.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="4.081" height="5.5"/>
+	<rect x="1426.395" y="258.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1132.731" y="256.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="315.087" height="2.5"/>
+	<rect x="1132.731" y="255.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.999" height="5.5"/>
+	<rect x="1136.18" y="256.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1444.146" y="255.373" clip-path="url(#SVGID_32_)" fill="#800080" width="3.672" height="5.5"/>
+	<rect x="1135.874" y="253.873" clip-path="url(#SVGID_32_)" fill="#DDDDDD" width="228.449" height="2.5"/>
+	<rect x="1135.874" y="252.373" clip-path="url(#SVGID_32_)" fill="#FF0000" width="3.999" height="5.5"/>
+	<rect x="1136.18" y="253.873" clip-path="url(#SVGID_32_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1137.099" y="253.873" clip-path="url(#SVGID_32_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="1360.242" y="252.373" clip-path="url(#SVGID_32_)" fill="#800080" width="4.081" height="5.5"/>
+	<rect x="1361.711" y="253.873" clip-path="url(#SVGID_32_)" fill="#008000" width="0.041" height="2.5"/>
+	<line clip-path="url(#SVGID_32_)" x1="665.345" y1="443.873" x2="665.345" y2="213.873"/>
+	
+		<line clip-path="url(#SVGID_32_)" fill="none" stroke="#000000" stroke-width="3" x1="665.345" y1="443.873" x2="665.345" y2="213.873"/>
+	<line clip-path="url(#SVGID_32_)" x1="1136.119" y1="443.873" x2="1136.119" y2="213.873"/>
+	
+		<line clip-path="url(#SVGID_32_)" fill="none" stroke="#000000" stroke-width="3" x1="1136.119" y1="443.873" x2="1136.119" y2="213.873"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_37_" x="312.364" y="443.873" width="1190" height="926.5"/>
+	</defs>
+	<clipPath id="SVGID_38_">
+		<use xlink:href="#SVGID_37_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_38_)">
+		<text transform="matrix(1 0 0 1 312.3643 473.873)" font-family="'Helvetica'" font-size="18">Repeats</text>
+	</g>
+</g>
+<g>
+	<rect x="512.066" y="635.873" fill="#0000FF" width="123.57" height="20"/>
+	<text transform="matrix(1 0 0 1 636.5728 654.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="634.779" y="615.873" fill="#0000FF" width="6.122" height="20"/>
+	<text transform="matrix(1 0 0 1 641.8374 634.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="640.492" y="595.873" fill="#0000FF" width="20.608" height="20"/>
+	<text transform="matrix(1 0 0 1 662.0376 614.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="661.183" y="575.873" fill="#0000FF" width="3.55" height="20"/>
+	<text transform="matrix(1 0 0 1 665.6699 594.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="665.345" y="555.873" fill="#0000FF" width="23.833" height="20"/>
+	<text transform="matrix(1 0 0 1 690.1143 574.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="689.218" y="535.873" fill="#0000FF" width="8.815" height="20"/>
+	<text transform="matrix(1 0 0 1 698.9702 554.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="698.033" y="515.873" fill="#0000FF" width="15.426" height="20"/>
+	<text transform="matrix(1 0 0 1 714.3955 534.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	<rect x="800.056" y="495.873" fill="#0000FF" width="34.729" height="20"/>
+	<text transform="matrix(1 0 0 1 835.7217 514.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1M3</text>
+	<rect x="860.657" y="635.873" fill="#0000FF" width="24.241" height="20"/>
+	<text transform="matrix(1 0 0 1 885.835 654.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1M3</text>
+	<rect x="884.979" y="615.873" fill="#FF8C00" width="30.484" height="20"/>
+	<text transform="matrix(1 0 0 1 916.4014 634.873)" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1M3</text>
+	<rect x="915.546" y="595.873" fill="#0000FF" width="5.468" height="20"/>
+	<text transform="matrix(1 0 0 1 921.9512 614.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1MB2</text>
+	<rect x="921.177" y="575.873" fill="#FF8C00" width="14.528" height="20"/>
+	<text transform="matrix(1 0 0 1 936.6416 594.873)" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1ME3</text>
+	<rect x="956.722" y="555.873" fill="#0000FF" width="28.607" height="20"/>
+	<text transform="matrix(1 0 0 1 986.2656 574.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1</tspan><tspan x="20.021" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18" letter-spacing="-1">P</tspan><tspan x="30.713" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">A7</tspan></text>
+	<rect x="1010.876" y="635.873" fill="#FF8C00" width="23.139" height="20"/>
+	<text transform="matrix(1 0 0 1 1034.9512 654.873)" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1MA8</text>
+	<rect x="1317.72" y="635.873" fill="#0000FF" width="54.725" height="20"/>
+	<text transform="matrix(1 0 0 1 1373.3809 654.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1P2</text>
+	<rect x="1374.894" y="615.873" fill="#0000FF" width="2.406" height="20"/>
+	<text transform="matrix(1 0 0 1 1378.2383 634.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1</tspan><tspan x="20.021" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18" letter-spacing="-1">P</tspan><tspan x="30.713" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">A5</tspan></text>
+	<rect x="1430.23" y="595.873" fill="#0000FF" width="1.999" height="20"/>
+	<text transform="matrix(1 0 0 1 1433.167 614.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1MA9</text>
+	<line x1="664.845" y1="675.873" x2="664.845" y2="455.873"/>
+	<line fill="none" stroke="#000000" stroke-width="3" x1="664.845" y1="675.873" x2="664.845" y2="455.873"/>
+	<line x1="1135.619" y1="675.873" x2="1135.619" y2="455.873"/>
+	<line fill="none" stroke="#000000" stroke-width="3" x1="1135.618" y1="675.873" x2="1135.618" y2="455.873"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_39_" x="304.697" y="675.873" width="1195.501" height="75"/>
+	</defs>
+	<clipPath id="SVGID_40_">
+		<use xlink:href="#SVGID_39_"  overflow="visible"/>
+	</clipPath>
+	<rect x="402.004" y="710.873" clip-path="url(#SVGID_40_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 376.4937 746.873)" font-family="'Helvetica-Bold'" font-size="18">5.0KB</text>
+	</g>
+	<rect x="606.049" y="710.873" clip-path="url(#SVGID_40_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 575.5337 746.873)" font-family="'Helvetica-Bold'" font-size="18">10.0KB</text>
+	</g>
+	<rect x="810.095" y="710.873" clip-path="url(#SVGID_40_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 779.5791 746.873)" font-family="'Helvetica-Bold'" font-size="18">15.0KB</text>
+	</g>
+	<rect x="1014.141" y="710.873" clip-path="url(#SVGID_40_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 983.624 746.873)" font-family="'Helvetica-Bold'" font-size="18">20.0KB</text>
+	</g>
+	<rect x="1218.186" y="710.873" clip-path="url(#SVGID_40_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 1187.6699 746.873)" font-family="'Helvetica-Bold'" font-size="18">25.0KB</text>
+	</g>
+	<rect x="1422.231" y="710.873" clip-path="url(#SVGID_40_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 1391.7158 746.873)" font-family="'Helvetica-Bold'" font-size="18">30.0KB</text>
+	</g>
+	<line clip-path="url(#SVGID_40_)" x1="197.958" y1="710.873" x2="665.345" y2="710.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#FF0000" stroke-width="8" x1="197.958" y1="710.873" x2="665.345" y2="710.873"/>
+	<line clip-path="url(#SVGID_40_)" x1="197.958" y1="710.873" x2="665.345" y2="710.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#FF0000" stroke-width="3" x1="197.958" y1="710.873" x2="665.345" y2="710.873"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#FF0000" points="354.913,695.873 384.913,710.873 354.913,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#FF0000" points="448.39,695.873 478.39,710.873 448.39,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#FF0000" points="541.868,695.873 571.868,710.873 541.868,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#FF0000" points="635.345,695.873 665.345,710.873 635.345,725.873 	"/>
+	<line clip-path="url(#SVGID_40_)" x1="1136.119" y1="710.873" x2="665.345" y2="710.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#0000FF" stroke-width="8" x1="1136.119" y1="710.873" x2="665.345" y2="710.873"/>
+	<line clip-path="url(#SVGID_40_)" x1="1136.119" y1="710.873" x2="665.345" y2="710.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#0000FF" stroke-width="3" x1="1136.119" y1="710.873" x2="665.345" y2="710.873"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#0000FF" points="1071.964,695.873 1041.964,710.873 1071.964,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#0000FF" points="977.81,695.873 947.81,710.873 977.81,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#0000FF" points="883.654,695.873 853.654,710.873 883.654,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#0000FF" points="789.5,695.873 759.5,710.873 789.5,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#0000FF" points="695.345,695.873 665.345,710.873 695.345,725.873 	"/>
+	<line clip-path="url(#SVGID_40_)" x1="1136.119" y1="710.873" x2="1603.505" y2="710.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#808080" stroke-width="8" x1="1136.119" y1="710.873" x2="1603.505" y2="710.873"/>
+	<line clip-path="url(#SVGID_40_)" x1="1136.119" y1="710.873" x2="1603.505" y2="710.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#808080" stroke-width="3" x1="1136.119" y1="710.873" x2="1603.505" y2="710.873"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#808080" points="1199.596,695.873 1229.596,710.873 1199.596,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#808080" points="1293.073,695.873 1323.073,710.873 1293.073,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#808080" points="1386.552,695.873 1416.552,710.873 1386.552,725.873 	"/>
+	<polygon clip-path="url(#SVGID_40_)" fill="#808080" points="1480.028,695.873 1510.028,710.873 1480.028,725.873 	"/>
+	<line clip-path="url(#SVGID_40_)" x1="665.345" y1="695.873" x2="665.345" y2="730.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#000000" stroke-width="3" x1="665.345" y1="695.873" x2="665.345" y2="730.873"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 622.8154 693.873)" font-family="'Helvetica'" font-size="18">breakpoint</text>
+	</g>
+	<line clip-path="url(#SVGID_40_)" x1="1136.119" y1="695.873" x2="1136.119" y2="730.873"/>
+	
+		<line clip-path="url(#SVGID_40_)" fill="none" stroke="#000000" stroke-width="3" x1="1136.119" y1="695.873" x2="1136.119" y2="730.873"/>
+	<g clip-path="url(#SVGID_40_)">
+		<text transform="matrix(1 0 0 1 1093.5889 693.873)" font-family="'Helvetica'" font-size="18">breakpoint</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_41_" x="312.364" y="760.873" width="1190" height="609.5"/>
+	</defs>
+	<clipPath id="SVGID_42_">
+		<use xlink:href="#SVGID_41_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_42_)">
+		<text transform="matrix(1 0 0 1 312.3643 792.873)" font-family="'Helvetica'" font-size="30">Reference Allele</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_43_" x="312.364" y="792.873" width="1190" height="577.5"/>
+	</defs>
+	<clipPath id="SVGID_44_">
+		<use xlink:href="#SVGID_43_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_44_)">
+		<text transform="matrix(1 0 0 1 312.3643 822.873)" font-family="'Helvetica'" font-size="18">HG002</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_45_" x="302.364" y="804.873" width="1200" height="239"/>
+	</defs>
+	<clipPath id="SVGID_46_">
+		<use xlink:href="#SVGID_45_"  overflow="visible"/>
+	</clipPath>
+	<g opacity="0" clip-path="url(#SVGID_46_)" enable-background="new    ">
+		<g>
+			<defs>
+				<rect id="SVGID_47_" x="302.364" y="804.373" width="1200" height="240"/>
+			</defs>
+			<clipPath id="SVGID_48_">
+				<use xlink:href="#SVGID_47_"  overflow="visible"/>
+			</clipPath>
+			<g clip-path="url(#SVGID_48_)">
+				<defs>
+					<rect id="SVGID_49_" x="302.364" y="804.373" width="1200" height="240"/>
+				</defs>
+				<clipPath id="SVGID_50_">
+					<use xlink:href="#SVGID_49_"  overflow="visible"/>
+				</clipPath>
+				<rect x="210.473" y="804.873" clip-path="url(#SVGID_50_)" width="1390.687" height="239"/>
+			</g>
+		</g>
+	</g>
+	<rect x="356.91" y="1033.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="323.639" height="2.5"/>
+	<rect x="356.91" y="1032.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="676.511" y="1032.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="392.641" y="1030.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="326.264" height="2.5"/>
+	<rect x="392.641" y="1029.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="717.33" y="1029.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.575" height="5.5"/>
+	<rect x="395.831" y="1027.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="327.676" height="2.5"/>
+	<rect x="395.831" y="1026.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="719.469" y="1026.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="398.011" y="1024.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="283.507" height="2.5"/>
+	<rect x="398.011" y="1023.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="677.48" y="1023.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="406.449" y="1021.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="291.784" height="2.5"/>
+	<rect x="406.449" y="1020.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="694.195" y="1020.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="409.679" y="1018.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="346.733" height="2.5"/>
+	<rect x="409.679" y="1017.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.311" height="5.5"/>
+	<rect x="752.375" y="1017.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="409.679" y="1015.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="346.733" height="2.5"/>
+	<rect x="409.679" y="1014.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.311" height="5.5"/>
+	<rect x="752.375" y="1014.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="413.03" y="1012.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="304.784" height="2.5"/>
+	<rect x="413.03" y="1011.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="716.159" y="1011.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.655" height="5.5"/>
+	<rect x="417.229" y="1009.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="288.514" height="2.5"/>
+	<rect x="417.229" y="1008.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="701.705" y="1008.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="418.077" y="1006.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="270.789" height="2.5"/>
+	<rect x="418.077" y="1005.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.18" height="5.5"/>
+	<rect x="684.829" y="1005.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="422.841" y="1003.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="333.652" height="2.5"/>
+	<rect x="422.841" y="1002.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="752.455" y="1002.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="431.763" y="1000.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="273.858" height="2.5"/>
+	<rect x="431.763" y="999.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="701.583" y="999.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="446.459" y="997.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="307.085" height="2.5"/>
+	<rect x="446.459" y="996.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.059" height="5.5"/>
+	<rect x="749.508" y="996.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="447.227" y="994.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="263.885" height="2.5"/>
+	<rect x="447.227" y="993.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="707.075" y="993.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="447.227" y="991.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="263.885" height="2.5"/>
+	<rect x="447.227" y="990.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="707.075" y="990.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="449.165" y="988.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="309.468" height="2.5"/>
+	<rect x="449.165" y="987.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="757.098" y="987.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.534" height="5.5"/>
+	<rect x="449.165" y="985.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="309.468" height="2.5"/>
+	<rect x="449.165" y="984.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="757.098" y="984.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.534" height="5.5"/>
+	<rect x="450.214" y="982.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="272.97" height="2.5"/>
+	<rect x="450.214" y="981.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="720.277" y="981.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.907" height="5.5"/>
+	<rect x="455.019" y="979.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="316.372" height="2.5"/>
+	<rect x="455.019" y="978.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="767.353" y="978.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="455.382" y="976.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="268.327" height="2.5"/>
+	<rect x="455.382" y="975.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="719.994" y="975.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.715" height="5.5"/>
+	<rect x="457.522" y="973.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="297.396" height="2.5"/>
+	<rect x="457.522" y="972.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="750.88" y="972.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="458.976" y="970.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="282.054" height="2.5"/>
+	<rect x="458.976" y="969.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="738.445" y="969.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.584" height="5.5"/>
+	<rect x="460.106" y="967.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="225.732" height="2.5"/>
+	<rect x="460.106" y="966.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.23" height="5.5"/>
+	<rect x="681.8" y="966.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="460.106" y="964.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="225.732" height="2.5"/>
+	<rect x="460.106" y="963.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.23" height="5.5"/>
+	<rect x="681.8" y="963.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="469.19" y="961.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="300.263" height="2.5"/>
+	<rect x="469.19" y="960.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="766.99" y="960.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.463" height="5.5"/>
+	<rect x="482.15" y="958.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="303.533" height="2.5"/>
+	<rect x="482.15" y="957.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="781.646" y="957.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="508.07" y="955.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="244.546" height="2.5"/>
+	<rect x="508.07" y="954.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="748.579" y="954.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="508.07" y="952.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="244.627" height="2.5"/>
+	<rect x="508.07" y="951.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="748.579" y="951.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.118" height="5.5"/>
+	<rect x="749.266" y="952.873" clip-path="url(#SVGID_46_)" fill="#808080" width="0.121" height="2.5"/>
+	<rect x="509.887" y="949.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="251.612" height="2.5"/>
+	<rect x="509.887" y="948.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="510.453" y="949.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="513.037" y="949.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="760.49" y="948.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.009" height="5.5"/>
+	<rect x="523.493" y="946.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="259.646" height="2.5"/>
+	<rect x="523.493" y="945.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="779.425" y="945.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.715" height="5.5"/>
+	<rect x="532.779" y="943.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="232.071" height="2.5"/>
+	<rect x="532.779" y="942.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="763.76" y="942.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.09" height="5.5"/>
+	<rect x="547.92" y="940.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="243.254" height="2.5"/>
+	<rect x="547.92" y="939.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="787.136" y="939.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="555.792" y="937.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="248.019" height="2.5"/>
+	<rect x="555.792" y="936.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="800.016" y="936.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.795" height="5.5"/>
+	<rect x="555.792" y="934.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="248.019" height="2.5"/>
+	<rect x="555.792" y="933.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="800.016" y="933.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.795" height="5.5"/>
+	<rect x="560.476" y="931.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="311.688" height="2.5"/>
+	<rect x="560.476" y="930.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="870.59" y="930.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.575" height="5.5"/>
+	<rect x="566.452" y="928.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="326.344" height="2.5"/>
+	<rect x="566.452" y="927.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="566.532" y="928.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="566.936" y="928.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="567.017" y="928.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="567.138" y="928.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="567.178" y="928.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="567.905" y="928.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="568.551" y="928.873" clip-path="url(#SVGID_46_)" fill="#808080" width="0.081" height="2.5"/>
+	<rect x="568.813" y="928.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.04" height="2.5"/>
+	<rect x="568.833" y="928.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="569.036" y="928.873" clip-path="url(#SVGID_46_)" width="0.04" height="2.5"/>
+	<rect x="891.302" y="927.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.494" height="5.5"/>
+	<rect x="575.051" y="925.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="317.704" height="2.5"/>
+	<rect x="575.051" y="924.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="890.938" y="924.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.817" height="5.5"/>
+	<rect x="576.666" y="922.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="248.866" height="2.5"/>
+	<rect x="576.666" y="921.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.472" height="5.5"/>
+	<rect x="821.495" y="921.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="583.247" y="919.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="241.316" height="2.5"/>
+	<rect x="583.247" y="918.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="820.849" y="918.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.715" height="5.5"/>
+	<rect x="585.185" y="916.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="231.667" height="2.5"/>
+	<rect x="585.185" y="915.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="812.814" y="915.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="602.142" y="913.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="281.206" height="2.5"/>
+	<rect x="602.142" y="912.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="879.714" y="912.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.634" height="5.5"/>
+	<rect x="607.916" y="910.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="257.87" height="2.5"/>
+	<rect x="607.916" y="909.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.078" height="5.5"/>
+	<rect x="609.773" y="910.873" clip-path="url(#SVGID_46_)" fill="#808080" width="0.081" height="2.5"/>
+	<rect x="862.354" y="909.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.432" height="5.5"/>
+	<rect x="607.916" y="907.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="257.87" height="2.5"/>
+	<rect x="607.916" y="906.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.078" height="5.5"/>
+	<rect x="609.773" y="907.873" clip-path="url(#SVGID_46_)" fill="#808080" width="0.081" height="2.5"/>
+	<rect x="862.354" y="906.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.432" height="5.5"/>
+	<rect x="610.419" y="904.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="278.582" height="2.5"/>
+	<rect x="610.419" y="903.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.351" height="5.5"/>
+	<rect x="613.487" y="904.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="884.963" y="903.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="611.065" y="901.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="236.956" height="2.5"/>
+	<rect x="611.065" y="900.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="613.487" y="901.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="846.164" y="900.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.857" height="5.5"/>
+	<rect x="623.984" y="898.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="295.014" height="2.5"/>
+	<rect x="623.984" y="897.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="914.961" y="897.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="624.913" y="895.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="250.925" height="2.5"/>
+	<rect x="624.913" y="894.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="871.801" y="894.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="629.193" y="892.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="309.953" height="2.5"/>
+	<rect x="629.193" y="891.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.897" height="5.5"/>
+	<rect x="935.107" y="891.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="631.938" y="889.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="234.331" height="2.5"/>
+	<rect x="631.938" y="888.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="632.706" y="889.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="633.553" y="889.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="635.168" y="889.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="865.018" y="888.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.251" height="5.5"/>
+	<rect x="635.33" y="886.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="148.859" height="2.5"/>
+	<rect x="635.33" y="885.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="637.792" y="886.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="780.192" y="885.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.997" height="5.5"/>
+	<rect x="784.209" y="886.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="636.743" y="883.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="285.203" height="2.5"/>
+	<rect x="636.743" y="882.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="917.908" y="882.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="637.833" y="880.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="246.403" height="2.5"/>
+	<rect x="637.833" y="879.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.997" height="5.5"/>
+	<rect x="637.812" y="880.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="638.116" y="880.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="880.199" y="879.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="640.74" y="877.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="50.185" height="2.5"/>
+	<rect x="640.74" y="876.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="686.888" y="876.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="641.83" y="874.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="231.424" height="2.5"/>
+	<rect x="641.83" y="873.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="869.217" y="873.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="645.746" y="871.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="291.743" height="2.5"/>
+	<rect x="645.746" y="870.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.957" height="5.5"/>
+	<rect x="645.726" y="871.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="933.452" y="870.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="652.287" y="868.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="329.009" height="2.5"/>
+	<rect x="652.287" y="867.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.997" height="5.5"/>
+	<rect x="652.267" y="868.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="652.368" y="868.873" clip-path="url(#SVGID_46_)" fill="#808080" width="0.081" height="2.5"/>
+	<rect x="652.489" y="868.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="652.65" y="868.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.04" height="2.5"/>
+	<rect x="977.258" y="867.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="659.271" y="865.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="253.994" height="2.5"/>
+	<rect x="659.271" y="864.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="909.228" y="864.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="667.266" y="862.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="215.437" height="2.5"/>
+	<rect x="667.266" y="861.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="667.427" y="862.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="667.629" y="862.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="667.912" y="862.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="668.154" y="862.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="668.275" y="862.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="878.665" y="861.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="668.396" y="859.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="224.965" height="2.5"/>
+	<rect x="668.396" y="858.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="889.323" y="858.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="668.396" y="856.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="224.965" height="2.5"/>
+	<rect x="668.396" y="855.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="668.638" y="856.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="889.323" y="855.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="669.527" y="853.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="300.625" height="2.5"/>
+	<rect x="669.527" y="852.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.633" height="5.5"/>
+	<rect x="968.901" y="852.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.251" height="5.5"/>
+	<rect x="830.377" y="1033.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="350.367" height="2.5"/>
+	<rect x="830.377" y="1032.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.342" height="5.5"/>
+	<rect x="1176.706" y="1032.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="833.89" y="1030.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="308.701" height="2.5"/>
+	<rect x="833.89" y="1029.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1138.553" y="1029.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="833.89" y="1027.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="308.701" height="2.5"/>
+	<rect x="833.89" y="1026.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1138.553" y="1026.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="833.89" y="1024.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="308.701" height="2.5"/>
+	<rect x="833.89" y="1023.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1138.553" y="1023.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1140.692" y="1024.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="840.35" y="1021.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="335.913" height="2.5"/>
+	<rect x="840.35" y="1020.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.373" height="5.5"/>
+	<rect x="1172.225" y="1020.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="850.282" y="1018.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="324.931" height="2.5"/>
+	<rect x="850.282" y="1017.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1171.175" y="1017.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="863.847" y="1015.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="276.402" height="2.5"/>
+	<rect x="863.847" y="1014.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="0.969" height="5.5"/>
+	<rect x="1136.211" y="1014.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="863.847" y="1012.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="276.402" height="2.5"/>
+	<rect x="863.847" y="1011.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="0.969" height="5.5"/>
+	<rect x="1136.211" y="1011.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="880.805" y="1009.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="278.46" height="2.5"/>
+	<rect x="880.805" y="1008.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1156.843" y="1008.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.422" height="5.5"/>
+	<rect x="881.127" y="1006.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="260.535" height="2.5"/>
+	<rect x="881.127" y="1005.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1137.624" y="1005.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="881.127" y="1003.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="260.535" height="2.5"/>
+	<rect x="881.127" y="1002.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1137.624" y="1002.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="881.127" y="1000.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="260.535" height="2.5"/>
+	<rect x="881.127" y="999.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="884.196" y="1000.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="1137.624" y="999.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1139.4" y="1000.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="882.056" y="997.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="271.153" height="2.5"/>
+	<rect x="882.056" y="996.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1149.171" y="996.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="894.693" y="994.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="260.655" height="2.5"/>
+	<rect x="894.693" y="993.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1151.312" y="993.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="903.374" y="991.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="267.68" height="2.5"/>
+	<rect x="903.374" y="990.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.906" height="5.5"/>
+	<rect x="1167.017" y="990.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="913.063" y="988.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="305.713" height="2.5"/>
+	<rect x="913.063" y="987.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1216.758" y="987.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.019" height="5.5"/>
+	<rect x="914.355" y="985.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="342.776" height="2.5"/>
+	<rect x="914.355" y="984.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1255.517" y="984.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.615" height="5.5"/>
+	<rect x="914.355" y="982.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="342.776" height="2.5"/>
+	<rect x="914.355" y="981.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1255.517" y="981.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.615" height="5.5"/>
+	<rect x="922.229" y="979.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="235.704" height="2.5"/>
+	<rect x="922.229" y="978.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="923.843" y="979.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="1153.896" y="978.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1156.075" y="979.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="924.207" y="976.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="250.844" height="2.5"/>
+	<rect x="924.207" y="975.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1171.014" y="975.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="924.771" y="973.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="295.297" height="2.5"/>
+	<rect x="924.771" y="972.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1217.282" y="972.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.786" height="5.5"/>
+	<rect x="1218.493" y="973.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="924.771" y="970.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="295.297" height="2.5"/>
+	<rect x="924.771" y="969.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1217.282" y="969.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.786" height="5.5"/>
+	<rect x="927.558" y="967.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="222.986" height="2.5"/>
+	<rect x="927.558" y="966.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1147.354" y="966.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.189" height="5.5"/>
+	<rect x="927.558" y="964.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="222.986" height="2.5"/>
+	<rect x="927.558" y="963.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="931.11" y="964.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1147.354" y="963.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.189" height="5.5"/>
+	<rect x="930.747" y="961.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="238.45" height="2.5"/>
+	<rect x="930.747" y="960.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="0.808" height="5.5"/>
+	<rect x="1165.159" y="960.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="931.07" y="958.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="219.474" height="2.5"/>
+	<rect x="931.07" y="957.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1147.031" y="957.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.513" height="5.5"/>
+	<rect x="940.801" y="955.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="225.529" height="2.5"/>
+	<rect x="940.801" y="954.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1162.293" y="954.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="948.552" y="952.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="244.385" height="2.5"/>
+	<rect x="948.552" y="951.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.786" height="5.5"/>
+	<rect x="1188.899" y="951.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="948.916" y="949.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="297.598" height="2.5"/>
+	<rect x="948.916" y="948.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="951.984" y="949.873" clip-path="url(#SVGID_46_)" width="0.04" height="2.5"/>
+	<rect x="1242.476" y="948.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="951.621" y="946.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="230.213" height="2.5"/>
+	<rect x="951.621" y="945.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="952.953" y="946.873" clip-path="url(#SVGID_46_)" width="0.04" height="2.5"/>
+	<rect x="1177.797" y="945.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="955.577" y="943.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="291.703" height="2.5"/>
+	<rect x="955.577" y="942.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="955.698" y="943.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.041" height="2.5"/>
+	<rect x="956.99" y="943.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="957.111" y="943.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="957.354" y="943.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="957.475" y="943.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="957.596" y="943.873" clip-path="url(#SVGID_46_)" width="0.041" height="2.5"/>
+	<rect x="957.798" y="943.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.04" height="2.5"/>
+	<rect x="959.09" y="943.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="959.171" y="943.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.04" height="2.5"/>
+	<rect x="959.251" y="943.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1245.504" y="942.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.776" height="5.5"/>
+	<rect x="959.05" y="940.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="259.323" height="2.5"/>
+	<rect x="959.05" y="939.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1214.335" y="939.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1218.211" y="940.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="960.18" y="937.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="233.282" height="2.5"/>
+	<rect x="960.18" y="936.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.796" height="5.5"/>
+	<rect x="1189.425" y="936.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="969.184" y="934.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="255.851" height="2.5"/>
+	<rect x="969.184" y="933.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1222.935" y="933.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.1" height="5.5"/>
+	<rect x="969.184" y="931.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="255.851" height="2.5"/>
+	<rect x="969.184" y="930.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1222.935" y="930.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.1" height="5.5"/>
+	<rect x="980.044" y="928.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="274.342" height="2.5"/>
+	<rect x="980.044" y="927.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.736" height="5.5"/>
+	<rect x="1250.349" y="927.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="985.172" y="925.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="293.843" height="2.5"/>
+	<rect x="985.172" y="924.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1275.542" y="924.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.473" height="5.5"/>
+	<rect x="1279.035" y="925.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.04" height="2.5"/>
+	<rect x="989.491" y="922.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="294.126" height="2.5"/>
+	<rect x="989.491" y="921.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1279.58" y="921.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1002.532" y="919.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="263.401" height="2.5"/>
+	<rect x="1002.532" y="918.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1006.085" y="919.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1261.896" y="918.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1009.033" y="916.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="305.874" height="2.5"/>
+	<rect x="1009.033" y="915.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1310.869" y="915.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1009.598" y="913.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="230.173" height="2.5"/>
+	<rect x="1009.598" y="912.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.857" height="5.5"/>
+	<rect x="1235.733" y="912.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1010.769" y="910.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="227.912" height="2.5"/>
+	<rect x="1010.769" y="909.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1234.684" y="909.373" clip-path="url(#SVGID_46_)" fill="#800080" width="3.997" height="5.5"/>
+	<rect x="1234.663" y="910.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.041" height="2.5"/>
+	<rect x="1011.132" y="907.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="329.857" height="2.5"/>
+	<rect x="1011.132" y="906.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1336.951" y="906.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1021.347" y="904.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="345.521" height="2.5"/>
+	<rect x="1021.347" y="903.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1024.375" y="904.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="1362.831" y="903.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1027.888" y="901.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="278.057" height="2.5"/>
+	<rect x="1027.888" y="900.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1029.503" y="901.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="1301.906" y="900.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1033.54" y="898.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="299.818" height="2.5"/>
+	<rect x="1033.54" y="897.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1033.782" y="898.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="1331.218" y="897.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.141" height="5.5"/>
+	<rect x="1034.105" y="895.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="268.892" height="2.5"/>
+	<rect x="1034.105" y="894.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1300.614" y="894.373" clip-path="url(#SVGID_46_)" fill="#800080" width="2.382" height="5.5"/>
+	<rect x="1040.484" y="892.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="217.777" height="2.5"/>
+	<rect x="1040.484" y="891.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1254.225" y="891.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1061.883" y="889.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="290.048" height="2.5"/>
+	<rect x="1061.883" y="888.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.099" height="5.5"/>
+	<rect x="1347.894" y="888.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1070.078" y="886.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="313.505" height="2.5"/>
+	<rect x="1070.078" y="885.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1379.546" y="885.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1072.501" y="883.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="273.171" height="2.5"/>
+	<rect x="1072.501" y="882.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1343.694" y="882.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.978" height="5.5"/>
+	<rect x="1085.138" y="880.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="264.048" height="2.5"/>
+	<rect x="1085.138" y="879.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.755" height="5.5"/>
+	<rect x="1345.147" y="879.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1092.284" y="877.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="307.975" height="2.5"/>
+	<rect x="1092.284" y="876.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1396.22" y="876.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.039" height="5.5"/>
+	<rect x="1095.312" y="874.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="240.307" height="2.5"/>
+	<rect x="1095.312" y="873.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.614" height="5.5"/>
+	<rect x="1331.581" y="873.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1097.977" y="871.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="265.622" height="2.5"/>
+	<rect x="1097.977" y="870.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1361.62" y="870.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.979" height="5.5"/>
+	<rect x="1098.502" y="868.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="252.177" height="2.5"/>
+	<rect x="1098.502" y="867.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="2.18" height="5.5"/>
+	<rect x="1346.642" y="867.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1099.875" y="865.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="206.755" height="2.5"/>
+	<rect x="1099.875" y="864.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1302.593" y="864.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1109.646" y="862.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="196.38" height="2.5"/>
+	<rect x="1109.646" y="861.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1301.987" y="861.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1109.726" y="859.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="224.884" height="2.5"/>
+	<rect x="1109.726" y="858.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1330.572" y="858.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1111.22" y="856.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="115.228" height="2.5"/>
+	<rect x="1111.22" y="855.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1222.41" y="855.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1114.975" y="853.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="233.2" height="2.5"/>
+	<rect x="1114.975" y="852.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1344.139" y="852.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.036" height="5.5"/>
+	<rect x="1119.052" y="850.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="300.425" height="2.5"/>
+	<rect x="1119.052" y="849.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.038" height="5.5"/>
+	<rect x="1122.807" y="850.873" clip-path="url(#SVGID_46_)" fill="#008000" width="0.041" height="2.5"/>
+	<rect x="1415.439" y="849.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1122.363" y="847.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="325.455" height="2.5"/>
+	<rect x="1122.363" y="846.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1445.881" y="846.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.938" height="5.5"/>
+	<rect x="1122.363" y="844.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="325.455" height="2.5"/>
+	<rect x="1122.363" y="843.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1445.881" y="843.373" clip-path="url(#SVGID_46_)" fill="#800080" width="1.938" height="5.5"/>
+	<rect x="1123.938" y="841.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="244.587" height="2.5"/>
+	<rect x="1123.938" y="840.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1364.486" y="840.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1127.006" y="838.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="234.735" height="2.5"/>
+	<rect x="1127.006" y="837.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1357.703" y="837.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1130.761" y="835.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="279.914" height="2.5"/>
+	<rect x="1130.761" y="834.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1131.205" y="835.873" clip-path="url(#SVGID_46_)" fill="#FFA500" width="0.04" height="2.5"/>
+	<rect x="1406.638" y="834.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1407.162" y="835.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="1407.688" y="835.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.04" height="2.5"/>
+	<rect x="1133.869" y="832.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="229.568" height="2.5"/>
+	<rect x="1133.869" y="831.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.979" height="5.5"/>
+	<rect x="1359.399" y="831.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1133.869" y="829.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="229.568" height="2.5"/>
+	<rect x="1133.869" y="828.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="1.979" height="5.5"/>
+	<rect x="1359.399" y="828.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1134.516" y="826.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="291.461" height="2.5"/>
+	<rect x="1134.516" y="825.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1421.939" y="825.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<rect x="1422.302" y="826.873" clip-path="url(#SVGID_46_)" fill="#0000FF" width="0.041" height="2.5"/>
+	<rect x="1135.524" y="823.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="247.373" height="2.5"/>
+	<rect x="1135.524" y="822.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.917" height="5.5"/>
+	<rect x="1135.505" y="823.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.04" height="2.5"/>
+	<rect x="1378.859" y="822.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1135.524" y="820.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="247.373" height="2.5"/>
+	<rect x="1135.524" y="819.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="3.917" height="5.5"/>
+	<rect x="1135.505" y="820.873" clip-path="url(#SVGID_46_)" fill="#00FFFF" width="0.04" height="2.5"/>
+	<rect x="1378.859" y="819.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.038" height="5.5"/>
+	<rect x="1136.292" y="817.873" clip-path="url(#SVGID_46_)" fill="#DDDDDD" width="276.846" height="2.5"/>
+	<rect x="1136.292" y="816.373" clip-path="url(#SVGID_46_)" fill="#FF0000" width="4.037" height="5.5"/>
+	<rect x="1409.101" y="816.373" clip-path="url(#SVGID_46_)" fill="#800080" width="4.037" height="5.5"/>
+	<line clip-path="url(#SVGID_46_)" x1="672.877" y1="1043.873" x2="672.877" y2="804.873"/>
+	
+		<line clip-path="url(#SVGID_46_)" fill="none" stroke="#000000" stroke-width="3" x1="672.877" y1="1043.873" x2="672.877" y2="804.873"/>
+	<line clip-path="url(#SVGID_46_)" x1="1138.634" y1="1043.873" x2="1138.634" y2="804.873"/>
+	
+		<line clip-path="url(#SVGID_46_)" fill="none" stroke="#000000" stroke-width="3" x1="1138.634" y1="1043.873" x2="1138.634" y2="804.873"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_51_" x="312.364" y="1043.873" width="1190" height="326.5"/>
+	</defs>
+	<clipPath id="SVGID_52_">
+		<use xlink:href="#SVGID_51_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_52_)">
+		<text transform="matrix(1 0 0 1 312.3643 1093.873)" font-family="'Helvetica'" font-size="18">Repeats</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_53_" x="302.364" y="1075.873" width="1200" height="180"/>
+	</defs>
+	<clipPath id="SVGID_54_">
+		<use xlink:href="#SVGID_53_"  overflow="visible"/>
+	</clipPath>
+	<rect x="521.232" y="1215.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="122.253" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 646.9619 1234.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="642.638" y="1195.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="6.056" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 652.1704 1214.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="648.29" y="1175.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="20.389" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 672.1553 1194.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="668.76" y="1155.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="3.512" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 675.7485 1174.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="773.934" y="1135.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="22.892" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 800.3027 1154.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1MA8</text>
+	</g>
+	<rect x="822.101" y="1115.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="28.302" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 853.8789 1134.873)"><tspan x="0" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1</tspan><tspan x="20.021" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18" letter-spacing="-1">P</tspan><tspan x="30.713" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">A7</tspan></text>
+	</g>
+	<rect x="871.195" y="1215.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="14.374" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 889.0449 1234.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1ME3</text>
+	</g>
+	<rect x="885.73" y="1195.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="5.41" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 894.6172 1214.873)" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1MB2</text>
+	</g>
+	<rect x="891.221" y="1175.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="30.16" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 924.8574 1194.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1M3</text>
+	</g>
+	<rect x="921.461" y="1155.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="23.982" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 948.9199 1174.873)" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1M3</text>
+	</g>
+	<rect x="971.041" y="1135.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="34.358" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1008.876 1154.873)" fill="#FF8C00" font-family="'Helvetica'" font-size="18">L1M3</text>
+	</g>
+	<rect x="1091.073" y="1215.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="15.261" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1109.8105 1234.873)"><tspan x="0" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="1106.334" y="1195.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="8.722" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1118.5322 1214.873)"><tspan x="0" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="1115.096" y="1175.873" clip-path="url(#SVGID_54_)" fill="#FF8C00" width="23.578" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1142.1504 1194.873)"><tspan x="0" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">HE</tspan><tspan x="25.005" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">R</tspan><tspan x="37.698" y="0" fill="#FF8C00" font-family="'Helvetica'" font-size="18">VH-int</tspan></text>
+	</g>
+	<rect x="1318.379" y="1215.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="54.143" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1375.998 1234.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1P2</text>
+	</g>
+	<rect x="1374.943" y="1195.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="2.382" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1380.8018 1214.873)"><tspan x="0" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1</tspan><tspan x="20.021" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18" letter-spacing="-1">P</tspan><tspan x="30.713" y="0" fill="#0000FF" font-family="'Helvetica'" font-size="18">A5</tspan></text>
+	</g>
+	<rect x="1429.691" y="1175.873" clip-path="url(#SVGID_54_)" fill="#0000FF" width="1.978" height="20"/>
+	<g clip-path="url(#SVGID_54_)">
+		<text transform="matrix(1 0 0 1 1435.1455 1194.873)" fill="#0000FF" font-family="'Helvetica'" font-size="18">L1MA9</text>
+	</g>
+	<line clip-path="url(#SVGID_54_)" x1="672.377" y1="1255.873" x2="672.377" y2="1075.873"/>
+	
+		<line clip-path="url(#SVGID_54_)" fill="none" stroke="#000000" stroke-width="3" x1="672.378" y1="1255.873" x2="672.378" y2="1075.873"/>
+	<line clip-path="url(#SVGID_54_)" x1="1138.134" y1="1255.873" x2="1138.134" y2="1075.873"/>
+	
+		<line clip-path="url(#SVGID_54_)" fill="none" stroke="#000000" stroke-width="3" x1="1138.134" y1="1255.873" x2="1138.134" y2="1075.873"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_55_" x="302.364" y="1255.873" width="1200" height="75"/>
+	</defs>
+	<clipPath id="SVGID_56_">
+		<use xlink:href="#SVGID_55_"  overflow="visible"/>
+	</clipPath>
+	<rect x="412.343" y="1290.873" clip-path="url(#SVGID_56_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 386.833 1326.873)" font-family="'Helvetica-Bold'" font-size="18">5.0KB</text>
+	</g>
+	<rect x="614.214" y="1290.873" clip-path="url(#SVGID_56_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 583.6982 1326.873)" font-family="'Helvetica-Bold'" font-size="18">10.0KB</text>
+	</g>
+	<rect x="816.085" y="1290.873" clip-path="url(#SVGID_56_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 785.5688 1326.873)" font-family="'Helvetica-Bold'" font-size="18">15.0KB</text>
+	</g>
+	<rect x="1017.955" y="1290.873" clip-path="url(#SVGID_56_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 987.4395 1326.873)" font-family="'Helvetica-Bold'" font-size="18">20.0KB</text>
+	</g>
+	<rect x="1219.826" y="1290.873" clip-path="url(#SVGID_56_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 1189.3105 1326.873)" font-family="'Helvetica-Bold'" font-size="18">25.0KB</text>
+	</g>
+	<rect x="1421.696" y="1290.873" clip-path="url(#SVGID_56_)" width="1" height="15"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 1391.1807 1326.873)" font-family="'Helvetica-Bold'" font-size="18">30.0KB</text>
+	</g>
+	<line clip-path="url(#SVGID_56_)" x1="210.473" y1="1290.873" x2="672.877" y2="1290.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#FF0000" stroke-width="8" x1="210.473" y1="1290.873" x2="672.877" y2="1290.873"/>
+	<line clip-path="url(#SVGID_56_)" x1="210.473" y1="1290.873" x2="672.877" y2="1290.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#FF0000" stroke-width="3" x1="210.473" y1="1290.873" x2="672.877" y2="1290.873"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#FF0000" points="272.954,1275.873 302.954,1290.873 272.954,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#FF0000" points="365.435,1275.873 395.435,1290.873 365.435,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#FF0000" points="457.916,1275.873 487.916,1290.873 457.916,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#FF0000" points="550.396,1275.873 580.396,1290.873 550.396,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#FF0000" points="642.877,1275.873 672.877,1290.873 642.877,1305.873 	"/>
+	<line clip-path="url(#SVGID_56_)" x1="672.877" y1="1290.873" x2="1138.634" y2="1290.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#0000FF" stroke-width="8" x1="672.877" y1="1290.873" x2="1138.634" y2="1290.873"/>
+	<line clip-path="url(#SVGID_56_)" x1="672.877" y1="1290.873" x2="1138.634" y2="1290.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#0000FF" stroke-width="3" x1="672.877" y1="1290.873" x2="1138.634" y2="1290.873"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#0000FF" points="736.029,1275.873 766.029,1290.873 736.029,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#0000FF" points="829.18,1275.873 859.18,1290.873 829.18,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#0000FF" points="922.331,1275.873 952.331,1290.873 922.331,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#0000FF" points="1015.482,1275.873 1045.482,1290.873 1015.482,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#0000FF" points="1108.634,1275.873 1138.634,1290.873 1108.634,1305.873 	"/>
+	<line clip-path="url(#SVGID_56_)" x1="1138.634" y1="1290.873" x2="1601.038" y2="1290.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#808080" stroke-width="8" x1="1138.634" y1="1290.873" x2="1601.039" y2="1290.873"/>
+	<line clip-path="url(#SVGID_56_)" x1="1138.634" y1="1290.873" x2="1601.038" y2="1290.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#808080" stroke-width="3" x1="1138.634" y1="1290.873" x2="1601.039" y2="1290.873"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#808080" points="1201.114,1275.873 1231.114,1290.873 1201.114,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#808080" points="1293.596,1275.873 1323.596,1290.873 1293.596,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#808080" points="1386.076,1275.873 1416.076,1290.873 1386.076,1305.873 	"/>
+	<polygon clip-path="url(#SVGID_56_)" fill="#808080" points="1478.558,1275.873 1508.558,1290.873 1478.558,1305.873 	"/>
+	<line clip-path="url(#SVGID_56_)" x1="672.877" y1="1275.873" x2="672.877" y2="1310.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#000000" stroke-width="3" x1="672.877" y1="1275.873" x2="672.877" y2="1310.873"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 630.3481 1273.873)" font-family="'Helvetica'" font-size="18">breakpoint</text>
+	</g>
+	<line clip-path="url(#SVGID_56_)" x1="1138.634" y1="1275.873" x2="1138.634" y2="1310.873"/>
+	
+		<line clip-path="url(#SVGID_56_)" fill="none" stroke="#000000" stroke-width="3" x1="1138.634" y1="1275.873" x2="1138.634" y2="1310.873"/>
+	<g clip-path="url(#SVGID_56_)">
+		<text transform="matrix(1 0 0 1 1096.1045 1273.873)" font-family="'Helvetica'" font-size="18">breakpoint</text>
+	</g>
+</g>
+<rect x="47" y="57.497" fill="none" width="230.987" height="140.993"/>
+<text transform="matrix(1 0 0 1 108.5576 74.7529)" opacity="0.8"><tspan x="0" y="0" font-family="'Helvetica'" font-size="24">Counts of reads </tspan><tspan x="17.32" y="28.8" font-family="'Helvetica'" font-size="24">supporting the </tspan><tspan x="-33.375" y="57.6" font-family="'Helvetica'" font-size="24">alternate allele, the </tspan><tspan x="-29.344" y="86.4" font-family="'Helvetica'" font-size="24">reference allele, or </tspan><tspan x="10.664" y="115.2" font-family="'Helvetica'" font-size="24">are ambiguous</tspan></text>
+<rect x="20" y="844.957" fill="none" width="257.987" height="188.99"/>
+<text transform="matrix(1 0 0 1 49.835 862.2129)" opacity="0.8"><tspan x="0" y="0" font-family="'Helvetica'" font-size="24">Reads supporting the </tspan><tspan x="13.371" y="28.8" font-family="'Helvetica'" font-size="24">reference allele; </tspan><tspan x="190.805" y="28.8" fill="#FF0000" font-family="'Helvetica-Bold'" font-size="24">red </tspan><tspan x="-22.641" y="57.6" font-family="'Helvetica'" font-size="24">reads map to the minus </tspan><tspan x="8.062" y="86.4" font-family="'Helvetica'" font-size="24">strand, </tspan><tspan x="88.102" y="86.4" fill="#800080" font-family="'Helvetica-Bold'" font-size="24">purple </tspan><tspan x="168.105" y="86.4" font-family="'Helvetica'" font-size="24">to the </tspan><tspan x="4.02" y="115.2" font-family="'Helvetica'" font-size="24">plus strand, and gray </tspan><tspan x="21.375" y="144" font-family="'Helvetica'" font-size="24">lines join read pairs</tspan></text>
+<rect x="1515.425" y="223.988" fill="none" width="247.488" height="175.921"/>
+<text transform="matrix(1 0 0 1 1515.4248 241.2437)" opacity="0.8"><tspan x="0" y="0" font-family="'Helvetica'" font-size="24">Reads supporting the </tspan><tspan x="0" y="28.8" font-family="'Helvetica'" font-size="24">alternate allele;only </tspan><tspan x="0" y="57.6" font-family="'Helvetica'" font-size="24">reads spanning the </tspan><tspan x="0" y="86.4" font-family="'Helvetica'" font-size="24">breakpoints are </tspan><tspan x="0" y="115.2" font-family="'Helvetica'" font-size="24">informative for an </tspan><tspan x="0" y="144" font-family="'Helvetica'" font-size="24">inversion</tspan></text>
+<rect x="17" y="454.977" fill="none" width="260.987" height="233.988"/>
+<text transform="matrix(1 0 0 1 72.499 472.2329)" opacity="0.8"><tspan x="0" y="0" font-family="'Helvetica'" font-size="24">Annotations can be </tspan><tspan x="-3.984" y="28.8" font-family="'Helvetica'" font-size="24">displayed; here, the </tspan><tspan x="-45.316" y="57.6" font-family="'Helvetica'" font-size="24">HERVH and L1 repeats </tspan><tspan x="-23.977" y="86.4" font-family="'Helvetica'" font-size="24">are shown (notice the </tspan><tspan x="-2.637" y="115.2" font-family="'Helvetica'" font-size="24">strand, indicated by </tspan><tspan x="-49.301" y="144" font-family="'Helvetica'" font-size="24">color, switches between </tspan><tspan x="129.457" y="172.8" font-family="'Helvetica'" font-size="24">alleles)</tspan></text>
+<rect x="1515.425" y="642.467" fill="none" width="271.486" height="168.482"/>
+<text transform="matrix(1 0 0 1 1515.4248 659.7231)" opacity="0.8"><tspan x="0" y="0" font-family="'Helvetica'" font-size="24">The orientation of </tspan><tspan x="0" y="28.8" font-family="'Helvetica'" font-size="24">genomic parts within the </tspan><tspan x="0" y="57.6" font-family="'Helvetica'" font-size="24">inverted region; notice </tspan><tspan x="0" y="86.4" font-family="'Helvetica'" font-size="24">the </tspan><tspan x="40.031" y="86.4" fill="#0000FF" font-family="'Helvetica-Bold'" font-size="24">blue </tspan><tspan x="96.035" y="86.4" font-family="'Helvetica'" font-size="24">region points to </tspan><tspan x="0" y="115.201" font-family="'Helvetica'" font-size="24">the left in the alternate </tspan><tspan x="0" y="144" font-family="'Helvetica'" font-size="24">allele!</tspan></text>
+<rect x="1515.425" y="1234.938" fill="none" width="271.486" height="117.485"/>
+<text transform="matrix(1 0 0 1 1515.4248 1252.1934)" opacity="0.8"><tspan x="0" y="0" font-family="'Helvetica'" font-size="24">The orientation of </tspan><tspan x="0" y="28.8" font-family="'Helvetica'" font-size="24">genomic parts within the </tspan><tspan x="0" y="57.6" font-family="'Helvetica'" font-size="24">reference genome; all </tspan><tspan x="0" y="86.4" font-family="'Helvetica'" font-size="24">parts point to the right</tspan></text>
+<rect x="768.462" y="1404.429" fill="none" width="332.982" height="30.489"/>
+<text transform="matrix(1 0 0 1 768.4619 1421.6846)" opacity="0.8" font-family="'Helvetica'" font-size="24">The inversion breakpoints</text>
+<g opacity="0.8">
+	<g>
+		<polyline fill="none" stroke="#000000" stroke-width="6" stroke-miterlimit="10" points="755.462,1412.929 674.466,1412.929 
+			674.466,1386.658 		"/>
+		<g>
+			<path d="M674.466,1364.932c3.793,10.224,10.266,22.908,17.121,30.771l-17.121-6.192l-17.118,6.192
+				C664.204,1387.84,670.676,1375.155,674.466,1364.932z"/>
+		</g>
+	</g>
+</g>
+<g opacity="0.8">
+	<g>
+		<polyline fill="none" stroke="#000000" stroke-width="6" stroke-miterlimit="10" points="1055.447,1412.929 1136.443,1412.929 
+			1136.443,1386.658 		"/>
+		<g>
+			<path d="M1136.443,1364.932c3.793,10.224,10.266,22.908,17.121,30.771l-17.121-6.192l-17.117,6.192
+				C1126.182,1387.84,1132.653,1375.155,1136.443,1364.932z"/>
+		</g>
+	</g>
+</g>
+</svg>
