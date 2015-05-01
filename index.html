@@ -1,183 +1,214 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>svviz - a read visualizer to validate structural variants</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="assets/css/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/style.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie/v9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie/v8.css" /><![endif]-->
-	</head>
-	<body class="landing">
+<head>
+    <title>svviz - a read visualizer to validate structural variants</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords"><!--[if lte IE 8]><script src="assets/css/ie/html5shiv.js"></script><![endif]-->
+    <link href="assets/css/style.css" rel="stylesheet"><!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie/v8.css" /><![endif]-->
+</head>
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+<body class="landing">
+    <!-- Page Wrapper -->
 
-					<article id="main">
-						<header>
-							<h2>svviz</h2>
-							<p>A read visualizer to validate structural variants</p>
-						</header>
+    <div id="page-wrapper">
+        <article id="main">
+            <header>
+                <h2>svviz</h2>
 
+                <p>A read visualizer to validate structural variants</p>
+            </header>
 
-				<section class="wrapper style2">
-					<div class="inner">
-						<h2>Quick Start</h2>
-						<ol>
-							<li>From the terminal, install the latest version of <a href="https://github.com/svviz/svviz">svviz</a> from pypi: <code>sudo pip install -U svviz</code></li>
-							<li>Run the following command: <code>svviz demo</code></li>
-						</ol>
+            <section class="wrapper style2">
+                <div class="inner">
+                    <h2>Quick Start</h2>
 
-						<p>See the <a href="http://svviz.readthedocs.org/en/latest/install.html">documentation</a> for more detailed installation instructions.
-					</div>
-				</section>
+                    <ol>
+                        <li>From the terminal, install the latest version of <a href="https://github.com/svviz/svviz">svviz</a> from pypi:
+                        <code>sudo pip install -U svviz</code>
+                        </li>
 
-				<section class="wrapper style5">
-						<div class="inner">
-						<h2>Overview</h2>
-						<div class="demo_wide">
-							<img src="images/example.svg" alt="" />
-						</div>
-						<!-- <div class="12u"><span class="image fit"><img src="images/example.svg" alt="" /></span></div> -->
+                        <li>Run the following command: <code>svviz demo</code></li>
+                    </ol>
 
-						</div>
-					</section>
+                    <p>See the <a href="http://svviz.readthedocs.org/en/latest/install.html">documentation</a> for more detailed
+                    installation instructions.</p>
+                </div>
+            </section>
 
-				<!-- Three -->
-					<section id="three" class="wrapper style2 special">
-						<div class="inner">
-							<header class="major">
-								<h2>Features</h2>
-								<p>svviz visualizes high-throughput sequencing data supporting a structural variant</p>
-							</header>
-							<ul class="features">
-								<li class="icon fa-arrows-h">
-									<h3>Reconstructs alternate allele sequence</h3>
-									<p>Reads are aligned against the reconstructed alternate allele sequence &ndash; no more awkward visual contortions of the standard reference genome.</p>
-								</li>
-								<li class="icon fa-file-o">
-									<h3>Supports any read data in BAM format</h3>
-									<p>Supports short reads, for example from Illumina short-fragment and mate-pair libraries</p>
-									<p>Also supports long read data, such as Moleculo (assembled), MinIon or PacBio.</p>
-								</li>
-								<li class="icon fa-cog">
-									<h3>Realignment around breakpoints</h3>
-									<p>Performs a full Smith-Waterman alignment so that reads are aligned across structural variant breakpoints.</p>
-								</li>
-								<li class="icon fa-html5">
-									<h3>Interactive browser view</h3>
-									<p>Supports zooming in and out and shows detailed information about each read upon request.</p>
-								</li>
-								<li class="icon fa-file-photo-o">
-									<h3>Export to PNG, PDF or SVG</h3>
-									<p>Export to vector or raster image formats from the browser view or directly from the command-line.</p>
-								</li>
+            <section class="wrapper style5">
+                <div class="inner">
+                    <h2>Overview</h2>
 
-								<li class="icon fa-list-ol">
-									<h3>Batch mode</h3>
-									<p>Analyze many putative structural variants simultaneously from an input VCF file.</p>
-								</li>
-							</ul>
-						</div>
-					</section>
+                    <div class="demo_wide"><img alt="" src="images/example.svg"></div>
+                </div>
+            </section>
 
-<!-- 
-					<section id="three" class="wrapper style5 special">
-						<div class="inner">
-							<header class="major">
-								<h2>Examples</h2>
-							</header>
-						</div>
-					</section> -->
+            <section class="wrapper style2 special" id="three">
+                <div class="inner">
+                    <header class="major">
+                        <h2>Features</h2>
 
+                        <p>svviz visualizes high-throughput sequencing data supporting a structural variant</p>
+                    </header>
 
+                    <ul class="features">
+                        <li class="icon fa-arrows-h">
+                            <h3>Reconstructs alternate allele sequence</h3>
 
-				<!-- Two -->
-					<section id="two" class="wrapper alt style5">
-						<section class="spotlight">
-							<div class="content">
-								<h2>Long reads</h2>
-								<p>Example heterozygous insertion fully spanned by multiple PacBio reads.</p>
-								<p>The insertion is shown in blue, replacing a short deleted segment colored orange.</p>
-							</div>
-							<div class="image"><img src="images/ins_pacbio_demo.svg" alt="" style="background: white;" /></div>
-						</section>
+                            <p>Reads are aligned against the reconstructed alternate allele sequence &ndash; no more awkward visual
+                            contortions of the standard reference genome.</p>
+                        </li>
 
-						<section class="spotlight">
-							<div class="content">
-								<h2>Multiple samples</h2>
-								<p>Example deletion in a trio; based on svviz's output, mother and son appear to be heterozygous for the deletion, while the father is homozygous (only a single read supports the reference, with minimal overlap with the deletion).</p>
-							</div>
-							<div class="image"><img src="images/del.svg" alt=""  style="background: white;" /></div>
-						</section>
-						
+                        <li class="icon fa-file-o">
+                            <h3>Supports any read data in BAM format</h3>
 
-						<section class="spotlight">
-							<div class="content">
-								<h2>Multiple samples</h2>
-								<p>Example deletion in a trio; based on svviz's output, mother and son appear to be heterozygous for the deletion, while the father is homozygous (only a single read supports the reference, with minimal overlap with the deletion).</p>
-							</div>
-							<div class="image"><img src="images/del.svg" alt=""  style="background: white;" /></div>
-						</section>
-						
+                            <p>Supports short reads, for example from Illumina short-fragment and mate-pair libraries</p>
 
-						<section class="spotlight">
-							<div class="content">
-								<h2>Interactive browser interface</h2>
-								<p>Get detailed information about individual reads, SNP positions and more in the browser interface..</p>
-							</div>
+                            <p>Also supports long read data, such as Moleculo (assembled), MinIon or PacBio.</p>
+                        </li>
 
-							<!-- <div class="image"><img src="images/svviz_demo.gif" alt=""  style="background: white;" /></div> -->
-							<video class="image" autoplay loop>
-								<!-- MP4 must be first for iPad! -->
-								<source src="images/svviz_demo.mp4" type="video/mp4" /><!-- Safari / iOS video    -->
-								<source src="images/svviz_demo.ogg" type="video/ogg" /><!-- Firefox / Opera / Chrome10 -->
-								<img src="images/svviz_demo.gif" />
-							</video>
+                        <li class="icon fa-cog">
+                            <h3>Realignment around breakpoints</h3>
 
-						</section>
+                            <p>Performs a full Smith-Waterman alignment so that reads are aligned across structural variant
+                            breakpoints.</p>
+                        </li>
 
-					</section>
+                        <li class="icon fa-html5">
+                            <h3>Interactive browser view</h3>
 
+                            <p>Supports zooming in and out and shows detailed information about each read upon request.</p>
+                        </li>
 
+                        <li class="icon fa-file-photo-o">
+                            <h3>Export to PNG, PDF or SVG</h3>
 
-				<!-- CTA -->
+                            <p>Export to vector or raster image formats from the browser view or directly from the command-line.</p>
+                        </li>
 
-				<section id="cta" class="wrapper style4">
-					<div class="inner">
-						<header>
-							<h2>More information</h2>
-							<p>svviz was developed by <a href="http://stanford.edu/~nspies/">Noah Spies</a> with support from the <a href="http://www.nist.gov">National Institute of Standards and Technology</a> and the <a href="http://mendel.stanford.edu/SidowLab/index.html">Sidow lab</a> at Stanford University.</p>
-						</header>
-						<ul class="actions vertical">
-							<li><a href="https://github.com/svviz/svviz" class="button fit"><div class="icon fa-github"> Source code</div></a></li>
-							<li><a href="http://biorxiv.org/content/early/2015/03/07/016063" class="button fit"><div class="icon fa-book"> Manuscript </div></a></li>
-							<li><a href="http://svviz.readthedocs.org/en/latest/" class="button fit special"><div class="icon fa-book"> Documentation </div></a></li>
-						</ul>
-					</div>
-				</section>
+                        <li class="icon fa-list-ol">
+                            <h3>Batch mode</h3>
 
+                            <p>Analyze many putative structural variants simultaneously from an input VCF file.</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
 
+            <section class="wrapper alt style5" id="two">
+                <section class="spotlight">
+                    <div class="content">
+                        <h2>Long reads</h2>
 
+                        <p>Example heterozygous insertion fully spanned by multiple PacBio reads.</p>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="copyright">
-							<li>&copy; Noah Spies</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</footer>
+                        <p>The insertion is shown in blue, replacing a short deleted segment colored orange.</p>
+                    </div>
 
-			</div>
+                    <div class="image"><img alt="" src="images/ins_pacbio_demo.svg" style="background: white;"></div>
+                </section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/init.js"></script>
+                <section class="spotlight">
+                    <div class="content">
+                        <h2>Multiple samples</h2>
 
-	</body>
+                        <p>Example deletion in a trio; based on svviz's output, mother and son appear to be heterozygous for the deletion,
+                        while the father is homozygous (only a single read supports the reference, with minimal overlap with the
+                        deletion).</p>
+                    </div>
+
+                    <div class="image"><img alt="" src="images/del.svg" style="background: white;"></div>
+                </section>
+
+                <section class="spotlight">
+                    <div class="content">
+                        <h2>Multiple samples</h2>
+
+                        <p>Example deletion in a trio; based on svviz's output, mother and son appear to be heterozygous for the deletion,
+                        while the father is homozygous (only a single read supports the reference, with minimal overlap with the
+                        deletion).</p>
+                    </div>
+
+                    <div class="image"><img alt="" src="images/del.svg" style="background: white;"></div>
+                </section>
+
+                <section class="spotlight">
+                    <div class="content">
+                        <h2>Interactive browser interface</h2>
+
+                        <p>Get detailed information about individual reads, SNP positions and more in the browser interface..</p>
+                    </div><video autoplay="" class="image" loop="">
+                    <source src="images/svviz_demo.mp4" type="video/mp4"><!-- Safari / iOS video    -->
+                    <source src="images/svviz_demo.ogg" type="video/ogg"><!-- Firefox / Opera / Chrome10 -->
+                    <img src="images/svviz_demo.gif"></video>
+                </section>
+            </section>
+
+            <section class="wrapper style4" id="cta">
+                <div class="inner">
+                    <header>
+                        <h2>More information</h2>
+
+                        <p>svviz was developed by <a href="http://stanford.edu/~nspies/">Noah Spies</a> with support from the <a href=
+                        "http://www.nist.gov">National Institute of Standards and Technology</a> and the <a href=
+                        "http://mendel.stanford.edu/SidowLab/index.html">Sidow lab</a> at Stanford University.</p>
+                    </header>
+
+                    <ul class="actions vertical">
+                        <li>
+                            <a class="button fit" href="https://github.com/svviz/svviz">
+                            <div class="icon fa-github">
+                                Source code
+                            </div></a>
+                        </li>
+
+                        <li>
+                            <a class="button fit" href="http://biorxiv.org/content/early/2015/03/07/016063">
+                            <div class="icon fa-book">
+                                Manuscript
+                            </div></a>
+                        </li>
+
+                        <li>
+                            <a class="button fit special" href="http://svviz.readthedocs.org/en/latest/">
+                            <div class="icon fa-book">
+                                Documentation
+                            </div></a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <ul class="copyright">
+                    <li>&copy; Noah Spies</li>
+
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a>
+                    </li>
+                </ul>
+            </footer>
+        </article>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/init.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-62515887-1', 'auto');
+              ga('send', 'pageview');
+
+    </script>
+</body>
 </html>
