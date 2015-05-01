@@ -206,14 +206,14 @@ def plotInsertSizeDistribution(isd, sampleName, dataHub):
         d = tempfile.mkdtemp()
         filename = os.path.join(d, sampleName)
 
-        if not filename.endswith(".svg"):
-            filename += ".svg"
+        if not filename.endswith(".png"):
+            filename += ".png"
 
-        ro.r.svg(filename)
+        ro.r.png(filename, res=250, width=1200, height=1200)
 
         alleles = ["alt", "ref", "amb"]
         others = [[len(chosenSet) for chosenSet in dataHub.samples[sampleName].chosenSets(allele)] for allele in alleles]
-        plotting.ecdf([isd.insertSizes]+others, ["average"]+alleles, xlab="Insert size (bp)", main=sampleName)
+        plotting.ecdf([isd.insertSizes]+others, ["average"]+alleles, xlab="Insert size (bp)", main=sampleName, legendWhere="bottomright", lwd=2)
         
         ro.r["dev.off"]()
 

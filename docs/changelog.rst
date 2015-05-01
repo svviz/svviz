@@ -1,6 +1,11 @@
 Change log
 ==========
 
+1.1.1
+-----
+
+- no longer requires X11 if rpy2 is installed (I know, this was a weird one)
+
 1.1.0
 -----
 

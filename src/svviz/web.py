@@ -167,7 +167,7 @@ def displayIsizes(name):
     if not dataHub.samples[name].insertSizePlot:
         return None
 
-    return Response(dataHub.samples[name].insertSizePlot, mimetype="image/svg+xml")
+    return Response(dataHub.samples[name].insertSizePlot, mimetype="image/png")
 
 @app.route("/_dotplots/<name>")
 def get_dotplot(name):
