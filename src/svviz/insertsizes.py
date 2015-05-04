@@ -43,6 +43,17 @@ def chooseOrientation(orientations):
         chosenOrientations = ["".join(d[x] for x in o) for o in chosenOrientations]
     return chosenOrientations
 
+def getSearchRegions(bam, minLength=0):
+    # get the chromosomes and move X, Y, M/MT to the end
+    chromosomes = []
+    for i in range(bam.nreferences):
+        if bam.lengths[i] > minLength:
+            chromosomes.append(bam.getrname(i))
+
+    for start, end in [(2500000, 50000000), (None, None)]:
+        for chrom in sorted(chromosomes):
+            yield chrom, start, end
+
 def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=20000, keepReads=False):
     """ get the insert size distribution, cutting off the tail at the high end, 
     and removing most oddly mapping pairs
@@ -53,24 +64,14 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
     inserts = []
     readLengths  = []
     
-    # TODO: should create a more complete list of searchable regions, for general use over smaller genomes
-
     count = 0
-    start = 2500000
-    end = 50000000
-
     reads = []
-    # get the chromosomes and move X, Y, M/MT to the end
-    chromosomes = []
-    for i in range(bam.nreferences):
-        if bam.lengths[i] > start:
-            chromosomes.append(bam.getrname(i))
 
     orientations = collections.Counter()
     NMs = []
     INDELs = []
 
-    for chrom in sorted(chromosomes):
+    for chrom, start, end in getSearchRegions(bam):
         for read in bam.fetch(chrom, start, end):
             if skip > 0:
                 skip -= 1
@@ -144,8 +145,9 @@ class ReadStatistics(object):
             self.insertSizes, self.reads, self.orientations, self.readLengths = sampleInsertSizes(bam, keepReads=keepReads)
             if len(self.insertSizes) > 1:
                 logging.info("  insert size mean: {:.2f} std: {:.2f}".format(numpy.mean(self.insertSizes), numpy.std(self.insertSizes)))
-        except ValueError:
+        except ValueError, e:
             print "*"*100, "here"
+            print "ERROR:", e
 
     def hasInsertSizeDistribution(self):
         if len(self.insertSizes) > 1000:
@@ -221,4 +223,3 @@ def plotInsertSizeDistribution(isd, sampleName, dataHub):
         return data
     except ImportError:
         return None    
-

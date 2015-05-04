@@ -1,6 +1,19 @@
 Change log
 ==========
 
+1.2.0
+-----
+
+This is a major feature release, implementing support for visualizing translocations.
+
+Additional changes:
+
+- does a better job finding reads to estimate empirical insert size distribution and read pair orientation
+- checks that bam files have index and produce a more helpful error message if they do not
+- annotations now also check to see if there's a mismatch between "chrX" and "X" formats, and try to automatically fix it
+- wrapping pyfaidx with a pickle-able ``GenomeSource`` object; should make automated debugging easier
+- added ``--skip-cigar`` option which disables visualizing mismatches and indels; this will speed up exporting and the web browser view for data with many errors (eg PacBio)
+
 1.1.1
 -----
 

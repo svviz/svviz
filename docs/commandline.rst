@@ -9,11 +9,12 @@ To visualize your structural variant of interest, you will need at least the fol
 1. Input bam file(s). This bam file must be coordinate-sorted and have an index file (sample.bam.bai) in the same directory. You can use `samtools <http://www.htslib.org/download>`_ to sort and index your bam file. Bam files are specified using the ``-b`` command line argument, which can be provided multiple times to load and visualize multiple samples simultaneously.
 2. Input genome fasta file. If a .fai index file does not already exist in the directory containing the fasta file, it will be created. This means that, if the .fai file does not already exist, the fasta file needs to be in a directory for which you have write permission. This fasta file is the first required command line argument.
 3. The coordinates of the structural variant. The type of event is specified by the ``-t`` command line option. The following four event types are currently supported:
-
+    
     :Deletions: The format for specifying deletion breakpoints is ``chrom start end``.
     :Inversions: To specify an inverted region, use ``chrom start end``.
     :Insertions: The format for specifying insertions is ``chrom breakpoint <inserted sequence>``.
     :Mobile elements: Mobile element insertions can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
+    :Translocations: Translocations can be specified using the following format: ``chrom1 start1 chrom2 start2 orientation``, where ``orientation`` is either ``+`` or ``-``, and specifies whether region1 and region2 are both on the plus strand of the genome, or are on opposite genomic strands.
     :Batch: see :ref:`below <batch-mode>`
 
 For example, a deletion might be called as:
@@ -88,6 +89,12 @@ Inversions
 - chromosome (column 0)
 - start coordinate (column 1)
 - SVTYPE=INV;END=<end coordinate> (column 7)
+
+
+Translocations
+^^^^^^^^^^^^^^
+
+Support for translocations in batch mode is forthcoming.
 
 
 Examples

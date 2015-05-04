@@ -1,8 +1,47 @@
+import collections
 import logging
-import pyfaidx
 
-from svviz.utilities import Locus, reverseComp, getListDefault
+from svviz.utilities import Locus, getListDefault
+from svviz import genomesource
 
+class ChromPart(object):
+    def __init__(self, regionID, segments, sources):
+        self.id = regionID
+        self.segments = segments
+        self.sources = sources
+        self._seq = None
+
+    def getSeq(self, start=0, end=None):
+        if self._seq is None:
+            seqs = []
+            for segment in self.segments:
+                seq = self.sources[segment.source].getSeq(segment.chrom, segment.start, segment.end, segment.strand)
+                seqs.append(seq)
+            self._seq = "".join(seqs).upper()
+        if end is None:
+            end = len(self._seq)
+        return self._seq[start:end]
+
+    def __len__(self):
+        return len(self.getSeq())
+
+class ChromPartsCollection(object):
+    def __init__(self, parts=None):
+        self.parts = collections.OrderedDict()
+        if parts is not None:
+            for part in parts:
+                self.parts[part.id] = part
+
+    def getPart(self, id_):
+        return self.parts[id_]
+
+    def getSeq(self, id_, *args, **kwdargs):
+        return self.parts[id_].getSeq(*args, **kwdargs)
+
+    def __iter__(self):
+        return self.parts.itervalues()
+    def __len__(self):
+        return len(self.parts)
 
 def getBreakpointFormatsStr(which=None):
     formats = []
@@ -17,19 +56,13 @@ def getBreakpointFormatsStr(which=None):
     if which in ["mei", None]:
         formats.append( "Format for mobile element insertion is '<mobile_elements.fasta> \n"
             "  <chrom> <pos> <ME name> [ME strand [start [end]]]'")
+    if which in ["tra", None]:
+        formats.append( "Format for a translocation is 'chrom1 start1 chrom2 start2 orientation'\n")
     return "\n".join(formats)
 
 
 def getVariant(dataHub):
-    # if dataHub.args.search_dist is None:
-    #     dataHub.args.search_dist = dataHub.args.isize_mean * 2
-
-    # alignDistance = int(max(dataHub.search_dist, dataHub.args.isize_mean*2))
-
     if dataHub.args.type.lower().startswith("del"):
-        # if dataHub.args.deldemo:
-        #     chrom, start, end = "chr1", 72766323, 72811840
-        # else:
         assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("del")
         chrom = dataHub.args.breakpoints[0]
         start = int(dataHub.args.breakpoints[1])
@@ -38,9 +71,6 @@ def getVariant(dataHub):
 
         variant = Deletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
     elif dataHub.args.type.lower().startswith("ins"):
-        # if dataHub.args.insdemo:
-        #     chrom, pos, seq = "chr3", 20090540, reverseComp(misc.L1SEQ)
-        # else:
         assert len(dataHub.args.breakpoints) in [3,4], getBreakpointFormatsStr("ins")
         chrom = dataHub.args.breakpoints[0]
         pos = int(dataHub.args.breakpoints[1])
@@ -72,9 +102,27 @@ def getVariant(dataHub):
         meEnd = getListDefault(dataHub.args.breakpoints, 6, 1e100)
 
         meCoords = Locus(meName, meStart, meEnd, meStrand)
-        meFasta = pyfaidx.Fasta(dataHub.args.breakpoints[0], as_raw=True)
+        meFasta = genomesource.FastaGenomeSource(dataHub.args.breakpoints[0])
 
         variant = MobileElementInsertion(insertionBreakpoint, meCoords, meFasta, dataHub.alignDistance, dataHub.genome)
+
+    elif dataHub.args.type.lower().startswith("tra"):
+        assert len(dataHub.args.breakpoints) == 5, getBreakpointFormatsStr("tra")
+        chrom1 = dataHub.args.breakpoints[0]
+        start1 = int(dataHub.args.breakpoints[1])
+
+        chrom2 = dataHub.args.breakpoints[2]
+        start2 = int(dataHub.args.breakpoints[3])
+
+        orientation = dataHub.args.breakpoints[4]
+
+        if dataHub.args.min_mapq is None:
+            dataHub.args.min_mapq = -1
+
+        variant = Translocation(Locus(chrom1, start1, start1, "+"), 
+                                Locus(chrom2, start2, start2, orientation), 
+                                dataHub.alignDistance, dataHub.genome)
+
     else:
         raise Exception("only accept event types of deletion, insertion or mei")
 
@@ -115,10 +163,16 @@ def mergedSegments(segments):
     for i in range(len(segments)-1):
         first = segments[i]
         second = segments[i+1]
-        if first.chrom==second.chrom and first.strand==second.strand and first.end == second.start-1 and first.source==second.source:
-            merged = Segment(first.chrom, first.start, second.end, second.strand, "{}_{}".format(first.id, second.id), first.source)
-            result = done + mergedSegments([merged]+segments[i+2:])
-            return result
+
+        if first.strand == "+" and first.chrom==second.chrom and first.strand==second.strand and first.end == second.start-1 and first.source==second.source:
+                merged = Segment(first.chrom, first.start, second.end, second.strand, "{}_{}".format(first.id, second.id), first.source)
+                result = done + mergedSegments([merged]+segments[i+2:])
+                return result
+        elif first.strand == "-" and first.chrom==second.chrom and first.strand==second.strand and first.start == second.end+1 and first.source==second.source:
+                merged = Segment(first.chrom, first.end, second.start, second.strand, "{}_{}".format(first.id, second.id), first.source)
+                result = done + mergedSegments([merged]+segments[i+2:])
+                return result
+
         else:
             done.append(segments[i])
 
@@ -126,22 +180,20 @@ def mergedSegments(segments):
     return done
     
 class StructuralVariant(object):
-    def __init__(self, breakpoints, alignDistance, fasta):
-        self.breakpoints = sorted(breakpoints, key=lambda x: x.start())
+    def __init__(self, breakpoints, alignDistance, genomeSource):
+        self.breakpoints = sorted(breakpoints, key=lambda x: (x.chr(), x.start()))
         self.alignDistance = alignDistance
 
-        self.sources = {"genome":fasta}
+        self.sources = {"genome":genomeSource}
 
-        # self._refseq = None
-        # self._altseq = None
         self._seqs = {}
 
     def __getstate__(self):
         """ allows pickling of StructuralVariant()s """
         for allele in ["alt", "ref"]:
-            self.getSeq(allele)
+            for part in self.chromParts(allele):
+                part.getSeq()
         state = self.__dict__.copy()
-        del state['sources']
         return state
 
 
@@ -152,41 +204,20 @@ class StructuralVariant(object):
 
     def searchRegions(self):
         pass    
-    def getRefSeq(self):
-        return self.getSeq("ref")
-    def getAltSeq(self):
-        return self.getSeq("alt")
 
-    def getSeq(self, allele):
-        if allele not in self._seqs:
-            segments = self.segments(allele)
-            seqs = []
-            for segment in segments:
-                # if segment.source == "genome":
-                #     seq = self.fasta[segment.chrom][segment.start:segment.end+1]
-                # else:
-                seq = self.sources[segment.source][segment.chrom][segment.start:segment.end+1]
-                    # raise Exception("not yet implemented: non-genomic segments")
+    def chromParts(self, allele):
+        """ overload this method for multi-part variants """
+        segments = self.segments(allele)
+        
+        name = "{}_part".format(allele)
+        if allele == "amb":
+            name = "ref_part"
 
-                if segment.strand == "-":
-                    seq = reverseComp(seq)
-                seqs.append(seq)
-            self._seqs[allele] = "".join(seqs).upper()
-        return self._seqs[allele]
-
-    def getLength(self, allele):
-        return len(self.getSeq(allele))
-    def getRelativeBreakpoints(self, which):
-        segments = self.segments(which)
-        breakpoints = []
-        curpos = 0
-        for segment in segments[:-1]:
-            curpos += len(segment)
-            breakpoints.append(curpos)
-
-        return breakpoints         
+        parts = [ChromPart(name, segments, self.sources)]
+        return ChromPartsCollection(parts)   
 
     def segments(self, allele):
+        raise Exception("use .parts() instead!")
         # for visual display of the different segments between breakpoints
         return None
 
@@ -262,8 +293,7 @@ class Inversion(StructuralVariant):
 class Insertion(StructuralVariant):
     def __init__(self, breakpoint, insertSeq, alignDistance, fasta):
         super(Insertion, self).__init__([breakpoint], alignDistance, fasta)
-        self.sources["insertion"] = {}
-        self.sources["insertion"]["insertion"] = insertSeq
+        self.sources["insertion"] = genomesource.GenomeSource(insertSeq)
         self.insertionLength = len(insertSeq)
 
 
@@ -306,9 +336,6 @@ class MobileElementInsertion(StructuralVariant):
         self.sources["repeats"] = insertionFasta
         self.insertedSeqLocus = insertedSeqLocus
 
-        # insertionSequence = insertionFasta[insertedSeqLocus.chr()][insertedSeqLocus.start():insertedSeqLocus.end()+1].upper()
-        # if insertedSeqLocus.strand() == "-":
-        #     insertionSequence = reverseComp(insertionSequence)
 
     def searchRegions(self, searchDistance):
         chrom = self.breakpoints[0].chr()
@@ -327,24 +354,80 @@ class MobileElementInsertion(StructuralVariant):
                     Segment(chrom, self.breakpoints[0].end(), self.breakpoints[0].end()+self.alignDistance, "+", 2)]
 
     def __str__(self):
-        return "{}::{}({});{})".format(self.__class__.__name__, self.insertedSeqLocus.chr(), self.breakpoints, self.alignDistance)
+        return "{}::{}({});{})".format(self.__class__.__name__, self.insertedSeqLocus.chr(), self.breakpoints, len(self.insertedSeqLocus))
     def shortName(self):
         return "{}_{}_{}".format("mei", self.breakpoints[0].chr(), self.breakpoints[0].start())
 
 
+class Translocation(StructuralVariant):
+    def __init__(self, breakpoint1, breakpoint2, alignDistance, refFasta):
+        super(Translocation, self).__init__([breakpoint1, breakpoint2], alignDistance, refFasta)
+
+    def searchRegions(self, searchDistance):
+        searchRegions = []
+
+        for breakpoint in self.breakpoints:
+            searchRegions.append(Locus(breakpoint.chr(), breakpoint.start()-searchDistance, 
+                breakpoint.end()+searchDistance, breakpoint.strand()))
+
+        return searchRegions
+
+    def chromParts(self, allele):
+        parts = []
+        b1 = self.breakpoints[0]
+        b2 = self.breakpoints[1]
+
+        segments = []
+        for i, breakpoint in enumerate(self.breakpoints):
+            segments.append(Segment(breakpoint.chr(), breakpoint.start()-self.alignDistance, 
+                                    breakpoint.start()-1, breakpoint.strand(), 0+i*2))
+            segments.append(Segment(breakpoint.chr(), breakpoint.start(), 
+                                    breakpoint.start()+self.alignDistance, breakpoint.strand(), 1+i*2))
+            # assert breakpoint.strand() == "+", breakpoint
+
+        if b2.strand() == "-":
+            if allele in ["ref", "amb"]:
+                name = "ref_{}".format(b1.chr())
+                parts.append(ChromPart(name, [segments[0], segments[1]], self.sources))
+
+                name = "ref_{}".format(b2.chr())
+                if b1.chr() == b2.chr(): name += "b"
+                parts.append(ChromPart(name, [segments[3], segments[2]], self.sources))
 
 
-if __name__ == '__main__':
-    import pyfaidx
-    from hts.GenomeFetch import GenomeFetch
+            elif allele == "alt":
+                name = "alt_{}/{}".format(b1.chr(), b2.chr())
+                parts.append(ChromPart(name, [segments[0], segments[2]], self.sources))
 
-    genomeFetch = GenomeFetch("/Users/nspies/Data/hg19-no-newlines/")
-    genome = pyfaidx.Fasta("/Users/nspies/Data/hg19/hg19.fasta", as_raw=True)
+                name = "alt_{}/{}".format(b2.chr(), b1.chr())
+                if b1.chr() == b2.chr(): name += "b"
 
-    deletion = Deletion([Locus("chr1", 72766323-1, 72766323-1, "+"), Locus("chr1", 72811840-1, 72811840-1, "+")],
-        100, genome)
+                parts.append(ChromPart(name, [segments[3], segments[1]], self.sources))
+        else:
+            if allele in ["ref", "amb"]:
+                part = ChromPart("ref_{}".format(b1.chr()), segments[:2], self.sources)
+                parts.append(part)
 
-    print deletion.getAltSeq()
+                part = ChromPart("ref_{}".format(b2.chr()), segments[2:], self.sources)
+                parts.append(part)
 
-    print genomeFetch.get_seq_from_to("chr1", 72766323-1-100, 72766323-1, "+").upper() + \
-                genomeFetch.get_seq_from_to("chr1", 72811840-1, 72811840-1+100).upper()
+            elif allele == "alt":
+                name = "alt_{}/{}".format(b1.chr(), b2.chr())
+                parts.append(ChromPart(name, [segments[0], segments[3]], self.sources))
+
+                name = "alt_{}/{}".format(b2.chr(), b1.chr())
+                if b1.chr() == b2.chr(): name += "b"
+
+                parts.append(ChromPart(name, [segments[2], segments[1]], self.sources))
+
+
+        return ChromPartsCollection(parts) 
+
+    def __str__(self):
+        chrom1 = self.breakpoints[0].chr()
+        chrom2 = self.breakpoints[1].chr()
+        if not chrom1.startswith("chr"):
+            chrom1 = "chr{}".format(chrom1)
+            chrom2 = "chr{}".format(chrom2)
+        return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
+

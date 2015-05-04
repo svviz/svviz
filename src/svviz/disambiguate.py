@@ -14,9 +14,14 @@ def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expect
 
         alignmentSet.evidences["valid"] = (True, )
 
+        regionIDs = set()
         for read in alignmentSet.getAlignments():
+            regionIDs.add(read.regionID)
             if read.score2 is not None and read.score - read.score2 <= 2:
                 alignmentSet.evidences["multimapping"] = True
+
+        if len(regionIDs) != 1:
+            alignmentSet.evidences["valid"] = (False, "multiRegion")
 
         if not singleEnded:
             if alignmentSet.evidences["insertSizeScore"] <= minInsertSizeScore:

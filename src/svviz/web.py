@@ -128,6 +128,16 @@ def info():
 
     alnSet = dataHub.getAlignmentSetByName(readid)
     if alnSet:
+        print "\n"
+        print alnSet.parentCollection.name
+        for setName, moreAlnSet in alnSet.parentCollection.sets.iteritems():
+            desc = [setName]
+            for aln in moreAlnSet.getAlignments():
+                desc.append("{}:{}-{}{} ({})".format(aln.regionID, aln.start, aln.end, aln.strand, aln.score))
+
+            print "\t".join(desc)
+
+
         reads = alnSet.getAlignments()
         result = []
         for read in reads:
@@ -135,6 +145,8 @@ def info():
             html = html.replace(" ", ".")
             result.append(html)
 
+
+        result.append("<br/>Regions={}".format(",".join(map(str, [aln.regionID for aln in alnSet.getAlignments()]))))
 
         result.append("<br/>Total length={}".format(len(alnSet)))
         result.append(" &nbsp; Reason={}".format(alnSet.parentCollection.why))

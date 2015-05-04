@@ -107,17 +107,17 @@ class Arrow(Shape):
 
         if self.direction == "right":
             a = """<path d="M {x0} {y0} L {x1} {y1} L {x2} {y2} z" fill="{color}" xcenter="{xcenter}" {more}/>""".format(
-                x0=(self.x-5*self.scale), y0=(self.y-5*self.scale), 
-                x1=(self.x+5*self.scale), y1=self.y, 
-                x2=(self.x-5*self.scale), y2=(self.y+5*self.scale),
+                x0=(self.x-10*self.scale), y0=(self.y-5*self.scale), 
+                x1=(self.x), y1=self.y, 
+                x2=(self.x-10*self.scale), y2=(self.y+5*self.scale),
                 color=self.color,
                 xcenter=self.x,
                 more=more)
         elif self.direction == "left":
             a = """<path d="M {x0} {y0} L {x1} {y1} L {x2} {y2} z" fill="{color}" xcenter="{xcenter}" {more}/>""".format(
-                x0=(self.x+5*self.scale), y0=(self.y-5*self.scale), 
-                x1=(self.x-5*self.scale), y1=self.y, 
-                x2=(self.x+5*self.scale), y2=(self.y+5*self.scale),
+                x0=(self.x+10*self.scale), y0=(self.y-5*self.scale), 
+                x1=(self.x), y1=self.y, 
+                x2=(self.x+10*self.scale), y2=(self.y+5*self.scale),
                 color=self.color,
                 xcenter=self.x,
                 more=more)

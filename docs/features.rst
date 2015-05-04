@@ -2,6 +2,7 @@ Features
 ========
 
 * built-in support for:
+    * translocations (new feature!)
     * deletions
     * insertions
         * including mobile element insertions

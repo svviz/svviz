@@ -1,12 +1,13 @@
 import logging
 import re
-from utilities import reverseComp
+# from utilities import reverseComp
 
 
 
 class Alignment(object):
-    def __init__(self, name, start, end, strand, seq, cigar, score, genome_seq, score2, mapq):
+    def __init__(self, name, regionID, start, end, strand, seq, cigar, score, genome_seq, score2, mapq):
         self.name = name
+        self.regionID = regionID
         self.start = start
         self.end = end
         self.strand = strand
@@ -57,6 +58,12 @@ class AlignmentSet(object):
 
     def orientation(self):
         return "".join(aln.strand for aln in self.getAlignments())
+
+    def name(self):
+        names = set(aln.name for aln in self.getAlignments())
+        if len(names) == 1:
+            return names.pop()
+        raise Exception("names are not consistent")
 
 
 class AlignmentSetCollection(object):

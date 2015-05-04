@@ -1,9 +1,12 @@
 import collections
+import logging
 import os
 import pyfaidx
 import pysam
+import sys
 
 from svviz import annotations
+from svviz import genomesource
 
 def nameFromBamPath(bampath):
     return os.path.basename(bampath).replace(".bam", "").replace(".sorted", "").replace(".sort", "").replace(".", "_").replace("+", "_")
@@ -50,7 +53,7 @@ class DataHub(object):
         self.args = args
 
         try:
-            self.genome = pyfaidx.Fasta(args.ref, as_raw=True)
+            self.genome = genomesource.FastaGenomeSource(args.ref)
 
             for bamPath in self.args.bam:
                 name = nameFromBamPath(bamPath)
@@ -66,6 +69,14 @@ class DataHub(object):
             self.args._parser.print_help()
             print ""
             raise
+
+        for bamPath in self.args.bam:
+            try:
+                bam = pysam.AlignmentFile(bamPath)
+                bam.fetch()
+            except ValueError:
+                logging.error("\nERROR: Need to create index for input bam file: {}".format(bamPath))
+                sys.exit(0)
 
     def getCounts(self):
         if self._counts is None:
