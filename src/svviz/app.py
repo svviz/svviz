@@ -52,8 +52,6 @@ def loadISDs(dataHub):
         if sample.orientations == "any":
             searchDist = sample.readStatistics.readLengthUpperQuantile()
             alignDist = sample.readStatistics.readLengthUpperQuantile()*1.25
-            # searchDist = sample.readStatistics.meanReadLength()+sample.readStatistics.stddevReadLength()*2
-            # alignDist = sample.readStatistics.meanReadLength()+sample.readStatistics.stddevReadLength()*2
         else:
             searchDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*2
             alignDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*4
@@ -90,18 +88,16 @@ def runDisambiguation(dataHub):
 
 def renderSamples(dataHub):
     for sample in dataHub:
-        # ref_chrom = track.ChromosomePart(dataHub.variant.getRefSeq())
         ref_track = track.Track(dataHub.variant.chromParts("ref"), sample.chosenSets("ref"), 3000, 4000, 
-            variant=dataHub.variant, allele="ref", thickerLines=dataHub.args.thicker_lines)
+            variant=dataHub.variant, allele="ref", thickerLines=dataHub.args.thicker_lines, colorCigar=(not dataHub.args.skip_cigar))
         sample.tracks["ref"] = ref_track
 
-        # alt_chrom = track.ChromosomePart(dataHub.variant.getAltSeq())
         alt_track = track.Track(dataHub.variant.chromParts("alt"), sample.chosenSets("alt"), 5000, 15000, 
-            variant=dataHub.variant, allele="alt", thickerLines=dataHub.args.thicker_lines)
+            variant=dataHub.variant, allele="alt", thickerLines=dataHub.args.thicker_lines, colorCigar=(not dataHub.args.skip_cigar))
         sample.tracks["alt"] = alt_track
 
         amb_track = track.Track(dataHub.variant.chromParts("ref"), sample.chosenSets("amb"), 4000, 10000,
-            variant=dataHub.variant, allele="amb", thickerLines=dataHub.args.thicker_lines)
+            variant=dataHub.variant, allele="amb", thickerLines=dataHub.args.thicker_lines, colorCigar=(not dataHub.args.skip_cigar))
         sample.tracks["amb"] = amb_track
 
 def renderAxesAndAnnotations(dataHub):

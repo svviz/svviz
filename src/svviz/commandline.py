@@ -126,6 +126,8 @@ def parseArgs(args):
     interfaceParams.add_argument("--thicker-lines", action="store_true", help=
         "Reads are shown with thicker lines, potentially overlapping one another, but increasing \n"
         "contrast when zoomed out")
+    interfaceParams.add_argument("--skip-cigar", action="store_true", help=
+        "Don't color mismatches, insertions and deletions")
 
     interfaceParams.add_argument("--dotplots", action="store_true", help=
         "generate dotplots to show sequence homology within the aligned region; requires some \n"

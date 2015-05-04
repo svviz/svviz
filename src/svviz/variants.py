@@ -208,7 +208,10 @@ class StructuralVariant(object):
     def chromParts(self, allele):
         """ overload this method for multi-part variants """
         segments = self.segments(allele)
+        
         name = "{}_part".format(allele)
+        if allele == "amb":
+            name = "ref_part"
 
         parts = [ChromPart(name, segments, self.sources)]
         return ChromPartsCollection(parts)   

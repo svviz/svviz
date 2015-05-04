@@ -176,12 +176,13 @@ class Axis(object):
 
 NYIWarned = False
 class ReadRenderer(object):
-    def __init__(self, rowHeight, scale, chromPartsCollection, thickerLines=False):
+    def __init__(self, rowHeight, scale, chromPartsCollection, thickerLines=False, colorCigar=True):
         self.rowHeight = rowHeight
         self.svg = None
         self.scale = scale
         self.chromPartsCollection = chromPartsCollection
         self.thickerLines = thickerLines
+        self.colorCigar = colorCigar
 
         self.nucColors = {"A":"blue", "C":"orange", "G":"green", "T":"black", "N":"gray"}
         self.colorsByStrand = {"+":"purple", "-":"red"}
@@ -228,8 +229,7 @@ class ReadRenderer(object):
             self.svg.rect(pstart, ystart, pend-pstart, height, fill=self.colorsByStrand[alignment.strand], 
                           **{"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name})
 
-            colorCigar = True
-            if colorCigar:
+            if self.colorCigar:
                 self._drawCigar(alignment, yoffset)
                 
         highlightOverlaps = True
@@ -289,7 +289,7 @@ class ReadRenderer(object):
 
 
 class Track(object):
-    def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, allele, thickerLines):
+    def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, allele, thickerLines, colorCigar):
         self.chromPartsCollection = chromPartsCollection
         self.height = height
         self.width = width
@@ -299,7 +299,7 @@ class Track(object):
         self.rowHeight = 5
         self.rowMargin = 1
 
-        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chromPartsCollection, thickerLines)
+        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chromPartsCollection, thickerLines, colorCigar)
 
         self.alignmentSets = alignmentSets
 
@@ -452,7 +452,6 @@ class AnnotationTrack(object):
         self._annos = []
         for part in self.chromPartsCollection:
             segmentStart = self.scale.partsToStartPixels[part.id]
-            print part.segments, variants.mergedSegments(part.segments)
 
             for segment in variants.mergedSegments(part.segments):
                 curWidth = len(segment)

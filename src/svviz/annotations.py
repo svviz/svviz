@@ -56,6 +56,8 @@ class AnnotationSet(object):
         
         if not chrom.startswith("chr") and self.usingChromFormat:
             chrom = "chr" + str(chrom)
+        if chrom.startswith("chr") and not self.usingChromFormat:
+            chrom = chrom.replace("chr", "")
 
         if chrom not in self.bed.contigs:
             return []
