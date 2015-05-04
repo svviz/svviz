@@ -30,11 +30,23 @@ def ensureIndexed(bedPath):
 class AnnotationSet(object):
     def __init__(self, bedPath):
         self.bedPath = ensureIndexed(bedPath)
-        self.bed = pysam.Tabixfile(self.bedPath)
+        self._bed = None
         self.usingChromFormat = False
 
         self._checkChromFormat()
 
+    def __getstate__(self):
+        """ allows pickling of DataHub()s """
+        state = self.__dict__.copy()
+        state["_bed"] = None
+        return state
+
+    @property
+    def bed(self):
+        if self._bed is None:
+            self._bed = pysam.Tabixfile(self.bedPath)
+        return self._bed
+    
     def _checkChromFormat(self):
         usingChromFormat = 0
         count = 0
