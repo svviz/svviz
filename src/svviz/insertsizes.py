@@ -64,8 +64,6 @@ def sampleInsertSizes(bam, maxreads=50000, skip=0, minmapq=40, maxExpectedSize=2
     inserts = []
     readLengths  = []
     
-    # TODO: should create a more complete list of searchable regions, for general use over smaller genomes
-
     count = 0
     reads = []
 

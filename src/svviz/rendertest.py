@@ -16,7 +16,7 @@ class MockArgs(object):
 
 timings = {}
 
-for testName in ["mei", "inv", "ins_moleculo", "ins_pacbio", "del_chr1"]:
+for testName in ["mei", "inv", "ins_moleculo", "ins_pacbio", "del_chr1", "translocation"]:
     print ">", testName, "<"
 
     exportPath = "tests/export_{}_new.svg".format(testName)

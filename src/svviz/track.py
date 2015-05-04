@@ -244,6 +244,8 @@ class ReadRenderer(object):
         genomePosition = alignment.start
         sequencePosition = 0
 
+        chromPartSeq = self.chromPartsCollection.getSeq(alignment.regionID)
+
         for length, code in pattern.findall(alignment.cigar):
             length = int(length)
             if code == "M":
@@ -254,9 +256,8 @@ class ReadRenderer(object):
                     color = self.nucColors[alignment.seq[sequencePosition+i]]
 
                     alt = alignment.seq[sequencePosition+i]
-
-                    # TODO: this lookup is pretty complicated and in an inner loop -- can we maybe cache the sequences locally?
-                    ref = self.chromPartsCollection.getSeq(alignment.regionID)[genomePosition+i]
+                    ref = chromPartSeq[genomePosition+i]
+                    
                     if eachNuc or alt!=ref:
                         self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
 
