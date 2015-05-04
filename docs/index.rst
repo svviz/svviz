@@ -6,7 +6,7 @@ svviz - a read visualizer for structural variants
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    self
    intro
@@ -28,6 +28,14 @@ Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of t
 
 |
 |
+
+
+News
+----
+
+*May, 2015 -- Translocations* Support for translocations has been implemented. This is a somewhat experimental feature, so please submit any bug reports or suggestions using the `github issue tracker <https://github.com/svviz/svviz/issues>`_. 
+
+The under-the-hood changes required to implement translocation support make it far simpler to implement arbitrary break-end type structural variants. Work on this is ongoing.
 
 Quick-start
 -----------
