@@ -124,7 +124,7 @@ def getVariant(dataHub):
                                 dataHub.alignDistance, dataHub.genome)
 
     else:
-        raise Exception("only accept event types of deletion, insertion or mei")
+        raise Exception("only accept event types of deletion, insertion, mei or translocation")
 
     logging.info(" Variant: {}".format(variant))
 
