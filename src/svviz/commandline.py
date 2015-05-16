@@ -80,8 +80,8 @@ def parseArgs(args):
         "reading variants from a VCF file in batch mode)")
 
     inputParams.add_argument("-A", "--annotations", action="append", help=
-        "bed file containing annotations to plot; will be compressed and indexed using samtools \n"
-        "tabix in place if needed (can specify multiple annotations files)")
+        "bed or gtf file containing annotations to plot; will be compressed and indexed using \n"
+        "samtools tabix in place if needed (can specify multiple annotations files)")
 
     # Obsolete
     inputParams.add_argument("-o", "--orientation", help=argparse.SUPPRESS)

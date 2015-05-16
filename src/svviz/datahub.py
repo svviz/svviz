@@ -6,6 +6,7 @@ import pysam
 import sys
 
 from svviz import annotations
+from svviz import gff
 from svviz import genomesource
 
 def nameFromBamPath(bampath):
@@ -64,7 +65,12 @@ class DataHub(object):
             if self.args.annotations:
                 for annoPath in self.args.annotations:
                     name = nameFromBedPath(annoPath)
-                    self.annotationSets[name] = annotations.AnnotationSet(annoPath)
+                    if annoPath.endswith(".bed") or annoPath.endswith(".bed.gz"):
+                        self.annotationSets[name] = annotations.AnnotationSet(annoPath)
+                    elif annoPath.endswith(".gff") or annoPath.endswith(".gff.gz") \
+                            or annoPath.endswith(".gtf") or annoPath.endswith(".gtf.gz"):
+                        self.annotationSets[name] = gff.GeneAnnotationSet(annoPath)
+
         except:
             self.args._parser.print_help()
             print ""

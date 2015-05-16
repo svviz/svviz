@@ -5,7 +5,7 @@ import re
 from svviz.svg import SVG
 from svviz import utilities
 from svviz import variants
-
+from svviz import gff
 
 class Scale(object):
     def __init__(self, chromPartsCollection, pixelWidth, dividerSize=25):
@@ -211,6 +211,16 @@ class ReadRenderer(object):
 
         positionCounts = collections.Counter()
 
+        cigars = []
+
+        if self.thickerLines:
+            # extra "bold":
+            ystart = yoffset+3
+            height = self.rowHeight+6
+        else:
+            ystart = yoffset
+            height = self.rowHeight
+
         for alignment in alignmentSet.getAlignments():
             for position in range(alignment.start, alignment.end+1):
                 positionCounts[position] += 1
@@ -218,26 +228,18 @@ class ReadRenderer(object):
             pstart = self.scale.topixels(alignment.start, regionID)
             pend = self.scale.topixels(alignment.end, regionID)
 
-            if self.thickerLines:
-                # extra "bold":
-                ystart = yoffset+3
-                height = self.rowHeight+6
-            else:
-                ystart = yoffset
-                height = self.rowHeight
-
             self.svg.rect(pstart, ystart, pend-pstart, height, fill=self.colorsByStrand[alignment.strand], 
                           **{"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name})
 
             if self.colorCigar:
-                self._drawCigar(alignment, yoffset)
-                
+                self._drawCigar(alignment, ystart, height)
+
         highlightOverlaps = True
         if highlightOverlaps:
-            self._highlightOverlaps(positionCounts, yoffset, regionID)
+            self._highlightOverlaps(positionCounts, ystart, height, regionID)
 
 
-    def _drawCigar(self, alignment, yoffset):
+    def _drawCigar(self, alignment, yoffset, height):
         eachNuc = False # this gets to be computationally infeasible to display in the browser
         pattern = re.compile('([0-9]*)([MIDNSHP=X])')
 
@@ -259,24 +261,25 @@ class ReadRenderer(object):
                     ref = chromPartSeq[genomePosition+i]
                     
                     if eachNuc or alt!=ref:
-                        self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=color)
+                        self.svg.rect(curstart, yoffset, curend-curstart, height, fill=color)
 
                 sequencePosition += length
                 genomePosition += length
             elif code in "D":
                 curstart = self.scale.topixels(genomePosition, alignment.regionID)
                 curend = self.scale.topixels(genomePosition+length+1, alignment.regionID)
-                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.deletionColor)
+                self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.deletionColor)
 
                 genomePosition += length
             elif code in "IHS":
                 curstart = self.scale.topixels(genomePosition-0.5, alignment.regionID)
                 curend = self.scale.topixels(genomePosition+0.5, alignment.regionID)
-                self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.insertionColor)
+                self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.insertionColor)
 
                 sequencePosition += length
 
-    def _highlightOverlaps(self, positionCounts, yoffset, regionID):
+
+    def _highlightOverlaps(self, positionCounts, yoffset, height, regionID):
         overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
 
         for segment in overlapSegments:
@@ -286,7 +289,7 @@ class ReadRenderer(object):
             curstart = self.scale.topixels(start, regionID)
             curend = self.scale.topixels(end, regionID)
 
-            self.svg.rect(curstart, yoffset, curend-curstart, self.rowHeight, fill=self.overlapColor)
+            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.overlapColor)
 
 
 class Track(object):
@@ -449,7 +452,6 @@ class AnnotationTrack(object):
         # coordinates are in pixels not base pairs
         self.rows = [None]
 
-
         self._annos = []
         for part in self.chromPartsCollection:
             segmentStart = self.scale.partsToStartPixels[part.id]
@@ -461,8 +463,11 @@ class AnnotationTrack(object):
                     curAnnos = sorted(curAnnos, key=lambda x:x.end, reverse=True)
 
                 for anno in curAnnos:
-                    start = self._topixels(anno.start, segment, segmentStart)
-                    end = self._topixels(anno.end, segment, segmentStart)
+                    start = max(anno.start, segment.start)
+                    end = min(anno.end, segment.end)
+
+                    start = self._topixels(start, segment, segmentStart)
+                    end = self._topixels(end, segment, segmentStart)
                     if end < start:
                         start, end = end, start
                     textLength = len(anno.name)*self.rowheight/1.0*scaleFactor*spacing
@@ -473,17 +478,50 @@ class AnnotationTrack(object):
                     anno.coords["start"] = start
                     anno.coords["end"] = end
                     anno.coords["strand"] = anno.strand if segment.strand=="+" else utilities.switchStrand(anno.strand)
+                    anno.coords["segment"] = segment
+                    anno.coords["segmentStart"] = segmentStart
 
                     self._annos.append(anno)
 
                 segmentStart += self.scale.relpixels(curWidth)
 
-    def render(self, scaleFactor=1.0, spacing=1, height=None, thickerLines=False):
-        self.dolayout(scaleFactor, spacing)
+    def drawBox(self, start, end, segment, segmentStart, y, height, scaleFactor, color, anno):
+        start = self._topixels(start, segment, segmentStart)
+        end = self._topixels(end, segment, segmentStart)
 
-        self.height = self.baseHeight()*scaleFactor
-        self.svg = SVG(self.scale.pixelWidth, self.height)
+        if end < start:
+            start, end = end, start
+            
+        width = end - start
 
+        ystart = y-((self.rowheight-height)/2.0)*scaleFactor
+        self.svg.rect(start, ystart, width, height*scaleFactor, fill=color)
+
+
+
+    def _drawGenes(self, scaleFactor):
+        for anno in self._annos:
+            anno.txExons # check to see if this is a gff or a bed
+
+            color = "blue" if anno.coords["strand"] == "+" else "darkorange"
+
+            y = ((anno.coords["row"]+1) * self.rowheight + 20) * scaleFactor
+            width = anno.coords["end"] - anno.coords["start"]
+
+            self.svg.rect(anno.coords["start"], y-((self.rowheight-2.0)/2.0), width, 2.0*scaleFactor, fill=color)
+            self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
+                anno.name, size=(self.rowheight-2)*scaleFactor, anchor="start", fill=color)        
+
+            for txExon in anno.txExons:
+                start, end = txExon
+                self.drawBox(start, end, anno.coords["segment"], anno.coords["segmentStart"], y, 5, scaleFactor, color, anno)
+
+            for cdExon in anno.cdExons:
+                start, end = cdExon
+                self.drawBox(start, end, anno.coords["segment"], anno.coords["segmentStart"], y, self.rowheight, scaleFactor, color, anno)
+
+
+    def _drawBED(self, scaleFactor):
         for anno in self._annos:
             color = "blue" if anno.coords["strand"] == "+" else "darkorange"
             y = ((anno.coords["row"]+1) * self.rowheight + 20) * scaleFactor
@@ -492,6 +530,18 @@ class AnnotationTrack(object):
             self.svg.rect(anno.coords["start"], y, width, self.rowheight*scaleFactor, fill=color)
             self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
                 anno.name, size=(self.rowheight-2)*scaleFactor, anchor="start", fill=color)
+
+    def render(self, scaleFactor=1.0, spacing=1, height=None, thickerLines=False):
+        self.dolayout(scaleFactor, spacing)
+
+        self.height = self.baseHeight()*scaleFactor
+        self.svg = SVG(self.scale.pixelWidth, self.height)
+
+        try:
+            self._drawGenes(scaleFactor)
+        except Exception, e:
+            self._drawBED(scaleFactor)
+
 
         for part in self.chromPartsCollection:
             for vline in self.scale.getBreakpointPositions(part.id):
