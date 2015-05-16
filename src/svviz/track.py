@@ -508,17 +508,7 @@ class AnnotationTrack(object):
             y = ((anno.coords["row"]+1) * self.rowheight + 20) * scaleFactor
             width = anno.coords["end"] - anno.coords["start"]
 
-            self.svg.rect(anno.coords["start"], y-((self.rowheight-2.0)/2.0)*scaleFactor, width, 2.0*scaleFactor, fill=color)
-
-            textSize = (self.rowheight-2)*scaleFactor
-            if anno.coords["end"] + len(anno.name)*textSize > self.scale.pixelWidth:
-                print "off the end:", anno.name
-                w = len(anno.name)*textSize*0.70
-                self.svg.rect(anno.coords["end"] - w, y, w, self.rowheight*scaleFactor, fill="white", **{"fill-opacity":0.40})
-                self.svg.text(anno.coords["end"], y-((self.rowheight-1)*scaleFactor), anno.name, size=textSize, fill=color, anchor="end")
-            else:
-                self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
-                    anno.name, size=textSize, anchor="start", fill=color)        
+            self.svg.rect(anno.coords["start"], y-((self.rowheight-2.0)/2.0)*scaleFactor, width, 2.0*scaleFactor, fill=color)     
 
             for txExon in anno.txExons:
                 start, end = txExon
@@ -528,6 +518,15 @@ class AnnotationTrack(object):
                 start, end = cdExon
                 self.drawBox(start, end, anno.coords["segment"], anno.coords["segmentStart"], y, self.rowheight, scaleFactor, color, anno)
 
+            textSize = (self.rowheight-2)*scaleFactor
+            if anno.coords["end"] + len(anno.name)*textSize*0.70 > self.scale.pixelWidth:
+                print "off the end:", anno.name
+                w = len(anno.name)*textSize*0.70
+                self.svg.rect(self.scale.pixelWidth - w, y, w, self.rowheight*scaleFactor, fill="white", **{"fill-opacity":0.40})
+                self.svg.text(self.scale.pixelWidth, y-((self.rowheight-1)*scaleFactor), anno.name, size=textSize, fill=color, anchor="end", **{"fill-opacity":0.70})
+            else:
+                self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
+                    anno.name, size=textSize, anchor="start", fill=color)   
 
     def _drawBED(self, scaleFactor):
         for anno in self._annos:

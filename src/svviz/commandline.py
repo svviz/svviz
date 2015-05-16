@@ -126,8 +126,8 @@ def parseArgs(args):
     interfaceParams.add_argument("--thicker-lines", action="store_true", help=
         "Reads are shown with thicker lines, potentially overlapping one another, but increasing \n"
         "contrast when zoomed out")
-    interfaceParams.add_argument("--context", type=int, help="number of additional nucleotides of \n"
-        "genomic context to either side of the visualization (useful for showing nearby annotations)")
+    interfaceParams.add_argument("--context", type=int, default=0, help="number of additional nucleotides \n"
+        "of genomic context to either side of the visualization (useful for showing nearby annotations)")
     interfaceParams.add_argument("--skip-cigar", action="store_true", help=
         "Don't color mismatches, insertions and deletions")
 

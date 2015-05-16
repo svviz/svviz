@@ -25,6 +25,9 @@ class ChromPart(object):
     def __len__(self):
         return len(self.getSeq())
 
+    def __repr__(self):
+        return "{}:{}".format(self.id, self.segments)
+
 class ChromPartsCollection(object):
     def __init__(self, parts=None):
         self.parts = collections.OrderedDict()
@@ -362,6 +365,8 @@ class MobileElementInsertion(StructuralVariant):
 class Translocation(StructuralVariant):
     def __init__(self, breakpoint1, breakpoint2, alignDistance, refFasta):
         super(Translocation, self).__init__([breakpoint1, breakpoint2], alignDistance, refFasta)
+
+        self.breakpoints = [breakpoint1, breakpoint2]
 
     def searchRegions(self, searchDistance):
         searchRegions = []
