@@ -51,10 +51,10 @@ def loadISDs(dataHub):
 
         if sample.orientations == "any":
             searchDist = sample.readStatistics.readLengthUpperQuantile()
-            alignDist = sample.readStatistics.readLengthUpperQuantile()*1.25
+            alignDist = sample.readStatistics.readLengthUpperQuantile()*1.25 + dataHub.args.context
         else:
             searchDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*2
-            alignDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*4
+            alignDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*4 + dataHub.args.context
 
         sample.searchDistance = int(searchDist)
         dataHub.alignDistance = max(dataHub.alignDistance, int(alignDist))

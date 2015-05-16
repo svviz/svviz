@@ -95,7 +95,8 @@ class TrackCompositor(object):
 
             self.addTrackSVG(section, name, track.svg.asString("export"), height=height, viewbox=viewbox)
 
-        if hasTrackWithReads:
+        # if hasTrackWithReads:
+        if True:
             scaleFactor = float(width) / self.width
             size = 1.0
             if self.dataHub.args.thicker_lines:
