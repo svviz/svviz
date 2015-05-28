@@ -35,7 +35,7 @@ Additional options
 
 The default settings are typically correct for Illumina data. Read orientation and insert sizes will be inferred for each input library. Sequencing platforms that have a substantially higher error rate than Illumina may need adjusting of the ``--aln-quality`` option.
 
-- ``--pacbio`` for pacific biosciences sequencing (because PacBio sequencing is typically of lower base-quality than Illumina sequencing, this preset changes the ``--aln-quality`` option as well to retain lower quality alignments as support for the Ref and Alt alleles)
+- ``--pacbio`` for pacific biosciences sequencing (because PacBio sequencing is typically of lower base-quality than Illumina sequencing, this preset changes the ``--aln-quality`` option to retain lower quality alignments as support for the Ref and Alt alleles)
 
 The ``--min-mapq`` option specifies the mapping quality threshold; reads with mapq (this is set during the original genome-wide mapping by bwa, bowtie, etc) below this threshold will be discarded during pre-processing. A similar argument, ``--pair-min-mapq``, can be used instead to require that at least one read end out of a read pair must have a mapq exceeding this value.
 
@@ -43,7 +43,7 @@ The ``--min-mapq`` option specifies the mapping quality threshold; reads with ma
 Exporting visualizations
 ------------------------
 
-The visualizations can be exported to SVG, PNG or PDF from the web view by clicking the "Export" link at the top of the page. Alternatively, these files can be created directly, without launching the web interface, using the ``--export`` option (and this exported image file can be opened automatically using your system-defined image viewer by additionally specifying the ``--open-exported`` option).
+The visualizations can be exported to SVG, PNG or PDF from the web view by clicking the "Export" link at the top of the page. Alternatively, these files can be created directly, without launching the web interface, using the ``--export`` option (and this exported image file can be opened automatically using your system-defined image viewer by additionally specifying the ``--open-exported`` or ``-O`` option).
 
 
 .. _batch-mode:
@@ -51,7 +51,7 @@ The visualizations can be exported to SVG, PNG or PDF from the web view by click
 Batch mode
 ----------
 
-To summarize a number of structural variants at once, svviz supports a batch mode. Currently, this batch mode does not produce visualizations, and instead simply collects statistics about the number of reads supporting each allele.
+To summarize a number of structural variants at once, svviz supports a batch mode.
 
 To run batch mode, use ``--type batch``, and specify (1) the reference genome (in fasta format, as above) and (2) a VCF file describing the SVs to be analyzed. These SVs must be of supported types (insertions, deletions, inversions and mobile element insertions), and specified in `VCF 4.0 Format <http://www.1000genomes.org/wiki/Analysis/Variant%20Call%20Format/VCF%20(Variant%20Call%20Format)%20version%204.0/encoding-structural-variants>`_.
 
