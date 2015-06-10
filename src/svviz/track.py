@@ -544,6 +544,14 @@ class AnnotationTrack(object):
         self.height = self.baseHeight()*scaleFactor
         self.svg = SVG(self.scale.pixelWidth, self.height)
 
+        # dividers! (multi-part only)
+        for part in list(self.chromPartsCollection)[1:]:
+            divWidth = self.scale.relpixels(self.scale.dividerSize)
+            x = self.scale.partsToStartPixels[part.id] - divWidth
+            self.svg.rect(x, self.height, divWidth, self.height, fill="#B2B2B2")
+            self.svg.line(x, 0, x, self.height, stroke="black", **{"stroke-width":1*scaleFactor})
+            self.svg.line(x+divWidth, 0, x+divWidth, self.height, stroke="black", **{"stroke-width":1*scaleFactor})
+
         try:
             self._drawGenes(scaleFactor)
         except Exception, e:
