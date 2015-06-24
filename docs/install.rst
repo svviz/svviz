@@ -3,13 +3,78 @@ Installation
 
 A single command should typically suffice to install ``svviz``:
 
-``pip install svviz``
+``sudo pip install svviz``
 
-If that command gives a permissions error, you can try adding ``sudo`` to the beginnning of the command in order to run the command as super-user (often required for a system-wide installation). If you get an error that ``pip`` is missing, assuming python is already installed, you can run ``sudo easy_install pip`` and then run the above command (see `here <https://pip.pypa.io/en/latest/installing.html>`_ for more info on installing pip).
+More detailed directions follow for linux and OS X. Try installing into a :ref:`virtual environment (see below) <venv>` if you have difficulty with any of these directions.
 
-To install directly from source (warning: bleeding edge! may contain bugs!), use this command:
+Installation on linux
+---------------------
 
-``pip install -U git+git://github.com/svviz/svviz.git``
+1. Ensure that the following prerequisites are installed: python and pip. If you are running ubuntu or similar, you can use the following commands to ensure they are installed correctly:
+
+    .. code-block:: bash
+
+        sudo apt-get install python-dev
+        sudo apt-get install python-pip
+
+2. Use pip to install svviz:
+
+    .. code-block:: bash
+
+        sudo pip install svviz
+
+    This should automatically install a number of required python packages (see :ref:`below <required_python_packages>`). If you prefer to install the latest development version from github, install git and then use this command instead (warning: bleeding edge! may contain bugs!):
+
+    .. code-block:: bash
+
+        sudo pip install -U git+git://github.com/svviz/svviz.git
+
+3. To enable PDF export, you will need to install the `libRsvg <https://wiki.gnome.org/action/show/Projects/LibRsvg>`_ package:
+
+    .. code-block:: bash
+
+        sudo apt-get install librsvg2-dev
+
+See the :ref:`troubleshooting` section if you have difficulties after following the above directions.
+
+
+Installation on Mac OS X
+------------------------
+
+1. Ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_. If you already have gcc or clang installed, you can skip this step.
+
+2. Ensure that you have the python package ``pip`` installed. If it is not already installed, follow the directions on `the pypa website <https://pip.pypa.io/en/stable/installing.html#pip-included-with-python>`_ or use the following command (requires ``easy_install``, which should ship with most versions of OS X):
+
+    .. code-block:: bash
+
+        sudo easy_install pip
+
+2. Use pip to install svviz:
+
+    .. code-block:: bash
+
+        sudo pip install svviz
+
+    This should automatically install a number of required python packages (see :ref:`below <required_python_packages>`). If you prefer to install the latest development version from github, install git and then use this command instead (warning: bleeding edge! may contain bugs!):
+
+    .. code-block:: bash
+
+        sudo pip install -U git+git://github.com/svviz/svviz.git
+
+3. To enable PDF export, you have two options.
+
+    * The first, and recommended option, is to use `webkitToPDF <https://github.com/nspies/webkitToPDF/tree/master>`_, a simple homegrown command-line program that uses OS X's built-in web rendering engine to convert SVGs (``svviz``'s native format) into PDF. As its name implies, ``webkitToPDF`` does not support PNG support. To use ``webkitToPDF`` with ``svviz``, simply `download <https://github.com/nspies/webkitToPDF/releases/latest>`_ the OS X app and add it to your `PATH <http://hathaway.cc/post/69201163472/how-to-edit-your-path-environment-variables-on-mac>`_.
+
+
+    * The second option is to use `libRsvg <https://wiki.gnome.org/action/show/Projects/LibRsvg>`_ package. First install and update `homebrew <http://brew.sh>`_ and then run ``brew install librsvg``. Export using ``libRsvg`` supports both PNG and PDF formats.
+
+See the :ref:`troubleshooting` section if you have difficulties after following the above directions.
+
+
+.. _required_python_packages:
+
+Required python packages
+------------------------
 
 ``svviz`` requires several python packages in order to run properly. During a normal installation, these packages should be installed automatically:
 
@@ -20,11 +85,8 @@ To install directly from source (warning: bleeding edge! may contain bugs!), use
 - `pysam <http://pysam.readthedocs.org/>`_
 - `requests <http://docs.python-requests.org/en/latest/>`_
 
-In order to export the visualizations into PDF or PNG format, you will need to install additional software. On the Mac, we recommend using `webkitToPDF <https://github.com/nspies/webkitToPDF/tree/master>`_, a simple homegrown command-line program that uses OS X's built-in web rendering engine to convert SVGs (``svviz``'s native format) into PDF. As its name implies, ``webkitToPDF`` does not support PNG support. To use ``webkitToPDF`` with ``svviz``, simply `download <https://github.com/nspies/webkitToPDF/releases/latest>`_ the OS X app and add it to your `PATH <http://hathaway.cc/post/69201163472/how-to-edit-your-path-environment-variables-on-mac>`_.
 
-Another option for export is `libRsvg <https://wiki.gnome.org/action/show/Projects/LibRsvg>`_. On the Mac, first install and update `homebrew <http://brew.sh>`_ and then run ``brew install librsvg``; on linux (ubuntu and similar), you can run ``sudo apt-get install librsvg2-dev``. Export using ``libRsvg`` supports both PNG and PDF formats.
-
-Finally, some optional functionality is provided by the following python packages:
+Some additional functionality is provided by the following optional python packages (not installed automatically; use ``sudo pip install pandas``, etc):
 
 - `pandas <http://pandas.pydata.org>`_
 - `rpy2 <https://bitbucket.org/rpy2/rpy2>`_
@@ -45,8 +107,12 @@ This will prompt you if you would like to download the example datasets into the
 Subsequent lines of output will indicate progress of ``svviz`` as it processes the data. Once processing is complete (should typically take ~1min), ``svviz`` will create a local web-server (accessible only from within your computer) and open your default web browser to a page displaying the example structural variant.
 
 
+.. _troubleshooting:
+
 Troubleshooting
 ---------------
+
+.. _venv:
 
 **svviz won't install**
 
@@ -59,7 +125,7 @@ Troubleshooting
 
 **I can't access the web view**
 
-1. Are you running the web browser on the same computer as svviz? For security reasons, the web server is only available within the same computer. To safely get around this, you will need to set up an ssh tunnel from one computer to the other
+1. Are you running the web browser on the same computer as svviz? For security reasons, the web server is only available within the same computer. To safely get around this, you will need to set up an ssh tunnel from one computer to the other (see :ref:`here <tunneling>` for directions)
 2. Are you accessing the correct URL? The server always runs on localhost, but the port is chosen randomly and may change between runs.
 3. Have you tried reloading the page? The server can take a moment to start, and this may take longer than it takes for your web browser to open.
 
@@ -74,5 +140,7 @@ It may take a minute or so to load the data tracks into the browser, depending o
 3. Have you properly specified the variant coordinates on the command-line? Running ``svviz`` without any arguments will output the help, including how to specify the variant coordinates.
 
 **Other problems**
+
+See the :ref:`FAQs <faqs>` for answers to other questions.
 
 Please report any other problems on the `issues page <https://github.com/svviz/svviz/issues>`_ of the github project site.
