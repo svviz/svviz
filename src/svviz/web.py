@@ -17,13 +17,22 @@ app = Flask(__name__,
 app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 
 
-def getport():
+def getRandomPort():
     import socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.bind(("", 0))
     port = sock.getsockname()[1]
     sock.close()
     return port
+
+def checkPortIsClosed(port):
+    import socket;
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex(('127.0.0.1', port))
+    if result == 0:
+       return False
+    else:
+       return True
 
 
 @app.route('/')
@@ -187,9 +196,11 @@ def get_dotplot(name):
         return Response(dataHub.dotplots[name], mimetype="image/png")
     return None
 
-def run():
+def run(port=None):
     import webbrowser, threading
-    port = getport()
+
+    if port is None:
+        port = getRandomPort()
 
     # load()
     url = "http://127.0.0.1:{}/".format(port)

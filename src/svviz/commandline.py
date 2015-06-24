@@ -7,6 +7,13 @@ import svviz
 from svviz import demo
 from svviz.alignment import AlignmentSet
 from svviz.variants import getBreakpointFormatsStr
+from svviz.web import checkPortIsClosed
+
+def portNumber(string):
+    value = int(string)
+    if 0 <= value <= 65535:
+        return value
+    raise argparse.ArgumentTypeError("port must be an integer between 0-65535; got '{}'' instead".format(string))
 
 def setDefault(args, key, default):
     if args.__dict__[key] is None:
@@ -106,6 +113,8 @@ def parseArgs(args):
     interfaceParams.add_argument("-v", "--version", action="version", 
         version="svviz version {}".format(svviz.__version__), help=
         "show svviz version number and exit")
+    interfaceParams.add_argument("-p", "--port", type=portNumber, help=
+        "define a port to use for the web browser (default: random port)")
     interfaceParams.add_argument("--no-web", action="store_true", help=
         "don't show the web interface")
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help=
@@ -162,6 +171,14 @@ def parseArgs(args):
         args.no_web = True
         if args.type!="batch" and not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
             print "Export filename must end with one of .svg, .png or .pdf"
+            sys.exit(1)
+
+    if args.port is not None:
+        if args.no_web:
+            print "--port cannot be used with --no-web"
+            sys.exit(1)
+        if not checkPortIsClosed(args.port):
+            print "Error: port {} is already in use!".format(args.port)
             sys.exit(1)
 
     logging.info(str(args))

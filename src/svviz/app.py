@@ -149,7 +149,7 @@ def runWebView(dataHub):
         plotInsertSizeDistributions(dataHub)
 
         web.dataHub = dataHub
-        web.run()
+        web.run(dataHub.args.port)
 
 def plotInsertSizeDistributions(dataHub):
     # TODO: show only for samples with insert size distributions (ie paired end)

@@ -63,3 +63,6 @@ TEST
 more_test_multiprocessing.py
 test_multiprocessing.py
 .env
+
+*.pdf
+svviz-examples
