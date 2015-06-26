@@ -7,7 +7,7 @@ import re
 class Alignment(object):
     def __init__(self, name, regionID, start, end, strand, seq, cigar, score, genome_seq, score2, mapq):
         self.name = name
-        self.regionID = regionID
+        self.regionID = regionID # regionID aka chromosome part ID
         self.start = start
         self.end = end
         self.strand = strand

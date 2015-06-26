@@ -9,6 +9,7 @@ from svviz import debug
 from svviz import datahub
 from svviz import dotplots
 from svviz import export
+from svviz import flanking
 from svviz import insertsizes
 from svviz import remap
 from svviz import summarystats
@@ -55,6 +56,8 @@ def loadISDs(dataHub):
         else:
             searchDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*2
             alignDist = sample.readStatistics.meanInsertSize()+sample.readStatistics.stddevInsertSize()*4 + dataHub.args.context
+        if dataHub.args.flanks:
+            searchDist += dataHub.args.context
 
         sample.searchDistance = int(searchDist)
         dataHub.alignDistance = max(dataHub.alignDistance, int(alignDist))
@@ -82,17 +85,23 @@ def runRemap(dataHub):
         sample.alnCollections = remap.do_realign(dataHub.variant, sample.reads)
 
 def runDisambiguation(dataHub):
+    flankingRegionCollection = flanking.FlankingRegionCollection(dataHub.variant)
     for sample in dataHub:
-        disambiguate.batchDisambiguate(sample.alnCollections, sample.readStatistics, 
-            sample.orientations, singleEnded=sample.singleEnded)
+        disambiguate.batchDisambiguate(sample.alnCollections, sample.readStatistics, sample.orientations, 
+            singleEnded=sample.singleEnded, flankingRegionCollection=flankingRegionCollection)
 
 def renderSamples(dataHub):
     for sample in dataHub:
-        ref_track = track.Track(dataHub.variant.chromParts("ref"), sample.chosenSets("ref"), 3000, 4000, 
+        flankingReads = {"ref":[], "alt":[]}
+        if dataHub.args.flanks:
+            flankingReads["ref"] = [alnCollection.sets["ref"] for alnCollection in sample.alnCollections if alnCollection.why=="flanking"]
+            flankingReads["alt"] = [alnCollection.sets["alt"] for alnCollection in sample.alnCollections if alnCollection.why=="flanking"]
+
+        ref_track = track.Track(dataHub.variant.chromParts("ref"), sample.chosenSets("ref")+flankingReads["ref"], 3000, 4000, 
             variant=dataHub.variant, allele="ref", thickerLines=dataHub.args.thicker_lines, colorCigar=(not dataHub.args.skip_cigar))
         sample.tracks["ref"] = ref_track
 
-        alt_track = track.Track(dataHub.variant.chromParts("alt"), sample.chosenSets("alt"), 5000, 15000, 
+        alt_track = track.Track(dataHub.variant.chromParts("alt"), sample.chosenSets("alt")+flankingReads["alt"], 5000, 15000, 
             variant=dataHub.variant, allele="alt", thickerLines=dataHub.args.thicker_lines, colorCigar=(not dataHub.args.skip_cigar))
         sample.tracks["alt"] = alt_track
 

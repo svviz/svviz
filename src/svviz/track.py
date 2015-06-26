@@ -206,12 +206,19 @@ class ReadRenderer(object):
         pstart = self.scale.topixels(alignmentSet.start, regionID)
         pend = self.scale.topixels(alignmentSet.end, regionID)
 
+        isFlanking = False
+        if alignmentSet.parentCollection.why == "flanking":
+            isFlanking = True
+
         thinLineWidth = 5
-        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill="#DDDDDD")
+        extras = {}
+        if isFlanking:
+            extras["opacity"] = 0.5
+            extras["class"] = "flanking"
+
+        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill="#DDDDDD", **extras)
 
         positionCounts = collections.Counter()
-
-        cigars = []
 
         if self.thickerLines:
             # extra "bold":
@@ -221,6 +228,7 @@ class ReadRenderer(object):
             ystart = yoffset
             height = self.rowHeight
 
+
         for alignment in alignmentSet.getAlignments():
             for position in range(alignment.start, alignment.end+1):
                 positionCounts[position] += 1
@@ -228,18 +236,23 @@ class ReadRenderer(object):
             pstart = self.scale.topixels(alignment.start, regionID)
             pend = self.scale.topixels(alignment.end, regionID)
 
+            extras = {"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name}
+            if isFlanking:
+                extras["opacity"] = 0.5
+                extras["class"] = "read flanking"
+
             self.svg.rect(pstart, ystart, pend-pstart, height, fill=self.colorsByStrand[alignment.strand], 
-                          **{"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name})
+                          **extras)
 
             if self.colorCigar:
-                self._drawCigar(alignment, ystart, height)
+                self._drawCigar(alignment, ystart, height, isFlanking)
 
         highlightOverlaps = True
         if highlightOverlaps:
             self._highlightOverlaps(positionCounts, ystart, height, regionID)
 
 
-    def _drawCigar(self, alignment, yoffset, height):
+    def _drawCigar(self, alignment, yoffset, height, isFlanking):
         eachNuc = False # this gets to be computationally infeasible to display in the browser
         pattern = re.compile('([0-9]*)([MIDNSHP=X])')
 
@@ -248,6 +261,9 @@ class ReadRenderer(object):
 
         chromPartSeq = self.chromPartsCollection.getSeq(alignment.regionID)
 
+        extras = {}
+        if isFlanking:
+            extras = {"class":"flanking"}
         for length, code in pattern.findall(alignment.cigar):
             length = int(length)
             if code == "M":
@@ -261,20 +277,20 @@ class ReadRenderer(object):
                     ref = chromPartSeq[genomePosition+i]
                     
                     if eachNuc or alt!=ref:
-                        self.svg.rect(curstart, yoffset, curend-curstart, height, fill=color)
+                        self.svg.rect(curstart, yoffset, curend-curstart, height, fill=color, **extras)
 
                 sequencePosition += length
                 genomePosition += length
             elif code in "D":
                 curstart = self.scale.topixels(genomePosition, alignment.regionID)
                 curend = self.scale.topixels(genomePosition+length+1, alignment.regionID)
-                self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.deletionColor)
+                self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.deletionColor, **extras)
 
                 genomePosition += length
             elif code in "IHS":
                 curstart = self.scale.topixels(genomePosition-0.5, alignment.regionID)
                 curend = self.scale.topixels(genomePosition+0.5, alignment.regionID)
-                self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.insertionColor)
+                self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.insertionColor, **extras)
 
                 sequencePosition += length
 

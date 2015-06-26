@@ -224,6 +224,43 @@ class StructuralVariant(object):
         # for visual display of the different segments between breakpoints
         return None
 
+    def _segments(self, allele):
+        segments = []
+        for part in self.chromParts(allele):
+            segments.extend(part.segments)
+        return segments
+
+    def commonSegments(self):
+        """ return the segment IDs of the segments that are identical between 
+        the ref and alt alleles (eg, flanking regions) """
+        common = []
+        refCounter = collections.Counter((segment.id for segment in self._segments("ref")))
+        altCounter = collections.Counter((segment.id for segment in self._segments("alt")))
+        if max(refCounter.values()) > 1 or max(altCounter.values()) > 1:
+            logging.warn(" Same genomic region repeated multiple times within one allele; "
+                "all flanking reads will be marked as ambiguous")
+            return []
+
+
+        refSegments = dict((segment.id, segment) for segment in self._segments("ref"))
+        altSegments = dict((segment.id, segment) for segment in self._segments("alt"))
+
+        for segmentID, refSegment in refSegments.iteritems():
+            if not segmentID in altSegments:
+                continue
+            altSegment = altSegments[segmentID]
+
+            # Could remove the requirement to have the strand be the same
+            # allowing the reads within the inversion to be plotted too
+            if refSegment.chrom==altSegment.chrom and \
+                refSegment.start == altSegment.start and \
+                refSegment.end == altSegment.end and \
+                refSegment.strand == altSegment.strand and \
+                refSegment.source == altSegment.source:
+                common.append(segmentID)
+
+        return common
+
 
 class Deletion(StructuralVariant):
     @classmethod

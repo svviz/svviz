@@ -2,7 +2,8 @@ import logging
 import numpy
 import time
 
-def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expectedOrientations="any", singleEnded=False):
+def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expectedOrientations="any", singleEnded=False,
+                                flankingRegionCollection=None):
     for name, alignmentSet in alnCollection.sets.iteritems():
         if not singleEnded:
             alignmentSet.evidences["insertSizeScore"] = isd.scoreInsertSize(len(alignmentSet))
@@ -20,8 +21,13 @@ def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expect
             if read.score2 is not None and read.score - read.score2 <= 2:
                 alignmentSet.evidences["multimapping"] = True
 
-        if len(regionIDs) != 1:
+        if len(regionIDs) == 1:
+            alignmentSet.evidences["flanking"] = False
+            if flankingRegionCollection is not None and flankingRegionCollection.isFlanking(alignmentSet, name):
+                alignmentSet.evidences["flanking"] = True
+        else:
             alignmentSet.evidences["valid"] = (False, "multiRegion")
+
 
         if not singleEnded:
             if alignmentSet.evidences["insertSizeScore"] <= minInsertSizeScore:
@@ -66,13 +72,17 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
         if logRatio < -insertSizeLogLikelihoodCutoff:
             return choose("ref", "insertSizeScore")
 
+    if alnCollection["alt"].evidences["flanking"] and alnCollection["ref"].evidences["flanking"]:
+        return choose("amb", "flanking")
+
     return choose("amb", "same_scores")
 
-def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False):
+def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False, flankingRegionCollection=None):
     t0 = time.time()
 
     for alnCollection in alnCollections:
-        scoreAlignmentSetCollection(alnCollection, isd, 0, expectedOrientations, singleEnded=singleEnded)
+        scoreAlignmentSetCollection(alnCollection, isd, 0, expectedOrientations, singleEnded=singleEnded,
+            flankingRegionCollection=flankingRegionCollection)
 
     for alnCollection in alnCollections:
         disambiguate(alnCollection, singleEnded=singleEnded)
