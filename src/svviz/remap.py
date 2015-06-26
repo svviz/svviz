@@ -1,5 +1,6 @@
 import collections
 import logging
+import multiprocessing
 import time
 # import numpy
 import math
@@ -122,7 +123,8 @@ def do1remap(chromPartsCollection, reads):
         namesToReferences[chromPart.id] = chromPart.getSeq()
 
     # map each read sequence against each chromosome part (the current allele only)
-    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], verbose=3, processes=8))
+    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
+        verbose=3, processes=multiprocessing.cpu_count()))
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:
