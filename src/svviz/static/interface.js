@@ -27,6 +27,7 @@ function update () {
       dohover('#' +which +'_result');
       $("#" + which + "_result .svg_container").SVGScroller();
       // $( ".svg_container" ).resizable();
+      setupFlankingToggle();
     });
   }
 
@@ -59,6 +60,31 @@ function setupExport() {
   $("#runExport").click(function(){
     $("#exportModal").modal("hide");
   })
+}
+
+function setupFlankingToggle() {
+  if ($("#alt_result .flanking").length + $("#ref_result .flanking").length < 1) {
+    $("#toggleFlanking").hide()
+  } else {
+    var checkbox = $("#toggleFlanking :checkbox");
+    $("#toggleFlanking").show()
+
+    if (!checkbox.data("activated")){
+      checkbox.data("activated", true);
+
+      checkbox.change(function(){
+        console.log("xxxxx");
+        var $this = $(this);
+        if ($this.is(':checked')) {
+            $("#alt_result .flanking").show();
+            $("#ref_result .flanking").show();
+        } else {
+          $("#alt_result .flanking").hide();
+          $("#ref_result .flanking").hide();
+        }
+      });
+    }
+  }
 }
 
 $(function() {

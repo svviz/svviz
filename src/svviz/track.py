@@ -213,7 +213,7 @@ class ReadRenderer(object):
         thinLineWidth = 5
         extras = {}
         if isFlanking:
-            extras["opacity"] = 0.5
+            extras["opacity"] = 0.4
             extras["class"] = "flanking"
 
         self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill="#DDDDDD", **extras)
@@ -238,7 +238,7 @@ class ReadRenderer(object):
 
             extras = {"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name}
             if isFlanking:
-                extras["opacity"] = 0.5
+                extras["opacity"] = 0.4
                 extras["class"] = "read flanking"
 
             self.svg.rect(pstart, ystart, pend-pstart, height, fill=self.colorsByStrand[alignment.strand], 

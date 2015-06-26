@@ -99,3 +99,7 @@ svg {
     position: relative;
     /*border: 1px solid gray;*/
 }
+
+label {
+  font-weight: normal;
+}
