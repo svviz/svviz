@@ -44,8 +44,7 @@ Quick-start
 1. Install the latest version of svviz from github: ``sudo pip install svviz``
 2. Run the following command: ``svviz demo``
 
-(Mac OS X Users must first ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_.)
-
+Detailed instructions, including how to ensure that all prerequisites are installed, are available on the :ref:`installation` page.
 
 Citation
 --------
