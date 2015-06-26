@@ -249,7 +249,7 @@ class ReadRenderer(object):
 
         highlightOverlaps = True
         if highlightOverlaps:
-            self._highlightOverlaps(positionCounts, ystart, height, regionID)
+            self._highlightOverlaps(positionCounts, ystart, height, regionID, alignment.name)
 
 
     def _drawCigar(self, alignment, yoffset, height, isFlanking):
@@ -295,7 +295,7 @@ class ReadRenderer(object):
                 sequencePosition += length
 
 
-    def _highlightOverlaps(self, positionCounts, yoffset, height, regionID):
+    def _highlightOverlaps(self, positionCounts, yoffset, height, regionID, readID):
         overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
 
         for segment in overlapSegments:
@@ -305,7 +305,8 @@ class ReadRenderer(object):
             curstart = self.scale.topixels(start, regionID)
             curend = self.scale.topixels(end, regionID)
 
-            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.overlapColor)
+            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.overlapColor, 
+                **{"class":"read", "data-readid":readID})
 
 
 class Track(object):
