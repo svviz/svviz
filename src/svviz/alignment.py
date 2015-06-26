@@ -57,6 +57,10 @@ class AlignmentSet(object):
         return True
 
     def orientation(self):
+        if len(self.getAlignments()) == 2:
+            if (self.getAlignments()[0].start == self.getAlignments()[1].start):
+                return "?"
+
         return "".join(aln.strand for aln in self.getAlignments())
 
     def name(self):
