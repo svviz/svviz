@@ -406,7 +406,11 @@ class Track(object):
         self.svg = SVG(self.width, self.height)
         self.readRenderer.svg = self.svg
 
-        for alignmentSet in self.getAlignments():
+        alnSets = self.getAlignments()
+        flankingAlignments = [alnSet for alnSet in alnSets if alnSet.parentCollection.why == "flanking"]
+        nonFlankingAlignments = [alnSet for alnSet in alnSets if alnSet.parentCollection.why != "flanking"]
+
+        for alignmentSet in flankingAlignments+nonFlankingAlignments:
             self.readRenderer.render(alignmentSet)
 
         lineWidth = 1 if not self.thickerLines else 3
