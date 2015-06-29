@@ -175,7 +175,11 @@ def plotInsertSizeDistributions(dataHub):
 def generateDotplots(dataHub):
     if dataHub.args.dotplots:
         logging.info(" * Generating dotplots *")
-        ref = dataHub.variant.getSeq("ref")
+        if len(dataHub.variant.chromParts("ref")) > 1:
+            logging.warning("  --> currently don't support producing dotplots with multi-part variants")
+            return
+
+        ref = list(dataHub.variant.chromParts("ref"))[0].getSeq()
         dotplotPngData = dotplots.dotplot(ref, ref)
         if dotplotPngData is not None:
             dataHub.dotplots["ref vs ref"] = dotplotPngData
