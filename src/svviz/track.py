@@ -206,17 +206,16 @@ class ReadRenderer(object):
         pstart = self.scale.topixels(alignmentSet.start, regionID)
         pend = self.scale.topixels(alignmentSet.end, regionID)
 
-        isFlanking = False
-        if alignmentSet.parentCollection.why == "flanking":
-            isFlanking = True
+        isFlanking = (alignmentSet.parentCollection.why == "flanking")
 
         thinLineWidth = 5
+        curColor = "#CCCCCC"
         extras = {}
         if isFlanking:
-            extras["opacity"] = 0.4
             extras["class"] = "flanking"
+            curColor = "#EEEEEE"
 
-        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill="#DDDDDD", **extras)
+        self.svg.rect(pstart, yoffset-(self.rowHeight/2.0)+thinLineWidth/2.0, pend-pstart, thinLineWidth, fill=curColor, **extras)
 
         positionCounts = collections.Counter()
 
@@ -236,12 +235,13 @@ class ReadRenderer(object):
             pstart = self.scale.topixels(alignment.start, regionID)
             pend = self.scale.topixels(alignment.end, regionID)
 
+            curColor = self.colorsByStrand[alignment.strand]
             extras = {"class":"read", "data-cigar":alignment.cigar,"data-readid":alignment.name}
             if isFlanking:
-                extras["opacity"] = 0.4
                 extras["class"] = "read flanking"
+                curColor = "#AAAAAA"
 
-            self.svg.rect(pstart, ystart, pend-pstart, height, fill=self.colorsByStrand[alignment.strand], 
+            self.svg.rect(pstart, ystart, pend-pstart, height, fill=curColor, 
                           **extras)
 
             if self.colorCigar:
@@ -354,7 +354,12 @@ class Track(object):
         # check which reads are overlapping (self.gstart, self.gend)
         # sorting by name makes the layout process deterministic
         regionIDsToPositions = dict((part.id, i) for i, part in enumerate(self.chromPartsCollection))
-        return sorted(self.alignmentSets, key=lambda x: (regionIDsToPositions[x.getAlignments()[0].regionID], x.start, x.end, x.name()))
+
+        def sortKey(alnSet):
+            return (regionIDsToPositions[alnSet.getAlignments()[0].regionID], 
+                    alnSet.start, alnSet.end, alnSet.name())
+
+        return sorted(self.alignmentSets, key=sortKey)
 
     def dolayout(self):
         self.rows = [None]#*numRows
