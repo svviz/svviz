@@ -248,8 +248,8 @@ class ReadRenderer(object):
                 self._drawCigar(alignment, ystart, height, isFlanking)
 
         highlightOverlaps = True
-        if highlightOverlaps:
-            self._highlightOverlaps(positionCounts, ystart, height, regionID, alignment.name)
+        if highlightOverlaps and not isFlanking:
+            self._highlightOverlaps(positionCounts, ystart, height, regionID, alignment.name, isFlanking)
 
 
     def _drawCigar(self, alignment, yoffset, height, isFlanking):
@@ -295,7 +295,7 @@ class ReadRenderer(object):
                 sequencePosition += length
 
 
-    def _highlightOverlaps(self, positionCounts, yoffset, height, regionID, readID):
+    def _highlightOverlaps(self, positionCounts, yoffset, height, regionID, readID, isFlanking):
         overlapSegments = [list(i[1]) for i in itertools.groupby(sorted(positionCounts), lambda x: positionCounts[x]) if i[0] > 1]
 
         for segment in overlapSegments:
@@ -305,7 +305,10 @@ class ReadRenderer(object):
             curstart = self.scale.topixels(start, regionID)
             curend = self.scale.topixels(end, regionID)
 
-            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=self.overlapColor, 
+            curColor = self.overlapColor
+            # if isFlanking:
+            #     curColor = "#88FF88"
+            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=curColor, 
                 **{"class":"read", "data-readid":readID})
 
 
