@@ -36,7 +36,7 @@ class PairFinder(object):
 
         if pair_minmapq > 0:
             self.matched = [self.readsByID[id_].reads for id_ in matchIDs 
-                            if max(read.mapq for read in self.readsByID[id_].reads)>pair_minmapq]
+                            if max(read.mapq for read in self.readsByID[id_].reads)>=pair_minmapq]
 
         # Unclear what to do with supplementary alignments...
         # self.matched = [[read for read in self.readsByID[id_].reads if read.flag&0x800==0] for id_ in matchIDs]

@@ -41,5 +41,5 @@ try:
 
 except ImportError:
     def dotplot(*args, **kwdargs):
-        logging.error("dotplots requires the python librarys scipy and PIL")
+        logging.error("dotplots requires the python libraries scipy and PIL")
         return None

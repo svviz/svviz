@@ -238,7 +238,7 @@ def run(args):
 
     summaryStats = summarystats.Summary()
     for i, variant in enumerate(svs):
-        logging.info("* Running for variant {}/{} {} *".format(i, len(svs), variant))
+        logging.info("* Running for variant {}/{} {} *".format(i+1, len(svs), variant))
         dataHub.reset()
 
         dataHub.variant = variant

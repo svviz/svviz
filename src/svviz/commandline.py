@@ -180,7 +180,7 @@ def parseArgs(args):
 
     if args.port is not None:
         if args.no_web:
-            print "--port cannot be used with --no-web"
+            print "--port cannot be used with --no-web or --export"
             sys.exit(1)
         if not checkPortIsClosed(args.port):
             print "Error: port {} is already in use!".format(args.port)
