@@ -241,6 +241,7 @@ def run(args):
         svs = [variants.getVariant(dataHub)]
 
     summaryStats = summarystats.Summary()
+    skipped = 0
     for i, variant in enumerate(svs):
         logging.info("* Running for variant {}/{} {} *".format(i+1, len(svs), variant))
         dataHub.reset()
@@ -255,6 +256,7 @@ def run(args):
         if dataHub.args.max_reads and readCount > dataHub.args.max_reads:
             logging.info("+++ Skipping variant -- number of reads ({}) exceeds threshold set by user ({})".format(
                 readCount, dataHub.args.max_reads))
+            skipped += 1
             continue
 
         logging.info("* Realigning reads *")
@@ -277,6 +279,8 @@ def run(args):
     if dataHub.args.summary is not None:
         summaryStats.saveToPath(dataHub.args.summary)
 
+    if skipped > 0:
+        logging.info("\n\nSkipped {} variants because they exceeded the --max-reads threshold\n\n".format(skipped))
     if dataHub.args.save_state is not None:
         saveState(dataHub)
         return
