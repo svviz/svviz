@@ -68,10 +68,14 @@ def loadISDs(dataHub):
 
 
 def loadReads(dataHub):
+    readCount = 0
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
         sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, dataHub.args.pair_min_mapq,
             sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary)
+        readCount += len(sample.reads)
+
+    return readCount
 
 def setSampleParams(dataHub):
     for sample in dataHub:
@@ -245,8 +249,13 @@ def run(args):
         setSampleParams(dataHub)
 
         logging.info("* Loading reads and finding mates *")
-        loadReads(dataHub)
+        readCount = loadReads(dataHub)
         saveReads(dataHub)
+
+        if dataHub.args.max_reads and readCount > dataHub.args.max_reads:
+            logging.info("+++ Skipping variant -- number of reads ({}) exceeds threshold set by user ({})".format(
+                readCount, dataHub.args.maxreads))
+            continue
 
         logging.info("* Realigning reads *")
         runRemap(dataHub)

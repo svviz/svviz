@@ -109,6 +109,10 @@ def parseArgs(args):
         "include supplementary alignments (ie, those with the 0x800 bit set in the bam flags); \n"
         "default: false")
 
+    inputParams.add_argument("--max-reads", type=int, help=
+        "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
+        "mode (default: unlimited)")
+
     interfaceParams = parser.add_argument_group("interface parameters")
     interfaceParams.add_argument("-v", "--version", action="version", 
         version="svviz version {}".format(svviz.__version__), help=

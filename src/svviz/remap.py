@@ -1,6 +1,6 @@
 import collections
 import logging
-import multiprocessing
+# import multiprocessing
 import time
 # import numpy
 import math
@@ -11,6 +11,7 @@ from svviz.multiprocessor import Multiprocessor
 from svviz.utilities import reverseComp, Locus
 from svviz.alignment import Alignment, AlignmentSet, AlignmentSetCollection
 from svviz.pairfinder import PairFinder
+from svviz import misc
 
 def log2(x):
     try:
@@ -123,8 +124,10 @@ def do1remap(chromPartsCollection, reads):
         namesToReferences[chromPart.id] = chromPart.getSeq()
 
     # map each read sequence against each chromosome part (the current allele only)
+    # we don't really gain from using virtual cores, so try to figure out how many physical
+    # cores we have
     remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
-        verbose=3, processes=multiprocessing.cpu_count()))
+        verbose=3, processes=misc.cpu_count_physical()))#multiprocessing.cpu_count()))
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:
