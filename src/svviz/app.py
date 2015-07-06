@@ -254,7 +254,7 @@ def run(args):
 
         if dataHub.args.max_reads and readCount > dataHub.args.max_reads:
             logging.info("+++ Skipping variant -- number of reads ({}) exceeds threshold set by user ({})".format(
-                readCount, dataHub.args.maxreads))
+                readCount, dataHub.args.max_reads))
             continue
 
         logging.info("* Realigning reads *")
