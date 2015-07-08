@@ -119,6 +119,8 @@ def parseArgs(args):
         "show svviz version number and exit")
     interfaceParams.add_argument("-p", "--port", type=portNumber, help=
         "define a port to use for the web browser (default: random port)")
+    interfaceParams.add_argument("--processes", type=int, help=
+        "how many processes to use for read realignment (default: use all available cores)")
     interfaceParams.add_argument("--no-web", action="store_true", help=
         "don't show the web interface")
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help=

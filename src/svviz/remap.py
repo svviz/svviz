@@ -4,8 +4,6 @@ import logging
 import time
 # import numpy
 import math
-import pyfaidx
-import pysam
 from svviz.multiprocessor import Multiprocessor
 
 from svviz.utilities import reverseComp, Locus
@@ -116,7 +114,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     return bestAln
 
 
-def do1remap(chromPartsCollection, reads):
+def do1remap(chromPartsCollection, reads, processes):
     reads = filterDegenerateOnly(reads)
 
     namesToReferences = {}
@@ -124,10 +122,17 @@ def do1remap(chromPartsCollection, reads):
         namesToReferences[chromPart.id] = chromPart.getSeq()
 
     # map each read sequence against each chromosome part (the current allele only)
-    # we don't really gain from using virtual cores, so try to figure out how many physical
-    # cores we have
-    remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
-        verbose=3, processes=misc.cpu_count_physical()))#multiprocessing.cpu_count()))
+
+    if processes != 1:
+        remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
+            verbose=3, processes=processes))#multiprocessing.cpu_count()))
+    else:
+        mapper = Multimap(namesToReferences)
+
+        remapped = []
+        for read in reads:
+            print set(read.seq), len(read.seq), read.seq
+            remapped.append(mapper.remap(read.seq))
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:
@@ -168,7 +173,6 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
 
         except ValueError:
             raise e
-        # if "chr" in searchRegions[0].chr
     t1 = time.time()
 
     if supplementaryAlignmentsFound:
@@ -182,12 +186,15 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
 
     return reads
 
-def do_realign(variant, reads):
-    # reads = reads[:25]
+def do_realign(variant, reads, processes=None):
+    if processes is None or processes == 0:
+        # we don't really gain from using virtual cores, so try to figure out how many physical
+        # cores we have
+        processes = misc.cpu_count_physical()
 
     t0 = time.time()
-    refalignments = do1remap(variant.chromParts("ref"), reads)
-    altalignments = do1remap(variant.chromParts("alt"), reads)
+    refalignments = do1remap(variant.chromParts("ref"), reads, processes)
+    altalignments = do1remap(variant.chromParts("alt"), reads, processes)
     t1 = time.time()
 
     logging.debug("  time for realigning:{}".format(t1-t0))
