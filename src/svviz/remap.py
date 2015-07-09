@@ -136,6 +136,8 @@ def do1remap(chromPartsCollection, reads, processes):
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:
+        # TODO: for paired-end, if there are equally-scoring alignments in multiple parts, we should pick
+        # the pair which are in the correct orientation
         aln = chooseBestAlignment(read, remapped[read.seq], chromPartsCollection)
         alignmentSets[read.qname].addAlignment(aln)
 

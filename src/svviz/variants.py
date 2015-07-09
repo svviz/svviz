@@ -61,6 +61,8 @@ def getBreakpointFormatsStr(which=None):
             "  <chrom> <pos> <ME name> [ME strand [start [end]]]'")
     if which in ["tra", None]:
         formats.append( "Format for a translocation is 'chrom1 start1 chrom2 start2 orientation'\n")
+    if which in ["bkend", None]:
+        formats.append( "Breakend format is 'chrom1 start1 strand1 chrom2 start2 strand2'\n")
     return "\n".join(formats)
 
 
@@ -126,9 +128,24 @@ def getVariant(dataHub):
                                 Locus(chrom2, start2, start2, orientation), 
                                 dataHub.alignDistance, dataHub.genome)
 
-    else:
-        raise Exception("only accept event types of deletion, insertion, mei or translocation")
+    elif dataHub.args.type.lower() in ["bkend", "breakend"]:
+        assert len(dataHub.args.breakpoints) == 6, getBreakpointFormatsStr("bkend")
+        chrom1 = dataHub.args.breakpoints[0]
+        start1 = int(dataHub.args.breakpoints[1])
+        strand1 = dataHub.args.breakpoints[2]
 
+        chrom2 = dataHub.args.breakpoints[3]
+        start2 = int(dataHub.args.breakpoints[4])
+        strand2 = dataHub.args.breakpoints[5]
+
+        if dataHub.args.min_mapq is None:
+            dataHub.args.min_mapq = -1
+
+        variant = Breakend(Locus(chrom1, start1, start1, strand1), 
+                           Locus(chrom2, start2, start2, strand2), 
+                           dataHub.alignDistance, dataHub.genome)
+    else:
+        raise Exception("only accept event types of deletion, insertion, mei, translocation or breakend")
     logging.info(" Variant: {}".format(variant))
 
     return variant
@@ -153,6 +170,10 @@ class Segment(object):
 
     def color(self):
         return self.colors[self.id]
+
+    def antisense(self):
+        antisense = {"+":"-", "-":"+"}
+        return Segment(self.chrom, self.start, self.end, antisense[self.strand], self.id, self.source)
 
     def __repr__(self):
         return "<Segment {} {}:{}-{}{} ({})>".format(self.id, self.chrom, self.start, self.end, self.strand, self.source)
@@ -473,3 +494,68 @@ class Translocation(StructuralVariant):
             chrom2 = "chr{}".format(chrom2)
         return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
 
+class Breakend(StructuralVariant):
+    def __init__(self, breakpoint1, breakpoint2, alignDistance, refFasta):
+        super(Breakend, self).__init__([breakpoint1, breakpoint2], alignDistance, refFasta)
+
+        self.breakpoints = [breakpoint1, breakpoint2]
+        self.chromParts("alt")
+
+    def searchRegions(self, searchDistance):
+        searchRegions = []
+
+        for breakpoint in self.breakpoints:
+            searchRegions.append(Locus(breakpoint.chr(), breakpoint.start()-searchDistance, 
+                breakpoint.end()+searchDistance, breakpoint.strand()))
+
+        return searchRegions
+
+    def chromParts(self, allele):
+        b1 = self.breakpoints[0]
+        b2 = self.breakpoints[1]
+
+        segments = []
+        for i, breakpoint in enumerate(self.breakpoints):
+            segments.append(Segment(breakpoint.chr(), breakpoint.start()-self.alignDistance, 
+                                    breakpoint.start()-1, "+", 0+i*2))
+            segments.append(Segment(breakpoint.chr(), breakpoint.start(), 
+                                    breakpoint.start()+self.alignDistance, "+", 1+i*2))
+            # assert breakpoint.strand() == "+", breakpoint
+
+        # TODO: disambiguate reads mapping to multiple parts with the same alignment scores
+        # but different orientations
+        loci = [Locus(s.chrom, s.start, s.end, "+") for s in segments]
+        for i in range(len(loci)-1):
+            for j in range(i+1, len(loci)):
+                if loci[i].overlaps(loci[j]):
+                    raise Exception("Not yet implemented - breakend-breakpoints near one another")
+
+        parts = []
+        if allele in ["ref", "amb"]:
+            name = "ref_{}".format(b1.chr())
+            parts.append(ChromPart(name, [segments[0], segments[1]], self.sources))
+
+            name = "ref_{}".format(b2.chr())
+            if b1.chr() == b2.chr(): name += "b"
+            parts.append(ChromPart(name, [segments[2], segments[3]], self.sources))
+
+        else:
+            if b1.strand() == "+": s1 = segments[0]
+            else: s1 = segments[1].antisense()
+
+            if b2.strand() == "+": s2 = segments[3]
+            else: s2 = segments[2].antisense()
+            
+            name = "alt_{}/{}".format(b1.chr(), b2.chr())
+            parts.append(ChromPart(name, [s1, s2], self.sources))
+
+
+        return ChromPartsCollection(parts) 
+
+    def __str__(self):
+        chrom1 = self.breakpoints[0].chr()
+        chrom2 = self.breakpoints[1].chr()
+        if not chrom1.startswith("chr"):
+            chrom1 = "chr{}".format(chrom1)
+            chrom2 = "chr{}".format(chrom2)
+        return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
