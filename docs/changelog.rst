@@ -1,6 +1,21 @@
 Change log
 ==========
 
+1.3.0
+-----
+
+This release adds a number of new features and fixes several bugs:
+
+- added support for displaying gene models (exons and introns) from GFF-formatted annotation files
+- added option to display reads that are in flanking genomic regions, providing context for a structural variant
+- initial implementation of breakend support (note that, currently, the breakends must be distant from one another, and breakend support has not been implemented from vcf files yet)
+- added checkbox to web interface to hide/show flanking reads
+- added option to define the web server port, making it easier to use ssh tunneling to access svviz running on a server
+- now auto-detect the number of cores available on a machine (used for the realignment step)
+- added option to specify how many processes (cores) to use when performing realignment
+- improved handling of paired-end reads that align to the same location
+- added option to skip variants with very deep read coverage (typically indicative of a repetitive genomic region); useful in batch mode
+
 1.2.0
 -----
 
