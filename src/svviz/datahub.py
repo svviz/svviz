@@ -67,9 +67,12 @@ class DataHub(object):
                     name = nameFromBedPath(annoPath)
                     if annoPath.endswith(".bed") or annoPath.endswith(".bed.gz"):
                         self.annotationSets[name] = annotations.AnnotationSet(annoPath)
-                    elif annoPath.endswith(".gff") or annoPath.endswith(".gff.gz") \
-                            or annoPath.endswith(".gtf") or annoPath.endswith(".gtf.gz"):
+                    else:
+                        if not (annoPath.endswith(".gff") or annoPath.endswith(".gff.gz") \
+                            or annoPath.endswith(".gtf") or annoPath.endswith(".gtf.gz")):
+                            logging.warn("Unknown annotation file extension; trying to parse as if GTF/GFF format: '{}'".format(annoPath))
                         self.annotationSets[name] = gff.GeneAnnotationSet(annoPath)
+
 
         except:
             self.args._parser.print_help()

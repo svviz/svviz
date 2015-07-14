@@ -1,13 +1,12 @@
 """ Simple parser for gff/gtf format genes, indexed by tabix """
 
 import collections
-import pysam
 import re
-from svviz.tabix import ensureIndexed
 from svviz.annotations import AnnotationSet, Annotation
 
 RE_TRANSCRIPT = r".*transcript_id \"([^\"]*)\".*"
-RE_GENE = r".*gene_id \"([^\"]*)\".*"
+RE_GENE_ID = r".*gene_id \"([^\"]*)\".*"
+RE_GENE_NAME = r".*gene_name \"([^\"]*)\".*"
 RE_LINE = r"(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)"
 
 
@@ -36,9 +35,6 @@ class GeneAnnotationSet(AnnotationSet):
             genes.append(GTFGene(lines))
 
         if extension > 0:
-            for gene in genes:
-                if gene.name == "NM_002653":
-                    print gene.name, gene.start, gene.end, start, end
             genes = [gene for gene in genes if not (end<gene.start or start>gene.end)]#start<=gene.start<=end or start<=gene.end<=end)]
 
         if clip:
@@ -50,6 +46,7 @@ class GeneAnnotationSet(AnnotationSet):
 
 class GTFGene(Annotation):
     def __init__(self, gtfLines):
+        self.id = None
         self.name = None
         self.chrom = None
         self.start = None
@@ -82,6 +79,11 @@ class GTFGene(Annotation):
             newCdExons.append((max(start, curStart), min(end, curEnd)))
         self.cdExons = newCdExons
 
+    @property
+    def label(self):
+        if self.name is not None:
+            return self.name
+        return self.id
 
     def fromGTFLines(self, gtfLines):
         for line in gtfLines:
@@ -94,11 +96,15 @@ class GTFGene(Annotation):
 
             event = fields[2]
 
-            gene = re.match(RE_TRANSCRIPT, line).group(1)
+            gene_id = re.match(RE_TRANSCRIPT, line).group(1)
+            gene_name = re.match(RE_GENE_NAME, line)
+            if gene_name is not None:
+                gene_name = gene_name.group(1)
 
-            if self.name is not None and self.name != gene:
+            if self.id is not None and self.id != gene_id:
                 raise Exception("transcripts don't belong to the same gene")
-            self.name = gene
+            self.id = gene_id
+            self.name = gene_name
 
             if self.strand is not None and self.strand != strand:
                 raise Exception("exons aren't on the same strand")
@@ -125,6 +131,8 @@ class GTFGene(Annotation):
 
 
     def __str__(self):
+        if self.name is None:
+            return "{} {}:{}-{}{} {} {}".format(self.id, self.chrom, self.start, self.end, self.strand, self.txExons, self.cdExons)
         return "{} {}:{}-{}{} {} {}".format(self.name, self.chrom, self.start, self.end, self.strand, self.txExons, self.cdExons)
 
     def __repr__(self):
@@ -132,7 +140,7 @@ class GTFGene(Annotation):
 
 if __name__ == '__main__':
     """ UCSC Genes table exported as gtf, then sorted using:
-    gsort -k1,1V -k4,4n -k5,4n /Users/nspies/Downloads/hg19.genes.gtf | bgzip > /Users/nspies/Downloads/hg19.genes.gtf.gz
+    gsort -k1,1V -k4,4n -k5,5n /Users/nspies/Downloads/hg19.genes.gtf | bgzip > /Users/nspies/Downloads/hg19.genes.gtf.gz
 
     (or remove the V option to get it to work with normal OS X sort) """
 
