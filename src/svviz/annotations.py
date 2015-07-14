@@ -76,3 +76,6 @@ class Annotation(object):
 
         self.info = info if info is not None else {}
 
+    @property
+    def label(self):
+        return self.name
