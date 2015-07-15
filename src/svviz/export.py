@@ -47,7 +47,7 @@ class TrackCompositor(object):
         segments = list(self.dataHub.variant.chromParts(allele))[0].segments
         alleleLength = len(list(self.dataHub.variant.chromParts(allele))[0])
 
-        if self.dataHub.args.flanks and self.dataHub.args.context>0:
+        if self.dataHub.args.context>0:
             begin = scale.topixels(len(segments[0])-self.dataHub.args.context)
             width = scale.topixels(sum(len(s) for s in segments[:-1])+self.dataHub.args.context) - begin
             return begin, width

@@ -160,8 +160,10 @@ def parseArgs(args):
         "save summary statistics to this (tab-delimited) file")
 
     defaults = parser.add_argument_group("presets")
-    defaults.add_argument("--pacbio", action="store_true", help=
-        "sets defaults for pacbio libraries")
+    defaults.add_argument("--pacbio", action="store_true", help=argparse.SUPPRESS)
+    defaults.add_argument("--lenient", action="store_true", help=
+        "lowers the minimum alignment quality, showing reads even when breakpoints are only \n"
+        "approximately correct, or reads of lower quality (eg PacBio)")
 
     if len(inputArgs)<1:
         parser.print_help()
@@ -170,7 +172,7 @@ def parseArgs(args):
     args = parser.parse_args(inputArgs)
     args._parser = parser
 
-    if args.pacbio:
+    if args.pacbio or args.lenient:
         # TODO: should infer this from the input if possible, per-sample
         setDefault(args, "aln_quality", 0.65)
 

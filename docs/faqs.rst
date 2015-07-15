@@ -21,3 +21,10 @@ Yes, you should be able to do this by ssh tunneling:
 3. Open your browser to ``http://127.0.0.1:7777``.
 
 
+**How do I visualize reads if the breakpoint coordinates are imprecise?**
+
+Depending on several factors, you may be able to visualize reads around imprecise breakpoints without doing anything special. This works best if the paired-end insert size is long or the degree of imprecision is small relative to the read length.
+
+However, if you know your breakpoints are imprecise, you can use the ``--lenient`` command line option to retain reads with poor alignment scores. It is prudent, however, to use the output of svviz to correct the breakpoint positions and re-run svviz once more precise breakpoints have been estimated.
+
+To refine breakpoints, look for a grey region around the alternate allele breakpoint(s), indicating a deletion, or a blue line immediately at the breakpoint, indicating an insertion. The length of the extra deleted or insert sequence can be estimated from the web view by hovering over relevant reads and inspecting the nucleotide-level alignments.
