@@ -9,6 +9,16 @@ from svviz.alignment import AlignmentSet
 from svviz.variants import getBreakpointFormatsStr
 from svviz.web import checkPortIsClosed
 
+EPILOG = \
+"""Breakpoint formats:
+{}
+
+For an example, run 'svviz demo'.
+
+Submit bug reports and feature requests at
+https://github.com/svviz/svviz/issues"""
+
+
 def portNumber(string):
     value = int(string)
     if 0 <= value <= 65535:
@@ -65,10 +75,12 @@ def checkDemoMode(args):
 def parseArgs(args):
     inputArgs = checkDemoMode(args)
 
+    epilog = EPILOG.format(getBreakpointFormatsStr())
+    
     parser = argparse.ArgumentParser(description="svviz version {}".format(svviz.__version__),
         usage="%(prog)s [options] [demo] [ref breakpoint...] [ref vcf]",
         formatter_class=argparse.RawTextHelpFormatter,
-        epilog="Breakpoint formats:\n{}\n\nFor an example, run 'svviz demo'.".format(getBreakpointFormatsStr()))
+        epilog=epilog)
 
     parser.add_argument("ref", help=
         "reference fasta file (a .faidx index file will be created if it doesn't exist so you need \n"
@@ -98,10 +110,10 @@ def parseArgs(args):
         "sequences)")
 
     inputParams.add_argument("-q", "--min-mapq", metavar="MAPQ", default=0, type=float, help=
-        "minimum mapping quality for reads")
+        "minimum mapping quality for reads (default: 0)")
     inputParams.add_argument("--pair-min-mapq", metavar="PAIR_MAPQ", default=0,
         type=float, help=
-        "include only read pairs where at least one read end exceeds PAIR_MAPQ")
+        "include only read pairs where at least one read end exceeds PAIR_MAPQ (default: 0)")
     inputParams.add_argument("-a", "--aln-quality", metavar="QUALITY", type=float, help=
         "minimum score of the Smith-Waterman alignment against the ref or alt allele in order to be \n"
         "considered (multiplied by 2)")

@@ -60,9 +60,9 @@ def getBreakpointFormatsStr(which=None):
         formats.append( "Format for mobile element insertion is '<mobile_elements.fasta> \n"
             "  <chrom> <pos> <ME name> [ME strand [start [end]]]'")
     if which in ["tra", None]:
-        formats.append( "Format for a translocation is 'chrom1 start1 chrom2 start2 orientation'\n")
+        formats.append( "Format for a translocation is 'chrom1 start1 chrom2 start2 orientation'")
     if which in ["bkend", None]:
-        formats.append( "Breakend format is 'chrom1 start1 strand1 chrom2 start2 strand2'\n")
+        formats.append( "Format for a breakend is 'chrom1 start1 strand1 chrom2 start2 strand2'")
     return "\n".join(formats)
 
 
