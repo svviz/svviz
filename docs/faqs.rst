@@ -28,3 +28,16 @@ Depending on several factors, you may be able to visualize reads around imprecis
 However, if you know your breakpoints are imprecise, you can use the ``--lenient`` command line option to retain reads with poor alignment scores. It is prudent, however, to use the output of svviz to correct the breakpoint positions and re-run svviz once more precise breakpoints have been estimated.
 
 To refine breakpoints, look for a grey region around the alternate allele breakpoint(s), indicating a deletion, or a blue line immediately at the breakpoint, indicating an insertion. The length of the extra deleted or insert sequence can be estimated from the web view by hovering over relevant reads and inspecting the nucleotide-level alignments.
+
+
+**What do I do if the genomic region around the structural variant is repetitive?**
+
+If you know the genomic region including the structural variant is repetitive, or if you're getting a warning about "Found a substantial number of reads that could map to multiple locations within the same allele", you should consider doing a few things:
+
+1. When reads are mapped to the genome using a tool such as bwa or bowtie2, they typically receive a "mapq" map-quality score that indicates how uniquely the read maps in the genome; this score can. These scores can be shown for individual reads in the web interface simply by hovering your cursor over a read, with example output being ``mapq=60`` or (for paired-end reads) ``mapq=60,30``.
+
+2. Make sure that you're using the ``--min-mapq`` or ``--pair-min-mapq`` options to filter out reads that map ambiguously within the entire genome. 
+
+3. Use the ``--dotplots`` option (see :ref:`here <dotplots>` for more information) to visualize sequence similarity within the genomic region.
+
+4. Adjust the ``--max-multimapping-similarity`` option to filter out reads potentially aligning to multiple locations within the structural variant region (see :ref:`here <multimapping>` for more information).

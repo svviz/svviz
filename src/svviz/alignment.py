@@ -76,6 +76,7 @@ class AlignmentSetCollection(object):
         self.sets = {}
         self.choice = None
         self.why = None
+        self.info = {}
 
     def addSet(self, newset, name):
         self.sets[name] = newset

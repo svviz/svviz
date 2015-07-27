@@ -39,6 +39,16 @@ The default settings are typically correct for Illumina data. Read orientation a
 
 The ``--min-mapq`` option specifies the mapping quality threshold; reads with mapq (this is set during the original genome-wide mapping by bwa, bowtie, etc) below this threshold will be discarded during pre-processing. A similar argument, ``--pair-min-mapq``, can be used instead to require that at least one read end out of a read pair must have a mapq exceeding this value.
 
+.. _dotplots:
+
+The ``--dotplots`` option will create a `dotplot <https://en.wikipedia.org/wiki/Dot_plot_(bioinformatics)>`_ to visualize sequence similarity within the genomic region(s) surrounding the structural variant. This depends on the optional python package rpy2 (first make sure `R <https://www.r-project.org>`_) is installed and then install rpy2 using the command ``sudo pip install rpy2``). You will also need to install `yass  <http://bioinfo.lifl.fr/yass>`_, which can be using the `homebrew <http://brew.sh>`_ command ``brew install homebrew/science/yass`` (OS X only) or yass can be downloaded, compiled and installed according to the instructions `here <http://bioinfo.lifl.fr/yass/download.php>`_.
+
+The dotplot output shows regions of similar within the reference allele as lines: blue lines indicate similarity on the same strand and direction whereas red indicates similarity on the opposite strand/direction. Because the similarity matrix is symmetrical, only same strand similarities are shown in the upper left half and only opposite strand similarities are shown in the bottom right half. The structural variant breakpoints are shown as dashed gray lines.
+
+.. _multimapping:
+
+A related option is ``--max-multimapping-similarity``, which adjust how aggressively svviz filters out reads that potentially align to multiple locations near the structural variant. The default score of 0.95 means that any read (for paired-end reads, this means any read-end) whose second-best alignment score is more than 0.95 times the best alignment score will be assigned as ambiguous. For example, if the best alignment score is 445, and the second-best alignment score is 439, the multimapping similarity would be 439/445=0.99 and the read would be marked as ambiguous. However, a read whose best alignment score is 445 but second-best alignment score is 405 would not be filtered because the multimapping similarity of 395/445=0.89 is less than 0.95.
+
 
 Exporting visualizations
 ------------------------

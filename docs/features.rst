@@ -18,5 +18,6 @@ Features
 * visualizes reads for multiple samples in SVG format (an open-source, web-standard vector graphics format)
     * shows mismatched bases indicative of sequence polymorphisms (eg SNPs) or mapping errors
     * can visualize BED or GTF format annotations, for example the locations of genes or repeats
+* optionally visualizes repetitiveness in the breakpoint regions using dotplots
 * options to export to PDF or PNG
 * batch mode to calculate summary statistics and create visualizations for many events from a VCF file

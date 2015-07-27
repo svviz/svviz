@@ -92,7 +92,10 @@ def runDisambiguation(dataHub):
     flankingRegionCollection = flanking.FlankingRegionCollection(dataHub.variant)
     for sample in dataHub:
         disambiguate.batchDisambiguate(sample.alnCollections, sample.readStatistics, sample.orientations, 
-            singleEnded=sample.singleEnded, flankingRegionCollection=flankingRegionCollection)
+            singleEnded=sample.singleEnded, flankingRegionCollection=flankingRegionCollection,
+            maxMultimappingSimilarity=dataHub.args.max_multimapping_similarity)
+
+    return disambiguate.checkMultimapping(dataHub)
 
 def renderSamples(dataHub):
     for sample in dataHub:
@@ -183,8 +186,7 @@ def generateDotplots(dataHub):
             logging.warning("  --> currently don't support producing dotplots with multi-part variants")
             return
 
-        ref = list(dataHub.variant.chromParts("ref"))[0].getSeq()
-        dotplotPngData = dotplots.dotplot(ref, ref)
+        dotplotPngData = dotplots.dotplot(dataHub)
         if dotplotPngData is not None:
             dataHub.dotplots["ref vs ref"] = dotplotPngData
 
@@ -248,6 +250,8 @@ def run(args):
 
         dataHub.variant = variant
         setSampleParams(dataHub)
+
+        debug.printDebugInfo(dataHub)
 
         logging.info("* Loading reads and finding mates *")
         readCount = loadReads(dataHub)

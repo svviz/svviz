@@ -114,6 +114,11 @@ def parseArgs(args):
     inputParams.add_argument("--pair-min-mapq", metavar="PAIR_MAPQ", default=0,
         type=float, help=
         "include only read pairs where at least one read end exceeds PAIR_MAPQ (default: 0)")
+    inputParams.add_argument("--max-multimapping-similarity", metavar="MAX_SIMILARITY", default=0.95,
+        type=float, help=
+        "maximum ratio between best and second-best alignment scores within visualization \n"
+        "region in order to retain read (default: 0.95)")
+
     inputParams.add_argument("-a", "--aln-quality", metavar="QUALITY", type=float, help=
         "minimum score of the Smith-Waterman alignment against the ref or alt allele in order to be \n"
         "considered (multiplied by 2)")
@@ -137,6 +142,9 @@ def parseArgs(args):
         "don't show the web interface")
     interfaceParams.add_argument("--save-reads", metavar="OUT_BAM_PATH", help=
         "save relevant reads to this file (bam)")
+
+    interfaceParams.add_argument("--verbose", default=3, type=int, help=
+        "how verbose the progress and logging should be")
 
     inputParams.add_argument("--save-state", help=argparse.SUPPRESS)
 

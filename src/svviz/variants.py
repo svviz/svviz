@@ -176,7 +176,8 @@ class Segment(object):
         return Segment(self.chrom, self.start, self.end, antisense[self.strand], self.id, self.source)
 
     def __repr__(self):
-        return "<Segment {} {}:{}-{}{} ({})>".format(self.id, self.chrom, self.start, self.end, self.strand, self.source)
+        return "<Segment {} {}:{}-{}{} (len={};{})>".format(self.id, self.chrom, self.start, self.end, self.strand, 
+            len(self), self.source)
 
 def mergedSegments(segments):
     # quick-and-dirty recursive function to merge adjacent variant.Segment's

@@ -1,9 +1,10 @@
+import collections
 import logging
 import numpy
 import time
 
 def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expectedOrientations="any", singleEnded=False,
-                                flankingRegionCollection=None):
+                                flankingRegionCollection=None, maxMultimappingSimilarity=0.9):
     for name, alignmentSet in alnCollection.sets.iteritems():
         if not singleEnded:
             alignmentSet.evidences["insertSizeScore"] = isd.scoreInsertSize(len(alignmentSet))
@@ -16,10 +17,17 @@ def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expect
         alignmentSet.evidences["valid"] = (True, )
 
         regionIDs = set()
+        multimapping = 0
+
         for read in alignmentSet.getAlignments():
             regionIDs.add(read.regionID)
-            if read.score2 is not None and read.score - read.score2 <= 2:
-                alignmentSet.evidences["multimapping"] = True
+            if read.score2 is not None:
+                scoreDiff = read.score2/float(read.score)
+                multimapping = max(scoreDiff, multimapping)
+
+        if multimapping > maxMultimappingSimilarity:            
+            alignmentSet.evidences["multimapping"] = True
+        alnCollection.info["multimapping"] = max(multimapping, alnCollection.info.get("multimapping", 0))
 
         if len(regionIDs) == 1:
             alignmentSet.evidences["flanking"] = False
@@ -77,15 +85,60 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
 
     return choose("amb", "same_scores")
 
-def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False, flankingRegionCollection=None):
+def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False, flankingRegionCollection=None,
+    maxMultimappingSimilarity=0.9):
     t0 = time.time()
 
     for alnCollection in alnCollections:
         scoreAlignmentSetCollection(alnCollection, isd, 0, expectedOrientations, singleEnded=singleEnded,
-            flankingRegionCollection=flankingRegionCollection)
+            flankingRegionCollection=flankingRegionCollection, maxMultimappingSimilarity=maxMultimappingSimilarity)
 
     for alnCollection in alnCollections:
         disambiguate(alnCollection, singleEnded=singleEnded)
 
     t1 = time.time()
     logging.info(" Time for disambiguation: {:.2f}s".format(t1-t0))
+
+
+def checkMultimapping(dataHub):
+    alreadyWarned = False
+
+    # only warn if the --max-multimapping-similarity command-line setting
+    # hasn't been adjusted down substantially
+    if dataHub.args.max_multimapping_similarity < 0.9:
+        return
+
+    for sample in dataHub:
+        counts = collections.defaultdict(int)
+
+        for alnCollection in sample.alnCollections:
+            score = alnCollection.info.get("multimapping", 0)
+            if score > 0.99:
+                counts[1.0] += 1
+            elif score >= 0.95:
+                counts[0.95] += 1
+            elif score >= 0.90:
+                counts[0.9] += 1
+
+            if score >= dataHub.args.max_multimapping_similarity:
+                counts["similar"] += 1
+
+            counts["total"] += 1
+
+        if (counts[1.0] + counts[0.9] > counts["total"] * 0.1) or (counts[1.0] + counts[0.9] > 100):
+            if not alreadyWarned:
+                logging.warn("\n   " + "*"*100 + "\n"
+                    "   Found a substantial number of reads that could map to multiple locations \n"
+                    "   within the same allele; please consider using the --dotplots option to check \n"
+                    "   repetitiveness within these genomic regions: or use the \n"
+                    "   --max-multimapping-similarity option to adjust how many of these reads \n"
+                    "   are marked as ambiguous\n")
+            logging.warn("   Sample = {}".format(sample.name))
+            logging.warn("   {} align equally well to 2+ locations\n".format(counts[1.0]))
+            logging.warn("   {} align nearly equally well to 2+ locations\n".format(counts[0.95]))
+            logging.warn("   {} align similarly to 2+ locations\n".format(counts[0.9]))
+
+            alreadyWarned = True
+
+    if alreadyWarned:
+        logging.warn("   "+ "*"*100 + "\n")

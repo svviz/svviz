@@ -137,14 +137,15 @@ def info():
 
     alnSet = dataHub.getAlignmentSetByName(readid)
     if alnSet:
-        print "\n"
-        print alnSet.parentCollection.name
-        for setName, moreAlnSet in alnSet.parentCollection.sets.iteritems():
-            desc = [setName]
-            for aln in moreAlnSet.getAlignments():
-                desc.append("{}:{}-{}{} ({})".format(aln.regionID, aln.start, aln.end, aln.strand, aln.score))
+        if dataHub.args.verbose > 3:
+            print "\n"
+            print alnSet.parentCollection.name
+            for setName, moreAlnSet in alnSet.parentCollection.sets.iteritems():
+                desc = [setName]
+                for aln in moreAlnSet.getAlignments():
+                    desc.append("{}:{}-{}{} ({}[{}])".format(aln.regionID, aln.start, aln.end, aln.strand, aln.score, aln.score2))
 
-            print "\t".join(desc)
+                print "\t".join(desc)
 
 
         reads = alnSet.getAlignments()
