@@ -26,7 +26,7 @@ def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expect
                 multimapping = max(scoreDiff, multimapping)
 
         if multimapping > maxMultimappingSimilarity:            
-            alignmentSet.evidences["multimapping"] = True
+            alignmentSet.evidences["multimapping"] = multimapping
         alnCollection.info["multimapping"] = max(multimapping, alnCollection.info.get("multimapping", 0))
 
         if len(regionIDs) == 1:
@@ -53,24 +53,39 @@ def checkOrientation(orientation, expectedOrientations):
     return False
 
 def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=False):
+    # TODO: the cutoffs used below are somewhat arbitrary
+
     def choose(which, why):
         alnCollection.choose(which, why)
         return which
 
+    refAlnScore = alnCollection["ref"].evidences["alignmentScore"]
+    altAlnScore = alnCollection["alt"].evidences["alignmentScore"]
+
+    altValid = alnCollection["alt"].evidences["valid"][0]
+    refValid = alnCollection["ref"].evidences["valid"][0]
+
     # check the validity of the alignment sets (see scoreAlignmentSetCollection())
-    if "multimapping" in alnCollection["alt"].evidences or "multimapping" in alnCollection["ref"].evidences:
-        return choose("amb", "multimapping")
-    if alnCollection["alt"].evidences["valid"][0] and not alnCollection["ref"].evidences["valid"][0]:
+    if "multimapping" in alnCollection["alt"].evidences:
+        if altAlnScore / float(refAlnScore) > 0.66:
+            return choose("amb", "multimapping")
+
+    if "multimapping" in alnCollection["ref"].evidences:
+        if refAlnScore / float(altAlnScore) > 0.66:
+            return choose("amb", "multimapping")
+
+    alnCollection.info["multimapping"] = 0
+
+    if altValid and not refValid:
         return choose("alt", alnCollection["ref"].evidences["valid"][1])
-    if alnCollection["ref"].evidences["valid"][0] and not alnCollection["alt"].evidences["valid"][0]:
+    if refValid and not altValid:
         return choose("ref", alnCollection["alt"].evidences["valid"][1])
-    if not alnCollection["ref"].evidences["valid"][0] and not alnCollection["alt"].evidences["valid"][0]:
+    if not refValid and not altValid:
         return choose("amb", str(alnCollection["ref"].evidences["valid"][1])+"_"+str(alnCollection["alt"].evidences["valid"][1]))
 
-    # TODO: this is kind of arbitrary, how to decide that the alignment scores must differ by at least 2 (or whatever)
-    if alnCollection["alt"].evidences["alignmentScore"]-2 > alnCollection["ref"].evidences["alignmentScore"]:
+    if altAlnScore-2 > refAlnScore:
         return choose("alt", "alignmentScore")
-    if alnCollection["ref"].evidences["alignmentScore"]-2 > alnCollection["alt"].evidences["alignmentScore"]:
+    if refAlnScore-2 > altAlnScore:
         return choose("ref", "alignmentScore")
 
     if not singleEnded:
