@@ -1,6 +1,11 @@
 Change log
 ==========
 
+1.3.1
+-----
+
+This release adds substantial improvements to the handling of multi-mapping reads (ie those aligning to multiple locations near the structural variant). See :ref:`here <dotplots>` for more details.
+
 1.3.0
 -----
 
