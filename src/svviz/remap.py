@@ -180,7 +180,7 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
     if supplementaryAlignmentsFound:
         logging.warn("  ** Supplementary alignments found: these alignments (with sam flag 0x800) **\n"
                      "  ** are poorly documented among mapping software and may result in missing **\n"
-                     "  ** portions of reads; consider using the --include-secondary command line **\n"
+                     "  ** portions of reads; consider using the --include-supplementary command line **\n"
                      "  ** argument if you think this is happening                                **")
         
     logging.debug("  time to find reads and mates:{}".format(t1 - t0))
