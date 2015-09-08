@@ -34,7 +34,9 @@ Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of t
 News
 ----
 
-**July, 2015 -- multimapping** new capabilities have been added to identify repetitiveness near the structural variant and to more aggressively filter out reads that could potentially align to multiple locations. See :ref:`here <dotplots>` for more information. With the default settings, svviz should recover more alt- and ref-supporting reads while filtering more truly ambiguous reads.
+**Sept, 2015 -- Publication** The final version of the svviz paper is now `available in Bioinformatics <http://dx.doi.org/10.1093/bioinformatics/btv478>`_.
+
+**July, 2015 -- Multimapping** new capabilities have been added to identify repetitiveness near the structural variant and to more aggressively filter out reads that could potentially align to multiple locations. See :ref:`here <dotplots>` for more information. With the default settings, svviz should recover more alt- and ref-supporting reads while filtering more truly ambiguous reads.
 
 **May, 2015 -- Translocations** Support for translocations has been implemented. This is a somewhat experimental feature, so please submit any bug reports or suggestions using the `github issue tracker <https://github.com/svviz/svviz/issues>`_. 
 
@@ -51,8 +53,8 @@ Detailed instructions, including how to ensure that all prerequisites are instal
 Citation
 --------
 
-A preprint manuscript describing svviz is `available on bioRxiv <http://dx.doi.org/10.1101/016063>`_:
+svviz has been `published in Bioinformatics <http://dx.doi.org/10.1093/bioinformatics/btv478>`_. If you found svviz useful for your research, please cite svviz as follows:
 
-Spies N, Zook JM, Salit M, Sidow A. svviz: a read viewer for validating structural variants. bioRxiv doi:10.1101/016063.
+Spies N, Zook JM, Salit M, Sidow A. 2015. svviz: a read viewer for validating structural variants. Bioinformatics doi:bioinformatics/btv478.
 
 svviz was developed by `Noah Spies <http://stanford.edu/~nspies/>`_, a member of the `Sidow lab <http://mendel.stanford.edu/SidowLab/index.html>`_ at Stanford and part of the `Joint Initiative for Metrology in Biology (JIMB) <http://jimb.stanford.edu/>`_. Funding was provided by the `National Institute of Standards and Technology (NIST) <http://www.nist.gov>`_.
