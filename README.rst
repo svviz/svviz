@@ -24,9 +24,9 @@ See the `documentation <http://svviz.readthedocs.org/>`_ for more detailed help,
 
 Please submit bug reports or feature requests on the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 
-Manuscript
-----------
+Publication
+-----------
 
-A preprint manuscript describing svviz is `available on bioRxiv <http://dx.doi.org/10.1101/016063>`_:
+svviz has been `published in Bioinformatics <http://dx.doi.org/10.1093/bioinformatics/btv478>`_. If you found svviz useful for your research, please cite svviz as follows:
 
-Spies N, Zook JM, Salit M, Sidow A. svviz: a read viewer for validating structural variants. bioRxiv doi:10.1101/016063.
+Spies N, Zook JM, Salit M, Sidow A. 2015. svviz: a read viewer for validating structural variants. Bioinformatics doi:bioinformatics/btv478.
