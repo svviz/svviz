@@ -9,6 +9,8 @@ A single command should typically suffice to install ``svviz``:
 
 More detailed directions follow for linux and OS X. Try installing into a :ref:`virtual environment (see below) <venv>` if you have difficulty with any of these directions.
 
+svviz is not currently supported on Windows, although it should probably work there.
+
 Installation on linux
 ---------------------
 

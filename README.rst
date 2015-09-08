@@ -8,7 +8,7 @@ svviz
 
 Author: Noah Spies
 
-``svviz`` visualizes high-throughput sequencing data relevant to a structural variant. Only reads supporting the variant or the reference allele will be shown. ``svviz`` can operate in both an interactive web browser view to closely inspect individual variants, or in batch mode, allowing multiple variants (annotated in a VCF file) to be analyzed simultaneously.
+``svviz`` visualizes high-throughput sequencing data relevant to a structural variant. Only reads supporting the variant or the reference allele will be shown. svviz can operate in both an interactive web browser view to closely inspect individual variants, or in batch mode, allowing multiple variants (annotated in a VCF file) to be analyzed simultaneously.
 
 Visit the `project site <http://svviz.github.io/svviz/>`_ for a tour of the features and example output.
 
@@ -16,7 +16,9 @@ Visit the `project site <http://svviz.github.io/svviz/>`_ for a tour of the feat
 Quickstart
 ==========
 
-1. Ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_ (OS X only) and that the python package `pip <https://pip.pypa.io/en/latest/installing.html>`_ is installed.
+svviz has been tested on Mac OS X and Linux, and should work on Windows, although that has not been tested.
+
+1. Ensure that you have a working compiler by following `these instructions <http://railsapps.github.io/xcode-command-line-tools.html>`_ (OS X only) and that `python <http://docs.python-guide.org/en/latest/>`_ and the python package `pip <https://pip.pypa.io/en/latest/installing.html>`_ are installed.
 2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install -U svviz``. (The sudo may not be necessary depending on your setup.)
 3. Run the following command, which downloads example data and runs it through svviz: ``svviz demo``. After several processing steps, a web browser window should open, with separate, interactive views of the reference and alternate alleles.
 
