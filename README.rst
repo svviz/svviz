@@ -1,4 +1,4 @@
-.. image:: docs/example.png
+.. image:: https://raw.githubusercontent.com/svviz/svviz/master/docs/example.png
     :width: 80%
     :align: center
 
