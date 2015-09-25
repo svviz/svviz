@@ -252,11 +252,11 @@ def convertSVG(insvg, outformat="pdf"):
 
     exportData = _convertSVG_webkitToPDF(inpath, outpath, outformat)
     if exportData is not None:
-        print "used webkitToPDF to export to PDF"
+        print "used webkitToPDF to export to {}".format(outformat)
         return exportData
     else:
         exportData = _convertSVG_rsvg_convert(inpath, outpath, outformat)
-        print "used rsvg-convert to export to PDF"
+        print "used rsvg-convert to export to {}".format(outformat)
         return exportData
 
 def _convertSVG_webkitToPDF(inpath, outpath, outformat):
