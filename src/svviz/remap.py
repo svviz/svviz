@@ -78,6 +78,7 @@ def filterDegenerateOnly(reads):
     return filtered
 
 def chooseBestAlignment(read, mappings, chromPartsCollection):
+    # TODO: this should be read-pair aware
     # TODO: this is kind of ridiculous; we need to make pickleable reads that can be sent to 
     # and from the Multimapper
     # mappings: name -> (strand, aln)
@@ -129,10 +130,12 @@ def do1remap(chromPartsCollection, reads, processes):
     else:
         mapper = Multimap(namesToReferences)
 
-        remapped = []
-        for read in reads:
-            print set(read.seq), len(read.seq), read.seq
-            remapped.append(mapper.remap(read.seq))
+        remapped = {}
+        for i, read in enumerate(reads):
+            if i % 1000 == 0:
+                print "realigned", i, "of", len(reads)
+            seq, result = mapper.remap(read.seq)
+            remapped[seq] = result
 
     alignmentSets = collections.defaultdict(AlignmentSet)
     for read in reads:
