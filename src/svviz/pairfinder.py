@@ -50,7 +50,7 @@ class PairFinder(object):
             if i % 1000 == 0:
                 if t0 is None:
                     t0 = time.time()
-                    elapsed = "starting..."
+                    elapsed = "Finding mate pairs..."
                 else:
                     t1 = time.time()
                     elapsed = t1-t0
@@ -73,7 +73,7 @@ class PairFinder(object):
         reads = list(self.sam.fetch(chrom, start, end))
 
         if len(reads) > 100000:
-            logging.warn("  LOTS OF READS IN REGION:{} {} {} {}".format(chrom, start, end, len(reads)))
+            logging.warn("  LOTS OF READS IN MATE-PAIR REGION:{} {} {} {}".format(chrom, start, end, len(reads)))
             # return []
 
         goodReads = []
