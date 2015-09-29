@@ -22,10 +22,14 @@ class GeneAnnotationSet(AnnotationSet):
 
         transcriptsToLines = collections.defaultdict(list)
 
-        for line in lines:
+        for i, line in enumerate(lines):
             if len(line) < 2:
-                continue                
-            tx = re.match(RE_TRANSCRIPT, line).group(1)
+                continue    
+
+            try:            
+                tx = re.match(RE_TRANSCRIPT, line).group(1)
+            except AttributeError:
+                tx = "anno{}".format(i)
 
 
             transcriptsToLines[tx].append(line)
@@ -96,7 +100,12 @@ class GTFGene(Annotation):
 
             event = fields[2]
 
-            gene_id = re.match(RE_TRANSCRIPT, line).group(1)
+            gene_id = re.match(RE_TRANSCRIPT, line)
+            if gene_id is not None:
+                gene_id = gene_id.group(1)
+            else:
+                gene_id = ""
+                
             gene_name = re.match(RE_GENE_NAME, line)
             if gene_name is not None:
                 gene_name = gene_name.group(1)

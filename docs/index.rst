@@ -19,7 +19,7 @@ svviz - a read visualizer for structural variants
    license
 
 
-``svviz`` visualizes high-throughput sequencing data that supports a structural variant. ``svviz`` is free and open source, available at `<https://github.com/svviz/svviz>`_. Please report any issues using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
+``svviz`` visualizes high-throughput sequencing data that supports a structural variant. ``svviz`` is free and open source, available at `<https://github.com/svviz/svviz>`_. Please submit issues, questions or feature requests using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 
 Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of the features, or continue through this documentation for more detailed information about svviz.
 
