@@ -27,7 +27,7 @@ def ensureIndexed(bedPath, preset="bed", trySorting=True):
     if len(line.strip().split("\t")) < 6 and preset == "bed":
         raise AnnotationError("BED files need to have at least 6 (tab-delimited) fields (including "
             "chrom, start, end, name, score, strand; score is unused)")
-    if len(line.strip().split("\t")) < 9 and preset == "bed":
+    if len(line.strip().split("\t")) < 9 and preset == "gff":
         raise AnnotationError("GFF/GTF files need to have at least 9 tab-delimited fields")
 
     return bedPath
