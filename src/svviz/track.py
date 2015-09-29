@@ -499,7 +499,7 @@ class AnnotationTrack(object):
                     end = self._topixels(end, segment, segmentStart)
                     if end < start:
                         start, end = end, start
-                    textLength = len(anno.name)*self.rowheight/1.0*scaleFactor*spacing
+                    textLength = len(anno.label)*self.rowheight/1.0*scaleFactor*spacing
                     rowNum = self.findRow(start, end+textLength)
 
                     anno.coords = {}
