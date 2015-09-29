@@ -43,6 +43,8 @@ If you know the genomic region including the structural variant is repetitive, o
 4. Adjust the ``--max-multimapping-similarity`` option to filter out reads potentially aligning to multiple locations within the structural variant region (see :ref:`here <multimapping>` for more information).
 
 
+.. _lotsoreads:
+
 **What does the warning "LOTS OF READS IN MATE-PAIR REGION" mean?**
 
 The "LOTS OF READS IN MATE-PAIR REGION" warning indicates that svviz will be trying to pull reads in from a genomic region with very high sequencing coverage (over 100,000 reads within the region). This warning may appear when analyzing very high coverage sequencing data or extremely large regions. 
