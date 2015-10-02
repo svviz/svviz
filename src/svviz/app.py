@@ -190,7 +190,7 @@ def generateDotplots(dataHub):
         if dotplotPngData is not None:
             dataHub.dotplots["ref vs ref"] = dotplotPngData
 
-def saveReads(dataHub):
+def saveReads(dataHub, nameExtra=None):
     if dataHub.args.save_reads:
         logging.info("* Saving relevant reads *")
         for i, sample in enumerate(dataHub):
@@ -201,6 +201,11 @@ def saveReads(dataHub):
             if len(dataHub.samples) > 1:
                 logging.debug("Using i = {}".format(i))
                 outbam_path = outbam_path.replace(".bam", ".{}.bam".format(i))
+
+            if nameExtra is not None:
+                outbam_path = outbam_path.replace(".bam", ".{}.bam".format(nameExtra))
+
+            logging.info("  Outpath: {}".format(outbam_path))
 
             # print out just the reads we're interested for use later
             bam_small = pysam.Samfile(outbam_path, "wb", template=sample.bam)
@@ -217,8 +222,9 @@ def saveReads(dataHub):
 
 def saveState(dataHub):
     import cPickle as pickle
+    import gzip
 
-    pickle.dump(dataHub, open(dataHub.args.save_state, "w"))
+    pickle.dump(dataHub, gzip.open(dataHub.args.save_state, "wb"))
     logging.warn("^"*20 + " saving state to pickle and exiting " + "^"*20)
 
 def run(args):
@@ -255,7 +261,11 @@ def run(args):
 
         logging.info("* Loading reads and finding mates *")
         readCount = loadReads(dataHub)
-        saveReads(dataHub)
+
+        nameExtra = None
+        if len(svs) > 1:
+            nameExtra = "variant_{}".format(i)
+        saveReads(dataHub, nameExtra)
 
         if dataHub.args.max_reads and readCount > dataHub.args.max_reads:
             logging.info("+++ Skipping variant -- number of reads ({}) exceeds threshold set by user ({})".format(
@@ -290,6 +300,8 @@ def run(args):
         return
 
     runWebView(dataHub)
+
+    return summaryStats
     
 def main():
     # entry point for shell script

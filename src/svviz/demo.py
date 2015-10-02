@@ -38,18 +38,11 @@ def downloadDemo(which):
         archivePath = "{}/svviz-data.zip".format(downloadDir)
 
         # logging.info("Downloading...")
-        # urllib.urlretrieve("https://github.com/svviz/svviz-data/archive/master.zip", archivePath)
-
-        # downloadWithProgress("https://github.com/svviz/svviz-data/archive/{}.zip".format(which), archivePath)
         downloadWithProgress("http://web.stanford.edu/~nspies/svviz/examples/{}.zip".format(which), archivePath)
         
         logging.info("Decompressing...")
         archive = zipfile.ZipFile(archivePath)
         archive.extractall("{}".format(downloadDir))
-
-        # import subprocess
-        # subprocess.call("ls {}/svviz-data-{}".format(downloadDir, which), shell=True)
-        # subprocess.call("ls {temp}/svviz-data-{which}/{which}".format(temp=downloadDir, which=which), shell=True)
 
         if not os.path.exists("svviz-examples"):
             os.makedirs("svviz-examples/")

@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="1520.0">
+<svg x="10" y="20"><text x="0" y="37" font-size="35" font-family="Helvetica"  font-weight="bold">Translocation::chr19/chr6</text></svg>
+<svg x="10" y="67"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="start">Sample</text></svg>
+<svg x="163" y="67"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="end">Alt</text></svg>
+<svg x="226" y="67"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="end">Ref</text></svg>
+<svg x="289" y="67"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="end">Amb</text></svg>
+<svg x="10" y="89.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="start">dna_normal</text></svg>
+<svg x="163" y="89.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">0</text></svg>
+<svg x="226" y="89.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">82</text></svg>
+<svg x="289" y="89.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">334</text></svg>
+<svg x="10" y="112.0"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="start">dna_tumor</text></svg>
+<svg x="163" y="112.0"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">31</text></svg>
+<svg x="226" y="112.0"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">118</text></svg>
+<svg x="289" y="112.0"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">646</text></svg>
+<svg x="10" y="134.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  font-weight="bold" anchor="start">Total</text></svg>
+<svg x="163" y="134.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">31</text></svg>
+<svg x="226" y="134.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">200</text></svg>
+<svg x="289" y="134.5"><text x="0" y="18" font-size="16" font-family="Helvetica"  anchor="end">980</text></svg>
+<svg x="10" y="167.0"><text x="0" y="32" font-size="30" font-family="Helvetica" >Alternate Allele</text></svg>
+<svg x="10" y="199.0"><text x="0" y="20" font-size="18" font-family="Helvetica" >dna_normal</text></svg>
+<svg x="0" y="231.0" width="1200" height="20" viewBox="0 0 15000 375.0" preserveAspectRatio="xMinYMin" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<text x="7500.0" y="356.25" font-size="337.5" text-anchor="middle" font-family="Helvetica"  fill="#999999" >No reads found</text>
+</g></svg>
+<svg x="10" y="251.0"><text x="0" y="20" font-size="18" font-family="Helvetica" >dna_tumor</text></svg>
+<svg x="0" y="283.0" width="1200" height="113.0" viewBox="0 -20 15000 226" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="0" y="-20" width="15000" height="226" opacity="0.0" />
+<rect x="1402.35159163" y="186.0" width="2520.79151133" height="5" fill="#CCCCCC" />
+<rect x="1402.35159163" y="186" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2105:20253:25076"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3497.27559507" y="186" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2105:20253:25076"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1522.79896759" y="180.0" width="2361.62890737" height="5" fill="#CCCCCC" />
+<rect x="1522.79896759" y="180" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2112:14958:21523"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3458.56036708" y="180" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2112:14958:21523"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2176.65615142" y="174.0" width="2094.92400344" height="5" fill="#CCCCCC" />
+<rect x="2176.65615142" y="174" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2102:6271:75131"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3845.71264697" y="174" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2102:6271:75131"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="4125.3226269" y="174" width="4.30169199885" height="5" fill="blue" />
+<rect x="4207.05477488" y="174" width="4.30169199885" height="5" fill="green" />
+<rect x="2232.5781474" y="168.0" width="1729.28018354" height="5" fill="#CCCCCC" />
+<rect x="2232.5781474" y="168" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2105:13327:18941"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2641.2388873" y="168" width="4.30169199885" height="5" fill="green" />
+<rect x="3544.59420705" y="168" width="417.264123889" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2105:13327:18941"  data-cigar="2S98M"  class="read"  fill="red" />
+<rect x="3542.44336106" y="168" width="4.30169199885" height="5" fill="cyan" />
+<rect x="3832.80757098" y="168" width="4.30169199885" height="5" fill="black" />
+<rect x="3858.61772297" y="168" width="4.30169199885" height="5" fill="black" />
+<rect x="2266.9916834" y="162.0" width="1527.10065959" height="5" fill="#CCCCCC" />
+<rect x="2266.9916834" y="162" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1312:8214:76822"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3368.2248351" y="162" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1312:8214:76822"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2301.40521939" y="156.0" width="2086.32061944" height="5" fill="#CCCCCC" />
+<rect x="2301.40521939" y="156" width="417.264123889" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2211:15975:87495"  data-cigar="98M2S"  class="read"  fill="purple" />
+<rect x="2720.82018927" y="156" width="4.30169199885" height="5" fill="cyan" />
+<rect x="3961.85833094" y="156" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2211:15975:87495"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2318.61198738" y="150.0" width="1785.20217952" height="5" fill="#CCCCCC" />
+<rect x="2318.61198738" y="150" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2310:19759:55975"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2649.84227129" y="150" width="4.30169199885" height="5" fill="blue" />
+<rect x="2705.76426728" y="150" width="4.30169199885" height="5" fill="green" />
+<rect x="3677.94665902" y="150" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2310:19759:55975"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2370.23229137" y="144.0" width="1634.64295956" height="5" fill="#CCCCCC" />
+<rect x="2370.23229137" y="144" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1207:6107:91133"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2585.31689131" y="144" width="4.30169199885" height="5" fill="green" />
+<rect x="2740.17780327" y="144" width="4.30169199885" height="5" fill="blue" />
+<rect x="2761.68626326" y="144" width="4.30169199885" height="5" fill="blue" />
+<rect x="3579.00774305" y="144" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1207:6107:91133"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2447.66274735" y="138.0" width="1410.95497562" height="5" fill="#CCCCCC" />
+<rect x="2447.66274735" y="138" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2207:16252:66315"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3432.75021508" y="138" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2207:16252:66315"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2503.58474333" y="132.0" width="1789.50387152" height="5" fill="#CCCCCC" />
+<rect x="2503.58474333" y="132" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2302:17800:5421"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3867.22110697" y="132" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2302:17800:5421"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2525.09320333" y="126.0" width="1466.87697161" height="5" fill="#CCCCCC" />
+<rect x="2525.09320333" y="126" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1307:3503:76825"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3566.10266705" y="126" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1307:3503:76825"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2529.39489533" y="120.0" width="2378.83567537" height="5" fill="#CCCCCC" />
+<rect x="2529.39489533" y="120" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2205:15603:54910"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="4486.6647548" y="120" width="421.565815888" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2205:15603:54910"  data-cigar="1S99M"  class="read"  fill="red" />
+<rect x="4484.5139088" y="120" width="4.30169199885" height="5" fill="cyan" />
+<rect x="4774.87811873" y="120" width="4.30169199885" height="5" fill="blue" />
+<rect x="2581.01519931" y="114.0" width="1144.25007169" height="5" fill="#CCCCCC" />
+<rect x="2581.01519931" y="114" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2204:3158:98269"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3299.39776312" y="114" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2204:3158:98269"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2581.01519931" y="108.0" width="1621.73788357" height="5" fill="#CCCCCC" />
+<rect x="2581.01519931" y="108" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2315:11035:76724"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2843.41841124" y="108" width="4.30169199885" height="5" fill="green" />
+<rect x="3776.88557499" y="108" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2315:11035:76724"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2598.22196731" y="102.0" width="1669.05649555" height="5" fill="#CCCCCC" />
+<rect x="2598.22196731" y="102" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2209:16088:13179"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3841.41095498" y="102" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2209:16088:13179"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2675.65242329" y="96.0" width="2477.77459134" height="5" fill="#CCCCCC" />
+<rect x="2675.65242329" y="96" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1211:2565:87667"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="4727.55950674" y="96" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1211:2565:87667"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2705.76426728" y="90.0" width="1062.51792372" height="5" fill="#CCCCCC" />
+<rect x="2705.76426728" y="90" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1213:6584:8819"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3342.41468311" y="90" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1213:6584:8819"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2813.30656725" y="84.0" width="1032.40607972" height="5" fill="#CCCCCC" />
+<rect x="2813.30656725" y="84" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2205:15276:99804"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3419.84513909" y="84" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2205:15276:99804"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2821.90995125" y="78.0" width="1264.69744766" height="5" fill="#CCCCCC" />
+<rect x="2821.90995125" y="78" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2212:2919:94587"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3019.78778319" y="78" width="4.30169199885" height="5" fill="green" />
+<rect x="3660.73989102" y="78" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2212:2919:94587"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2920.84886722" y="72.0" width="1380.84313163" height="5" fill="#CCCCCC" />
+<rect x="2920.84886722" y="72" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1306:17068:74171"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3875.82449097" y="72" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1306:17068:74171"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2942.35732722" y="66.0" width="1355.03297964" height="5" fill="#CCCCCC" />
+<rect x="2942.35732722" y="66" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2211:6925:81419"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3871.52279897" y="66" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2211:6925:81419"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3045.59793519" y="60.0" width="1118.4399197" height="5" fill="#CCCCCC" />
+<rect x="3045.59793519" y="60" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1305:9733:36931"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3738.170347" y="60" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1305:9733:36931"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3075.70977918" y="54.0" width="1798.10725552" height="5" fill="#CCCCCC" />
+<rect x="3075.70977918" y="54" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2102:9558:7023"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="4473.75967881" y="54" width="400.057355893" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2102:9558:7023"  data-cigar="6S94M"  class="read"  fill="red" />
+<rect x="4471.60883281" y="54" width="4.30169199885" height="5" fill="cyan" />
+<rect x="4482.3630628" y="54" width="4.30169199885" height="5" fill="green" />
+<rect x="3097.21823917" y="48.0" width="2400.34413536" height="5" fill="#CCCCCC" />
+<rect x="3097.21823917" y="48" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1313:4331:19153"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="5071.69486665" y="48" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1313:4331:19153"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3127.33008317" y="42.0" width="1187.26699168" height="5" fill="#CCCCCC" />
+<rect x="3127.33008317" y="42" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1308:10544:92086"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3888.72956696" y="42" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1308:10544:92086"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3153.14023516" y="36.0" width="997.992543734" height="5" fill="#CCCCCC" />
+<rect x="3153.14023516" y="36" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2307:5259:38488"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3398.33667909" y="36" width="4.30169199885" height="5" fill="green" />
+<rect x="3725.26527101" y="36" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2307:5259:38488"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3320.90622311" y="30.0" width="1101.23315171" height="5" fill="#CCCCCC" />
+<rect x="3320.90622311" y="30" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2305:7179:68676"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3996.27186693" y="30" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2305:7179:68676"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="4155.43447089" y="30" width="4.30169199885" height="5" fill="black" />
+<rect x="3325.20791511" y="24.0" width="1161.45683969" height="5" fill="#CCCCCC" />
+<rect x="3325.20791511" y="24" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:11847:77936"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="4060.79724692" y="24" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:11847:77936"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3480.06882707" y="18.0" width="1363.63636364" height="5" fill="#CCCCCC" />
+<rect x="3480.06882707" y="18" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1312:1906:51336"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="4417.83768282" y="18" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1312:1906:51336"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="4426.44106682" y="18" width="4.30169199885" height="5" fill="green" />
+<rect x="4452.25121881" y="18" width="4.30169199885" height="5" fill="green" />
+<rect x="4460.85460281" y="18" width="4.30169199885" height="5" fill="green" />
+<rect x="4473.75967881" y="18" width="4.30169199885" height="5" fill="green" />
+<rect x="4482.3630628" y="18" width="4.30169199885" height="5" fill="green" />
+<rect x="4546.88844279" y="18" width="4.30169199885" height="5" fill="green" />
+<rect x="3596.21451104" y="12.0" width="2202.46630341" height="5" fill="#CCCCCC" />
+<rect x="3596.21451104" y="12" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1205:4461:36748"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="5372.81330657" y="12" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1205:4461:36748"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3665.04158302" y="6.0" width="2142.24261543" height="5" fill="#CCCCCC" />
+<rect x="3665.04158302" y="6" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1210:14627:4066"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="5381.41669056" y="6" width="425.867507886" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1210:14627:4066"  data-cigar="100M"  class="read"  fill="red" />
+<line x1="3716.66188701" x2="3716.66188701" y1="206" y2="-20" stroke="black"  stroke-width="3.67077717235"  />
+<line x1="11270.433037" x2="11270.433037" y1="206" y2="-20" stroke="black"  stroke-width="3.67077717235"  />
+<rect x="7441.92715802" y="-40" width="107.542299971" height="226" fill="#B2B2B2" />
+<line x1="7441.92715802" x2="7441.92715802" y1="186" y2="-40" stroke="black"  stroke-width="4"  />
+<line x1="7549.46945799" x2="7549.46945799" y1="186" y2="-40" stroke="black"  stroke-width="4"  />
+</g></svg>
+<svg x="10" y="396.0"><text x="0" y="20" font-size="18" font-family="Helvetica" >hg19_refGene</text></svg>
+<svg x="0" y="428.0" width="1200" height="180" viewBox="0 0 15000 2250.0" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="7441.92715802" y="0.0" width="107.542299971" height="2250.0" fill="#B2B2B2" />
+<line x1="7441.92715802" x2="7441.92715802" y1="2250.0" y2="0.0" stroke="black"  stroke-width="12.5"  />
+<line x1="7549.46945799" x2="7549.46945799" y1="2250.0" y2="0.0" stroke="black"  stroke-width="12.5"  />
+<rect x="0.0" y="1750.0" width="3716.66188701" height="250.0" fill="blue" />
+<text x="3726.66188701" y="1987.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001300992</text>
+<rect x="0.0" y="1500.0" width="3716.66188701" height="250.0" fill="blue" />
+<text x="3726.66188701" y="1737.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_013234</text>
+<rect x="3716.66188701" y="1250.0" width="3716.66188701" height="250.0" fill="blue" />
+<text x="7443.32377402" y="1487.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001278738</text>
+<rect x="3716.66188701" y="1000.0" width="3716.66188701" height="250.0" fill="blue" />
+<text x="7443.32377402" y="1237.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001278739</text>
+<rect x="3716.66188701" y="750.0" width="3716.66188701" height="250.0" fill="blue" />
+<text x="7443.32377402" y="987.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_016593</text>
+<rect x="7549.46945799" y="1750.0" width="3720.96357901" height="250.0" fill="blue" />
+<text x="11280.433037" y="1987.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001278738</text>
+<rect x="7549.46945799" y="1500.0" width="3720.96357901" height="250.0" fill="blue" />
+<text x="11280.433037" y="1737.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001278739</text>
+<rect x="7549.46945799" y="500.0" width="3720.96357901" height="250.0" fill="blue" />
+<text x="11280.433037" y="737.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_016593</text>
+<rect x="11270.433037" y="1250.0" width="3720.96357901" height="250.0" fill="blue" />
+<text x="15001.396616" y="1487.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001300992</text>
+<rect x="11270.433037" y="1000.0" width="3720.96357901" height="250.0" fill="blue" />
+<text x="15001.396616" y="1237.5" font-size="225.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_013234</text>
+<line x1="3710.41188701" x2="3710.41188701" y1="2250.0" y2="0.0" stroke="black"  stroke-width="12.5"  />
+<line x1="11264.183037" x2="11264.183037" y1="2250.0" y2="0.0" stroke="black"  stroke-width="12.5"  />
+</g></svg>
+<svg x="0" y="608.0" width="1200" height="75" viewBox="0 0 15000 937.5" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="7441.92715802" y="0" width="107.542299971" height="937.5" fill="#B2B2B2" />
+<line x1="7441.92715802" x2="7441.92715802" y1="0" y2="937.5" stroke="black"  stroke-width="12.5"  />
+<line x1="7549.46945799" x2="7549.46945799" y1="0" y2="937.5" stroke="black"  stroke-width="12.5"  />
+<text x="7426.92715802" y="225.0" font-size="225.0" text-anchor="end" font-family="Helvetica" >alt_19/6</text>
+<text x="7564.46945799" y="225.0" font-size="225.0" text-anchor="start" font-family="Helvetica" >alt_6/19</text>
+<rect x="0.0" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="50" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >0</text>
+<rect x="1075.42299971" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="1075.42299971" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >250</text>
+<rect x="2150.84599943" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="2150.84599943" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >500</text>
+<rect x="3226.26899914" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="3226.26899914" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >750</text>
+<rect x="4301.69199885" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="4301.69199885" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >1000</text>
+<rect x="5377.11499857" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="5377.11499857" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >1.2KB</text>
+<rect x="6452.53799828" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="6452.53799828" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >1.5KB</text>
+<rect x="7549.46945799" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="7549.46945799" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >0</text>
+<rect x="8624.8924577" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="8624.8924577" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >250</text>
+<rect x="9700.31545741" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="9700.31545741" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >500</text>
+<rect x="10775.7384571" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="10775.7384571" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >750</text>
+<rect x="11851.1614568" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="11851.1614568" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >1000</text>
+<rect x="12926.5844566" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="12926.5844566" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >1.2KB</text>
+<rect x="14002.0074563" y="437.5" width="12.5" height="187.5" fill="black" />
+<text x="14002.0074563" y="887.5" font-size="225.0" text-anchor="middle" font-family="Helvetica" >1.5KB</text>
+<line x1="0" x2="3716.66188701" y1="437.5" y2="437.5" stroke="red"  stroke-width="100.0"  />
+<line x1="0" x2="3716.66188701" y1="437.5" y2="437.5" stroke="red"  stroke-width="37.5"  />
+<path d="M 368.332377402 250.0 L 743.332377402 437.5 L 368.332377402 625.0 z" fill="red" xcenter="743.332377402" class="scaleArrow" />
+<path d="M 1111.6647548 250.0 L 1486.6647548 437.5 L 1111.6647548 625.0 z" fill="red" xcenter="1486.6647548" class="scaleArrow" />
+<path d="M 1854.99713221 250.0 L 2229.99713221 437.5 L 1854.99713221 625.0 z" fill="red" xcenter="2229.99713221" class="scaleArrow" />
+<path d="M 2598.32950961 250.0 L 2973.32950961 437.5 L 2598.32950961 625.0 z" fill="red" xcenter="2973.32950961" class="scaleArrow" />
+<path d="M 3341.66188701 250.0 L 3716.66188701 437.5 L 3341.66188701 625.0 z" fill="red" xcenter="3716.66188701" class="scaleArrow" />
+<line x1="7433.32377402" x2="3716.66188701" y1="437.5" y2="437.5" stroke="gray"  stroke-width="100.0"  />
+<line x1="7433.32377402" x2="3716.66188701" y1="437.5" y2="437.5" stroke="gray"  stroke-width="37.5"  />
+<path d="M 7064.99139662 250.0 L 6689.99139662 437.5 L 7064.99139662 625.0 z" fill="gray" xcenter="6689.99139662" class="scaleArrow" />
+<path d="M 6321.65901921 250.0 L 5946.65901921 437.5 L 6321.65901921 625.0 z" fill="gray" xcenter="5946.65901921" class="scaleArrow" />
+<path d="M 5578.32664181 250.0 L 5203.32664181 437.5 L 5578.32664181 625.0 z" fill="gray" xcenter="5203.32664181" class="scaleArrow" />
+<path d="M 4834.99426441 250.0 L 4459.99426441 437.5 L 4834.99426441 625.0 z" fill="gray" xcenter="4459.99426441" class="scaleArrow" />
+<path d="M 4091.66188701 250.0 L 3716.66188701 437.5 L 4091.66188701 625.0 z" fill="gray" xcenter="3716.66188701" class="scaleArrow" />
+<line x1="11270.433037" x2="7549.46945799" y1="437.5" y2="437.5" stroke="orange"  stroke-width="100.0"  />
+<line x1="11270.433037" x2="7549.46945799" y1="437.5" y2="437.5" stroke="orange"  stroke-width="37.5"  />
+<path d="M 10901.2403212 250.0 L 10526.2403212 437.5 L 10901.2403212 625.0 z" fill="orange" xcenter="10526.2403212" class="scaleArrow" />
+<path d="M 10157.0476054 250.0 L 9782.04760539 437.5 L 10157.0476054 625.0 z" fill="orange" xcenter="9782.04760539" class="scaleArrow" />
+<path d="M 9412.85488959 250.0 L 9037.85488959 437.5 L 9412.85488959 625.0 z" fill="orange" xcenter="9037.85488959" class="scaleArrow" />
+<path d="M 8668.66217379 250.0 L 8293.66217379 437.5 L 8668.66217379 625.0 z" fill="orange" xcenter="8293.66217379" class="scaleArrow" />
+<path d="M 7924.46945799 250.0 L 7549.46945799 437.5 L 7924.46945799 625.0 z" fill="orange" xcenter="7549.46945799" class="scaleArrow" />
+<line x1="11270.433037" x2="14991.396616" y1="437.5" y2="437.5" stroke="blue"  stroke-width="100.0"  />
+<line x1="11270.433037" x2="14991.396616" y1="437.5" y2="437.5" stroke="blue"  stroke-width="37.5"  />
+<path d="M 11639.6257528 250.0 L 12014.6257528 437.5 L 11639.6257528 625.0 z" fill="blue" xcenter="12014.6257528" class="scaleArrow" />
+<path d="M 12383.8184686 250.0 L 12758.8184686 437.5 L 12383.8184686 625.0 z" fill="blue" xcenter="12758.8184686" class="scaleArrow" />
+<path d="M 13128.0111844 250.0 L 13503.0111844 437.5 L 13128.0111844 625.0 z" fill="blue" xcenter="13503.0111844" class="scaleArrow" />
+<path d="M 13872.2039002 250.0 L 14247.2039002 437.5 L 13872.2039002 625.0 z" fill="blue" xcenter="14247.2039002" class="scaleArrow" />
+<path d="M 14616.396616 250.0 L 14991.396616 437.5 L 14616.396616 625.0 z" fill="blue" xcenter="14991.396616" class="scaleArrow" />
+<line x1="3716.66188701" x2="3716.66188701" y1="250.0" y2="687.5" stroke="black"  stroke-width="12.5"  />
+<text x="3710.41188701" y="225.0" font-size="225.0" text-anchor="middle" font-family="Helvetica"  fill="black" >breakpoint</text>
+<line x1="11270.433037" x2="11270.433037" y1="250.0" y2="687.5" stroke="black"  stroke-width="12.5"  />
+<text x="11264.183037" y="225.0" font-size="225.0" text-anchor="middle" font-family="Helvetica"  fill="black" >breakpoint</text>
+</g></svg>
+<svg x="10" y="713.0"><text x="0" y="32" font-size="30" font-family="Helvetica" >Reference Allele</text></svg>
+<svg x="10" y="745.0"><text x="0" y="20" font-size="18" font-family="Helvetica" >dna_normal</text></svg>
+<svg x="0" y="777.0" width="1200" height="176.0" viewBox="0 -20 4000 352" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="0" y="-20" width="4000" height="352" opacity="0.0" />
+<rect x="368.224835102" y="312.0" width="636.65041583" height="5" fill="#CCCCCC" />
+<rect x="368.224835102" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2215:2601:18346"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="891.310582162" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2215:2601:18346"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="400.34413536" y="306.0" width="672.211069687" height="5" fill="#CCCCCC" />
+<rect x="400.34413536" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2208:2919:15275"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="958.990536278" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2208:2919:15275"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="439.346142816" y="300.0" width="675.652423286" height="5" fill="#CCCCCC" />
+<rect x="439.346142816" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2316:15097:36102"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="456.552910812" y="300" width="1.14711786636" height="5" fill="black" />
+<rect x="494.407800401" y="300" width="1.14711786636" height="5" fill="orange" />
+<rect x="503.584743332" y="300" width="1.14711786636" height="5" fill="orange" />
+<rect x="1001.43389733" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2316:15097:36102"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1048.46572985" y="300" width="1.14711786636" height="5" fill="blue" />
+<rect x="1061.08402638" y="300" width="1.14711786636" height="5" fill="green" />
+<rect x="450.81732148" y="294.0" width="666.475480356" height="5" fill="#CCCCCC" />
+<rect x="450.81732148" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2312:3321:95289"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1003.72813307" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2312:3321:95289"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="463.43561801" y="288.0" width="658.445655291" height="5" fill="#CCCCCC" />
+<rect x="463.43561801" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1306:14889:50418"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1008.31660453" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1306:14889:50418"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="471.465443074" y="282.0" width="645.827358761" height="5" fill="#CCCCCC" />
+<rect x="471.465443074" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1202:15892:3908"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1006.0223688" y="282" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1202:15892:3908"  data-cigar="1S4M1I14M1D2M1I77M"  class="read"  fill="red" />
+<rect x="1005.44880987" y="282" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1010.03728133" y="282" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1012.905076" y="282" width="1.14711786636" height="5" fill="green" />
+<rect x="1015.19931173" y="282" width="1.14711786636" height="5" fill="green" />
+<rect x="1017.49354746" y="282" width="1.14711786636" height="5" fill="orange" />
+<rect x="1026.67049039" y="282" width="2.29423573272" height="5" fill="gray" />
+<rect x="1029.53828506" y="282" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1038.14166906" y="282" width="1.14711786636" height="5" fill="orange" />
+<rect x="473.759678807" y="276.0" width="629.767708632" height="5" fill="#CCCCCC" />
+<rect x="473.759678807" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1315:12954:93190"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="989.962718669" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1315:12954:93190"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="479.495268139" y="270.0" width="591.912819042" height="5" fill="#CCCCCC" />
+<rect x="479.495268139" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1101:18096:84197"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="957.843418411" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1101:18096:84197"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="492.113564669" y="264.0" width="605.678233438" height="5" fill="#CCCCCC" />
+<rect x="492.113564669" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2303:13778:47367"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="984.227129338" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2303:13778:47367"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="518.497275595" y="258.0" width="714.654430743" height="5" fill="#CCCCCC" />
+<rect x="518.497275595" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1312:15359:14501"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1119.58703757" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1312:15359:14501"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="549.469457987" y="252.0" width="564.381990249" height="5" fill="#CCCCCC" />
+<rect x="549.469457987" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2209:13673:87102"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1000.28677947" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2209:13673:87102"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="571.264697448" y="246.0" width="683.682248351" height="5" fill="#CCCCCC" />
+<rect x="571.264697448" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1316:3228:91254"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1141.38227703" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1316:3228:91254"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="581.588758245" y="240.0" width="424.433610553" height="5" fill="#CCCCCC" />
+<rect x="581.588758245" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2304:11321:51280"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="892.457700029" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2304:11321:51280"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="599.942644107" y="234.0" width="398.049899627" height="5" fill="#CCCCCC" />
+<rect x="599.942644107" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1205:20475:38698"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="884.427874964" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1205:20475:38698"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="894.751935761" y="234" width="1.14711786636" height="5" fill="orange" />
+<rect x="929.165471752" y="234" width="1.14711786636" height="5" fill="green" />
+<rect x="980.785775738" y="234" width="1.14711786636" height="5" fill="black" />
+<rect x="621.737883568" y="228.0" width="738.743905936" height="5" fill="#CCCCCC" />
+<rect x="621.737883568" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1112:19516:72126"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1246.91712073" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1112:19516:72126"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1289.36048179" y="228" width="1.14711786636" height="5" fill="orange" />
+<rect x="1296.24318899" y="228" width="1.14711786636" height="5" fill="orange" />
+<rect x="1299.68454259" y="228" width="1.14711786636" height="5" fill="orange" />
+<rect x="1306.56724978" y="228" width="1.14711786636" height="5" fill="orange" />
+<rect x="650.415830227" y="222.0" width="564.381990249" height="5" fill="#CCCCCC" />
+<rect x="650.415830227" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1105:19107:96004"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1101.23315171" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1105:19107:96004"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="659.592773157" y="216.0" width="471.465443074" height="5" fill="#CCCCCC" />
+<rect x="659.592773157" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2208:1498:67817"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1017.49354746" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2208:1498:67817"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1077.14367651" y="216" width="1.14711786636" height="5" fill="green" />
+<rect x="659.592773157" y="210.0" width="724.97849154" height="5" fill="#CCCCCC" />
+<rect x="659.592773157" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1207:15053:27760"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1271.00659593" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1207:15053:27760"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1273.30083166" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1281.33065672" y="210" width="1.14711786636" height="5" fill="black" />
+<rect x="1296.24318899" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1299.68454259" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1311.15572125" y="210" width="1.14711786636" height="5" fill="black" />
+<rect x="661.88700889" y="204.0" width="439.346142816" height="5" fill="#CCCCCC" />
+<rect x="661.88700889" y="204" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1216:12417:10045"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="987.668482937" y="204" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1216:12417:10045"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="664.181244623" y="198.0" width="642.386005162" height="5" fill="#CCCCCC" />
+<rect x="664.181244623" y="198" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1102:8104:77236"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="762.83338113" y="198" width="1.14711786636" height="5" fill="blue" />
+<rect x="1193.00258102" y="198" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1102:8104:77236"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="665.328362489" y="192.0" width="449.670203613" height="5" fill="#CCCCCC" />
+<rect x="665.328362489" y="192" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2210:14352:79449"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1001.43389733" y="192" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2210:14352:79449"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="668.769716088" y="186.0" width="463.43561801" height="5" fill="#CCCCCC" />
+<rect x="668.769716088" y="186" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1215:6278:26537"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1018.64066533" y="186" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1215:6278:26537"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1020.93490106" y="186" width="1.14711786636" height="5" fill="orange" />
+<rect x="1033.55319759" y="186" width="1.14711786636" height="5" fill="orange" />
+<rect x="1038.14166906" y="186" width="1.14711786636" height="5" fill="orange" />
+<rect x="1048.46572985" y="186" width="1.14711786636" height="5" fill="orange" />
+<rect x="1057.64267278" y="186" width="1.14711786636" height="5" fill="blue" />
+<rect x="1065.67249785" y="186" width="1.14711786636" height="5" fill="green" />
+<rect x="1074.84944078" y="186" width="1.14711786636" height="5" fill="green" />
+<rect x="1079.43791225" y="186" width="1.14711786636" height="5" fill="green" />
+<rect x="1084.02638371" y="186" width="1.14711786636" height="5" fill="orange" />
+<rect x="1094.35044451" y="186" width="1.14711786636" height="5" fill="orange" />
+<rect x="669.916833955" y="180.0" width="449.670203613" height="5" fill="#CCCCCC" />
+<rect x="669.916833955" y="180" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1212:7575:90538"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1006.0223688" y="180" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1212:7575:90538"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1011.75795813" y="180" width="1.14711786636" height="5" fill="green" />
+<rect x="673.358187554" y="174.0" width="441.640378549" height="5" fill="#CCCCCC" />
+<rect x="673.358187554" y="174" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2115:3408:93327"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="744.479495268" y="174" width="1.14711786636" height="5" fill="green" />
+<rect x="1001.43389733" y="174" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2115:3408:93327"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="681.388012618" y="168.0" width="626.326355033" height="5" fill="#CCCCCC" />
+<rect x="681.388012618" y="168" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2107:15731:64381"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1194.14969888" y="168" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2107:15731:64381"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="694.006309148" y="162.0" width="333.811299111" height="5" fill="#CCCCCC" />
+<rect x="694.006309148" y="162" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1309:11939:18894"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="914.25293949" y="162" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1309:11939:18894"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="696.300544881" y="156.0" width="622.885001434" height="5" fill="#CCCCCC" />
+<rect x="696.300544881" y="156" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1313:10559:25041"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1205.62087755" y="156" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1313:10559:25041"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="708.918841411" y="150.0" width="393.461428162" height="5" fill="#CCCCCC" />
+<rect x="708.918841411" y="150" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1204:11569:13946"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="988.815600803" y="150" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1204:11569:13946"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="741.038141669" y="144.0" width="571.264697448" height="5" fill="#CCCCCC" />
+<rect x="741.038141669" y="144" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2210:16737:49000"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1198.73817035" y="144" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2210:16737:49000"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="769.716088328" y="138.0" width="726.125609406" height="5" fill="#CCCCCC" />
+<rect x="769.716088328" y="138" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2205:19694:52822"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="877.545167766" y="138" width="1.14711786636" height="5" fill="green" />
+<rect x="1382.27702896" y="138" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2205:19694:52822"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="783.481502724" y="132.0" width="321.193002581" height="5" fill="#CCCCCC" />
+<rect x="783.481502724" y="132" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1314:1094:2012"  data-cigar="1S99M"  class="read"  fill="purple" />
+<rect x="782.907943791" y="132" width="1.14711786636" height="5" fill="cyan" />
+<rect x="785.775738457" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="816.747920849" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="844.278749642" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="845.425867508" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="846.572985374" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="847.720103241" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="848.867221107" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="850.014338973" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="853.455692572" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="858.044164038" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="859.191281904" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="991.109836536" y="132" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1314:1094:2012"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1101.23315171" y="132" width="1.14711786636" height="5" fill="gray" />
+<rect x="784.628620591" y="126.0" width="314.310295383" height="5" fill="#CCCCCC" />
+<rect x="784.628620591" y="126" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1110:8145:37928"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="985.374247204" y="126" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1110:8145:37928"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1003.72813307" y="126" width="1.14711786636" height="5" fill="black" />
+<rect x="788.06997419" y="120.0" width="426.727846286" height="5" fill="#CCCCCC" />
+<rect x="788.06997419" y="120" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2307:15397:4930"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1103.52738744" y="120" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2307:15397:4930"  data-cigar="2S98M"  class="read"  fill="red" />
+<rect x="1102.95382851" y="120" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1109.26297677" y="120" width="1.14711786636" height="5" fill="black" />
+<rect x="1113.85144824" y="120" width="1.14711786636" height="5" fill="black" />
+<rect x="788.06997419" y="114.0" width="462.288500143" height="5" fill="#CCCCCC" />
+<rect x="788.06997419" y="114" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1213:12897:40102"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1136.79380556" y="114" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1213:12897:40102"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="788.06997419" y="108.0" width="692.859191282" height="5" fill="#CCCCCC" />
+<rect x="788.06997419" y="108" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2111:6794:32425"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1367.3644967" y="108" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2111:6794:32425"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="800.68827072" y="102.0" width="278.749641526" height="5" fill="#CCCCCC" />
+<rect x="800.68827072" y="102" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1306:16669:67259"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="965.873243476" y="102" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1306:16669:67259"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="809.865213651" y="96.0" width="291.367938056" height="5" fill="#CCCCCC" />
+<rect x="809.865213651" y="96" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1215:13325:57131"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="987.668482937" y="96" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1215:13325:57131"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="809.865213651" y="90.0" width="479.495268139" height="5" fill="#CCCCCC" />
+<rect x="809.865213651" y="90" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2110:5414:27114"  data-cigar="99M1S"  class="read"  fill="purple" />
+<rect x="821.336392314" y="90" width="1.14711786636" height="5" fill="orange" />
+<rect x="825.92486378" y="90" width="1.14711786636" height="5" fill="blue" />
+<rect x="902.781760826" y="90" width="1.14711786636" height="5" fill="green" />
+<rect x="903.928878692" y="90" width="1.14711786636" height="5" fill="orange" />
+<rect x="907.370232291" y="90" width="1.14711786636" height="5" fill="orange" />
+<rect x="909.664468024" y="90" width="1.14711786636" height="5" fill="green" />
+<rect x="911.958703757" y="90" width="1.14711786636" height="5" fill="orange" />
+<rect x="917.694293089" y="90" width="1.14711786636" height="5" fill="black" />
+<rect x="922.856323487" y="90" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1175.79581302" y="90" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2110:5414:27114"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="811.012331517" y="84.0" width="402.638371093" height="5" fill="#CCCCCC" />
+<rect x="811.012331517" y="84" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2215:15497:38175"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1098.93891597" y="84" width="114.711786636" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2215:15497:38175"  data-cigar="14M1D86M"  class="read"  fill="red" />
+<rect x="1114.9985661" y="84" width="2.29423573272" height="5" fill="gray" />
+<rect x="813.30656725" y="78.0" width="298.250645254" height="5" fill="#CCCCCC" />
+<rect x="813.30656725" y="78" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2310:1688:23924"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="997.992543734" y="78" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2310:1688:23924"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="813.30656725" y="72.0" width="441.640378549" height="5" fill="#CCCCCC" />
+<rect x="813.30656725" y="72" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2312:13494:7122"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1141.38227703" y="72" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2312:13494:7122"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1194.14969888" y="72" width="1.14711786636" height="5" fill="blue" />
+<rect x="845.425867508" y="66.0" width="293.662173788" height="5" fill="#CCCCCC" />
+<rect x="845.425867508" y="66" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1116:2461:93825"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1025.52337253" y="66" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1116:2461:93825"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1038.14166906" y="66" width="1.14711786636" height="5" fill="orange" />
+<rect x="1043.87725839" y="66" width="1.14711786636" height="5" fill="black" />
+<rect x="1048.46572985" y="66" width="1.14711786636" height="5" fill="orange" />
+<rect x="1075.99655865" y="66" width="1.14711786636" height="5" fill="orange" />
+<rect x="1077.14367651" y="66" width="1.14711786636" height="5" fill="green" />
+<rect x="1084.02638371" y="66" width="1.14711786636" height="5" fill="orange" />
+<rect x="1101.23315171" y="66" width="1.14711786636" height="5" fill="blue" />
+<rect x="854.602810439" y="60.0" width="273.014052194" height="5" fill="#CCCCCC" />
+<rect x="854.602810439" y="60" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1102:12186:27828"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1014.05219386" y="60" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1102:12186:27828"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1087.46773731" y="60" width="1.14711786636" height="5" fill="black" />
+<rect x="862.632635503" y="54.0" width="370.519070835" height="5" fill="#CCCCCC" />
+<rect x="862.632635503" y="54" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2313:19941:56550"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1119.58703757" y="54" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2313:19941:56550"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="866.073989102" y="48.0" width="403.785488959" height="5" fill="#CCCCCC" />
+<rect x="866.073989102" y="48" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2107:15469:17829"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1156.29480929" y="48" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2107:15469:17829"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="879.839403499" y="42.0" width="434.757671351" height="5" fill="#CCCCCC" />
+<rect x="879.839403499" y="42" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1209:19084:7618"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1201.03240608" y="42" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1209:19084:7618"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="880.986521365" y="36.0" width="430.169199885" height="5" fill="#CCCCCC" />
+<rect x="880.986521365" y="36" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1106:20601:58792"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="977.344422139" y="36" width="1.14711786636" height="5" fill="green" />
+<rect x="1197.59105248" y="36" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1106:20601:58792"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1217.09205621" y="36" width="1.14711786636" height="5" fill="black" />
+<rect x="911.958703757" y="30.0" width="422.139374821" height="5" fill="#CCCCCC" />
+<rect x="911.958703757" y="30" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2102:12569:47665"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1221.68052767" y="30" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2102:12569:47665"  data-cigar="1S99M"  class="read"  fill="red" />
+<rect x="1221.10696874" y="30" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1223.97476341" y="30" width="1.14711786636" height="5" fill="orange" />
+<rect x="1296.24318899" y="30" width="1.14711786636" height="5" fill="orange" />
+<rect x="976.197304273" y="24.0" width="650.415830227" height="5" fill="#CCCCCC" />
+<rect x="976.197304273" y="24" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2308:3905:83693"  data-cigar="99M1S"  class="read"  fill="purple" />
+<rect x="1089.18841411" y="24" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1513.04846573" y="24" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2308:3905:83693"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="980.785775738" y="18.0" width="324.63435618" height="5" fill="#CCCCCC" />
+<rect x="980.785775738" y="18" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1104:4754:71369"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1191.85546315" y="18" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1104:4754:71369"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="984.227129338" y="12.0" width="322.340120447" height="5" fill="#CCCCCC" />
+<rect x="984.227129338" y="12" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2102:15992:66243"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1193.00258102" y="12" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2102:15992:66243"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="986.52136507" y="6.0" width="624.0321193" height="5" fill="#CCCCCC" />
+<rect x="986.52136507" y="6" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1206:3587:9435"  data-cigar="98M2S"  class="read"  fill="purple" />
+<rect x="1065.67249785" y="6" width="1.14711786636" height="5" fill="green" />
+<rect x="1095.49756237" y="6" width="1.14711786636" height="5" fill="blue" />
+<rect x="1098.36535704" y="6" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1496.9888156" y="6" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1206:3587:9435"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2445.65529108" y="312.0" width="564.381990249" height="5" fill="#CCCCCC" />
+<rect x="2445.65529108" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1103:2161:31304"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2896.47261256" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1103:2161:31304"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="312" width="1.14711786636" height="5" fill="green" />
+<rect x="2550.04301692" y="306.0" width="534.556925724" height="5" fill="#CCCCCC" />
+<rect x="2550.04301692" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1113:10394:21168"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2971.03527387" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1113:10394:21168"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2567.24978492" y="300.0" width="586.17722971" height="5" fill="#CCCCCC" />
+<rect x="2567.24978492" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2305:8215:93231"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3039.86234586" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2305:8215:93231"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2576.42672785" y="294.0" width="660.739891024" height="5" fill="#CCCCCC" />
+<rect x="2576.42672785" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2312:15253:58715"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3123.6019501" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2312:15253:58715"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3127.0433037" y="294" width="1.14711786636" height="5" fill="blue" />
+<rect x="3141.95583596" y="294" width="1.14711786636" height="5" fill="blue" />
+<rect x="3160.30972182" y="294" width="1.14711786636" height="5" fill="black" />
+<rect x="3161.45683969" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="3193.57613995" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="3201.60596501" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="3205.04731861" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="3210.78290794" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="2595.92773157" y="288.0" width="427.874964153" height="5" fill="#CCCCCC" />
+<rect x="2595.92773157" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1109:4440:42439"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2910.23802696" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1109:4440:42439"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="288" width="1.14711786636" height="5" fill="green" />
+<rect x="2646.40091769" y="282.0" width="512.761686263" height="5" fill="#CCCCCC" />
+<rect x="2646.40091769" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1316:3336:98591"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3045.59793519" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1316:3336:98591"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2662.46056782" y="276.0" width="398.049899627" height="5" fill="#CCCCCC" />
+<rect x="2662.46056782" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2211:14019:95400"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2946.94579868" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2211:14019:95400"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2679.66733582" y="270.0" width="409.521078291" height="5" fill="#CCCCCC" />
+<rect x="2679.66733582" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1105:3193:99505"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2975.62374534" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1105:3193:99505"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2707.19816461" y="264.0" width="636.65041583" height="5" fill="#CCCCCC" />
+<rect x="2707.19816461" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1308:19904:59528"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3230.28391167" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1308:19904:59528"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2711.78663608" y="258.0" width="299.39776312" height="5" fill="#CCCCCC" />
+<rect x="2711.78663608" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1215:14903:65161"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2779.46659019" y="258" width="1.14711786636" height="5" fill="green" />
+<rect x="2787.49641526" y="258" width="1.14711786636" height="5" fill="green" />
+<rect x="2897.61973043" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1215:14903:65161"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="258" width="1.14711786636" height="5" fill="green" />
+<rect x="2717.52222541" y="252.0" width="420.992256954" height="5" fill="#CCCCCC" />
+<rect x="2717.52222541" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2304:8812:80409"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3024.94981359" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2304:8812:80409"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3081.15858905" y="252" width="1.14711786636" height="5" fill="black" />
+<rect x="2732.43475767" y="246.0" width="404.932606825" height="5" fill="#CCCCCC" />
+<rect x="2732.43475767" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2111:5906:70756"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3023.80269573" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2111:5906:70756"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2761.11270433" y="240.0" width="315.457413249" height="5" fill="#CCCCCC" />
+<rect x="2761.11270433" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2108:4962:14255"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2963.00544881" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2108:4962:14255"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2782.90794379" y="234.0" width="313.163177516" height="5" fill="#CCCCCC" />
+<rect x="2782.90794379" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1212:8194:79187"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2982.50645254" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1212:8194:79187"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2787.49641526" y="228.0" width="291.367938056" height="5" fill="#CCCCCC" />
+<rect x="2787.49641526" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2203:9681:10186"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2965.29968454" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2203:9681:10186"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2796.67335819" y="222.0" width="365.930599369" height="5" fill="#CCCCCC" />
+<rect x="2796.67335819" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2111:2002:49034"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3049.03928879" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:2111:2002:49034"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2806.99741898" y="216.0" width="270.719816461" height="5" fill="#CCCCCC" />
+<rect x="2806.99741898" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1114:9466:30156"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2964.15256668" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1114:9466:30156"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2812.73300832" y="210.0" width="309.721823917" height="5" fill="#CCCCCC" />
+<rect x="2812.73300832" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1210:18338:84527"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3008.89016346" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1210:18338:84527"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2818.46859765" y="204.0" width="633.209062231" height="5" fill="#CCCCCC" />
+<rect x="2818.46859765" y="204" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1312:4680:58357"  data-cigar="98M2S"  class="read"  fill="purple" />
+<rect x="2930.31258962" y="204" width="1.14711786636" height="5" fill="cyan" />
+<rect x="3338.11299111" y="204" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1312:4680:58357"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2819.61571551" y="198.0" width="566.676225982" height="5" fill="#CCCCCC" />
+<rect x="2819.61571551" y="198" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1115:21153:99078"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2886.14855176" y="198" width="1.14711786636" height="5" fill="blue" />
+<rect x="2930.88614855" y="198" width="1.14711786636" height="5" fill="green" />
+<rect x="3272.72727273" y="198" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1115:21153:99078"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2820.76283338" y="192.0" width="393.461428162" height="5" fill="#CCCCCC" />
+<rect x="2820.76283338" y="192" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1213:20556:60072"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="192" width="1.14711786636" height="5" fill="green" />
+<rect x="3100.65959277" y="192" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:7:1213:20556:60072"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2854.02925151" y="186.0" width="582.735876111" height="5" fill="#CCCCCC" />
+<rect x="2854.02925151" y="186" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2314:19392:57884"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="186" width="1.14711786636" height="5" fill="green" />
+<rect x="3323.20045885" y="186" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2314:19392:57884"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2865.50043017" y="180.0" width="307.427588185" height="5" fill="#CCCCCC" />
+<rect x="2865.50043017" y="180" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2110:2679:34300"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="180" width="1.14711786636" height="5" fill="green" />
+<rect x="3059.36334958" y="180" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2110:2679:34300"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2874.6773731" y="174.0" width="672.211069687" height="5" fill="#CCCCCC" />
+<rect x="2874.6773731" y="174" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1316:7217:79668"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2912.53226269" y="174" width="1.14711786636" height="5" fill="blue" />
+<rect x="2930.88614855" y="174" width="1.14711786636" height="5" fill="green" />
+<rect x="3433.32377402" y="174" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1316:7217:79668"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2880.41296243" y="168.0" width="308.574706051" height="5" fill="#CCCCCC" />
+<rect x="2880.41296243" y="168" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1103:10849:76327"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3075.42299971" y="168" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1103:10849:76327"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2906.79667336" y="162.0" width="310.868941784" height="5" fill="#CCCCCC" />
+<rect x="2906.79667336" y="162" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2205:16732:16763"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="162" width="1.14711786636" height="5" fill="green" />
+<rect x="3104.10094637" y="162" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:2205:16732:16763"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2928.59191282" y="156.0" width="183.538858618" height="5" fill="#CCCCCC" />
+<rect x="2928.59191282" y="156" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2105:13268:64424"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="156" width="1.14711786636" height="5" fill="green" />
+<rect x="2998.56610267" y="156" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2105:13268:64424"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2998.56610267" y="156" width="43.5904789217" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:2105:13268:64424"  class="read"  fill="lime" />
+<rect x="2932.03326642" y="150.0" width="669.916833955" height="5" fill="#CCCCCC" />
+<rect x="2932.03326642" y="150" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1212:10607:83404"  data-cigar="1S99M"  class="read"  fill="purple" />
+<rect x="2931.45970748" y="150" width="1.14711786636" height="5" fill="cyan" />
+<rect x="3488.3854316" y="150" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:8:1212:10607:83404"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2937.76885575" y="144.0" width="276.455405793" height="5" fill="#CCCCCC" />
+<rect x="2937.76885575" y="144" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1310:17431:52863"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3100.65959277" y="144" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1310:17431:52863"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2993.9776312" y="138.0" width="275.308287927" height="5" fill="#CCCCCC" />
+<rect x="2993.9776312" y="138" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1316:7688:59936"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3155.72125036" y="138" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:6:1316:7688:59936"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3177.51648982" y="138" width="1.14711786636" height="5" fill="green" />
+<line x1="991.109836536" x2="991.109836536" y1="332" y2="-20" stroke="black"  stroke-width="2.69477105439"  />
+<line x1="3006.59592773" x2="3006.59592773" y1="332" y2="-20" stroke="black"  stroke-width="2.69477105439"  />
+<rect x="1985.66102667" y="-40" width="28.677946659" height="352" fill="#B2B2B2" />
+<line x1="1985.66102667" x2="1985.66102667" y1="312" y2="-40" stroke="black"  stroke-width="4"  />
+<line x1="2014.33897333" x2="2014.33897333" y1="312" y2="-40" stroke="black"  stroke-width="4"  />
+</g></svg>
+<svg x="10" y="953.0"><text x="0" y="20" font-size="18" font-family="Helvetica" >dna_tumor</text></svg>
+<svg x="0" y="985.0" width="1200" height="248.0" viewBox="0 -20 4000 496" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="0" y="-20" width="4000" height="496" opacity="0.0" />
+<rect x="459.994264411" y="456.0" width="651.562948093" height="5" fill="#CCCCCC" />
+<rect x="459.994264411" y="456" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2109:4151:36055"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="997.992543734" y="456" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2109:4151:36055"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="492.113564669" y="450.0" width="640.091769429" height="5" fill="#CCCCCC" />
+<rect x="492.113564669" y="450" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1309:3994:52023"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1018.64066533" y="450" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1309:3994:52023"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1024.37625466" y="450" width="1.14711786636" height="5" fill="green" />
+<rect x="1048.46572985" y="450" width="1.14711786636" height="5" fill="orange" />
+<rect x="1074.84944078" y="450" width="1.14711786636" height="5" fill="green" />
+<rect x="507.026096931" y="444.0" width="618.296529968" height="5" fill="#CCCCCC" />
+<rect x="507.026096931" y="444" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2203:8356:42013"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1011.75795813" y="444" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2203:8356:42013"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="526.52710066" y="438.0" width="583.882993978" height="5" fill="#CCCCCC" />
+<rect x="526.52710066" y="438" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1210:19707:80445"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="996.845425868" y="438" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1210:19707:80445"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="557.499283051" y="432.0" width="707.771723545" height="5" fill="#CCCCCC" />
+<rect x="557.499283051" y="432" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2315:12302:96823"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="607.972469171" y="432" width="1.14711786636" height="5" fill="black" />
+<rect x="611.41382277" y="432" width="1.14711786636" height="5" fill="black" />
+<rect x="632.061944365" y="432" width="1.14711786636" height="5" fill="black" />
+<rect x="1151.70633783" y="432" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2315:12302:96823"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1170.06022369" y="432" width="1.14711786636" height="5" fill="black" />
+<rect x="1178.09004875" y="432" width="1.14711786636" height="5" fill="blue" />
+<rect x="1226.26899914" y="432" width="1.14711786636" height="5" fill="blue" />
+<rect x="560.94063665" y="426.0" width="542.586750789" height="5" fill="#CCCCCC" />
+<rect x="560.94063665" y="426" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2113:4040:86809"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="989.962718669" y="426" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2113:4040:86809"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="575.853168913" y="420.0" width="676.799541153" height="5" fill="#CCCCCC" />
+<rect x="575.853168913" y="420" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1111:19535:93349"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1139.0880413" y="420" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1111:19535:93349"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="624.0321193" y="414.0" width="481.789503872" height="5" fill="#CCCCCC" />
+<rect x="624.0321193" y="414" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1303:16025:17376"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="992.256954402" y="414" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1303:16025:17376"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="637.797533697" y="408.0" width="479.495268139" height="5" fill="#CCCCCC" />
+<rect x="637.797533697" y="408" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1107:18656:51501"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1003.72813307" y="408" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1107:18656:51501"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1051.90708345" y="408" width="1.14711786636" height="5" fill="blue" />
+<rect x="1102.38026957" y="408" width="1.14711786636" height="5" fill="green" />
+<rect x="653.857183826" y="402.0" width="466.876971609" height="5" fill="#CCCCCC" />
+<rect x="653.857183826" y="402" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2207:18489:92730"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="742.185259535" y="402" width="1.14711786636" height="5" fill="green" />
+<rect x="744.479495268" y="402" width="1.14711786636" height="5" fill="green" />
+<rect x="1007.16948666" y="402" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2207:18489:92730"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="657.298537425" y="396.0" width="447.375967881" height="5" fill="#CCCCCC" />
+<rect x="657.298537425" y="396" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1111:19524:79294"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="991.109836536" y="396" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1111:19524:79294"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="659.592773157" y="390.0" width="414.109549756" height="5" fill="#CCCCCC" />
+<rect x="659.592773157" y="390" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1214:14360:52407"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="960.137654144" y="390" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1214:14360:52407"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="963.579007743" y="390" width="1.14711786636" height="5" fill="green" />
+<rect x="965.873243476" y="390" width="1.14711786636" height="5" fill="black" />
+<rect x="975.050186407" y="390" width="1.14711786636" height="5" fill="black" />
+<rect x="980.785775738" y="390" width="1.14711786636" height="5" fill="black" />
+<rect x="681.388012618" y="384.0" width="323.487238314" height="5" fill="#CCCCCC" />
+<rect x="681.388012618" y="384" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1311:8065:96205"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="891.310582162" y="384" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1311:8065:96205"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="687.12360195" y="378.0" width="307.427588185" height="5" fill="#CCCCCC" />
+<rect x="687.12360195" y="378" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2103:12562:100441"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="880.986521365" y="378" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2103:12562:100441"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="723.831373674" y="372.0" width="302.839116719" height="5" fill="#CCCCCC" />
+<rect x="723.831373674" y="372" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1213:11342:77271"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="913.105821623" y="372" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1213:11342:77271"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="938.342414683" y="372" width="1.14711786636" height="5" fill="black" />
+<rect x="726.125609406" y="366.0" width="581.588758245" height="5" fill="#CCCCCC" />
+<rect x="726.125609406" y="366" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2205:16067:28549"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1194.14969888" y="366" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2205:16067:28549"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="745.626613134" y="360.0" width="498.996271867" height="5" fill="#CCCCCC" />
+<rect x="745.626613134" y="360" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1210:2836:58615"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="784.628620591" y="360" width="1.14711786636" height="5" fill="green" />
+<rect x="839.690278176" y="360" width="1.14711786636" height="5" fill="orange" />
+<rect x="1131.05821623" y="360" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1210:2836:58615"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="746.773731001" y="354.0" width="276.455405793" height="5" fill="#CCCCCC" />
+<rect x="746.773731001" y="354" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2312:1179:47636"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="909.664468024" y="354" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2312:1179:47636"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="778.893031259" y="348.0" width="541.439632922" height="5" fill="#CCCCCC" />
+<rect x="778.893031259" y="348" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2109:7893:67722"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="889.01634643" y="348" width="1.14711786636" height="5" fill="blue" />
+<rect x="1206.76799541" y="348" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2109:7893:67722"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1220.53340981" y="348" width="1.14711786636" height="5" fill="orange" />
+<rect x="780.040149125" y="342.0" width="453.111557213" height="5" fill="#CCCCCC" />
+<rect x="780.040149125" y="342" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1302:13900:72742"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1119.58703757" y="342" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1302:13900:72742"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="783.481502724" y="336.0" width="470.318325208" height="5" fill="#CCCCCC" />
+<rect x="783.481502724" y="336" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2205:11114:47850"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1141.38227703" y="336" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2205:11114:47850"  data-cigar="99M1S"  class="read"  fill="red" />
+<rect x="1254.37338687" y="336" width="1.14711786636" height="5" fill="cyan" />
+<rect x="791.511327789" y="330.0" width="334.958416977" height="5" fill="#CCCCCC" />
+<rect x="791.511327789" y="330" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2105:17913:13935"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1012.905076" y="330" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2105:17913:13935"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="794.952681388" y="324.0" width="430.169199885" height="5" fill="#CCCCCC" />
+<rect x="794.952681388" y="324" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2307:20050:3620"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1111.5572125" y="324" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2307:20050:3620"  data-cigar="1S2M1D97M"  class="read"  fill="red" />
+<rect x="1110.98365357" y="324" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1113.85144824" y="324" width="2.29423573272" height="5" fill="gray" />
+<rect x="800.68827072" y="318.0" width="526.52710066" height="5" fill="#CCCCCC" />
+<rect x="800.68827072" y="318" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2315:16553:19991"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="813.30656725" y="318" width="1.14711786636" height="5" fill="green" />
+<rect x="1213.65070261" y="318" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2315:16553:19991"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1217.09205621" y="318" width="1.14711786636" height="5" fill="orange" />
+<rect x="1243.47576714" y="318" width="1.14711786636" height="5" fill="orange" />
+<rect x="1257.24118153" y="318" width="1.14711786636" height="5" fill="orange" />
+<rect x="801.835388586" y="312.0" width="307.427588185" height="5" fill="#CCCCCC" />
+<rect x="801.835388586" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1102:16914:6184"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="906.223114425" y="312" width="1.14711786636" height="5" fill="blue" />
+<rect x="995.698308001" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1102:16914:6184"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="805.276742185" y="306.0" width="316.604531116" height="5" fill="#CCCCCC" />
+<rect x="805.276742185" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2115:12227:45826"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1008.31660453" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2115:12227:45826"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="807.570977918" y="300.0" width="449.670203613" height="5" fill="#CCCCCC" />
+<rect x="807.570977918" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2202:6789:69457"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1143.67651276" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2202:6789:69457"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="811.012331517" y="294.0" width="489.819328936" height="5" fill="#CCCCCC" />
+<rect x="811.012331517" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1214:1846:94990"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="906.223114425" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="917.694293089" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="919.988528821" y="294" width="1.14711786636" height="5" fill="green" />
+<rect x="1187.26699168" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1214:1846:94990"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1217.09205621" y="294" width="1.14711786636" height="5" fill="orange" />
+<rect x="813.30656725" y="288.0" width="376.254660166" height="5" fill="#CCCCCC" />
+<rect x="813.30656725" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2112:8255:92493"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1075.99655865" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2112:8255:92493"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1079.43791225" y="288" width="1.14711786636" height="5" fill="green" />
+<rect x="819.042156582" y="282.0" width="285.632348724" height="5" fill="#CCCCCC" />
+<rect x="819.042156582" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1114:10200:34010"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="991.109836536" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1114:10200:34010"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1006.0223688" y="282" width="1.14711786636" height="5" fill="orange" />
+<rect x="832.807570978" y="276.0" width="316.604531116" height="5" fill="#CCCCCC" />
+<rect x="832.807570978" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1206:18626:71453"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1034.70031546" y="276" width="114.711786636" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1206:18626:71453"  data-cigar="3M1D97M"  class="read"  fill="red" />
+<rect x="1038.14166906" y="276" width="2.29423573272" height="5" fill="gray" />
+<rect x="1048.46572985" y="276" width="1.14711786636" height="5" fill="orange" />
+<rect x="1058.78979065" y="276" width="1.14711786636" height="5" fill="black" />
+<rect x="1071.40808718" y="276" width="1.14711786636" height="5" fill="orange" />
+<rect x="1074.84944078" y="276" width="1.14711786636" height="5" fill="green" />
+<rect x="1077.14367651" y="276" width="1.14711786636" height="5" fill="green" />
+<rect x="1079.43791225" y="276" width="1.14711786636" height="5" fill="green" />
+<rect x="1089.76197304" y="276" width="1.14711786636" height="5" fill="orange" />
+<rect x="1090.90909091" y="276" width="1.14711786636" height="5" fill="orange" />
+<rect x="1113.85144824" y="276" width="1.14711786636" height="5" fill="black" />
+<rect x="835.101806711" y="270.0" width="433.610553484" height="5" fill="#CCCCCC" />
+<rect x="835.101806711" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1107:4533:42555"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1155.14769143" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1107:4533:42555"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="835.101806711" y="264.0" width="520.791511328" height="5" fill="#CCCCCC" />
+<rect x="835.101806711" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2309:17281:57033"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1242.32864927" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2309:17281:57033"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1245.77000287" y="264" width="1.14711786636" height="5" fill="orange" />
+<rect x="1249.21135647" y="264" width="1.14711786636" height="5" fill="orange" />
+<rect x="1253.79982793" y="264" width="1.14711786636" height="5" fill="orange" />
+<rect x="1268.7123602" y="264" width="1.14711786636" height="5" fill="blue" />
+<rect x="1280.18353886" y="264" width="1.14711786636" height="5" fill="blue" />
+<rect x="1281.33065672" y="264" width="1.14711786636" height="5" fill="black" />
+<rect x="1296.24318899" y="264" width="1.14711786636" height="5" fill="orange" />
+<rect x="1299.68454259" y="264" width="1.14711786636" height="5" fill="orange" />
+<rect x="1301.97877832" y="264" width="1.14711786636" height="5" fill="orange" />
+<rect x="837.396042443" y="258.0" width="299.39776312" height="5" fill="#CCCCCC" />
+<rect x="837.396042443" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2216:8739:55653"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1023.22913679" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2216:8739:55653"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1038.14166906" y="258" width="1.14711786636" height="5" fill="orange" />
+<rect x="845.425867508" y="252.0" width="726.125609406" height="5" fill="#CCCCCC" />
+<rect x="845.425867508" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1310:8380:74874"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1457.98680814" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1310:8380:74874"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="854.602810439" y="246.0" width="446.228850014" height="5" fill="#CCCCCC" />
+<rect x="854.602810439" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1208:2576:12673"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="913.105821623" y="246" width="1.14711786636" height="5" fill="blue" />
+<rect x="937.195296817" y="246" width="1.14711786636" height="5" fill="black" />
+<rect x="1187.26699168" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1208:2576:12673"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1259.53541726" y="246" width="1.14711786636" height="5" fill="black" />
+<rect x="864.926871236" y="240.0" width="235.159162604" height="5" fill="#CCCCCC" />
+<rect x="864.926871236" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1110:3443:94516"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="986.52136507" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1110:3443:94516"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="891.310582162" y="234.0" width="310.868941784" height="5" fill="#CCCCCC" />
+<rect x="891.310582162" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1110:19214:32735"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1092.05620878" y="234" width="110.123315171" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1110:19214:32735"  data-cigar="4S8M1D88M"  class="read"  fill="red" />
+<rect x="1091.48264984" y="234" width="1.14711786636" height="5" fill="cyan" />
+<rect x="1095.49756237" y="234" width="1.14711786636" height="5" fill="orange" />
+<rect x="1101.23315171" y="234" width="2.29423573272" height="5" fill="gray" />
+<rect x="1102.38026957" y="234" width="1.14711786636" height="5" fill="blue" />
+<rect x="1108.1158589" y="234" width="1.14711786636" height="5" fill="blue" />
+<rect x="1109.26297677" y="234" width="1.14711786636" height="5" fill="blue" />
+<rect x="1111.5572125" y="234" width="1.14711786636" height="5" fill="black" />
+<rect x="899.340407227" y="228.0" width="200.745626613" height="5" fill="#CCCCCC" />
+<rect x="899.340407227" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2112:20025:39845"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="986.52136507" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2112:20025:39845"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="986.52136507" y="228" width="26.3837109263" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2112:20025:39845"  class="read"  fill="lime" />
+<rect x="900.487525093" y="222.0" width="316.604531116" height="5" fill="#CCCCCC" />
+<rect x="900.487525093" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2102:9933:77181"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1103.52738744" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2102:9933:77181"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="1108.1158589" y="222" width="1.14711786636" height="5" fill="blue" />
+<rect x="1111.5572125" y="222" width="1.14711786636" height="5" fill="black" />
+<rect x="1113.85144824" y="222" width="1.14711786636" height="5" fill="black" />
+<rect x="953.254946946" y="216.0" width="151.41955836" height="5" fill="#CCCCCC" />
+<rect x="953.254946946" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2314:17802:72150"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="991.109836536" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2314:17802:72150"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="991.109836536" y="216" width="75.7097791798" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2314:17802:72150"  class="read"  fill="lime" />
+<rect x="964.726125609" y="210.0" width="439.346142816" height="5" fill="#CCCCCC" />
+<rect x="964.726125609" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2303:10346:55872"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="1287.06624606" y="210" width="117.006022369" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2303:10346:55872"  data-cigar="4M2D15M1D81M"  class="read"  fill="red" />
+<rect x="1291.65471752" y="210" width="3.44135359908" height="5" fill="gray" />
+<rect x="1296.24318899" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1299.68454259" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1301.97877832" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1307.71436765" y="210" width="1.14711786636" height="5" fill="orange" />
+<rect x="1311.15572125" y="210" width="2.29423573272" height="5" fill="gray" />
+<rect x="2426.15428735" y="456.0" width="601.089761973" height="5" fill="#CCCCCC" />
+<rect x="2426.15428735" y="456" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1114:12554:18167"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2913.67938056" y="456" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1114:12554:18167"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="456" width="1.14711786636" height="5" fill="green" />
+<rect x="2460.56782334" y="450.0" width="617.149412102" height="5" fill="#CCCCCC" />
+<rect x="2460.56782334" y="450" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2212:3331:46092"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2964.15256668" y="450" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2212:3331:46092"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2489.24577" y="444.0" width="652.710065959" height="5" fill="#CCCCCC" />
+<rect x="2489.24577" y="444" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1203:17599:29234"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3028.39116719" y="444" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1203:17599:29234"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2508.74677373" y="438.0" width="632.061944365" height="5" fill="#CCCCCC" />
+<rect x="2508.74677373" y="438" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1312:20906:29357"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3027.24404933" y="438" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1312:20906:29357"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2509.8938916" y="432.0" width="611.41382277" height="5" fill="#CCCCCC" />
+<rect x="2509.8938916" y="432" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1207:13418:21456"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3007.7430456" y="432" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1207:13418:21456"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2525.95354173" y="426.0" width="672.211069687" height="5" fill="#CCCCCC" />
+<rect x="2525.95354173" y="426" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2102:10753:40007"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3084.59994264" y="426" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2102:10753:40007"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2527.10065959" y="420.0" width="568.970461715" height="5" fill="#CCCCCC" />
+<rect x="2527.10065959" y="420" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2110:12029:32956"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2982.50645254" y="420" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2110:12029:32956"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2574.13249211" y="414.0" width="454.258675079" height="5" fill="#CCCCCC" />
+<rect x="2574.13249211" y="414" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2105:15416:57749"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2914.82649842" y="414" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2105:15416:57749"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="414" width="1.14711786636" height="5" fill="green" />
+<rect x="2574.13249211" y="408.0" width="513.90880413" height="5" fill="#CCCCCC" />
+<rect x="2574.13249211" y="408" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1304:17645:69373"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2974.47662747" y="408" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1304:17645:69373"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2590.19214224" y="402.0" width="446.228850014" height="5" fill="#CCCCCC" />
+<rect x="2590.19214224" y="402" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2206:7950:63524"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2922.85632349" y="402" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2206:7950:63524"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="402" width="1.14711786636" height="5" fill="green" />
+<rect x="2591.33926011" y="396.0" width="424.433610553" height="5" fill="#CCCCCC" />
+<rect x="2591.33926011" y="396" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1302:10246:71790"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2902.20820189" y="396" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1302:10246:71790"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="396" width="1.14711786636" height="5" fill="green" />
+<rect x="2600.51620304" y="390.0" width="442.787496415" height="5" fill="#CCCCCC" />
+<rect x="2600.51620304" y="390" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2315:5528:63369"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2932.03326642" y="390" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2315:5528:63369"  data-cigar="2S98M"  class="read"  fill="red" />
+<rect x="2931.45970748" y="390" width="1.14711786636" height="5" fill="cyan" />
+<rect x="2613.13449957" y="384.0" width="402.638371093" height="5" fill="#CCCCCC" />
+<rect x="2613.13449957" y="384" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1115:7114:50256"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2902.20820189" y="384" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1115:7114:50256"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="384" width="1.14711786636" height="5" fill="green" />
+<rect x="2620.01720677" y="378.0" width="423.286492687" height="5" fill="#CCCCCC" />
+<rect x="2620.01720677" y="378" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2115:12221:91423"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2702.60969315" y="378" width="1.14711786636" height="5" fill="blue" />
+<rect x="2932.03326642" y="378" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2115:12221:91423"  data-cigar="2S98M"  class="read"  fill="red" />
+<rect x="2931.45970748" y="378" width="1.14711786636" height="5" fill="cyan" />
+<rect x="2626.89991397" y="372.0" width="384.284485231" height="5" fill="#CCCCCC" />
+<rect x="2626.89991397" y="372" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2112:15994:27986"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2668.19615716" y="372" width="1.14711786636" height="5" fill="green" />
+<rect x="2897.61973043" y="372" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2112:15994:27986"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="372" width="1.14711786636" height="5" fill="green" />
+<rect x="2630.34126757" y="366.0" width="659.592773157" height="5" fill="#CCCCCC" />
+<rect x="2630.34126757" y="366" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2210:16535:55592"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3176.36937195" y="366" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2210:16535:55592"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3187.84055062" y="366" width="1.14711786636" height="5" fill="green" />
+<rect x="3193.57613995" y="366" width="1.14711786636" height="5" fill="green" />
+<rect x="3202.75308288" y="366" width="1.14711786636" height="5" fill="blue" />
+<rect x="3210.78290794" y="366" width="1.14711786636" height="5" fill="green" />
+<rect x="2645.25379983" y="360.0" width="431.316317752" height="5" fill="#CCCCCC" />
+<rect x="2645.25379983" y="360" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1116:11264:79021"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2963.00544881" y="360" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1116:11264:79021"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2661.31344996" y="354.0" width="440.493260683" height="5" fill="#CCCCCC" />
+<rect x="2661.31344996" y="354" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2115:19620:54758"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2988.24204187" y="354" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2115:19620:54758"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2671.63751075" y="348.0" width="582.735876111" height="5" fill="#CCCCCC" />
+<rect x="2671.63751075" y="348" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1316:18265:72180"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3140.8087181" y="348" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1316:18265:72180"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3177.51648982" y="348" width="1.14711786636" height="5" fill="green" />
+<rect x="2687.69716088" y="342.0" width="409.521078291" height="5" fill="#CCCCCC" />
+<rect x="2687.69716088" y="342" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2111:5069:69193"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2983.6535704" y="342" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2111:5069:69193"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2689.99139662" y="336.0" width="433.610553484" height="5" fill="#CCCCCC" />
+<rect x="2689.99139662" y="336" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2207:20335:99494"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2779.46659019" y="336" width="1.14711786636" height="5" fill="orange" />
+<rect x="3010.03728133" y="336" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2207:20335:99494"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2692.28563235" y="330.0" width="548.32234012" height="5" fill="#CCCCCC" />
+<rect x="2692.28563235" y="330" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1113:4915:33362"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2710.63951821" y="330" width="1.14711786636" height="5" fill="blue" />
+<rect x="3127.0433037" y="330" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1113:4915:33362"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3129.33753943" y="330" width="1.14711786636" height="5" fill="blue" />
+<rect x="3167.19242902" y="330" width="1.14711786636" height="5" fill="blue" />
+<rect x="3171.78090049" y="330" width="1.14711786636" height="5" fill="blue" />
+<rect x="3177.51648982" y="330" width="1.14711786636" height="5" fill="green" />
+<rect x="3201.60596501" y="330" width="1.14711786636" height="5" fill="green" />
+<rect x="3207.34155434" y="330" width="1.14711786636" height="5" fill="green" />
+<rect x="3215.37137941" y="330" width="1.14711786636" height="5" fill="green" />
+<rect x="2696.87410381" y="324.0" width="437.051907083" height="5" fill="#CCCCCC" />
+<rect x="2696.87410381" y="324" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1111:19716:42318"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3020.36134213" y="324" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1111:19716:42318"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3100.65959277" y="324" width="1.14711786636" height="5" fill="blue" />
+<rect x="2698.02122168" y="318.0" width="459.994264411" height="5" fill="#CCCCCC" />
+<rect x="2698.02122168" y="318" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2315:9389:59788"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3044.45081732" y="318" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2315:9389:59788"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3107.54229997" y="318" width="1.14711786636" height="5" fill="orange" />
+<rect x="2700.31545741" y="312.0" width="432.463435618" height="5" fill="#CCCCCC" />
+<rect x="2700.31545741" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1211:7760:70144"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3019.21422426" y="312" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1211:7760:70144"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2703.75681101" y="306.0" width="376.254660166" height="5" fill="#CCCCCC" />
+<rect x="2703.75681101" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2308:15681:6997"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2790.93776886" y="306" width="1.14711786636" height="5" fill="blue" />
+<rect x="2966.44680241" y="306" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2308:15681:6997"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2709.49240034" y="300.0" width="438.19902495" height="5" fill="#CCCCCC" />
+<rect x="2709.49240034" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1311:8366:93521"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3034.12675652" y="300" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1311:8366:93521"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2710.63951821" y="294.0" width="376.254660166" height="5" fill="#CCCCCC" />
+<rect x="2710.63951821" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1214:14357:65443"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2973.32950961" y="294" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1214:14357:65443"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2712.93375394" y="288.0" width="440.493260683" height="5" fill="#CCCCCC" />
+<rect x="2712.93375394" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1315:3292:32564"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3039.86234586" y="288" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1315:3292:32564"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2712.93375394" y="282.0" width="497.849154001" height="5" fill="#CCCCCC" />
+<rect x="2712.93375394" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1203:7004:96232"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3097.21823917" y="282" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1203:7004:96232"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2718.66934328" y="276.0" width="388.872956696" height="5" fill="#CCCCCC" />
+<rect x="2718.66934328" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1113:4049:27105"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2993.9776312" y="276" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1113:4049:27105"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2730.14052194" y="270.0" width="326.928591913" height="5" fill="#CCCCCC" />
+<rect x="2730.14052194" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1102:3807:7641"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2943.50444508" y="270" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1102:3807:7641"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2737.02322914" y="264.0" width="298.250645254" height="5" fill="#CCCCCC" />
+<rect x="2737.02322914" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2215:7282:90891"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2921.70920562" y="264" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2215:7282:90891"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="264" width="1.14711786636" height="5" fill="green" />
+<rect x="2738.170347" y="258.0" width="298.250645254" height="5" fill="#CCCCCC" />
+<rect x="2738.170347" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1105:8397:16596"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2922.85632349" y="258" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1105:8397:16596"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2930.88614855" y="258" width="1.14711786636" height="5" fill="green" />
+<rect x="2753.08287927" y="252.0" width="301.691998853" height="5" fill="#CCCCCC" />
+<rect x="2753.08287927" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1212:12719:57117"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2941.21020935" y="252" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1212:12719:57117"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2757.67135073" y="246.0" width="445.081732148" height="5" fill="#CCCCCC" />
+<rect x="2757.67135073" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1105:9978:50076"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3089.18841411" y="246" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1105:9978:50076"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3091.48264984" y="246" width="1.14711786636" height="5" fill="green" />
+<rect x="2786.34929739" y="240.0" width="392.314310295" height="5" fill="#CCCCCC" />
+<rect x="2786.34929739" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2313:18565:29653"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3065.09893892" y="240" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:2313:18565:29653"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2792.08488672" y="234.0" width="340.694006309" height="5" fill="#CCCCCC" />
+<rect x="2792.08488672" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1107:16057:25280"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3019.21422426" y="234" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1107:16057:25280"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2796.67335819" y="228.0" width="580.441640379" height="5" fill="#CCCCCC" />
+<rect x="2796.67335819" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2114:20119:89621"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3263.5503298" y="228" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2114:20119:89621"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2800.11471179" y="222.0" width="372.813306567" height="5" fill="#CCCCCC" />
+<rect x="2800.11471179" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1102:16195:55080"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3059.36334958" y="222" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1102:16195:55080"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2802.40894752" y="216.0" width="318.898766848" height="5" fill="#CCCCCC" />
+<rect x="2802.40894752" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1102:18764:71795"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3007.7430456" y="216" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1102:18764:71795"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2810.43877258" y="210.0" width="308.574706051" height="5" fill="#CCCCCC" />
+<rect x="2810.43877258" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2311:8404:25439"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3005.44880987" y="210" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2311:8404:25439"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2816.17436192" y="204.0" width="317.751648982" height="5" fill="#CCCCCC" />
+<rect x="2816.17436192" y="204" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2111:12225:90374"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3020.36134213" y="204" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2111:12225:90374"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2816.17436192" y="198.0" width="673.358187554" height="5" fill="#CCCCCC" />
+<rect x="2816.17436192" y="198" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2304:2415:26188"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3375.9678807" y="198" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2304:2415:26188"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2817.32147978" y="192.0" width="316.604531116" height="5" fill="#CCCCCC" />
+<rect x="2817.32147978" y="192" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1215:12075:75024"  data-cigar="99M1S"  class="read"  fill="purple" />
+<rect x="2930.31258962" y="192" width="1.14711786636" height="5" fill="cyan" />
+<rect x="3020.36134213" y="192" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1215:12075:75024"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2818.46859765" y="186.0" width="292.515055922" height="5" fill="#CCCCCC" />
+<rect x="2818.46859765" y="186" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:12798:14355"  data-cigar="98M2S"  class="read"  fill="purple" />
+<rect x="2930.31258962" y="186" width="1.14711786636" height="5" fill="cyan" />
+<rect x="2997.4189848" y="186" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:12798:14355"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2832.23401204" y="180.0" width="281.043877258" height="5" fill="#CCCCCC" />
+<rect x="2832.23401204" y="180" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1105:16064:83457"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="180" width="1.14711786636" height="5" fill="green" />
+<rect x="2999.71322053" y="180" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1105:16064:83457"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2835.67536564" y="174.0" width="211.06968741" height="5" fill="#CCCCCC" />
+<rect x="2835.67536564" y="174" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2212:13578:35038"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="174" width="1.14711786636" height="5" fill="green" />
+<rect x="2933.18038428" y="174" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2212:13578:35038"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2933.18038428" y="174" width="16.0596501291" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2212:13578:35038"  class="read"  fill="lime" />
+<rect x="2835.67536564" y="168.0" width="454.258675079" height="5" fill="#CCCCCC" />
+<rect x="2835.67536564" y="168" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1211:14341:48936"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3176.36937195" y="168" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1211:14341:48936"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3187.84055062" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3194.72325781" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3201.60596501" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3203.90020075" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3207.34155434" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="3210.78290794" y="168" width="1.14711786636" height="5" fill="green" />
+<rect x="2836.82248351" y="162.0" width="587.324347577" height="5" fill="#CCCCCC" />
+<rect x="2836.82248351" y="162" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1304:7063:85980"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="162" width="1.14711786636" height="5" fill="green" />
+<rect x="3310.58216232" y="162" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1304:7063:85980"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2845.99942644" y="156.0" width="198.45139088" height="5" fill="#CCCCCC" />
+<rect x="2845.99942644" y="156" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1311:20430:27523"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="156" width="1.14711786636" height="5" fill="green" />
+<rect x="2932.03326642" y="156" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1311:20430:27523"  data-cigar="1S99M"  class="read"  fill="red" />
+<rect x="2931.45970748" y="156" width="1.14711786636" height="5" fill="cyan" />
+<rect x="2932.03326642" y="156" width="27.5308287927" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1311:20430:27523"  class="read"  fill="lime" />
+<rect x="2847.14654431" y="150.0" width="295.956409521" height="5" fill="#CCCCCC" />
+<rect x="2847.14654431" y="150" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1101:14320:84128"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="150" width="1.14711786636" height="5" fill="green" />
+<rect x="3029.53828506" y="150" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1101:14320:84128"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2847.14654431" y="144.0" width="313.163177516" height="5" fill="#CCCCCC" />
+<rect x="2847.14654431" y="144" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2216:16215:18175"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="144" width="1.14711786636" height="5" fill="green" />
+<rect x="3046.74505305" y="144" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2216:16215:18175"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2848.29366217" y="138.0" width="283.338112991" height="5" fill="#CCCCCC" />
+<rect x="2848.29366217" y="138" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1209:3651:7955"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="138" width="1.14711786636" height="5" fill="green" />
+<rect x="3018.0671064" y="138" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1209:3651:7955"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2851.73501577" y="132.0" width="650.415830227" height="5" fill="#CCCCCC" />
+<rect x="2851.73501577" y="132" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1302:6962:65691"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="132" width="1.14711786636" height="5" fill="green" />
+<rect x="3388.58617723" y="132" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1302:6962:65691"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2856.32348724" y="126.0" width="309.721823917" height="5" fill="#CCCCCC" />
+<rect x="2856.32348724" y="126" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1304:16359:22338"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="126" width="1.14711786636" height="5" fill="green" />
+<rect x="3052.48064239" y="126" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1304:16359:22338"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2870.08890163" y="120.0" width="306.280470318" height="5" fill="#CCCCCC" />
+<rect x="2870.08890163" y="120" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2212:18705:6829"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2912.53226269" y="120" width="1.14711786636" height="5" fill="orange" />
+<rect x="2930.88614855" y="120" width="1.14711786636" height="5" fill="green" />
+<rect x="3063.95182105" y="120" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2212:18705:6829"  data-cigar="99M1S"  class="read"  fill="red" />
+<rect x="3128.19042157" y="120" width="1.14711786636" height="5" fill="green" />
+<rect x="3176.94293089" y="120" width="1.14711786636" height="5" fill="cyan" />
+<rect x="2873.53025523" y="114.0" width="315.457413249" height="5" fill="#CCCCCC" />
+<rect x="2873.53025523" y="114" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:16327:66829"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="114" width="1.14711786636" height="5" fill="green" />
+<rect x="3075.42299971" y="114" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:16327:66829"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2874.6773731" y="108.0" width="293.662173788" height="5" fill="#CCCCCC" />
+<rect x="2874.6773731" y="108" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2310:17832:17266"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="108" width="1.14711786636" height="5" fill="green" />
+<rect x="3054.77487812" y="108" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:2310:17832:17266"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2878.1187267" y="102.0" width="310.868941784" height="5" fill="#CCCCCC" />
+<rect x="2878.1187267" y="102" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1302:1357:8811"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="102" width="1.14711786636" height="5" fill="green" />
+<rect x="3075.42299971" y="102" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1302:1357:8811"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2880.41296243" y="96.0" width="476.05391454" height="5" fill="#CCCCCC" />
+<rect x="2880.41296243" y="96" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1301:18517:65070"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="96" width="1.14711786636" height="5" fill="green" />
+<rect x="3242.9022082" y="96" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1301:18517:65070"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2881.5600803" y="90.0" width="268.425580728" height="5" fill="#CCCCCC" />
+<rect x="2881.5600803" y="90" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:10709:55681"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="90" width="1.14711786636" height="5" fill="green" />
+<rect x="3036.42099226" y="90" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:1316:10709:55681"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2912.53226269" y="84.0" width="138.80126183" height="5" fill="#CCCCCC" />
+<rect x="2912.53226269" y="84" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2112:3909:59338"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="84" width="1.14711786636" height="5" fill="green" />
+<rect x="2937.76885575" y="84" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2112:3909:59338"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2937.76885575" y="84" width="88.3280757098" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2112:3909:59338"  class="read"  fill="lime" />
+<rect x="2917.12073416" y="78.0" width="523.085747061" height="5" fill="#CCCCCC" />
+<rect x="2917.12073416" y="78" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2213:4121:54242"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="78" width="1.14711786636" height="5" fill="green" />
+<rect x="3326.64181245" y="78" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:2213:4121:54242"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2924.00344135" y="72.0" width="438.19902495" height="5" fill="#CCCCCC" />
+<rect x="2924.00344135" y="72" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1306:15720:36712"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="72" width="1.14711786636" height="5" fill="green" />
+<rect x="3248.63779753" y="72" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:4:1306:15720:36712"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2926.29767709" y="66.0" width="227.129337539" height="5" fill="#CCCCCC" />
+<rect x="2926.29767709" y="66" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2216:3399:37235"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="66" width="1.14711786636" height="5" fill="green" />
+<rect x="3039.86234586" y="66" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2216:3399:37235"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3039.86234586" y="66" width="0.0" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2216:3399:37235"  class="read"  fill="lime" />
+<rect x="2927.44479495" y="60.0" width="290.220820189" height="5" fill="#CCCCCC" />
+<rect x="2927.44479495" y="60" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1101:6085:100651"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="2930.88614855" y="60" width="1.14711786636" height="5" fill="green" />
+<rect x="3104.10094637" y="60" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1101:6085:100651"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2964.15256668" y="54.0" width="340.694006309" height="5" fill="#CCCCCC" />
+<rect x="2964.15256668" y="54" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1112:17176:5897"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3193.57613995" y="54" width="111.270433037" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1112:17176:5897"  data-cigar="2S98M"  class="read"  fill="red" />
+<rect x="3193.00258102" y="54" width="1.14711786636" height="5" fill="cyan" />
+<rect x="3207.34155434" y="54" width="1.14711786636" height="5" fill="green" />
+<rect x="3210.78290794" y="54" width="1.14711786636" height="5" fill="green" />
+<rect x="3215.37137941" y="54" width="1.14711786636" height="5" fill="green" />
+<rect x="3226.84255807" y="54" width="1.14711786636" height="5" fill="black" />
+<rect x="2969.88815601" y="48.0" width="199.598508747" height="5" fill="#CCCCCC" />
+<rect x="2969.88815601" y="48" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1103:18566:74706"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3055.92199599" y="48" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1103:18566:74706"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3055.92199599" y="48" width="27.5308287927" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:5:1103:18566:74706"  class="read"  fill="lime" />
+<rect x="2973.32950961" y="42.0" width="351.018067106" height="5" fill="#CCCCCC" />
+<rect x="2973.32950961" y="42" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2206:9572:56932"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3211.93002581" y="42" width="112.417550903" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2206:9572:56932"  data-cigar="1S99M"  class="read"  fill="red" />
+<rect x="3211.35646688" y="42" width="1.14711786636" height="5" fill="cyan" />
+<rect x="3215.37137941" y="42" width="1.14711786636" height="5" fill="green" />
+<rect x="3223.40120447" y="42" width="1.14711786636" height="5" fill="green" />
+<rect x="3227.98967594" y="42" width="1.14711786636" height="5" fill="green" />
+<rect x="2981.35933467" y="36.0" width="398.049899627" height="5" fill="#CCCCCC" />
+<rect x="2981.35933467" y="36" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2312:9749:24421"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3265.84456553" y="36" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:2312:9749:24421"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="2988.24204187" y="30.0" width="299.39776312" height="5" fill="#CCCCCC" />
+<rect x="2988.24204187" y="30" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1203:7706:2810"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3174.07513622" y="30" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1203:7706:2810"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3177.51648982" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3187.84055062" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3194.72325781" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3195.87037568" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3205.04731861" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3207.34155434" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3210.78290794" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="3227.98967594" y="30" width="1.14711786636" height="5" fill="green" />
+<rect x="2998.56610267" y="24.0" width="388.872956696" height="5" fill="#CCCCCC" />
+<rect x="2998.56610267" y="24" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1101:16508:85594"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3273.87439059" y="24" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1101:16508:85594"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3000.8603384" y="18.0" width="321.193002581" height="5" fill="#CCCCCC" />
+<rect x="3000.8603384" y="18" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2303:13587:55494"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3023.80269573" y="18" width="1.14711786636" height="5" fill="orange" />
+<rect x="3211.93002581" y="18" width="110.123315171" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:1:2303:13587:55494"  data-cigar="3S97M"  class="read"  fill="red" />
+<rect x="3211.35646688" y="18" width="1.14711786636" height="5" fill="cyan" />
+<rect x="3215.37137941" y="18" width="1.14711786636" height="5" fill="green" />
+<rect x="3227.98967594" y="18" width="1.14711786636" height="5" fill="green" />
+<rect x="3277.31574419" y="18" width="1.14711786636" height="5" fill="blue" />
+<rect x="3005.44880987" y="12.0" width="322.340120447" height="5" fill="#CCCCCC" />
+<rect x="3005.44880987" y="12" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1208:9213:44244"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3214.22426154" y="12" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:2:1208:9213:44244"  data-cigar="100M"  class="read"  fill="red" />
+<rect x="3223.40120447" y="12" width="1.14711786636" height="5" fill="green" />
+<rect x="3005.44880987" y="6.0" width="322.340120447" height="5" fill="#CCCCCC" />
+<rect x="3005.44880987" y="6" width="113.56466877" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1116:3394:18547"  data-cigar="100M"  class="read"  fill="purple" />
+<rect x="3213.07714368" y="6" width="114.711786636" height="5" data-readid="HWI-ST791:134804979:D1VCPACXX:3:1116:3394:18547"  data-cigar="2M1D98M"  class="read"  fill="red" />
+<rect x="3215.37137941" y="6" width="2.29423573272" height="5" fill="gray" />
+<line x1="991.109836536" x2="991.109836536" y1="476" y2="-20" stroke="black"  stroke-width="2.53513048466"  />
+<line x1="3006.59592773" x2="3006.59592773" y1="476" y2="-20" stroke="black"  stroke-width="2.53513048466"  />
+<rect x="1985.66102667" y="-40" width="28.677946659" height="496" fill="#B2B2B2" />
+<line x1="1985.66102667" x2="1985.66102667" y1="456" y2="-40" stroke="black"  stroke-width="4"  />
+<line x1="2014.33897333" x2="2014.33897333" y1="456" y2="-40" stroke="black"  stroke-width="4"  />
+</g></svg>
+<svg x="10" y="1233.0"><text x="0" y="20" font-size="18" font-family="Helvetica" >hg19_refGene</text></svg>
+<svg x="0" y="1265.0" width="1200" height="160" viewBox="0 0 4000 533.333333333" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="1985.66102667" y="0.0" width="28.677946659" height="533.333333333" fill="#B2B2B2" />
+<line x1="1985.66102667" x2="1985.66102667" y1="533.333333333" y2="0.0" stroke="black"  stroke-width="3.33333333333"  />
+<line x1="2014.33897333" x2="2014.33897333" y1="533.333333333" y2="0.0" stroke="black"  stroke-width="3.33333333333"  />
+<rect x="0.0" y="400.0" width="1984.5139088" height="66.6666666667" fill="blue" />
+<text x="1994.5139088" y="463.333333333" font-size="60.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001300992</text>
+<rect x="0.0" y="333.333333333" width="1984.5139088" height="66.6666666667" fill="blue" />
+<text x="1994.5139088" y="396.666666667" font-size="60.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_013234</text>
+<rect x="2014.33897333" y="266.666666667" width="1984.5139088" height="66.6666666667" fill="blue" />
+<text x="4008.85288213" y="330.0" font-size="60.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001278738</text>
+<rect x="2014.33897333" y="200.0" width="1984.5139088" height="66.6666666667" fill="blue" />
+<text x="4008.85288213" y="263.333333333" font-size="60.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_001278739</text>
+<rect x="2014.33897333" y="133.333333333" width="1984.5139088" height="66.6666666667" fill="blue" />
+<text x="4008.85288213" y="196.666666667" font-size="60.0" text-anchor="start" font-family="Helvetica"  fill="blue" >NM_016593</text>
+<line x1="989.443169869" x2="989.443169869" y1="533.333333333" y2="0.0" stroke="black"  stroke-width="3.33333333333"  />
+<line x1="3004.92926106" x2="3004.92926106" y1="533.333333333" y2="0.0" stroke="black"  stroke-width="3.33333333333"  />
+</g></svg>
+<svg x="0" y="1425.0" width="1200" height="75" viewBox="0 0 4000 250.0" preserveAspectRatio="none" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs>
+<g class="svg_viewport">
+<rect x="1985.66102667" y="0" width="28.677946659" height="250.0" fill="#B2B2B2" />
+<line x1="1985.66102667" x2="1985.66102667" y1="0" y2="250.0" stroke="black"  stroke-width="3.33333333333"  />
+<line x1="2014.33897333" x2="2014.33897333" y1="0" y2="250.0" stroke="black"  stroke-width="3.33333333333"  />
+<text x="1970.66102667" y="60.0" font-size="60.0" text-anchor="end" font-family="Helvetica" >ref_19</text>
+<text x="2029.33897333" y="60.0" font-size="60.0" text-anchor="start" font-family="Helvetica" >ref_6</text>
+<rect x="0.0" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="50" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >0</text>
+<rect x="286.77946659" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="286.77946659" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >250</text>
+<rect x="573.55893318" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="573.55893318" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >500</text>
+<rect x="860.338399771" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="860.338399771" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >750</text>
+<rect x="1147.11786636" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="1147.11786636" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >1000</text>
+<rect x="1433.89733295" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="1433.89733295" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >1.2KB</text>
+<rect x="1720.67679954" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="1720.67679954" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >1.5KB</text>
+<rect x="2014.33897333" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="2014.33897333" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >0</text>
+<rect x="2301.11843992" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="2301.11843992" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >250</text>
+<rect x="2587.89790651" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="2587.89790651" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >500</text>
+<rect x="2874.6773731" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="2874.6773731" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >750</text>
+<rect x="3161.45683969" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="3161.45683969" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >1000</text>
+<rect x="3448.23630628" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="3448.23630628" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >1.2KB</text>
+<rect x="3735.01577287" y="116.666666667" width="3.33333333333" height="50.0" fill="black" />
+<text x="3735.01577287" y="236.666666667" font-size="60.0" text-anchor="middle" font-family="Helvetica" >1.5KB</text>
+<line x1="0" x2="991.109836536" y1="116.666666667" y2="116.666666667" stroke="red"  stroke-width="26.6666666667"  />
+<line x1="0" x2="991.109836536" y1="116.666666667" y2="116.666666667" stroke="red"  stroke-width="10.0"  />
+<path d="M 98.2219673071 66.6666666667 L 198.221967307 116.666666667 L 98.2219673071 166.666666667 z" fill="red" xcenter="198.221967307" class="scaleArrow" />
+<path d="M 296.443934614 66.6666666667 L 396.443934614 116.666666667 L 296.443934614 166.666666667 z" fill="red" xcenter="396.443934614" class="scaleArrow" />
+<path d="M 494.665901921 66.6666666667 L 594.665901921 116.666666667 L 494.665901921 166.666666667 z" fill="red" xcenter="594.665901921" class="scaleArrow" />
+<path d="M 692.887869229 66.6666666667 L 792.887869229 116.666666667 L 692.887869229 166.666666667 z" fill="red" xcenter="792.887869229" class="scaleArrow" />
+<path d="M 891.109836536 66.6666666667 L 991.109836536 116.666666667 L 891.109836536 166.666666667 z" fill="red" xcenter="991.109836536" class="scaleArrow" />
+<line x1="991.109836536" x2="1983.36679094" y1="116.666666667" y2="116.666666667" stroke="blue"  stroke-width="26.6666666667"  />
+<line x1="991.109836536" x2="1983.36679094" y1="116.666666667" y2="116.666666667" stroke="blue"  stroke-width="10.0"  />
+<path d="M 1089.56122742 66.6666666667 L 1189.56122742 116.666666667 L 1089.56122742 166.666666667 z" fill="blue" xcenter="1189.56122742" class="scaleArrow" />
+<path d="M 1288.0126183 66.6666666667 L 1388.0126183 116.666666667 L 1288.0126183 166.666666667 z" fill="blue" xcenter="1388.0126183" class="scaleArrow" />
+<path d="M 1486.46400918 66.6666666667 L 1586.46400918 116.666666667 L 1486.46400918 166.666666667 z" fill="blue" xcenter="1586.46400918" class="scaleArrow" />
+<path d="M 1684.91540006 66.6666666667 L 1784.91540006 116.666666667 L 1684.91540006 166.666666667 z" fill="blue" xcenter="1784.91540006" class="scaleArrow" />
+<path d="M 1883.36679094 66.6666666667 L 1983.36679094 116.666666667 L 1883.36679094 166.666666667 z" fill="blue" xcenter="1983.36679094" class="scaleArrow" />
+<line x1="3006.59592773" x2="2014.33897333" y1="116.666666667" y2="116.666666667" stroke="orange"  stroke-width="26.6666666667"  />
+<line x1="3006.59592773" x2="2014.33897333" y1="116.666666667" y2="116.666666667" stroke="orange"  stroke-width="10.0"  />
+<path d="M 2908.14453685 66.6666666667 L 2808.14453685 116.666666667 L 2908.14453685 166.666666667 z" fill="orange" xcenter="2808.14453685" class="scaleArrow" />
+<path d="M 2709.69314597 66.6666666667 L 2609.69314597 116.666666667 L 2709.69314597 166.666666667 z" fill="orange" xcenter="2609.69314597" class="scaleArrow" />
+<path d="M 2511.24175509 66.6666666667 L 2411.24175509 116.666666667 L 2511.24175509 166.666666667 z" fill="orange" xcenter="2411.24175509" class="scaleArrow" />
+<path d="M 2312.79036421 66.6666666667 L 2212.79036421 116.666666667 L 2312.79036421 166.666666667 z" fill="orange" xcenter="2212.79036421" class="scaleArrow" />
+<path d="M 2114.33897333 66.6666666667 L 2014.33897333 116.666666667 L 2114.33897333 166.666666667 z" fill="orange" xcenter="2014.33897333" class="scaleArrow" />
+<line x1="3997.70576427" x2="3006.59592773" y1="116.666666667" y2="116.666666667" stroke="gray"  stroke-width="26.6666666667"  />
+<line x1="3997.70576427" x2="3006.59592773" y1="116.666666667" y2="116.666666667" stroke="gray"  stroke-width="10.0"  />
+<path d="M 3899.48379696 66.6666666667 L 3799.48379696 116.666666667 L 3899.48379696 166.666666667 z" fill="gray" xcenter="3799.48379696" class="scaleArrow" />
+<path d="M 3701.26182965 66.6666666667 L 3601.26182965 116.666666667 L 3701.26182965 166.666666667 z" fill="gray" xcenter="3601.26182965" class="scaleArrow" />
+<path d="M 3503.03986235 66.6666666667 L 3403.03986235 116.666666667 L 3503.03986235 166.666666667 z" fill="gray" xcenter="3403.03986235" class="scaleArrow" />
+<path d="M 3304.81789504 66.6666666667 L 3204.81789504 116.666666667 L 3304.81789504 166.666666667 z" fill="gray" xcenter="3204.81789504" class="scaleArrow" />
+<path d="M 3106.59592773 66.6666666667 L 3006.59592773 116.666666667 L 3106.59592773 166.666666667 z" fill="gray" xcenter="3006.59592773" class="scaleArrow" />
+<line x1="991.109836536" x2="991.109836536" y1="66.6666666667" y2="183.333333333" stroke="black"  stroke-width="3.33333333333"  />
+<text x="989.443169869" y="60.0" font-size="60.0" text-anchor="middle" font-family="Helvetica"  fill="black" >breakpoint</text>
+<line x1="3006.59592773" x2="3006.59592773" y1="66.6666666667" y2="183.333333333" stroke="black"  stroke-width="3.33333333333"  />
+<text x="3004.92926106" y="60.0" font-size="60.0" text-anchor="middle" font-family="Helvetica"  fill="black" >breakpoint</text>
+</g></svg>
+</svg>

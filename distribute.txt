@@ -1,0 +1,22 @@
+Tests:
+1. go to main svviz directory
+2. python src/svviz/rendertest.py
+    - regenerate input data using tests/save_rendertest_states.sh
+    - regenerate output by clearing tests/*.svg 
+3. python src/svviz/testCounts.py
+    - regenerate output using -f command-line option
+
+Check docs:
+1. update changelog.rst (check version number)
+2. cd docs/
+3. update versions in conf.py
+4. make html
+5. check output
+
+Upload to pypi
+1. rm -r dist/*
+2. update __version__ in src/svviz/__init__.py
+3. tag, commit and push release
+4. cd tests; ./run_tests.sh
+5. python setup.py bdist_wheel sdist
+6. twine upload -r pypi dist/*
