@@ -96,6 +96,9 @@ def run():
 
 
 def main():
+    # don't ask me why I rolled my own regression testing code instead of using one of the 
+    # gazillion existing ones...
+
     if len(sys.argv) < 2:
         print USAGE
         return 
@@ -110,5 +113,6 @@ def main():
         reset()
     else:
         print USAGE
+
 if __name__ == '__main__':
     main()
