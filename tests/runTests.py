@@ -6,7 +6,7 @@ import time
 
 from svviz import demo
 from svviz import rendertest
-from svviz import test
+from svviz import testDemos
 from svviz import testCounts
 
 
@@ -81,15 +81,14 @@ def run():
     summary = pandas.DataFrame(columns=["pass", "info", "timing"])
 
 
-    # # Run the demos
-    # summary.loc["demos"] = _runTest(test.run, "demos")
+    # Run the demos
+    summary.loc["demos"] = _runTest(testDemos.run, "demos")
 
-    # # Run regression testing on ref/alt/amb counts
-    # summary.loc["counts"] = _runTest(runTestCounts, "counts")
+    # Run regression testing on ref/alt/amb counts
+    summary.loc["counts"] = _runTest(runTestCounts, "counts")
 
     # Run the render regression tests
-    summary.loc["rendering"] = _runTest(rendertest.run, "rendering")
-    
+    summary.loc["rendering"] = _runTest(rendertest.run, "rendering")    
 
 
     summary["timing"] = summary["timing"].apply(lambda x: "{}".format(datetime.timedelta(seconds=int(x))))
