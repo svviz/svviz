@@ -15,6 +15,7 @@ To visualize your structural variant of interest, you will need at least the fol
     :Insertions: The format for specifying insertions is ``chrom breakpoint <inserted sequence>``.
     :Mobile elements: Mobile element insertions can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
     :Translocations: Translocations can be specified using the following format: ``chrom1 start1 chrom2 start2 orientation``, where ``orientation`` is either ``+`` or ``-``, and specifies whether region1 and region2 are both on the plus strand of the genome, or are on opposite genomic strands.
+    :Breakend: Additional types of structural variant can be specified using `breakend <http://samtools.github.io/hts-specs/VCFv4.2.pdf>`_ format: ``chrom1 start1 strand1 chrom2 start2 strand2``. Note that, due to limitations of the Smith-Waterman alignment library used by svviz, breakend breakpoints must be distant from one another, relative to the insert size/read length.
     :Batch: see :ref:`below <batch-mode>`
 
 For example, a deletion might be called as:

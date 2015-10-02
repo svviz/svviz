@@ -19,7 +19,7 @@ svviz - a read visualizer for structural variants
    license
 
 
-``svviz`` visualizes high-throughput sequencing data that supports a structural variant. ``svviz`` is free and open source, available at `<https://github.com/svviz/svviz>`_. Please submit issues, questions or feature requests using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
+svviz visualizes high-throughput sequencing data that supports a structural variant. svviz is free and open source, available at `<https://github.com/svviz/svviz>`_. Please submit issues, questions or feature requests using the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 
 Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of the features, or continue through this documentation for more detailed information about svviz.
 
@@ -38,9 +38,6 @@ News
 
 **July, 2015 -- Multimapping** new capabilities have been added to identify repetitiveness near the structural variant and to more aggressively filter out reads that could potentially align to multiple locations. See :ref:`here <dotplots>` for more information. With the default settings, svviz should recover more alt- and ref-supporting reads while filtering more truly ambiguous reads.
 
-**May, 2015 -- Translocations** Support for translocations has been implemented. This is a somewhat experimental feature, so please submit any bug reports or suggestions using the `github issue tracker <https://github.com/svviz/svviz/issues>`_. 
-
-The under-the-hood changes required to implement translocation support make it far simpler to implement arbitrary break-end type structural variants. Work on this is ongoing.
 
 Quick-start
 -----------
