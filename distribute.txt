@@ -1,10 +1,10 @@
 Tests:
-1. go to main svviz directory
-2. python src/svviz/rendertest.py
-    - regenerate input data using tests/save_rendertest_states.sh
+1. go to svviz/tests directory
+2. python runTests.py
+    - TODO: automate resetting regression tests
+    - regenerate input data using save_rendertest_states.sh
     - regenerate output by clearing tests/*.svg 
-3. python src/svviz/testCounts.py
-    - regenerate output using -f command-line option
+    - regenerate output using -f command-line option to svviz/src/svviz/testCounts.py
 
 Check docs:
 1. update changelog.rst (check version number)
