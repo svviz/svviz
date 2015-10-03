@@ -7,7 +7,7 @@ This release includes a number of bugfixes and additions to the documentation.
 
 - bed annotations should now work again (C. Lee)
 - added support for gff files without gene or transcript IDs
-- fixed support for --processor 1 (A. Ramu)
+- fixed support for ``--processor 1`` (A. Ramu)
 - added more information about the "lots fo reads in region" warning (see :ref:`FAQ <lotsoreads>`)
 
 
