@@ -251,6 +251,9 @@ def run(args):
     summaryStats = summarystats.Summary()
     skipped = 0
     for i, variant in enumerate(svs):
+        if dataHub.args.verbose > 8:
+            logging.info("-- starting loop) --")
+
         logging.info("* Running for variant {}/{} {} *".format(i+1, len(svs), variant))
         dataHub.reset()
 
@@ -287,7 +290,12 @@ def run(args):
 
         runDirectExport(dataHub)
 
+        if dataHub.args.verbose > 8:
+            logging.info("- starting addVariantResults -")
         summaryStats.addVariantResults(dataHub)
+        if dataHub.args.verbose > 8:
+            logging.info("- finished addVariantResults -")
+            logging.info("-- finished loop --")
 
     summaryStats.display()
     if dataHub.args.summary is not None:
