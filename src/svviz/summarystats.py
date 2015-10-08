@@ -1,4 +1,5 @@
 import collections
+import logging
 import numpy
 
 class Summary(object):
@@ -9,6 +10,10 @@ class Summary(object):
     def addVariantResults(self, dataHub):
         variant = str(dataHub.variant)
         for sampleName, sample in dataHub.samples.iteritems():
+
+            if dataHub.args.verbose > 8:
+                logging.info("-- collecting summary stats for sample {} --".format(sampleName))
+
             counts = collections.Counter()
             reasons = {}
             alnScores = collections.defaultdict(list)
@@ -26,6 +31,8 @@ class Summary(object):
                 alnScores[allele].append(sum(aln.score for aln in alnCollection.chosenSet().getAlignments()))
                 insertSizes[allele].append(len(alnCollection.chosenSet()))
 
+            if dataHub.args.verbose > 8:
+                logging.info("-- finished collecting stats for sample {} --".format(sampleName))
 
 
             # record stats
@@ -44,6 +51,9 @@ class Summary(object):
                 self.stats.append([variant, sampleName, allele, "insertSize_mean", numpy.mean(insertSizes[allele])])
                 self.stats.append([variant, sampleName, allele, "insertSize_std", numpy.std(insertSizes[allele])])
 
+
+            if dataHub.args.verbose > 8:
+                logging.info("-- finished recording stats for sample {} --".format(sampleName))
 
 
     def __str__(self):
