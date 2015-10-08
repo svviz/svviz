@@ -97,7 +97,7 @@ def run():
 
 def main():
     # don't ask me why I rolled my own regression testing code instead of using one of the 
-    # gazillion existing ones...
+    # gazillion existing frameworks...
 
     if len(sys.argv) < 2:
         print USAGE

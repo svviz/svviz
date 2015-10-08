@@ -17,6 +17,6 @@ Upload to pypi
 1. rm -r dist/*
 2. update __version__ in src/svviz/__init__.py
 3. tag, commit and push release
-4. cd tests; ./run_tests.sh
+4. cd tests; ./run_github_test.sh
 5. python setup.py bdist_wheel sdist
 6. twine upload -r pypi dist/*

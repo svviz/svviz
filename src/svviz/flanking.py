@@ -1,6 +1,6 @@
 class FlankingRegionCollection(object):
     """
-    Used to store information genomic regions that are 'flanking', meaning they are not really 
+    Used to store information about genomic regions that are 'flanking', meaning they are not really 
     involved in the structural variant; use this to identify reads mapping to the flanking regions
     to provide more context for events and to better categorize ambiguously mapping reads (ie those
     that in the flanks vs those that don't really match either allele)
