@@ -1,9 +1,9 @@
 import collections
 import logging
-# import multiprocessing
-import time
-# import numpy
 import math
+import sys
+import time
+
 from svviz.multiprocessor import Multiprocessor
 
 from svviz.utilities import reverseComp, Locus
@@ -125,8 +125,12 @@ def do1remap(chromPartsCollection, reads, processes):
     # map each read sequence against each chromosome part (the current allele only)
 
     if processes != 1:
+        verbose = 0
+        if sys.stdout.isatty():
+            verbose = 3
+
         remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
-            verbose=3, processes=processes))#multiprocessing.cpu_count()))
+            verbose=verbose, processes=processes))#multiprocessing.cpu_count()))
     else:
         mapper = Multimap(namesToReferences)
 
@@ -183,8 +187,8 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
     if supplementaryAlignmentsFound:
         logging.warn("  ** Supplementary alignments found: these alignments (with sam flag 0x800) **\n"
                      "  ** are poorly documented among mapping software and may result in missing **\n"
-                     "  ** portions of reads; consider using the --include-supplementary command line **\n"
-                     "  ** argument if you think this is happening                                **")
+                     "  ** portions of reads; consider using the --include-supplementary          **\n"
+                     "  ** command line argument if you think this is happening                   **")
         
     logging.debug("  time to find reads and mates:{}".format(t1 - t0))
     logging.info("  number of reads found: {}".format(len(reads)))
@@ -202,7 +206,7 @@ def do_realign(variant, reads, processes=None):
     altalignments = do1remap(variant.chromParts("alt"), reads, processes)
     t1 = time.time()
 
-    logging.debug("  time for realigning:{}".format(t1-t0))
+    logging.debug(" Time to realign: {:.1f}s".format(t1-t0))
 
     assert refalignments.keys() == altalignments.keys()
 

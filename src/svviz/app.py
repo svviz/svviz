@@ -69,13 +69,27 @@ def loadISDs(dataHub):
 
 def loadReads(dataHub):
     readCount = 0
+    readLength = 0
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
         sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, dataHub.args.pair_min_mapq,
             sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary)
         readCount += len(sample.reads)
+        readLength += sum(len(read.seq) for read in sample.reads)
 
-    return readCount
+
+    logging.info(" Found {:,} reads across {} samples for a total of {:,} nt".format(readCount, len(dataHub.samples), readLength))
+
+    if readLength > 2.5e6 or (dataHub.args.aln_quality is not None and readLength > 5e5):
+        if not dataHub.args.skip_cigar and (dataHub.args.export or not dataHub.args.no_web):
+            logging.warn("==== Based on the number reads (sequence nucleotides) found relevant =====\n"
+                         "==== to the current variant, performance for the web browser and     =====\n"
+                         "==== export may be poor; using the --skip-cigar option is            =====\n"
+                         "==== recommended to reduce the number of shapes being drawn          =====")
+
+
+
+    return readCount, readLength
 
 def setSampleParams(dataHub):
     for sample in dataHub:
@@ -260,7 +274,7 @@ def run(args):
         debug.printDebugInfo(dataHub)
 
         logging.info("* Loading reads and finding mates *")
-        readCount = loadReads(dataHub)
+        readCount, readLength = loadReads(dataHub)
 
         nameExtra = None
         if len(svs) > 1:

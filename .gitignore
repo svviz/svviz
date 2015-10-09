@@ -65,4 +65,14 @@ test_multiprocessing.py
 .env
 
 *.pdf
+*.png
 svviz-examples
+
+*.pickle
+*.vcf
+*.gz
+*.gtf.gz
+*.tbi
+*.gtf
+*.zip
+old/
