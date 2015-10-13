@@ -5,7 +5,8 @@ from svviz import app
 def run():
     commands = ["svviz demo 1 -a --no-web",
                 "svviz demo 2 -a --no-web",
-                "svviz demo 2 -a --no-web --auto-export"]
+                "svviz demo 2 -a --no-web --auto-export",
+                "svviz demo 3 -a --no-web"]
     times = []
 
     for command in commands:

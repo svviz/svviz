@@ -32,7 +32,7 @@ _queue = multiprocessing.Queue()
         
 class Multiprocessor(object):
     @classmethod
-    def map(cls, method, args, initArgs=None, processes=2, verbose=1):
+    def map(cls, method, args, initArgs=None, processes=2, verbose=1, name=""):
         """
         This is the meat of things, basically a replacement for multiprocessing.pool. Subclass this class to enable
         an object-oriented approach to multiprocessing, where an object is instantiated for each pool, allowing
@@ -73,8 +73,8 @@ class Multiprocessor(object):
         mappedValues = []
 
         if verbose > 2:
-            progressBar = _multiProgressBar()
-            t0 = time.time()
+            progressBar = _multiProgressBar(name=name)
+            # t0 = time.time()
             
         while len(asyncResults) > 0:
             for i, asyncResult in enumerate(asyncResults):
@@ -99,8 +99,8 @@ class Multiprocessor(object):
 
         if verbose > 2:
             sys.stderr.write("\n")
-            t1 = time.time()
-            print "  total time elapsed:", t1-t0
+        #     t1 = time.time()
+        #     print "  total time elapsed:", t1-t0
         return mappedValues
 
 
@@ -147,12 +147,13 @@ def _map(cls, methodName, initArgs, args, chunkNum, verbose):
 
 class _multiProgressBar(object):
     """ a stupid little progress bar to keep track of multiple processes going on at once """
-    def __init__(self):
+    def __init__(self, name=""):
         self.barsToProgress = {}
 
         self.t0 = time.time()
         self.timeRemaining = "--"
         self.status = "+"
+        self.name = name
         
         try:
             self.handleResize(None,None)
@@ -207,7 +208,7 @@ class _multiProgressBar(object):
         
         numBars = len(self.barsToProgress)+1
         
-        barWidth = (self.term_width-40) / numBars - 1
+        barWidth = (self.term_width-40-len(self.name)) / numBars - 1
 
         if self.status == "+":
             self.status = " "
@@ -215,6 +216,9 @@ class _multiProgressBar(object):
             self.status = "+"
             
         text = [" ", self.status]
+        if len(self.name) > 0:
+            text.append(self.name)
+
         text.append(self._getBar("total", overallCompleted, overallTotal, 25))
 
         text.append("left:%s"%self.timeRemaining)
@@ -242,7 +246,7 @@ class _multiProgressBar(object):
             text = "%s:%d%%"%(name, completed/float(total)*100)
             return text.rjust(width)            
         else:
-            text = "%s : %.2f%%"%(name, completed/float(total)*100)
+            text = "%s : %.1f%%"%(name, completed/float(total)*100)
             return text.rjust(width)
             
     def handleResize(self, signum, frame):

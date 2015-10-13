@@ -48,7 +48,7 @@ def checkDemoMode(args):
         autoExport = ("--auto-export" in options)
 
         if len(inputArgs) > 1:
-            if inputArgs[1] in ["1","2"]:
+            if inputArgs[1] in ["1","2","3"]:
                 which = "example{}".format(inputArgs[1])
             else:
                 raise Exception("Don't know how to load this example: {}".format(inputArgs[1]))

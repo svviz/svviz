@@ -115,7 +115,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     return bestAln
 
 
-def do1remap(chromPartsCollection, reads, processes):
+def do1remap(chromPartsCollection, reads, processes, jobName=""):
     reads = filterDegenerateOnly(reads)
 
     namesToReferences = {}
@@ -130,7 +130,7 @@ def do1remap(chromPartsCollection, reads, processes):
             verbose = 3
 
         remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
-            verbose=verbose, processes=processes))#multiprocessing.cpu_count()))
+            verbose=verbose, processes=processes, name=jobName))
     else:
         mapper = Multimap(namesToReferences)
 
@@ -195,15 +195,21 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
 
     return reads
 
-def do_realign(variant, reads, processes=None):
+def do_realign(dataHub, sample):
+    processes = dataHub.args.processes
     if processes is None or processes == 0:
         # we don't really gain from using virtual cores, so try to figure out how many physical
         # cores we have
         processes = misc.cpu_count_physical()
 
+    variant = dataHub.variant
+    reads = sample.reads
+    print sample.name, sample.name[:15]
+    name = "{}:{{}}".format(sample.name[:15])
+
     t0 = time.time()
-    refalignments = do1remap(variant.chromParts("ref"), reads, processes)
-    altalignments = do1remap(variant.chromParts("alt"), reads, processes)
+    refalignments = do1remap(variant.chromParts("ref"), reads, processes, jobName=name.format("ref"))
+    altalignments = do1remap(variant.chromParts("alt"), reads, processes, jobName=name.format("alt"))
     t1 = time.time()
 
     logging.debug(" Time to realign: {:.1f}s".format(t1-t0))

@@ -100,7 +100,7 @@ def setSampleParams(dataHub):
 
 def runRemap(dataHub):
     for sample in dataHub:
-        sample.alnCollections = remap.do_realign(dataHub.variant, sample.reads, dataHub.args.processes)
+        sample.alnCollections = remap.do_realign(dataHub, sample)
 
 def runDisambiguation(dataHub):
     flankingRegionCollection = flanking.FlankingRegionCollection(dataHub.variant)
