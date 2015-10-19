@@ -2,7 +2,9 @@ import collections
 import logging
 import os
 import subprocess
+import sys
 import tempfile
+import time
 
 
 class TrackCompositor(object):
@@ -219,28 +221,70 @@ class TrackCompositor(object):
 
         curY += self.marginTopBottom
 
-        composite = ['<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, curY)] \
-                    + modTracks + ["</svg>"]
+        composite = ['<?xml version="1.0" encoding="utf-8" ?><svg  xmlns="http://www.w3.org/2000/svg" ' + \
+                     'xmlns:xlink="http://www.w3.org/1999/xlink" width="{}" height="{}">'.format(self.width, curY)] + \
+                     modTracks + ["</svg>"]
         return "\n".join(composite)
 
 
-def canConvertSVGToPDF():
+def getExportConverter(args):
+    if (args.converter == "webkittopdf") and (args.format == "png" or args.export.lower().endswith("png")):
+        logging.error("webkitToPDF does not support export to PNG; use librsvg or inkscape instead, or "
+            "export to PDF")
+        sys.exit(1)
+
+    if args.converter == "rsvg-convert":
+        args.converter = "librsvg"
+
+    if args.converter in [None, "webkittopdf"]:
+        if checkWebkitToPDF():
+            args.converter = "webkittopdf"
+            return
+
+    if args.converter in [None, "librsvg"]:
+        if checkRSVGConvert():
+            args.converter = "librsvg"
+            return
+
+    if args.converter in [None, "inkscape"]:
+        if checkInkscape():
+            args.converter = "inkscape"
+            return
+
+    if args is not None:
+        logging.error("ERROR: unable to run SVG converter '{}'. Please check that it is "
+            "installed correctly".format(args))
+    else:
+        logging.error("ERROR: unable to export to PDF/PNG because at least one of the following "
+            "programs must be correctly installed: webkitToPDF, librsvg or inkscape")
+
+    sys.exit(1)
+
+
+
+def checkWebkitToPDF():
     try:
         subprocess.check_call("webkitToPDF", stderr=subprocess.PIPE, shell=True)
         return True
     except subprocess.CalledProcessError:
-        try:
-            subprocess.check_call("rsvg-convert -v", stdout=subprocess.PIPE, shell=True)
-        except subprocess.CalledProcessError:
-            return False
-        else:
-            return True
+        return False
 
-def convertSVG(insvg, outformat="pdf"):
-    if not canConvertSVGToPDF():
-        logging.error("Can't find rsvg-convert; make sure you have librsvg installed")
-        return None
+def checkRSVGConvert():
+    try:
+        subprocess.check_call("rsvg-convert -v", stdout=subprocess.PIPE, shell=True)
+        return True
+    except subprocess.CalledProcessError:
+        return False
 
+def checkInkscape():
+    try:
+        subprocess.check_call("inkscape --version", stdout=subprocess.PIPE, shell=True)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+def convertSVG(insvg, outformat, converter):
     outdir = tempfile.mkdtemp()
     inpath = "{}/original.svg".format(outdir)
     infile = open(inpath, "w")
@@ -250,14 +294,14 @@ def convertSVG(insvg, outformat="pdf"):
 
     outpath = "{}/converted.{}".format(outdir, outformat)
 
-    exportData = _convertSVG_webkitToPDF(inpath, outpath, outformat)
-    if exportData is not None:
-        print "used webkitToPDF to export to {}".format(outformat)
-        return exportData
-    else:
+    if converter == "webkittopdf":
+        exportData = _convertSVG_webkitToPDF(inpath, outpath, outformat)
+    elif converter == "librsvg":
         exportData = _convertSVG_rsvg_convert(inpath, outpath, outformat)
-        print "used rsvg-convert to export to {}".format(outformat)
-        return exportData
+    elif converter == "inkscape":
+        exportData = _convertSVG_inkscape(inpath, outpath, outformat)
+
+    return exportData
 
 def _convertSVG_webkitToPDF(inpath, outpath, outformat):
     if outformat.lower() != "pdf":
@@ -271,11 +315,26 @@ def _convertSVG_webkitToPDF(inpath, outpath, outformat):
 
     return open(outpath).read()
 
+def _convertSVG_inkscape(inpath, outpath, outformat):
+    options = ""
+    outformat = outformat.lower()
+    if outformat == "png":
+        options = "--export-dpi 150 --export-background white"
+
+    try:
+        subprocess.check_call("inkscape {} {} --export-{}={}".format(options, inpath, outformat, outpath), 
+            shell=True)
+    except subprocess.CalledProcessError, e:
+        print "EXPORT ERROR:", str(e)
+
+    return open(outpath).read()
+
+
 def _convertSVG_rsvg_convert(inpath, outpath, outformat):
     options = ""
     outformat = outformat.lower()
     if outformat == "png":
-        options = "-a -w 5000 --background-color white"
+        options = "-a --background-color white"
 
     try:
         subprocess.check_call("rsvg-convert -f {} {} -o {} {}".format(outformat, options, outpath, inpath), shell=True)
@@ -283,7 +342,6 @@ def _convertSVG_rsvg_convert(inpath, outpath, outformat):
         print "EXPORT ERROR:", str(e)
 
     return open(outpath).read()
-
 
 
 def test():

@@ -190,7 +190,7 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
                      "  ** portions of reads; consider using the --include-supplementary          **\n"
                      "  ** command line argument if you think this is happening                   **")
         
-    logging.debug("  time to find reads and mates:{}".format(t1 - t0))
+    logging.debug("  time to find reads and mates:{:.1f}s".format(t1 - t0))
     logging.info("  number of reads found: {}".format(len(reads)))
 
     return reads

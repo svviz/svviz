@@ -257,6 +257,23 @@ class Aligner(object):
         """
         self.align_destroy(align)
 
+
+
+# Load the ssw library using ctypes
+glibssw = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), 'libssw.so'))
+# libssw = cdll.LoadLibrary('libssw.so')
+
+# Init and setup the functions pointer to map the one specified in the SSW lib
+# cigar_int_to_len function
+cigar_int_to_len = glibssw.cigar_int_to_len
+cigar_int_to_len.restype = c_int32
+cigar_int_to_len.argtypes = [c_int32]
+# cigar_int_to_op function
+cigar_int_to_op = glibssw.cigar_int_to_op
+cigar_int_to_op.restype = c_char
+cigar_int_to_op.argtypes = [c_int32]
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 class PyAlignRes(object):
     """
@@ -264,25 +281,6 @@ class PyAlignRes(object):
     @brief  Extract and verify result from a CAlignRes structure. A comprehensive python
     object is created according to user requirements (+- cigar string and secondary alignment)
     """
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-    #~~~~~~~CLASS VARIABLES~~~~~~~#
-
-    # Load the ssw library using ctypes
-    libssw = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), 'libssw.so'))
-    # libssw = cdll.LoadLibrary('libssw.so')
-
-    # Init and setup the functions pointer to map the one specified in the SSW lib
-    # cigar_int_to_len function
-    cigar_int_to_len = libssw.cigar_int_to_len
-    cigar_int_to_len.restype = c_int32
-    cigar_int_to_len.argtypes = [c_int32]
-    # cigar_int_to_op function
-    cigar_int_to_op = libssw.cigar_int_to_op
-    cigar_int_to_op.restype = c_char
-    cigar_int_to_op.argtypes = [c_int32]
-
-    #~~~~~~~FONDAMENTAL METHOD~~~~~~~#
 
     def __repr__(self):
         msg = self.__str__()
@@ -339,7 +337,6 @@ class PyAlignRes(object):
         else:
             self.cigar_string = None
 
-    #~~~~~~~PRIVATE METHODS~~~~~~~#
 
     def _cigar_string(self, cigar, cigar_len, query_len):
         """
@@ -357,11 +354,11 @@ class PyAlignRes(object):
 
         # Iterate over the cigar (pointer to a vector of int)
         for i in range(cigar_len):
-            op_len = self.cigar_int_to_len(cigar[i])
-            op_char = self.cigar_int_to_op(cigar[i])
+            op_len = cigar_int_to_len(cigar[i])
+            op_char = cigar_int_to_op(cigar[i])
             cigar_string += '{}{}'.format(op_len, op_char)
 
-        # If the lenght of bases aligned is shorter than the overall query length
+        # If the length of bases aligned is shorter than the overall query length
         # = introduce a softclip at the end
         end_len = query_len - self.query_end - 1
         if  end_len != 0:

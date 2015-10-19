@@ -11,10 +11,10 @@ More detailed directions follow for linux and OS X. Try installing into a :ref:`
 
 svviz is not currently supported on Windows, although it should probably work there.
 
-Installation on linux
+Installation on Linux
 ---------------------
 
-1. Ensure that the following prerequisites are installed: python and pip. If you are running ubuntu or similar, you can use the following commands to ensure they are installed correctly:
+1. Ensure that the following prerequisites are installed: python and pip. If you are running a Debian-based Linux (for example Ubuntu 12.04 or later), you can use the following commands to ensure they are installed correctly:
 
     .. code-block:: bash
 

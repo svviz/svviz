@@ -73,10 +73,10 @@ def do_export():
         data = svg
     elif format == "png":
         mimetype = "image/png"
-        data = export.convertSVG(svg, "png")
+        data = export.convertSVG(svg, "png", dataHub.args.converter)
     elif format == "pdf":
         mimetype = "application/pdf"
-        data = export.convertSVG(svg, "pdf")
+        data = export.convertSVG(svg, "pdf", dataHub.args.converter)
     else:
         raise Exception("unknown format")
 

@@ -23,10 +23,10 @@ def checkRequirements(args):
     if not remap.check_swalign():
         print "ERROR: check that svviz is correctly installed -- the 'ssw' Smith-Waterman alignment module does not appear to be functional"
         sys.exit(1)
-    if args.export and (args.export.lower().endswith("pdf") or args.export.lower().endswith("png")):
-        if not export.canConvertSVGToPDF():
-            print "ERROR: librsvg needs to be installed in order to export to pdf and png format."
-            sys.exit(1)
+    if args.export and \
+        ((args.export.lower().endswith("pdf") or args.export.lower().endswith("png")) or args.format!="pdf"):
+        export.getExportConverter(args)
+
 
 def loadISDs(dataHub):
     """ Load the Insert Size Distributions """
@@ -164,7 +164,7 @@ def runDirectExport(dataHub):
 
         exportData = dataHub.trackCompositor.render()
         if exportFormat.lower() != "svg":
-            exportData = export.convertSVG(exportData, exportFormat)
+            exportData = export.convertSVG(exportData, exportFormat, dataHub.args.converter)
         outf = open(path, "w")
         outf.write(exportData)
         outf.close()

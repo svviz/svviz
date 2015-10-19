@@ -25,6 +25,13 @@ def portNumber(string):
         return value
     raise argparse.ArgumentTypeError("port must be an integer between 0-65535; got '{}'' instead".format(string))
 
+def converterOptions(value):
+    value = value.lower()
+    options = ["auto", "librsvg", "webkittopdf", "inkscape", "rsvg-convert"]
+    if value in options:
+        return value
+    raise argparse.ArgumentTypeError("converter must be one of '{}'; got '{}'' instead".format(",".join(options), value))
+
 def setDefault(args, key, default):
     if args.__dict__[key] is None:
         args.__dict__[key] = default
@@ -158,6 +165,10 @@ def parseArgs(args):
         "extension of --export")
     interfaceParams.add_argument("-O", "--open-exported", action="store_true", help=
         "automatically open the exported file")
+    interfaceParams.add_argument("--converter", type=converterOptions, help=
+        "which program should be used to convert the output into PDF or PNG; choose from [webkitToPDF, \n"
+        "librsvg, inkscape] (default: auto)")
+
     interfaceParams.add_argument("--thicker-lines", action="store_true", help=
         "Reads are shown with thicker lines, potentially overlapping one another, but increasing \n"
         "contrast when zoomed out")
