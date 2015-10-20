@@ -25,7 +25,16 @@ def checkRequirements(args):
         sys.exit(1)
     if args.export:
         exportFormat = export.getExportFormat(args)
-        export.getExportConverter(args, exportFormat)
+        converter = export.getExportConverter(args, exportFormat)
+        if converter is None and exportFormat != "svg":
+            if args.converter is not None:
+                logging.error("ERROR: unable to run SVG converter '{}'. Please check that it is "
+                    "installed correctly".format(args.converter))
+            else:
+                logging.error("ERROR: unable to export to PDF/PNG because at least one of the following "
+                    "programs must be correctly installed: webkitToPDF, librsvg or inkscape")
+
+            sys.exit(1)
 
 
 def loadISDs(dataHub):
@@ -163,7 +172,7 @@ def runDirectExport(dataHub):
         if exportFormat != "svg":
             converter = export.getExportConverter(dataHub.args, exportFormat)
             exportData = export.convertSVG(exportData, exportFormat, converter)
-            
+
         outf = open(path, "w")
         outf.write(exportData)
         outf.close()

@@ -116,14 +116,14 @@
                 </div>
 
                 <div class="radio disabled">
-                  <label><input type="radio" name="format" value="png" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="png" else '' }}>PNG<br></label>
+                  <label><input type="radio" name="format" value="png" class="requiresPNG" disabled {{ 'checked=""' if session.last_format=="png" else '' }}>PNG<br></label>
                 </div>
 
                 <div class="radio disabled">
-                  <label><input type="radio" name="format" value="pdf" class="requiresRSVG" disabled {{ 'checked=""' if session.last_format=="pdf" else '' }}>PDF<br></label>
+                  <label><input type="radio" name="format" value="pdf" class="requiresPDF" disabled {{ 'checked=""' if session.last_format=="pdf" else '' }}>PDF<br></label>
                 </div>
 
-                <span id="requiresRSVGText" class="help-block">PDF and PNG export requires librsvg library to be installed. Click <a href="installPDFExport.html">here</a> for instructions.</span>
+                <span id="requiresRSVGText" class="help-block">PNG export requires librsvg or inkscape to be installed. PDF export requires one of those programs or webkitToPDF. Click <a href="installPDFExport.html">here</a> for instructions.</span>
               </div>
           </div>
           <div class="modal-footer">

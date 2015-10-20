@@ -52,7 +52,13 @@ function loadSVGs() {
 function setupExport() {
   $.getJSON('/_haspdfexport', function(data) {
     if (data.haspdfexport) {
-      $(".requiresRSVG").prop("disabled", false);
+      $(".requiresPDF").prop("disabled", false);
+    }
+  });
+
+  $.getJSON('/_haspngexport', function(data) {
+    if (data.haspngexport) {
+      $(".requiresPNG").prop("disabled", false);
       $("#requiresRSVGText").hide();
     }
   });

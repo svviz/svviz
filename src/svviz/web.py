@@ -95,6 +95,12 @@ def _hasPDFExport():
         return jsonify({"haspdfexport":True})
     return jsonify({"haspdfexport":False})
 
+@app.route('/_haspngexport')
+def _hasPNGExport():
+    if export.getExportConverter(dataHub.args, "png"):
+        return jsonify({"haspngexport":True})
+    return jsonify({"haspngexport":False})
+
 def _getsvg(track):
     track.render()
     svgText = track.svg.asString("web")

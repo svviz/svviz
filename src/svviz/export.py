@@ -270,14 +270,7 @@ def getExportConverter(args, exportFormat):
         if checkInkscape():
             return "inkscape"
 
-    if args is not None:
-        logging.error("ERROR: unable to run SVG converter '{}'. Please check that it is "
-            "installed correctly".format(args))
-    else:
-        logging.error("ERROR: unable to export to PDF/PNG because at least one of the following "
-            "programs must be correctly installed: webkitToPDF, librsvg or inkscape")
-
-    sys.exit(1)
+    return None
 
 
 
