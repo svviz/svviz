@@ -39,6 +39,13 @@ Installation on Linux
 
         sudo apt-get install librsvg2-dev
 
+    or the `Inkscape <https://inkscape.org/>`_ application:
+
+    .. code-block:: bash
+
+        sudo apt-get install inkscape
+
+
 See the :ref:`troubleshooting` section if you have difficulties after following the above directions.
 
 
