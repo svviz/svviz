@@ -4,7 +4,7 @@ import math
 import sys
 import time
 
-from svviz.multiprocessor import Multiprocessor
+# from svviz.multiprocessor import Multiprocessor
 
 from svviz.utilities import reverseComp, Locus
 from svviz.alignment import Alignment, AlignmentSet, AlignmentSetCollection
@@ -61,19 +61,32 @@ def alignBothStrands(seq, aligner):
 
 
 
-class Multimap(Multiprocessor):
-    def __init__(self, namesToReferences):
-        from ssw import ssw_wrap
+def initMapper(namesToReferences):
+    from ssw import ssw_wrap
 
-        self.namesToAligners = {}
-        for name, ref in namesToReferences.iteritems():
-            self.namesToAligners[name] = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
+    remap.namesToAligners = {}
+    for name, ref in namesToReferences.iteritems():
+        remap.namesToAligners[name] = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
 
-    def remap(self, seq):
-        results = {}
-        for name, aligner in self.namesToAligners.iteritems():
-            results[name] = alignBothStrands(seq, aligner)
-        return seq, results
+def remap(seq):
+    results = {}
+    for name, aligner in remap.namesToAligners.iteritems():
+        results[name] = alignBothStrands(seq, aligner)
+    return seq, results
+
+# class Multimap(Multiprocessor):
+#     def __init__(self, namesToReferences):
+#         from ssw import ssw_wrap
+
+#         self.namesToAligners = {}
+#         for name, ref in namesToReferences.iteritems():
+#             self.namesToAligners[name] = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
+
+#     def remap(self, seq):
+#         results = {}
+#         for name, aligner in self.namesToAligners.iteritems():
+#             results[name] = alignBothStrands(seq, aligner)
+#         return seq, results
 
 
 def filterDegenerateOnly(reads):
@@ -121,7 +134,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     return bestAln
 
 
-def do1remap(chromPartsCollection, reads, processes, jobName=""):
+def remapForAllele(chromPartsCollection, reads, processes, jobName=""):
     reads = filterDegenerateOnly(reads)
 
     namesToReferences = {}
@@ -131,20 +144,29 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
     # map each read sequence against each chromosome part (the current allele only)
 
     if processes != 1:
-        verbose = 0
-        if sys.stdout.isatty():
-            verbose = 3
+        import multiprocessing
+        pool = multiprocessing.Pool(processes=processes, initializer=initMapper, initargs=[namesToReferences])
+        remapped = pool.map(remap, [read.seq for read in reads])
+        remapped = dict(remapped)
 
-        remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
-            verbose=verbose, processes=processes, name=jobName))
+        pool.close()
+        pool.terminate()
+        # verbose = 0
+        # if sys.stdout.isatty():
+            # verbose = 3
+
+        # remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
+            # verbose=verbose, processes=processes, name=jobName))
     else:
-        mapper = Multimap(namesToReferences)
+        # mapper = Multimap(namesToReferences)
+        initMapper(namesToReferences)
 
         remapped = {}
         for i, read in enumerate(reads):
             if i % 1000 == 0:
                 logging.debug("realigned {} of {} reads".format(i, len(reads)))
-            seq, result = mapper.remap(read.seq)
+            # seq, result = mapper.remap(read.seq)
+            seq, result = remap(read.seq)
             remapped[seq] = result
 
     alignmentSets = collections.defaultdict(AlignmentSet)
@@ -170,8 +192,8 @@ def do_realign(dataHub, sample):
     name = "{}:{{}}".format(sample.name[:15])
 
     t0 = time.time()
-    refalignments = do1remap(variant.chromParts("ref"), reads, processes, jobName=name.format("ref"))
-    altalignments = do1remap(variant.chromParts("alt"), reads, processes, jobName=name.format("alt"))
+    refalignments = remapForAllele(variant.chromParts("ref"), reads, processes, jobName=name.format("ref"))
+    altalignments = remapForAllele(variant.chromParts("alt"), reads, processes, jobName=name.format("alt"))
     t1 = time.time()
 
     logging.debug(" Time to realign: {:.1f}s".format(t1-t0))
