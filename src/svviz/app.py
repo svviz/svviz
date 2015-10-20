@@ -23,9 +23,9 @@ def checkRequirements(args):
     if not remap.check_swalign():
         print "ERROR: check that svviz is correctly installed -- the 'ssw' Smith-Waterman alignment module does not appear to be functional"
         sys.exit(1)
-    if args.export and \
-        ((args.export.lower().endswith("pdf") or args.export.lower().endswith("png")) or args.format!="pdf"):
-        export.getExportConverter(args)
+    if args.export:
+        exportFormat = export.getExportFormat(args)
+        export.getExportConverter(args, exportFormat)
 
 
 def loadISDs(dataHub):
@@ -150,21 +150,20 @@ def runDirectExport(dataHub):
         logging.info("* Exporting views *")
         ensureExportData(dataHub)
 
+        exportFormat = export.getExportFormat(dataHub.args)
+
         if dataHub.args.type == "batch" or dataHub.args.format is not None:
-            exportFormat = dataHub.args.format
-            if exportFormat is None:
-                exportFormat = "pdf"
             if not os.path.exists(dataHub.args.export):
                 os.makedirs(dataHub.args.export)
-
             path = os.path.join(dataHub.args.export, "{}.{}".format(dataHub.variant.shortName(), exportFormat))
         else:
-            exportFormat = dataHub.args.export.split(".")[-1]
             path = dataHub.args.export
 
         exportData = dataHub.trackCompositor.render()
-        if exportFormat.lower() != "svg":
-            exportData = export.convertSVG(exportData, exportFormat, dataHub.args.converter)
+        if exportFormat != "svg":
+            converter = export.getExportConverter(dataHub.args, exportFormat)
+            exportData = export.convertSVG(exportData, exportFormat, converter)
+            
         outf = open(path, "w")
         outf.write(exportData)
         outf.close()

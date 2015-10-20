@@ -68,15 +68,17 @@ def do_export():
 
     svg = dataHub.trackCompositor.render()
 
+    converter = export.getExportConverter(dataHub.args, format)
+
     if format == "svg":
         mimetype = "image/svg+xml"
         data = svg
     elif format == "png":
         mimetype = "image/png"
-        data = export.convertSVG(svg, "png", dataHub.args.converter)
+        data = export.convertSVG(svg, "png", converter)
     elif format == "pdf":
         mimetype = "application/pdf"
-        data = export.convertSVG(svg, "pdf", dataHub.args.converter)
+        data = export.convertSVG(svg, "pdf", converter)
     else:
         raise Exception("unknown format")
 
@@ -89,7 +91,7 @@ def do_export():
    
 @app.route('/_haspdfexport')
 def _hasPDFExport():
-    if export.canConvertSVGToPDF():
+    if export.getExportConverter(dataHub.args, "pdf"):
         return jsonify({"haspdfexport":True})
     return jsonify({"haspdfexport":False})
 

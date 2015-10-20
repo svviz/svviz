@@ -227,29 +227,48 @@ class TrackCompositor(object):
         return "\n".join(composite)
 
 
-def getExportConverter(args):
-    if (args.converter == "webkittopdf") and (args.format == "png" or args.export.lower().endswith("png")):
+def getExportFormat(args):
+    formats = [None, "png", "pdf", "svg"]
+    if args.type == "batch" or args.format is not None:
+        exportFormat = args.format
+        if exportFormat is None:
+            exportFormat = "pdf"
+    else:
+        exportFormat = args.export.partition(".")
+        if len(exportFormat[2]) > 0:
+            exportFormat = exportFormat[2]
+            if exportFormat not in formats:
+                logging.warn("= File suffix {} not recognized; exporting as .svg =".format(exportFormat))
+                exportFormat = "svg"
+        else:
+            exportFormat = "svg"
+
+    exportFormat = exportFormat.lower()
+    return exportFormat
+
+def getExportConverter(args, exportFormat):
+    if args.converter == "webkittopdf" and exportFormat=="png":
         logging.error("webkitToPDF does not support export to PNG; use librsvg or inkscape instead, or "
             "export to PDF")
         sys.exit(1)
 
+    if exportFormat == "png" and args.converter is None:
+        return "librsvg"
+
     if args.converter == "rsvg-convert":
-        args.converter = "librsvg"
+        return "librsvg"
 
     if args.converter in [None, "webkittopdf"]:
         if checkWebkitToPDF():
-            args.converter = "webkittopdf"
-            return
+            return "webkittopdf"
 
     if args.converter in [None, "librsvg"]:
         if checkRSVGConvert():
-            args.converter = "librsvg"
-            return
+            return "librsvg"
 
     if args.converter in [None, "inkscape"]:
         if checkInkscape():
-            args.converter = "inkscape"
-            return
+            return "inkscape"
 
     if args is not None:
         logging.error("ERROR: unable to run SVG converter '{}'. Please check that it is "

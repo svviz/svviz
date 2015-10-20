@@ -137,7 +137,7 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
         remapped = {}
         for i, read in enumerate(reads):
             if i % 1000 == 0:
-                print "realigned", i, "of", len(reads)
+                logging.debug("realigned {} of {} reads".format(i, len(reads)))
             seq, result = mapper.remap(read.seq)
             remapped[seq] = result
 
@@ -149,6 +149,37 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
         alignmentSets[read.qname].addAlignment(aln)
 
     return alignmentSets
+
+
+
+def do_realign(dataHub, sample):
+    processes = dataHub.args.processes
+    if processes is None or processes == 0:
+        # we don't really gain from using virtual cores, so try to figure out how many physical
+        # cores we have
+        processes = misc.cpu_count_physical()
+
+    variant = dataHub.variant
+    reads = sample.reads
+    name = "{}:{{}}".format(sample.name[:15])
+
+    t0 = time.time()
+    refalignments = do1remap(variant.chromParts("ref"), reads, processes, jobName=name.format("ref"))
+    altalignments = do1remap(variant.chromParts("alt"), reads, processes, jobName=name.format("alt"))
+    t1 = time.time()
+
+    logging.debug(" Time to realign: {:.1f}s".format(t1-t0))
+
+    assert refalignments.keys() == altalignments.keys()
+
+    alnCollections = []
+    for key in refalignments:
+        alnCollection = AlignmentSetCollection(key)
+        alnCollection.addSet(refalignments[key], "ref")
+        alnCollection.addSet(altalignments[key], "alt")
+        alnCollections.append(alnCollection)
+
+    return alnCollections
 
 
 
@@ -194,38 +225,6 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
     logging.info("  number of reads found: {}".format(len(reads)))
 
     return reads
-
-def do_realign(dataHub, sample):
-    processes = dataHub.args.processes
-    if processes is None or processes == 0:
-        # we don't really gain from using virtual cores, so try to figure out how many physical
-        # cores we have
-        processes = misc.cpu_count_physical()
-
-    variant = dataHub.variant
-    reads = sample.reads
-    print sample.name, sample.name[:15]
-    name = "{}:{{}}".format(sample.name[:15])
-
-    t0 = time.time()
-    refalignments = do1remap(variant.chromParts("ref"), reads, processes, jobName=name.format("ref"))
-    altalignments = do1remap(variant.chromParts("alt"), reads, processes, jobName=name.format("alt"))
-    t1 = time.time()
-
-    logging.debug(" Time to realign: {:.1f}s".format(t1-t0))
-
-    assert refalignments.keys() == altalignments.keys()
-
-    alnCollections = []
-    for key in refalignments:
-        alnCollection = AlignmentSetCollection(key)
-        alnCollection.addSet(refalignments[key], "ref")
-        alnCollection.addSet(altalignments[key], "alt")
-        alnCollections.append(alnCollection)
-
-    return alnCollections
-
-
 
 
 def main():
