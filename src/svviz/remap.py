@@ -29,7 +29,7 @@ def check_swalign():
     return True
 
 
-def findBestAlignment(seq, aligner):
+def alignBothStrands(seq, aligner):
     revseq = reverseComp(seq)
     forward_al = aligner.align(seq)
     reverse_al = aligner.align(revseq)
@@ -45,8 +45,14 @@ def findBestAlignment(seq, aligner):
         else:
             if forward_al.score >= reverse_al.score:
                 strand = "+"
+                if reverse_al.score > forward_al.score2:
+                    forward_al.score2 = reverse_al.score
+                    forward_al.ref_end2 = -1
             else:
                 strand = "-"
+                if forward_al.score > reverse_al.score2:
+                    reverse_al.score2 = forward_al.score
+                    reverse_al.ref_end2 = -1
 
     if strand == "+":
         return "+", forward_al
@@ -66,7 +72,7 @@ class Multimap(Multiprocessor):
     def remap(self, seq):
         results = {}
         for name, aligner in self.namesToAligners.iteritems():
-            results[name] = findBestAlignment(seq, aligner)
+            results[name] = alignBothStrands(seq, aligner)
         return seq, results
 
 

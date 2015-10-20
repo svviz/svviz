@@ -37,6 +37,8 @@ def run():
         t1 = time.time()
         timings[testName] = t1-t0
 
+        no_changes = True
+
         if not os.path.exists(originalPath):
             print "  first time running; nothing to compare against"
             shutil.copy(exportPath, originalPath)
@@ -46,6 +48,7 @@ def run():
             else:
                 for a, b in zip(open(originalPath).readlines(), open(exportPath).readlines()):
                     if a != b:
+                        no_changes = (False, "files differ: {}".format(testName))
                         print "FILES DIFFER! First line that differs:"
                         print "Original:", a.strip()
                         print "New:     ", b.strip()
@@ -80,3 +83,4 @@ def run():
         print "overwriting previous timings..."
         json.dump(timings, open(timingsPath, "w"))
         
+    return no_changes, ""

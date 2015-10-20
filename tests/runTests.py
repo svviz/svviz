@@ -38,9 +38,9 @@ def _runTest(fn, description):
     print "\n\n -- running {} --\n\n".format(description)
     try:
         t0 = time.time()
-        fn()
+        result = fn()
         t1 = time.time()
-        result = [True, "", t1-t0]
+        result = [result[0], result[1], t1-t0]
     except Exception, e:
         print " ** error running {}: {} **".format(description, e)
         result = [False, str(e), -1]
@@ -73,7 +73,7 @@ def runTestCounts():
     bams = ["svviz-examples/countsTest/reads.sorted.bam"]
     previousSummaryPath = "countsTest.previousSummary.txt"
 
-    testCounts.run(genome, vcfs, bams, previousSummaryPath)
+    return testCounts.run(genome, vcfs, bams, previousSummaryPath)
 
 
 def run():

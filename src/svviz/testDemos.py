@@ -16,6 +16,7 @@ def run():
 
     print pandas.DataFrame({"command":commands, "time (s)":times})
 
+    return (True, "")
 
 if __name__ == '__main__':
     run()

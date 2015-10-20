@@ -47,6 +47,7 @@ def run(genome, vcfs, bams, previousSummaryPath):
         print "="*30, "SAVING", "="*30
         summaries.to_csv(previousSummaryPath, sep="\t")
         print summaries
+        return (True, "")
     else:
         print "="*30, "COMAPRING", "="*30
         previousSummary = pandas.read_table(previousSummaryPath, index_col=0)
@@ -62,9 +63,11 @@ def run(genome, vcfs, bams, previousSummaryPath):
         if diff.shape[0] == 0:
             print "--- same as previous run ---"
 
-            return [True, "", totalTime]
+            # return [True, "", totalTime]
+            return (True, "")
         else:
             print combined.loc[diff.index]
+            return (False, "not equal to previous")
 
 
 

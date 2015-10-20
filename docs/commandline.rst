@@ -54,7 +54,7 @@ A related option is ``--max-multimapping-similarity``, which adjust how aggressi
 Exporting visualizations
 ------------------------
 
-The visualizations can be exported to SVG, PNG or PDF from the web view by clicking the "Export" link at the top of the page. Alternatively, these files can be created directly, without launching the web interface, using the ``--export`` option (and this exported image file can be opened automatically using your system-defined image viewer by additionally specifying the ``--open-exported`` or ``-O`` option).
+The visualizations can be exported to SVG, PNG or PDF from the web view by clicking the "Export" link at the top of the web view. Alternatively, these files can be created directly, without launching the web interface, using the ``--export`` option (and this exported image file can be opened automatically using your system-defined image viewer by additionally specifying the ``--open-exported`` or ``-O`` option).
 
 SVG is svviz's native format and requires no additional software. Export to PNG or PDF requires either librsvg or Inkscape (see the :ref:`installation instructions <installation>` for more info). An option for PDF export on OS X only is webkitToPDF. When multiple conversion backends are installed, you can specify which one is used to convert to PDF/PNG using the ``--converter`` command line option. For example, add the option ``--converter inkscape`` to specify that conversion should use Inkscape instead of one of the other backends. If this option is not specified, svviz will automatically pick from the installed backends.
 
