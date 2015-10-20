@@ -144,28 +144,22 @@ def remapForAllele(chromPartsCollection, reads, processes, jobName=""):
     # map each read sequence against each chromosome part (the current allele only)
 
     if processes != 1:
+        logging.debug("  {} - realigning {} reads...".format(jobName, len(reads)))
+
         import multiprocessing
         pool = multiprocessing.Pool(processes=processes, initializer=initMapper, initargs=[namesToReferences])
-        remapped = pool.map(remap, [read.seq for read in reads])
+        remapped = pool.map_async(remap, [read.seq for read in reads]).get(9999999)
         remapped = dict(remapped)
 
         pool.close()
         pool.terminate()
-        # verbose = 0
-        # if sys.stdout.isatty():
-            # verbose = 3
-
-        # remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
-            # verbose=verbose, processes=processes, name=jobName))
     else:
-        # mapper = Multimap(namesToReferences)
         initMapper(namesToReferences)
 
         remapped = {}
         for i, read in enumerate(reads):
             if i % 1000 == 0:
-                logging.debug("realigned {} of {} reads".format(i, len(reads)))
-            # seq, result = mapper.remap(read.seq)
+                logging.debug("  {} - realigned {} of {} reads".format(jobName, i, len(reads)))
             seq, result = remap(read.seq)
             remapped[seq] = result
 
