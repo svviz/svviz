@@ -27,7 +27,7 @@ Installation on Linux
 
         sudo pip install svviz
 
-    This should automatically install a number of required python packages (see :ref:`below <required_python_packages>`). If you prefer to install the latest development version from github, install git and then use this command instead (warning: bleeding edge! may contain bugs!):
+    This should automatically install a number of required python packages (see :ref:`below <required_python_packages>`). If you prefer to install the latest development version from github, `install git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_ and then use this command instead (warning: bleeding edge! may contain bugs!):
 
     .. code-block:: bash
 
