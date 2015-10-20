@@ -109,16 +109,14 @@ def run():
 
 
     # Run the demos
-    # summary.loc["demos"] = _runTest(testDemos.run, "demos")
+    summary.loc["demos"] = _runTest(testDemos.run, "demos")
 
     # Run regression testing on ref/alt/amb counts
-    # summary.loc["counts"] = _runTest(runTestCounts, "counts")
+    summary.loc["counts"] = _runTest(runTestCounts, "counts")
 
     # Run the render regression tests
-    # summary.loc["rendering"] = _runTest(rendertest.run, "rendering")    
+    summary.loc["rendering"] = _runTest(rendertest.run, "rendering")    
 
-    summary.loc["rendering"] = [True, "", 29.23]
-    summary.loc["counts"] = [True, "", 45.13]
     summary["timing"] = summary["timing"].apply(lambda x: "{}".format(datetime.timedelta(seconds=int(x))))
     print summary
 
