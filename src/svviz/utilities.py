@@ -94,6 +94,9 @@ class Locus:
         self._strand = strand
         self._start = int(coords[0])
         self._end = int(coords[1])
+
+        if self._start < 0:
+            raise Exception("Locus start coordinate cannot be negative: {}".format(start))
         
     @classmethod
     def fromlocus(class_, otherLocus):
