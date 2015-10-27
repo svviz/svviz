@@ -338,7 +338,7 @@ class Inversion(StructuralVariant):
 
         if len(self.region) < 2*searchDistance:
             # return a single region
-            return [Locus(chrom, self.region.start()-searchDistance, self.region.end()+searchDistance, "+")]
+            return [Locus(chrom, nonNegative(self.region.start()-searchDistance), self.region.end()+searchDistance, "+")]
         else:
             # return two regions, each around one of the ends of the inversion
             searchRegions = []
