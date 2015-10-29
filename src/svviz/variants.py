@@ -50,6 +50,8 @@ def getBreakpointFormatsStr(which=None):
     formats = []
     if which in ["del", None]:
         formats.append("Format for deletion breakpoints is '<chrom> <start> <end>'")
+    if which in ["ldel", None]:
+        formats.append("Format for large deletion breakpoints is '<chrom> <start> <end>'")
     if which in ["ins", None]:
         formats.append("Format for insertion breakpoints is '<chrom> <pos> [end] <seq>'; \n"
             "  specify 'end' to create a compound deletion-insertion, otherwise insertion \n"
@@ -73,8 +75,16 @@ def getVariant(dataHub):
         start = int(dataHub.args.breakpoints[1])
         end = int(dataHub.args.breakpoints[2])
         assert start < end
-
         variant = Deletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
+
+    elif dataHub.args.type.lower() in ["ldel", "largedeletion"]:
+        assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("ldel")
+        chrom = dataHub.args.breakpoints[0]
+        start = int(dataHub.args.breakpoints[1])
+        end = int(dataHub.args.breakpoints[2])
+        assert start < end
+        variant = LargeDeletion.from_breakpoints(chrom, start-1, end-1, dataHub.alignDistance, dataHub.genome)
+
     elif dataHub.args.type.lower().startswith("ins"):
         assert len(dataHub.args.breakpoints) in [3,4], getBreakpointFormatsStr("ins")
         chrom = dataHub.args.breakpoints[0]
@@ -85,8 +95,8 @@ def getVariant(dataHub):
         else:
             end = int(dataHub.args.breakpoints[2])
             seq = dataHub.args.breakpoints[3]
-
         variant = Insertion(Locus(chrom, pos, end, "+"), seq, dataHub.alignDistance, dataHub.genome)
+
     elif dataHub.args.type.lower().startswith("inv"):
         assert len(dataHub.args.breakpoints) == 3, getBreakpointFormatsStr("inv")
         chrom = dataHub.args.breakpoints[0]
@@ -94,8 +104,8 @@ def getVariant(dataHub):
         end = int(dataHub.args.breakpoints[2])
         if dataHub.args.min_mapq is None:
             dataHub.args.min_mapq = -1
-
         variant = Inversion(Locus(chrom, start, end, "+"), dataHub.alignDistance, dataHub.genome)
+
     elif dataHub.args.type.lower().startswith("mei"):
         assert len(dataHub.args.breakpoints) >= 4, getBreakpointFormatsStr("mei")
 
@@ -560,3 +570,12 @@ class Breakend(StructuralVariant):
             chrom1 = "chr{}".format(chrom1)
             chrom2 = "chr{}".format(chrom2)
         return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
+
+
+
+class LargeDeletion(Breakend):
+    @classmethod
+    def from_breakpoints(class_, chrom, first, second, alignDistance, fasta):
+        breakpoint1 = Locus(chrom, first, first, "+")
+        breakpoint2 = Locus(chrom, second, second, "+")
+        return class_(breakpoint1, breakpoint2, alignDistance, fasta)
