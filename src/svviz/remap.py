@@ -189,20 +189,21 @@ def do_realign(dataHub, sample):
 
 
 
-def _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary):
+def _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary, max_reads):
     pairFinder = PairFinder(searchRegions, bam, minmapq=minmapq, pair_minmapq=pair_minmapq,
-        is_paired=(not single_ended), include_supplementary=include_supplementary)
+        is_paired=(not single_ended), include_supplementary=include_supplementary, max_reads=max_reads)
     reads = [item for sublist in pairFinder.matched for item in sublist]
     return reads, pairFinder.supplementaryAlignmentsFound
 
-def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=False, include_supplementary=False):
+def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=False, include_supplementary=False, max_reads=None):
     t0 = time.time()
     searchRegions = variant.searchRegions(searchDistance)
 
     # This cludge tries the chromosomes as given ('chr4' or '4') and if that doesn't work
     # tries to switch to the other variation ('4' or 'chr4')
     try:
-        reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary)
+        reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, 
+            include_supplementary, max_reads)
     except ValueError, e:
         oldchrom = searchRegions[0].chr()
         try:
@@ -215,7 +216,8 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
 
             logging.warn("  Couldn't find reads on chromosome '{}'; trying instead '{}'".format(oldchrom, newchrom))
 
-            reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, include_supplementary)
+            reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, 
+                include_supplementary, max_reads)
 
         except ValueError:
             raise e
