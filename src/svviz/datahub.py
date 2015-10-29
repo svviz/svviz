@@ -59,6 +59,14 @@ class DataHub(object):
             for bamPath in self.args.bam:
                 name = nameFromBamPath(bamPath)
 
+                i = 0
+                while name in self.samples:
+                    i += 1
+                    curname = "{}_{}".format(name, i)
+                    if curname not in self.samples:
+                        name = curname
+                        break
+
                 sample = Sample(name, bamPath)
                 self.samples[name] = sample
 
