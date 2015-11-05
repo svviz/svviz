@@ -4,6 +4,11 @@ import logging
 from svviz.utilities import Locus, getListDefault
 from svviz import genomesource
 
+
+def nonNegative(x):
+    return max(x, 0)
+    
+
 class ChromPart(object):
     def __init__(self, regionID, segments, sources):
         self.id = regionID
@@ -169,6 +174,11 @@ class Segment(object):
         self.chrom = chrom
         if start > end:
             start, end = end, start
+
+        if start < 0:
+            start = 0
+        if end < 0:
+            raise Exception("Segment end coordinate cannot be negative: {}".format(start))
         self.start = start
         self.end = end
         self.strand = strand
@@ -302,7 +312,8 @@ class Deletion(StructuralVariant):
 
     def searchRegions(self, searchDistance):
         chrom = self.breakpoints[0].chr()
-        deletionRegion = Locus(chrom, self.breakpoints[0].start()-searchDistance, self.breakpoints[-1].end()+searchDistance, "+")
+        deletionRegion = Locus(chrom, nonNegative(self.breakpoints[0].start()-searchDistance), 
+            self.breakpoints[-1].end()+searchDistance, "+")
         return [deletionRegion]
 
     def segments(self, allele):
@@ -337,12 +348,14 @@ class Inversion(StructuralVariant):
 
         if len(self.region) < 2*searchDistance:
             # return a single region
-            return [Locus(chrom, self.region.start()-searchDistance, self.region.end()+searchDistance, "+")]
+            return [Locus(chrom, nonNegative(self.region.start()-searchDistance), self.region.end()+searchDistance, "+")]
         else:
             # return two regions, each around one of the ends of the inversion
             searchRegions = []
-            searchRegions.append(Locus(chrom, self.region.start()-searchDistance, self.region.start()+searchDistance, "+"))
-            searchRegions.append(Locus(chrom, self.region.end()-searchDistance, self.region.end()+searchDistance, "+"))
+            searchRegions.append(Locus(chrom, nonNegative(self.region.start()-searchDistance), 
+                self.region.start()+searchDistance, "+"))
+            searchRegions.append(Locus(chrom, nonNegative(self.region.end()-searchDistance), 
+                self.region.end()+searchDistance, "+"))
             return searchRegions
 
     def segments(self, allele):
@@ -371,7 +384,8 @@ class Insertion(StructuralVariant):
 
     def searchRegions(self, searchDistance):
         chrom = self.breakpoints[0].chr()
-        return [Locus(chrom, self.breakpoints[0].start()-searchDistance, self.breakpoints[-1].end()+searchDistance, "+")]
+        return [Locus(chrom, nonNegative(self.breakpoints[0].start()-searchDistance), 
+            self.breakpoints[-1].end()+searchDistance, "+")]
 
     def segments(self, allele):
         breakpoint = self.breakpoints[0]
@@ -411,7 +425,8 @@ class MobileElementInsertion(StructuralVariant):
 
     def searchRegions(self, searchDistance):
         chrom = self.breakpoints[0].chr()
-        return [Locus(chrom, self.breakpoints[0].start()-searchDistance, self.breakpoints[-1].end()+searchDistance, "+")]
+        return [Locus(chrom, nonNegative(self.breakpoints[0].start()-searchDistance), 
+            self.breakpoints[-1].end()+searchDistance, "+")]
 
     def segments(self, allele):
         chrom = self.breakpoints[0].chr()
@@ -441,7 +456,7 @@ class Translocation(StructuralVariant):
         searchRegions = []
 
         for breakpoint in self.breakpoints:
-            searchRegions.append(Locus(breakpoint.chr(), breakpoint.start()-searchDistance, 
+            searchRegions.append(Locus(breakpoint.chr(), nonNegative(breakpoint.start()-searchDistance), 
                 breakpoint.end()+searchDistance, breakpoint.strand()))
 
         return searchRegions
@@ -516,7 +531,7 @@ class Breakend(StructuralVariant):
         searchRegions = []
 
         for breakpoint in self.breakpoints:
-            searchRegions.append(Locus(breakpoint.chr(), breakpoint.start()-searchDistance, 
+            searchRegions.append(Locus(breakpoint.chr(), nonNegative(breakpoint.start()-searchDistance), 
                 breakpoint.end()+searchDistance, breakpoint.strand()))
 
         return searchRegions

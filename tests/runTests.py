@@ -5,8 +5,10 @@ import pandas
 import subprocess
 import sys
 import time
+import traceback
 
 from svviz import demo
+from svviz import testIssues
 from svviz import rendertest
 from svviz import testDemos
 from svviz import testCounts
@@ -48,6 +50,7 @@ def _runTest(fn, description):
         result = [result[0], result[1], t1-t0]
     except Exception, e:
         print " ** error running {}: {} **".format(description, e)
+        print traceback.print_exc()
         result = [False, str(e), -1]
 
     return result
@@ -80,6 +83,10 @@ def runTestCounts():
 
     return testCounts.run(genome, vcfs, bams, previousSummaryPath)
 
+def runTestIssues():
+    genome = getHG19Ref()
+
+    return testIssues.run(genome)
 
 def saveTimingInfo(summary):
     timingsPath = "test_timings.csv"
@@ -107,6 +114,8 @@ def run():
     print "running all tests..."
     summary = pandas.DataFrame(columns=["pass", "info", "timing"])
 
+    # Test chromosome ends
+    summary.loc["chrom_ends"] = _runTest(runTestIssues, "issues")
 
     # Run the demos
     summary.loc["demos"] = _runTest(testDemos.run, "demos")
