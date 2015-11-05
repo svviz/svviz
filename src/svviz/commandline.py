@@ -213,7 +213,7 @@ def parseArgs(args):
     
     if args.export is not None:
         args.no_web = True
-        if args.type!="batch" and not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
+        if args.type!="batch" and args.format is None and not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
             print "Export filename must end with one of .svg, .png or .pdf"
             sys.exit(1)
 
