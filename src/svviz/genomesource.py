@@ -14,6 +14,18 @@ class GenomeSource(object):
         return seq
 
 
+def matchChromFormat(chrom, keys):
+    if chrom in keys:
+        return chrom
+    if "chr" in chrom:
+        chrom2 = chrom.replace("chr", "")
+    else:
+        chrom2 = "chr{}".format(chrom)
+
+    if chrom2 in keys:
+        return chrom2
+    return chrom
+
 class FastaGenomeSource(GenomeSource):
     """ pickle-able wrapper for pyfaidx.Fasta """
     def __init__(self, path, name=None):
@@ -22,6 +34,8 @@ class FastaGenomeSource(GenomeSource):
         self._fasta = None
 
     def getSeq(self, chrom, start, end, strand):
+        chrom = matchChromFormat(chrom, self.fasta.keys())
+
         seq = self.fasta[chrom][start:end+1]
         if strand == "-":
             seq = reverseComp(seq)

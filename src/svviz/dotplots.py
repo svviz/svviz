@@ -46,7 +46,7 @@ except ImportError:
         return None
 
 
-def yass_dotplot(s1, breakpoints):
+def yass_dotplot(s1, breakpoints, boundaries=()):
     from rpy2 import robjects as ro
 
     length = len(s1)
@@ -90,26 +90,42 @@ def yass_dotplot(s1, breakpoints):
         ro.r.abline(h=breakpoint, lty=2, col="gray")
         ro.r.abline(v=breakpoint, lty=2, col="gray")
 
+    for boundary in boundaries:
+        ro.r.abline(h=boundary, lty=1, col="black")
+        ro.r.abline(v=boundary, lty=1, col="black")
+
     ro.r["dev.off"]()
 
     return open(tempPNG).read()
 
 
 def dotplot(dataHub):
-    chromPart = list(dataHub.variant.chromParts("ref"))[0]
-    ref = chromPart.getSeq()
-
     try:
         breakpoints = []
-        curpos = 0
-        for segment in chromPart.segments[:-1]:
-            curpos += len(segment)
-            breakpoints.append(curpos)
+        boundaries = []
+        partStart = 0
 
-        return yass_dotplot(ref, breakpoints)
+        fullSeq = ""
+
+        for i, chromPart in enumerate(dataHub.variant.chromParts("ref")):
+            print "*"*10, i
+            # chromPart = list(dataHub.variant.chromParts("ref"))[0]
+            ref = chromPart.getSeq()
+            fullSeq += ref
+
+            segmentStart = partStart
+            for segment in chromPart.segments[:-1]:
+                segmentStart += len(segment)
+                breakpoints.append(segmentStart)
+
+            partStart += len(ref)
+            if i < len(dataHub.variant.chromParts("ref")):
+                boundaries.append(partStart)
+
+        return yass_dotplot(fullSeq, breakpoints, boundaries)
     except Exception, e:
         logging.info("  Couldn't run recommended dot-plot helper-program yass: '{}'".format(e))
-        return dotplot2(ref, ref)
+        # return dotplot2(ref, ref)
 
 
 if __name__ == '__main__':
