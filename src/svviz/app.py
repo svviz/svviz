@@ -279,6 +279,13 @@ def run(args):
         dataHub.variant = variant
         setSampleParams(dataHub)
 
+        if dataHub.args.max_size and \
+                    (sum(len(part) for part in dataHub.variant.chromParts("ref")) > dataHub.args.max_size  or 
+                     sum(len(part) for part in dataHub.variant.chromParts("alt")) > dataHub.args.max_size):
+            logging.info("+++ Skipping variant -- event size exceeds threshold set by user ({})".format(dataHub.args.max_reads))
+            skipped += 1
+            continue
+
         debug.printDebugInfo(dataHub)
 
         logging.info("* Loading reads and finding mates *")
@@ -316,7 +323,7 @@ def run(args):
         summaryStats.saveToPath(dataHub.args.summary)
 
     if skipped > 0:
-        logging.info("\n\nSkipped {} variants because they exceeded the --max-reads threshold\n\n".format(skipped))
+        logging.info("\n\nSkipped {} variants because they exceeded the --max-reads or --max-size threshold\n\n".format(skipped))
     if dataHub.args.save_state is not None:
         saveState(dataHub)
         return

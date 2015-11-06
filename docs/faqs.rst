@@ -45,10 +45,14 @@ If you know the genomic region including the structural variant is repetitive, o
 
 .. _lotsoreads:
 
-**What does the warning "LOTS OF READS IN MATE-PAIR REGION" mean?**
+**What does the warning "LOTS OF READS IN BREAKPOINT REGION" mean?**
 
-The "LOTS OF READS IN MATE-PAIR REGION" warning indicates that svviz will be trying to pull reads in from a genomic region with very high sequencing coverage (over 100,000 reads within the region). This warning may appear when analyzing very high coverage sequencing data or extremely large regions. 
+The "LOTS OF READS IN BREAKPOINT/MATE-PAIR REGION" warning indicates that svviz will be trying to pull reads in from a genomic region with very high sequencing coverage (over 100,000 reads within the region). This warning may appear when analyzing very high coverage sequencing data or extremely large regions. 
+
+The warning indicates that run-time or memory to analyze a variant may be excessive. Memory scales with the number of reads being analyzed for the event. Run-time scales with the number of reads, the lengths of the reads and the size of the event.
+
+To skip variants that are particularly large use the ``--min-size`` option, for example to skip events that are larger than 1 megabase (``--min-size 1000000``). To skip variants with too many reads, use the ``--min-reads`` option, for example to skip events with more than 100,000 reads (``--min-reads 100000``). 
 
 For paired-end data, this warning may also appear as a result of trying to read in mate-pairs from the input BAM(s). svviz first finds all reads in the vicinity of the structural variant being analyzed. For paired-end data, svviz then tries to find the read mates for all reads identified previously. Most of the reads and their mates should both be near the breakpoints. However, in the case of a repetitively-mapping sequence, an incorrectly-called breakpoint, or a mapping error, reads can be separated from their mates in the genome. Thus, to find the mates for these types of reads, svviz must access other genomic locations from the input BAM.
 
-In most cases, svviz should take only a bit longer to find read-pairs, perhaps a few minutes. In the case that it is taking substantially longer, you can cancel svviz by hitting ctrl-c in the terminal. One potential option for skipping highly repetitive reads, thus improving performance, is to adjust the ``--min-mapq`` (``-q``) option. For example, if the maximum mapping-quality output by your alignment software is 60 (for example, when using bwa), you could specify ``-q 60`` when running svviz.
+In most cases, svviz should take only a bit longer to find read-pairs, perhaps a few minutes. In the case that it is taking substantially longer, you can cancel svviz by hitting ctrl-c in the terminal. One potential option for skipping highly repetitive reads, thus improving performance, is to adjust the ``--min-mapq`` (``-q``) option. For example, if the maximum mapping-quality output by your alignment software is 60 (for example, when using bwa), you could specify ``-q 60`` when running svviz. The related ``--min-pair-mapq`` option skips read pairs where neither read end exceeds the mapq threshold.

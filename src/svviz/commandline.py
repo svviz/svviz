@@ -137,6 +137,11 @@ def parseArgs(args):
         "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
         "mode (default: unlimited)")
 
+    inputParams.add_argument("--max-size", type=int, help=
+        "maximum event size allowed, totaled across all chromosome parts in bp; if either the ref \n"
+        "allele or alt allele exceeds this size, it will be skipped (default: unlimited)")
+
+
     interfaceParams = parser.add_argument_group("interface parameters")
     interfaceParams.add_argument("-v", "--version", action="version", 
         version="svviz version {}".format(svviz.__version__), help=
