@@ -120,7 +120,8 @@ def parseArgs(args):
         "minimum mapping quality for reads (default: 0)")
     inputParams.add_argument("--pair-min-mapq", metavar="PAIR_MAPQ", default=0,
         type=float, help=
-        "include only read pairs where at least one read end exceeds PAIR_MAPQ (default: 0)")
+        "include only read pairs where at least one read end both exceeds PAIR_MAPQ and \n"
+        "falls near the variant being analyzed (default: 0)")
     inputParams.add_argument("--max-multimapping-similarity", metavar="MAX_SIMILARITY", default=0.95,
         type=float, help=
         "maximum ratio between best and second-best alignment scores within visualization \n"
@@ -140,6 +141,10 @@ def parseArgs(args):
     inputParams.add_argument("--max-size", type=int, help=
         "maximum event size allowed, totaled across all chromosome parts in bp; if either the ref \n"
         "allele or alt allele exceeds this size, it will be skipped (default: unlimited)")
+
+    inputParams.add_argument("--max-deletion-size", type=int, help=
+        "deletion size above which the deletion is analyzed in breakend mode (default: don't \n"
+        "convert to breakend mode)")
 
 
     interfaceParams = parser.add_argument_group("interface parameters")

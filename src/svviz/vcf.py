@@ -84,7 +84,11 @@ def parseVCFLine(line, dataHub):
         return None
 
 def parseDeletion(record, dataHub):
-    return variants.Deletion.from_breakpoints(record.chrom, record.start, record.end, dataHub.alignDistance, dataHub.genome)
+    deletion = variants.Deletion.from_breakpoints(record.chrom, record.start, record.end, dataHub.alignDistance, dataHub.genome)
+    if dataHub.args.max_deletion_size and deletion.deletionLength() > dataHub.args.max_deletion_size:
+        deletion = variants.LargeDeletion.from_breakpoints(record.chrom, record.start, record.end, dataHub.alignDistance, dataHub.genome)
+        print "*"*1000, deletion
+    return deletion
 
 def parseInversion(record, dataHub):
     region = utilities.Locus(record.chrom, record.start, record.end, "+")

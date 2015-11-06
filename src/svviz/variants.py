@@ -316,6 +316,10 @@ class Deletion(StructuralVariant):
             self.breakpoints[-1].end()+searchDistance, "+")
         return [deletionRegion]
 
+    def deletionLength(self):
+        length = self.breakpoints[1].end() - self.breakpoints[0].start()
+        return length
+
     def segments(self, allele):
         chrom = self.breakpoints[0].chr()
 
@@ -328,9 +332,8 @@ class Deletion(StructuralVariant):
                     Segment(chrom, self.breakpoints[1].end()+1, self.breakpoints[1].end()+self.alignDistance, "+", 2)]
 
     def __str__(self):
-        deletionLength = self.breakpoints[1].end() - self.breakpoints[0].start()
         return "{}::{}:{:,}-{:,}({})".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), 
-            self.breakpoints[1].end(), deletionLength)
+            self.breakpoints[1].end(), self.deletionLength())
 
 
 class Inversion(StructuralVariant):
@@ -594,3 +597,10 @@ class LargeDeletion(Breakend):
         breakpoint1 = Locus(chrom, first, first, "+")
         breakpoint2 = Locus(chrom, second, second, "+")
         return class_(breakpoint1, breakpoint2, alignDistance, fasta)
+
+    def deletionLength(self):
+        return self.breakpoints[1].end() - self.breakpoints[0].start()
+        
+    def __str__(self):
+        return "{}::{}:{:,}-{:,}({})".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), 
+            self.breakpoints[1].end(), self.deletionLength())

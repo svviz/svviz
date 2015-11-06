@@ -65,9 +65,6 @@ class PairFinder(object):
 
 
     def loadRegion(self, chrom, start, end, mates=False):
-        ## TODO: should bail here if we're beyond self.maxReads and pair_minmapq is not 
-        ## being used
-
         count = self.sam.count(chrom, start, end)
         reads = self.sam.fetch(chrom, start, end)
 
