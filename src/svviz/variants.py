@@ -521,7 +521,8 @@ class Translocation(StructuralVariant):
         if not chrom1.startswith("chr"):
             chrom1 = "chr{}".format(chrom1)
             chrom2 = "chr{}".format(chrom2)
-        return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
+        return "{}::{}:{:,}/{}:{:,}".format(self.__class__.__name__, chrom1, self.breakpoints[0].start(), chrom2, self.breakpoints[1].start())
+        # return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
 
 class Breakend(StructuralVariant):
     def __init__(self, breakpoint1, breakpoint2, alignDistance, refFasta):
@@ -587,7 +588,7 @@ class Breakend(StructuralVariant):
         if not chrom1.startswith("chr"):
             chrom1 = "chr{}".format(chrom1)
             chrom2 = "chr{}".format(chrom2)
-        return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
+        return "{}::{}:{:,}/{}:{:,}".format(self.__class__.__name__, chrom1, self.breakpoints[0].start(), chrom2, self.breakpoints[1].start())
 
 
 
@@ -600,7 +601,7 @@ class LargeDeletion(Breakend):
 
     def deletionLength(self):
         return self.breakpoints[1].end() - self.breakpoints[0].start()
-        
+
     def __str__(self):
         return "{}::{}:{:,}-{:,}({})".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), 
             self.breakpoints[1].end(), self.deletionLength())
