@@ -24,6 +24,7 @@ def run(genome, vcfs, bams, previousSummaryPath):
         args = []
         args.append("test_script")
         args.append("-t batch")
+        args.append("--pair-min-mapq 50")
         args.append(" ".join("-b {}".format(bam) for bam in bams))
         args.append(genome)
         args.append(vcf)

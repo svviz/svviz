@@ -18,6 +18,7 @@ class PairFinder(object):
         self.regions = regions
         self.sam = sam
         self.minmapq = minmapq
+        self.pair_minmapq = pair_minmapq
         self.readsByID = collections.defaultdict(ReadSet)
         self.tomatch = set()
         self.supplementaryAlignmentsFound = False
@@ -35,7 +36,7 @@ class PairFinder(object):
         self.matched = [self.readsByID[id_].reads for id_ in matchIDs]
 
         if pair_minmapq > 0:
-            self.matched = [self.readsByID[id_].reads for id_ in matchIDs 
+            self.matched = [self.readsByID[id_].reads for id_ in matchIDs
                             if max(read.mapq for read in self.readsByID[id_].reads)>=pair_minmapq]
 
         logging.info("  reads with missing pairs: {}".format(sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))))
@@ -85,6 +86,11 @@ class PairFinder(object):
                 if (read.flag & 0x800) != 0 and not self.include_supplementary:
                     self.supplementaryAlignmentsFound = True
                     continue
+
+                # if not mates and read.mapq < self.pair_minmapq:
+                #     continue
+
+
                 # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
                 goodReads.append(read)

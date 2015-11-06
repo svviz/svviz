@@ -14,16 +14,16 @@ from svviz import testDemos
 from svviz import testCounts
 
 
-USAGE = """
-python runTests.py run|reset [hg19.ref.fa]
+# USAGE = """
+# python runTests.py run|reset [hg19.ref.fa]
 
-run         - run all svviz tests
-reset       - removes then regenerates all values stored for each test;
-              use only after verifying that svviz behavior has changed
-              and that the new behavior is correct
-hg19.ref.fa - path to reference genome; must be defined here or using
-              the environmental variable SVVIZ_HG19_FASTA
-"""
+# run         - run all svviz tests
+# reset       - removes then regenerates all values stored for each test;
+#               use only after verifying that svviz behavior has changed
+#               and that the new behavior is correct
+# hg19.ref.fa - path to reference genome; must be defined here or using
+#               the environmental variable SVVIZ_HG19_FASTA
+# """
 
 
 # reset ...
@@ -55,12 +55,12 @@ def _runTest(fn, description):
 
     return result
 
-def getHG19Ref():
+def getHG19Ref(path=None):
+    if path is not None:
+        os.environ["SVVIZ_HG19_FASTA"] = path
+        return path
+
     path = os.environ.get("SVVIZ_HG19_FASTA", None)
-    if path is None:
-        if len(sys.argv) < 3:
-            return None
-        path = sys.argv[2]
     assert os.path.exists(path), "Can't find hg19 reference fasta at path '{}'".format(path)
 
     return path
@@ -110,21 +110,25 @@ def saveTimingInfo(summary):
         
 
 
-def run():
+def run(which):
     print "running all tests..."
     summary = pandas.DataFrame(columns=["pass", "info", "timing"])
 
     # Test chromosome ends
-    summary.loc["chrom_ends"] = _runTest(runTestIssues, "issues")
+    if len(which)==0 or "chrom_ends" in which:
+        summary.loc["chrom_ends"] = _runTest(runTestIssues, "issues")
 
     # Run the demos
-    summary.loc["demos"] = _runTest(testDemos.run, "demos")
+    if len(which)==0 or "demos" in which:
+        summary.loc["demos"] = _runTest(testDemos.run, "demos")
 
     # Run regression testing on ref/alt/amb counts
-    summary.loc["counts"] = _runTest(runTestCounts, "counts")
+    if len(which)==0 or "counts" in which:
+        summary.loc["counts"] = _runTest(runTestCounts, "counts")
 
     # Run the render regression tests
-    summary.loc["rendering"] = _runTest(rendertest.run, "rendering")    
+    if len(which)==0 or "rendering" in which:
+        summary.loc["rendering"] = _runTest(rendertest.run, "rendering")    
 
     summary["timing"] = summary["timing"].apply(lambda x: "{}".format(datetime.timedelta(seconds=int(x))))
     print summary
@@ -138,20 +142,32 @@ def main():
     # don't ask me why I rolled my own regression testing code instead of using one of the 
     # gazillion existing frameworks...
 
-    if len(sys.argv) < 2:
-        print USAGE
-        return 
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-r", "--reference", help="path for hg19 reference fasta; must be defined here or "
+        "using the environmental variable SVVIZ_HG19_FASTA")
 
-    if sys.argv[1] == "run":
-        if getHG19Ref() is None:
-            print USAGE
+    parser.add_argument("mode", help="run|reset")
+    parser.add_argument("which", nargs="*", help="which analyses to run (default all)")
+
+    args = parser.parse_args()
+
+    print args.which
+
+    # if len(sys.argv) < 2:
+    #     print USAGE
+    #     return 
+
+    if args.mode == "run":
+        if getHG19Ref(args.reference) is None:
+            parser.print_help()
             print "ERROR: Must provide path for hg19 reference fasta"
             sys.exit(1)
-        run()
-    elif sys.argv[1] == "reset":
+        run(args.which)
+    elif args.mode == "reset":
         reset()
     else:
-        print USAGE
+        parser.print_help()
 
 if __name__ == '__main__':
     main()
