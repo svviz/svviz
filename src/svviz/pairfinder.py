@@ -2,6 +2,8 @@ import collections
 import logging
 import time
 
+class TooManyReadsException(Exception): pass
+
 class ReadSet(object):
     def __init__(self):
         self.reads = []
@@ -26,18 +28,16 @@ class PairFinder(object):
 
         for region in self.regions:
             self.tomatch.update(self.loadRegion(region.chr(), region.start(), region.end()))
+            if self.maxReads and len(self.tomatch) > self.maxReads:
+                raise TooManyReadsException
 
         if is_paired:
-            logging.debug("  To-match: {}, min-mapq: {}".format(len(self.tomatch), self.minmapq))
+            logging.debug("  To-match: {:,}".format(len(self.tomatch)))
             self.domatching()
 
 
         matchIDs = set(read.qname for read in self.tomatch)
         self.matched = [self.readsByID[id_].reads for id_ in matchIDs]
-
-        if pair_minmapq > 0:
-            self.matched = [self.readsByID[id_].reads for id_ in matchIDs]
-                            #if max(read.mapq for read in self.readsByID[id_].reads)>=pair_minmapq]
 
         logging.info("  reads with missing pairs: {}".format(sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))))
 
@@ -45,15 +45,15 @@ class PairFinder(object):
         t0 = None
 
         for i, read in enumerate(self.tomatch):#[:150]):
-            if i % 1000 == 0:
+            if i % 10000 == 0:
                 if t0 is None:
                     t0 = time.time()
                     elapsed = "Finding mate pairs..."
                 else:
                     t1 = time.time()
-                    elapsed = t1-t0
+                    elapsed = "t={:.1f}s".format(t1-t0)
                     t0 = t1
-                logging.info("  {} {} {}".format(i, len(self.tomatch), elapsed))
+                logging.info("   {:,} of {:,} {}".format(i, len(self.tomatch), elapsed))
             if len(self.readsByID[read.qname].reads) < 2:
                 self.findmatch(read)
 
@@ -90,14 +90,11 @@ class PairFinder(object):
                 if not mates and read.mapq < self.pair_minmapq:
                     continue
 
-
-                # beforeString = str([(rr.qname, rr.flag) for rr in self.readsByID[read.qname].reads]) +str((read.qname, read.flag))
                 self.readsByID[read.qname].add(read)
                 goodReads.append(read)
 
-                # if len(self.readsByID[read.qname].reads) > 1:
-                #     print ""
-                #     print "\n".join(map(str, self.readsByID[read.qname].reads))
-                #     print "*"*200
+                if not mates and self.maxReads and len(goodReads) > self.maxReads:
+                    return goodReads
+
 
         return goodReads

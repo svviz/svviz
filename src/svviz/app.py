@@ -11,6 +11,7 @@ from svviz import dotplots
 from svviz import export
 from svviz import flanking
 from svviz import insertsizes
+from svviz import pairfinder
 from svviz import remap
 from svviz import summarystats
 from svviz import track
@@ -79,12 +80,15 @@ def loadISDs(dataHub):
 def loadReads(dataHub):
     readCount = 0
     readLength = 0
+    maxReads = dataHub.args.max_reads
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
         sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, dataHub.args.pair_min_mapq,
-            sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary, dataHub.args.max_reads)
+            sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary, maxReads)
         readCount += len(sample.reads)
         readLength += sum(len(read.seq) for read in sample.reads)
+        if maxReads is not None:
+            maxReads -= readCount
 
 
     logging.info(" Found {:,} reads across {} samples for a total of {:,} nt".format(readCount, len(dataHub.samples), readLength))
@@ -289,7 +293,10 @@ def run(args):
         debug.printDebugInfo(dataHub)
 
         logging.info("* Loading reads and finding mates *")
-        readCount, readLength = loadReads(dataHub)
+        try:
+            readCount, readLength = loadReads(dataHub)
+        except pairfinder.TooManyReadsException:
+            readCount = dataHub.args.max_reads + 1
 
         nameExtra = None
         if len(svs) > 1:
