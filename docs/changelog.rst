@@ -1,6 +1,31 @@
 Change log
 ==========
 
+1.4.0
+-----
+
+This release includes many small improvements and bugfixes.
+
+One changes to svviz's behavior is notable:
+- the ``--pair-min-mapq`` option now requires one read end to both exceed this mapq threshold *and* be near the variant
+
+Improvements:
+- implemented a largedeletion variant type, with an option to automatically convert deletions above a certain size to use "breakend" mode, thus only analyzing reads near the deletion breakpoints (see the :ref:`FAQ <largedeletions>`)
+- implemented a ``--max-size`` option which skips variants exceeding the specified number of nucleotides (see the :ref:`FAQ <lotsoreads>`)
+- when the ``--max-reads`` option is provided in batch mode, svviz should stop analyzing a variant much sooner if that variant exceeds the max-reads threshold
+- dotplots now work with multi-part variants such as breakends
+- better conversion between chromosome formats (chrX<->X)
+- many tweaks to the progress information provided as svviz is running
+- no longer require file suffix on ``--export`` when in batch mode and ``--format`` is specified (A. Regier)
+- added support for using inkscape for PDF export; the ``--converter`` option can be used to choose between different conversion software packages
+- the test suite is now mostly included in the git repository in case anyone else wants to run the regression tests
+- added demo 3, a deletion with an example annotation track
+
+Bugfixes:
+- fixed handling of variant breakpoints near the ends of chromosomes (rpadmanabhan)
+- fixed a bug where reads mapping to both strands with similar alignment scores might not have been marked as multimapping
+
+
 1.3.2
 -----
 This release includes a number of bugfixes and additions to the documentation.

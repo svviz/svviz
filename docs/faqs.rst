@@ -56,6 +56,8 @@ For paired-end data, this warning may also appear as a result of trying to read 
 In most cases, svviz should take only a bit longer to find read-pairs, perhaps a few minutes. In the case that it is taking substantially longer, you can cancel svviz by hitting ctrl-c in the terminal. One potential option for skipping highly repetitive reads, thus improving performance, is to adjust the ``--min-mapq`` (``-q``) option. For example, if the maximum mapping-quality output by your alignment software is 60 (for example, when using bwa), you could specify ``-q 60`` when running svviz. The related ``--min-pair-mapq`` option requires that one read end be (1) close to the variant and (2) exceed this mapq threshold. For example, if both read ends have low map quality (eg, fall within a repeat), then the reads will be skipped. If instead one read end maps close to a breakpoint, but the other end maps elsewhere in the genome, to a repeat, then both reads will be retained (eg, in the case of a non-reference repeat).
 
 
+.. _largedeletions:
+
 **Can svviz handle large structural variants?**
 
 In theory, svviz can handle arbitrarily large structural variants, however this is limited in practice by memory and processing time. Memory scales with the number of reads being analyzed for the event. Run-time scales with the number of reads, the lengths of the reads and the size of the event. Run-time is also dependent on the I/O bandwidth, processor speed and number of processors.
