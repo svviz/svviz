@@ -34,7 +34,7 @@ Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of t
 News
 ----
 
-** Nov, 2015 -- svviz 1.4.0rc1** svviz 1.4.0 will be released soon. Please try out the `release candidate <https://github.com/svviz/svviz/releases/tag/1.4.0rc1>`_ in a non-production context and report any problems.
+**Nov, 2015 -- svviz 1.4.0rc1** svviz 1.4.0 will be released soon. Please try out the `release candidate <https://github.com/svviz/svviz/releases/tag/1.4.0rc1>`_ in a non-production context and report any problems.
 
 **Sept, 2015 -- Publication** The final version of the svviz paper is now `available in Bioinformatics <http://dx.doi.org/10.1093/bioinformatics/btv478>`_.
 
