@@ -522,7 +522,6 @@ class Translocation(StructuralVariant):
             chrom1 = "chr{}".format(chrom1)
             chrom2 = "chr{}".format(chrom2)
         return "{}::{}:{:,}/{}:{:,}".format(self.__class__.__name__, chrom1, self.breakpoints[0].start(), chrom2, self.breakpoints[1].start())
-        # return "{}::{}/{}".format(self.__class__.__name__, chrom1, chrom2)
 
 class Breakend(StructuralVariant):
     def __init__(self, breakpoint1, breakpoint2, alignDistance, refFasta):
