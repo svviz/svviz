@@ -497,10 +497,14 @@ class Translocation(StructuralVariant):
                 parts.append(ChromPart(name, [segments[3], segments[1]], self.sources))
         else:
             if allele in ["ref", "amb"]:
-                part = ChromPart("ref_{}".format(b1.chr()), segments[:2], self.sources)
+                name = "ref_{}".format(b1.chr())
+                part = ChromPart(name, segments[:2], self.sources)
                 parts.append(part)
 
-                part = ChromPart("ref_{}".format(b2.chr()), segments[2:], self.sources)
+                name = "ref_{}".format(b2.chr())
+                if b1.chr() == b2.chr(): name += "b"
+
+                part = ChromPart(name, segments[2:], self.sources)
                 parts.append(part)
 
             elif allele == "alt":

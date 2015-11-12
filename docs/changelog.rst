@@ -24,7 +24,7 @@ Improvements:
 Bugfixes:
 - fixed handling of variant breakpoints near the ends of chromosomes (rpadmanabhan)
 - fixed a bug where reads mapping to both strands with similar alignment scores might not have been marked as multimapping
-
+- fixed a bug which prevented correctly analyzing translocations on the same chromosome on the same strand
 
 1.3.2
 -----
