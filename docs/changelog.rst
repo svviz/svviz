@@ -7,9 +7,11 @@ Change log
 This release includes many small improvements and bugfixes.
 
 One changes to svviz's behavior is notable:
+
 - the ``--pair-min-mapq`` option now requires one read end to both exceed this mapq threshold *and* be near the variant
 
 Improvements:
+
 - implemented a largedeletion variant type, with an option to automatically convert deletions above a certain size to use "breakend" mode, thus only analyzing reads near the deletion breakpoints (see the :ref:`FAQ <largedeletions>`)
 - implemented a ``--max-size`` option which skips variants exceeding the specified number of nucleotides (see the :ref:`FAQ <lotsoreads>`)
 - when the ``--max-reads`` option is provided in batch mode, svviz should stop analyzing a variant much sooner if that variant exceeds the max-reads threshold
