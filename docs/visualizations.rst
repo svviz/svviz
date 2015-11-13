@@ -42,7 +42,7 @@ To stop running the locally-hosted server and quit python, press ctrl-c in the t
 Complex variants
 ----------------
 
-For some structural variant types, the breakpoints are distant in the genome (in the extreme, they fall on entirely different chromosomes). An example might be a translocation between chromosome 1 and chromosome 7. To visualize these types of events, svviz visualizes each breakpoint region in a separate "chromosome part", which are then separated visually by a thicke gray line.
+For some structural variant types, the breakpoints are distant in the genome (in the extreme, they fall on entirely different chromosomes). An example might be a translocation between chromosome 6 and chromosome 19. To visualize these types of events, svviz visualizes each breakpoint region in a separate "chromosome part", which are then separated visually by a thick gray line.
 
 .. figure:: translocation.png
     :width: 80%
@@ -50,3 +50,6 @@ For some structural variant types, the breakpoints are distant in the genome (in
 
     A translocation between chromosomes 6 and 19 that was found only in the cancer sample but not the matched normal sample.
 
+Here, in the reference allele, you can see the chromosome 19 part colored red (upstream of breakpoint) and blue (downstream of breakpoint). The chromosome 6 part has two parts, this time shown in reverse orientation (indicated by axis arrows pointing left), gray (upstream) and yellow (downstream). Reads are shown tiling nicely across both breakpoints in both the cancer and matched normal sample.
+
+The alternate allele shows the fusion of the red upstream chromosome 19 segment with the gray upstream segment of chromosome 6. Reads tile across this translocation breakpoint in the cancer but not the normal sample (here, this is a fusion of two genic regions in the intronic regions; nearby genes can be shown using bed/gff format gene annotations). Note also that the reciprocal event (the yellow/blue fusion) is shown but with zero supporting reads.
