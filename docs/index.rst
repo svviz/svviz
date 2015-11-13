@@ -12,8 +12,10 @@ svviz - a read visualizer for structural variants
    intro
    features
    install
-   webinterface
+   visualizations
    commandline
+   summaryoutput
+   batchmode
    faqs
    changelog
    license
