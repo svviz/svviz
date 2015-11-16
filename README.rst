@@ -8,9 +8,16 @@ svviz
 
 Author: Noah Spies
 
+Latest version: |pypi|_
+
 ``svviz`` visualizes high-throughput sequencing data relevant to a structural variant. Only reads supporting the variant or the reference allele will be shown. svviz can operate in both an interactive web browser view to closely inspect individual variants, or in batch mode, allowing multiple variants (annotated in a VCF file) to be analyzed simultaneously.
 
 Visit the `project site <http://svviz.github.io/svviz/>`_ for a tour of the features and example output.
+
+
+.. |pypi| image:: https://img.shields.io/pypi/v/svviz.png   
+.. _pypi: http://svviz.readthedocs.org/en/latest/install.html
+
 
     
 Quickstart
