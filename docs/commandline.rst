@@ -14,8 +14,8 @@ To visualize your structural variant of interest, you will need at least the fol
     :Inversions: To specify an inverted region, use ``chrom start end``.
     :Insertions: The format for specifying insertions is ``chrom breakpoint <inserted sequence>``.
     :Mobile elements: Mobile element insertions can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
-    :Translocations: Translocations can be specified using the following format: ``chrom1 pos1 chrom2 pos2 orientation``, where ``orientation`` is either ``+`` or ``-``, and specifies whether region1 and region2 are both on the plus strand of the genome, or are on opposite genomic strands; and pos1 and pos2 are the chromosomal coordinates of the breakpoints.
-    :Breakend: Additional types of structural variant can be specified using `breakend <http://samtools.github.io/hts-specs/VCFv4.2.pdf>`_ format: ``chrom1 pos1 strand1 chrom2 pos2 strand2``. Note that, due to limitations of the Smith-Waterman alignment library used by svviz, breakend breakpoints must be distant from one another, relative to the insert size/read length.
+    :Translocations: Translocations can be specified using the following format: ``chrom1 pos1 chrom2 pos2 orientation``, where ``orientation`` is either ``+`` or ``-``, and specifies whether region1 and region2 are both on the plus strand of the genome, or are on opposite genomic strands; and pos1 and pos2 are the chromosomal coordinates of the breakpoints. See :ref:`below <breakends>`_ for more info.
+    :Breakend: Additional types of structural variant can be specified using `breakend <http://samtools.github.io/hts-specs/VCFv4.2.pdf>`_ format: ``chrom1 pos1 strand1 chrom2 pos2 strand2``. Note that, due to limitations of the Smith-Waterman alignment library used by svviz, breakend breakpoints must be distant from one another, relative to the insert size/read length. See :ref:`below <breakends>`_ for more info.
     :Batch: see :ref:`here <batch-mode>`
 
 For example, a deletion might be called as:
@@ -62,11 +62,12 @@ The dotplot output shows regions of similarity within the reference allele as li
 A related option is ``--max-multimapping-similarity``, which adjust how aggressively svviz filters out reads that potentially align to multiple locations near the structural variant. The default score of 0.95 means that any read (for paired-end reads, this means any read-end) whose second-best alignment score is more than 0.95 times the best alignment score will be assigned as ambiguous. For example, if the best alignment score is 445, and the second-best alignment score is 439, the multimapping similarity would be 439/445=0.99 and the read would be marked as ambiguous. However, a read whose best alignment score is 445 but second-best alignment score is 405 would not be filtered because the multimapping similarity of 395/445=0.89 is less than 0.95.
 
 
+.. _breakends:
 
 Translocations and Breakends
 ----------------------------
 
-Complex variants (first introduced :ref:`here <complex_variants>`) can be visualized using the translocation or breakend event types. Two possible orientations are possible for a translocation, "+" and "--":
+Complex variants (first introduced :ref:`here <complex_variants>`_) can be visualized using the translocation or breakend event types. Two possible orientations are possible for a translocation, "+" and "--":
 
 .. figure:: translocation_possibilities.png
     :width: 80%
@@ -92,8 +93,8 @@ The breakend event type takes two genomic locations and analyzes the structural 
 
 For example, the four fusions shown in the figure above would be specified as follows in breakend format:
 
-- (top-left): ``chr1 32456789 + chr2 12468579 +``
-- (top-right): ``chr2 12468579 + chr1 32456789 +``
-- (bottom-left): ``chr1 32456789 + chr2 12468579 -``
-- (bottom-right): ``chr2 12468579 - chr1 32456789 +``
+- ``chr1 32456789 + chr2 12468579 +`` (top-left)
+- ``chr2 12468579 + chr1 32456789 +`` (top-right)
+- ``chr1 32456789 + chr2 12468579 -`` (bottom-left)
+- ``chr2 12468579 - chr1 32456789 +`` (bottom-right)
 
