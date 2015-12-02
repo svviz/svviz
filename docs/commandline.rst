@@ -14,8 +14,8 @@ To visualize your structural variant of interest, you will need at least the fol
     :Inversions: To specify an inverted region, use ``chrom start end``.
     :Insertions: The format for specifying insertions is ``chrom breakpoint <inserted sequence>``.
     :Mobile elements: Mobile element insertions can be specified by ``<mobile_elements.fasta> <chrom> <pos> <ME name> [ME strand [start [end]]]``, where ``<ME name>`` must match the header line from the mobile_elements.fasta file, and strand, start and end are optional coordinates of the relevant portion from the mobile element sequence.
-    :Translocations: Translocations can be specified using the following format: ``chrom1 pos1 chrom2 pos2 orientation``, where ``orientation`` is either ``+`` or ``-``, and specifies whether region1 and region2 are both on the plus strand of the genome, or are on opposite genomic strands; and pos1 and pos2 are the chromosomal coordinates of the breakpoints. See :ref:`below <breakends>`_ for more info.
-    :Breakend: Additional types of structural variant can be specified using `breakend <http://samtools.github.io/hts-specs/VCFv4.2.pdf>`_ format: ``chrom1 pos1 strand1 chrom2 pos2 strand2``. Note that, due to limitations of the Smith-Waterman alignment library used by svviz, breakend breakpoints must be distant from one another, relative to the insert size/read length. See :ref:`below <breakends>`_ for more info.
+    :Translocations: Translocations can be specified using the following format: ``chrom1 pos1 chrom2 pos2 orientation``, where ``orientation`` is either ``+`` or ``-``, and specifies whether region1 and region2 are both on the plus strand of the genome, or are on opposite genomic strands; and pos1 and pos2 are the chromosomal coordinates of the breakpoints. See :ref:`below <breakends>` for more info.
+    :Breakend: Additional types of structural variant can be specified using `breakend <http://samtools.github.io/hts-specs/VCFv4.2.pdf>`_ format: ``chrom1 pos1 strand1 chrom2 pos2 strand2``. Note that, due to limitations of the Smith-Waterman alignment library used by svviz, breakend breakpoints must be distant from one another, relative to the insert size/read length. See :ref:`below <breakends>` for more info.
     :Batch: see :ref:`here <batch-mode>`
 
 For example, a deletion might be called as:
@@ -67,7 +67,7 @@ A related option is ``--max-multimapping-similarity``, which adjust how aggressi
 Translocations and Breakends
 ----------------------------
 
-Complex variants (first introduced :ref:`here <complex_variants>`_) can be visualized using the translocation or breakend event types. Two possible orientations are possible for a translocation, "+" and "--":
+Complex variants (first introduced :ref:`here <complex_variants>`) can be visualized using the translocation or breakend event types. Two possible orientations are possible for a translocation, "+" and "--":
 
 .. figure:: translocation_possibilities.png
     :width: 80%
