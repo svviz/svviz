@@ -70,7 +70,7 @@ Translocations and Breakends
 Complex variants (first introduced :ref:`here <complex_variants>`) can be visualized using the translocation or breakend event types. Two possible orientations are possible for a translocation, "+" and "--":
 
 .. figure:: translocation_possibilities.png
-    :width: 80%
+    :width: 100%
     :align: center
 
     Possible orientations for a translocation event.
