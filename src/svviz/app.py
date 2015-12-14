@@ -165,9 +165,12 @@ def runDirectExport(dataHub):
 
         exportFormat = export.getExportFormat(dataHub.args)
 
-        if dataHub.args.type == "batch" or dataHub.args.format is not None:
+        if dataHub.args.type == "batch":
             if not os.path.exists(dataHub.args.export):
                 os.makedirs(dataHub.args.export)
+            elif not os.path.isdir(dataHub.args.export):
+                logging.error("In batch mode, --export must be passed as a directory, not a file: '{}'".format(dataHub.args.export))
+                sys.exit(1)
             path = os.path.join(dataHub.args.export, "{}.{}".format(dataHub.variant.shortName(), exportFormat))
         else:
             path = dataHub.args.export
@@ -177,12 +180,17 @@ def runDirectExport(dataHub):
             converter = export.getExportConverter(dataHub.args, exportFormat)
             exportData = export.convertSVG(exportData, exportFormat, converter)
 
-        outf = open(path, "w")
-        outf.write(exportData)
-        outf.close()
+        with open(path, "w") as outf:
+            outf.write(exportData)
 
         if dataHub.args.open_exported:
             utilities.launchFile(dataHub.args.export)
+
+        if dataHub.args.dotplots:
+            dotplotPath = os.path.splitext(path)[0] + ".dotplot.png"
+            with open(dotplotPath, "wb") as dotplotFile:
+                dotplotFile.write(dataHub.dotplots["ref vs ref"])
+
 
 def runWebView(dataHub):
     if not dataHub.args.no_web:

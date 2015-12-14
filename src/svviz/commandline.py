@@ -226,6 +226,10 @@ def parseArgs(args):
         if args.type!="batch" and args.format is None and not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
             print "Export filename must end with one of .svg, .png or .pdf"
             sys.exit(1)
+    elif args.format is not None:
+        logging.error("ERROR: '--format' option provided without specifying '--export'")
+        sys.exit(1)
+
 
     if args.port is not None:
         if args.no_web:
