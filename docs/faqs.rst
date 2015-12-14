@@ -49,7 +49,7 @@ If you know the genomic region including the structural variant is repetitive, o
 
 The "LOTS OF READS IN BREAKPOINT/MATE-PAIR REGION" warning indicates that svviz will be trying to pull reads in from a genomic region with very high sequencing coverage (over 100,000 reads within the region). This warning may appear when analyzing very high coverage sequencing data or extremely large regions. The warning indicates that run-time or memory to analyze a variant may be excessive. 
 
-To skip variants that are particularly large use the ``--min-size`` option, for example to skip events that are larger than 1 megabase (``--min-size 1000000``). To skip variants with too many reads, use the ``--min-reads`` option, for example to skip events with more than 100,000 reads (``--min-reads 100000``). 
+To skip variants that are particularly large use the ``--max-size`` option, for example to skip events that are larger than 1 megabase (``--max-size 1000000``). To skip variants with too many reads, use the ``--max-reads`` option, for example to skip events with more than 100,000 reads (``--max-reads 100000``). 
 
 For paired-end data, this warning may also appear as a result of trying to read in mate-pairs from the input BAM(s). svviz first finds all reads in the vicinity of the structural variant being analyzed. For paired-end data, svviz then tries to find the read mates for all reads identified previously. Most of the reads and their mates should both be near the breakpoints. However, in the case of a repetitively-mapping sequence, an incorrectly-called breakpoint, or a mapping error, reads can be separated from their mates in the genome. Thus, to find the mates for these types of reads, svviz must access other genomic locations from the input BAM.
 
