@@ -82,7 +82,7 @@ class Multiprocessor(object):
                     mappedValues.extend(asyncResult.get())
                     asyncResults.remove(asyncResult)
                     if verbose > 2:
-                        progressBar.finish(asyncResult.chunkCount)
+                        progressBar.finishProcess(asyncResult.chunkCount)
                     elif verbose >= 1:
                         print "-- %i of %i done"%(numChunks-len(asyncResults), numChunks)
             
@@ -95,10 +95,11 @@ class Multiprocessor(object):
             if verbose > 2:
                 progressBar.redraw()
         
+
         pool.join()        
 
         if verbose > 2:
-            sys.stderr.write("\n")
+            progressBar.finish()
         #     t1 = time.time()
         #     print "  total time elapsed:", t1-t0
         return mappedValues
@@ -145,6 +146,15 @@ def _map(cls, methodName, initArgs, args, chunkNum, verbose):
         traceback.print_exc(file=sys.stdout)
         raise
 
+def formatTime(t):
+    if t > 3600:
+        t = "%.1fh"%(t / 3600.0)
+    elif t > 60:
+        t = "%.1fm"%(t / 60.0)
+    else:
+        t = "%.1fs"%(t)
+    return t
+
 class _multiProgressBar(object):
     """ a stupid little progress bar to keep track of multiple processes going on at once """
     def __init__(self, name=""):
@@ -176,12 +186,7 @@ class _multiProgressBar(object):
         
         #return t_remaining # in seconds
 
-        if t_remaining > 3600:
-            self.timeRemaining = "%.1fh"%(t_remaining / 3600.0)
-        elif t_remaining > 60:
-            self.timeRemaining = "%.1fm"%(t_remaining / 60.0)
-        else:
-            self.timeRemaining = "%.1fs"%(t_remaining)
+        self.timeRemaining = formatTime(t_remaining)
         
     def update(self, barid, completed=None, total=None):
         if completed == None:
@@ -196,11 +201,21 @@ class _multiProgressBar(object):
 
         self.updateTimeRemaining(overallCompleted, overallTotal)
         
-    def finish(self, barid):
+    def finishProcess(self, barid):
         if not barid in self.barsToProgress:
             self.barsToProgress[barid] = (100,100)
         self.barsToProgress[barid] = (self.barsToProgress[barid][1], self.barsToProgress[barid][1])
         self.redraw()
+
+    def finish(self):
+        text = [" "]
+        if len(self.name) > 0:
+            text.append(self.name)
+        text.append("[completed] time elapsed: {}".format(formatTime(time.time()-self.t0)))
+        text = " ".join(text)
+        text = text.ljust(self.term_width)
+        
+        sys.stderr.write(text+"\n")
         
     def redraw(self):
         overallTotal = sum(x[1] for x in self.barsToProgress.values())
