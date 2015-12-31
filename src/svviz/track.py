@@ -313,7 +313,7 @@ class ReadRenderer(object):
 
 
 
-class Track(object):
+class Track_(object):
     def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, 
                  allele, thickerLines, colorCigar):
         self.alignmentSets = alignmentSets
@@ -359,7 +359,7 @@ class Track(object):
         self.xmax = max(track.xmax for track in tracks)
 
 
-class TrackGroup(object):
+class Track(object):
     def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, 
                  allele, thickerLines, colorCigar):
         self.chromPartsCollection = chromPartsCollection
