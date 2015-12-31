@@ -145,10 +145,10 @@ class Axis(object):
                 if thickerLines:
                     thickness *= 2
                 x = self.scale.topixels(vline, part.id)
-                self.svg.line(x, 20*scaleFactor, x, 55*scaleFactor, 
+                self.svg.line(x, 20*scaleFactor, x, 55*scaleFactor,
                     stroke="black", **{"stroke-width":thickness})
-                
-                if previousPosition is None or x-previousPosition > 250*scaleFactor:     
+
+                if previousPosition is None or x-previousPosition > 250*scaleFactor:
                     self.svg.text(x-(scaleFactor/2.0), 18*scaleFactor, "breakpoint", size=18*scaleFactor, fill="black")
                 previousPosition = x
 
@@ -194,8 +194,8 @@ class ReadRenderer(object):
         yoffset = alignmentSet.yoffset
         if len(set([x.regionID for x in alignmentSet.getAlignments()]))!=1:
             global NYIWarned
-            
-            if not NYIWarned:            
+
+            if not NYIWarned:
                 NYIWarned = True
                 print "\n"*5
                 print "WARNING! Not yet implemented: ambiguous track display of read pairs mapping to different chromosomes"
@@ -241,7 +241,7 @@ class ReadRenderer(object):
                 extras["class"] = "read flanking"
                 curColor = "#AAAAAA"
 
-            self.svg.rect(pstart, ystart, pend-pstart, height, fill=curColor, 
+            self.svg.rect(pstart, ystart, pend-pstart, height, fill=curColor,
                           **extras)
 
             if self.colorCigar:
@@ -275,7 +275,7 @@ class ReadRenderer(object):
 
                     alt = alignment.seq[sequencePosition+i]
                     ref = chromPartSeq[genomePosition+i]
-                    
+
                     if eachNuc or alt!=ref:
                         self.svg.rect(curstart, yoffset, curend-curstart, height, fill=color, **extras)
 
@@ -308,12 +308,60 @@ class ReadRenderer(object):
             curColor = self.overlapColor
             # if isFlanking:
             #     curColor = "#88FF88"
-            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=curColor, 
+            self.svg.rect(curstart, yoffset, curend-curstart, height, fill=curColor,
                 **{"class":"read", "data-readid":readID})
 
 
+
 class Track(object):
-    def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, allele, thickerLines, colorCigar):
+    def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, 
+                 allele, thickerLines, colorCigar):
+        self.alignmentSets = alignmentSets
+        self.alignmentSetGroups = collections.defaultdict(list)
+
+        for alignmentSet in alignmentSets:
+            score = dict(alignmentSet.tags()).get("AS", None)
+            if score is None:
+                self.alignmentSetGroups["None"].append(alignmentSet)
+            elif 0 <= score < 50:
+                self.alignmentSetGroups["0->50"].append(alignmentSet)
+            elif 50 <= score < 100:
+                self.alignmentSetGroups["50->100"].append(alignmentSet)
+            elif 100 <= score:
+                self.alignmentSetGroups[">100"].append(alignmentSet)
+
+        self.trackGroups = collections.OrderedDict()
+        for groupname, asg in self.alignmentSetGroups.iteritems():
+            self.trackGroups[groupname] = TrackGroup(chromPartsCollection, 
+                    asg, height/len(self.alignmentSetGroups), width, 
+                    variant, allele, thickerLines, colorCigar)
+
+        self.scale = Scale(chromPartsCollection, width)
+        self.svg = None
+
+        self.xmin = None
+        self.xmax = None
+
+        self.width = width
+        self.height = height
+
+
+    def render(self):
+        tracks = self.trackGroups.values()
+        for track in tracks:
+            track.render()
+        # self.svg = "\n".join(str(track.svg) for track in tracks) + "\n"
+        self.svg = SVG(self.width, self.height)
+        for track in tracks:
+            self.svg.insertSVG(track.svg)
+
+        self.xmin = min(track.xmin for track in tracks)
+        self.xmax = max(track.xmax for track in tracks)
+
+
+class TrackGroup(object):
+    def __init__(self, chromPartsCollection, alignmentSets, height, width, variant, 
+                 allele, thickerLines, colorCigar):
         self.chromPartsCollection = chromPartsCollection
         self.height = height
         self.width = width
@@ -323,7 +371,9 @@ class Track(object):
         self.rowHeight = 5
         self.rowMargin = 1
 
-        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, self.chromPartsCollection, thickerLines, colorCigar)
+        self.readRenderer = ReadRenderer(self.rowHeight, self.scale, 
+                                         self.chromPartsCollection, thickerLines, 
+                                         colorCigar)
 
         self.alignmentSets = alignmentSets
 
@@ -356,10 +406,11 @@ class Track(object):
     def getAlignments(self):
         # check which reads are overlapping (self.gstart, self.gend)
         # sorting by name makes the layout process deterministic
-        regionIDsToPositions = dict((part.id, i) for i, part in enumerate(self.chromPartsCollection))
+        regionIDsToPositions = dict((part.id, i) for i, part in 
+                                    enumerate(self.chromPartsCollection))
 
         def sortKey(alnSet):
-            return (regionIDsToPositions[alnSet.getAlignments()[0].regionID], 
+            return (regionIDsToPositions[alnSet.getAlignments()[0].regionID],
                     alnSet.start, alnSet.end, alnSet.name())
 
         return sorted(self.alignmentSets, key=sortKey)
@@ -390,14 +441,15 @@ class Track(object):
 
         self.height = (self.rowHeight+self.rowMargin) * len(self.rows)
 
-    def render(self):        
+    def render(self):
         if len(self.getAlignments()) == 0:
             xmiddle = self.scale.pixelWidth / 2.0
 
             self.height = xmiddle/20.0
 
             self.svg = SVG(self.width, self.height)
-            self.svg.text(xmiddle, self.height*0.05, "No reads found", size=self.height*0.9, fill="#999999")
+            self.svg.text(xmiddle, self.height*0.05, "No reads found", 
+                          size=self.height*0.9, fill="#999999")
             self.rendered = self.svg.asString()
             return self.rendered
 
@@ -432,7 +484,7 @@ class Track(object):
             self.svg.line(x, 0, x, self.height+40, stroke="black", **{"stroke-width":4})
             self.svg.line(x+divWidth, 0, x+divWidth, self.height+40, stroke="black", **{"stroke-width":4})
 
-        self.svg.rect(0, self.svg.height+20, self.scale.pixelWidth, 
+        self.svg.rect(0, self.svg.height+20, self.scale.pixelWidth,
             self.height+40, opacity=0.0, zindex=0)
         self.rendered = str(self.svg)
 
@@ -520,7 +572,7 @@ class AnnotationTrack(object):
 
         if end < start:
             start, end = end, start
-            
+
         width = end - start
 
         ystart = y-((self.rowheight-height)/2.0)*scaleFactor
@@ -537,7 +589,7 @@ class AnnotationTrack(object):
             y = ((anno.coords["row"]+1) * self.rowheight + 20) * scaleFactor
             width = anno.coords["end"] - anno.coords["start"]
 
-            self.svg.rect(anno.coords["start"], y-((self.rowheight-2.0)/2.0)*scaleFactor, width, 2.0*scaleFactor, fill=color)     
+            self.svg.rect(anno.coords["start"], y-((self.rowheight-2.0)/2.0)*scaleFactor, width, 2.0*scaleFactor, fill=color)
 
             for txExon in anno.txExons:
                 start, end = txExon
@@ -553,8 +605,8 @@ class AnnotationTrack(object):
                 self.svg.rect(self.scale.pixelWidth - w, y, w, self.rowheight*scaleFactor, fill="white", **{"fill-opacity":0.40})
                 self.svg.text(self.scale.pixelWidth, y-((self.rowheight-1)*scaleFactor), anno.label, size=textSize, fill=color, anchor="end", **{"fill-opacity":0.70})
             else:
-                self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
-                    anno.label, size=textSize, anchor="start", fill=color)   
+                self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor),
+                    anno.label, size=textSize, anchor="start", fill=color)
 
     def _drawBED(self, scaleFactor):
         for anno in self._annos:
@@ -563,7 +615,7 @@ class AnnotationTrack(object):
             width = anno.coords["end"] - anno.coords["start"]
 
             self.svg.rect(anno.coords["start"], y, width, self.rowheight*scaleFactor, fill=color)
-            self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor), 
+            self.svg.text(anno.coords["end"]+(self.rowheight/2.0), y-((self.rowheight-1)*scaleFactor),
                 anno.label, size=(self.rowheight-2)*scaleFactor, anchor="start", fill=color)
 
     def render(self, scaleFactor=1.0, spacing=1, height=None, thickerLines=False):
@@ -595,5 +647,3 @@ class AnnotationTrack(object):
                 if thickerLines:
                     thickness *= 2
                 self.svg.line(x, y1, x, y2, stroke="black", **{"stroke-width":thickness})
-
-

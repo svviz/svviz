@@ -5,7 +5,8 @@ import re
 
 
 class Alignment(object):
-    def __init__(self, name, regionID, start, end, strand, seq, cigar, score, genome_seq, score2, mapq):
+    def __init__(self, name, regionID, start, end, strand, seq, cigar, 
+                 score, genome_seq, score2, mapq, tags=None):
         self.name = name
         self.regionID = regionID # regionID aka chromosome part ID
         self.start = start
@@ -17,6 +18,11 @@ class Alignment(object):
         self.score = score
         self.score2 = score2
         self.mapq = mapq
+
+        # list of tuples, as per pysam; easily converted using dict(self.tags)
+        self.tags = []
+        if tags is not None:
+            self.tags = tags
 
 
 class AlignmentSet(object):
@@ -69,6 +75,8 @@ class AlignmentSet(object):
             return names.pop()
         raise Exception("names are not consistent")
 
+    def tags(self):
+        return self._alignments[0].tags
 
 class AlignmentSetCollection(object):
     def __init__(self, name=None):

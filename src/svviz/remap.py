@@ -117,7 +117,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     if read.is_reverse:
         bestStrand = "+" if bestStrand=="-" else "-"
     bestAln = Alignment(read.qname, bestName, bestAln.ref_begin, bestAln.ref_end, bestStrand, seq, bestAln.cigar_string, 
-                    bestAln.score, genome_seq, secondScore, read.mapq)
+                    bestAln.score, genome_seq, secondScore, read.mapq, read.tags)
     return bestAln
 
 

@@ -151,29 +151,37 @@ class SVG(object):
             zindex = len(self.svg)
         return zindex
 
-    def header(self):
+    def header(self, xmlHeader=True):
         header = []
         # """<?xml version="1.0" encoding="utf-8" ?>"""
-        header.append("""<svg baseProfile="full" version="1.1" """
-            """xmlns="http://www.w3.org/2000/svg" {extras} """
-            """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>{markers}</defs>""".format(extras=self.headerExtras,
-                markers="\n".join(self.markers.values())))
 
+        if xmlHeader:
+            header.append("""<svg baseProfile="full" version="1.1" """
+                """xmlns="http://www.w3.org/2000/svg" {extras} """
+                """xmlns:ev="http://www.w3.org/2001/xml-events" """
+                """xmlns:xlink="http://www.w3.org/1999/xlink">"""
+                """<defs>{markers}</defs>""".format(extras=self.headerExtras,
+                    markers="\n".join(self.markers.values())))
+        else:
+            header.append("""<svg {extras}> <defs>{markers}</defs>""".format(
+                extras=self.headerExtras,
+                markers="\n".join(self.markers.values())))
         header.append("<g class=\"svg_viewport\">")
         return header
 
     def __str__(self):
         return self.asString()
 
-    def asString(self, headerSet=None):
+    def asString(self, headerSet=None, xmlHeader=True):
         oldHeaderExtras = self.headerExtras
 
         if headerSet is None:
             self.headerExtras += """viewBox="0 0 {w} {h}" """.format(w=self.width, h=self.height)
-            header = self.header()
+            self.headerExtras += """preserveAspectRatio="none" """
+            header = self.header(xmlHeader=xmlHeader)
         elif headerSet == "export":
             self.headerExtras = ""
-            header = self.header()
+            header = self.header(xmlHeader=xmlHeader)
         elif headerSet == "web":
             xmlHeader = """<?xml version="1.0" encoding="utf-8" ?>"""
             self.headerExtras += """preserveAspectRatio="none" height="100%" width="100%" """
@@ -205,6 +213,16 @@ class SVG(object):
     def text(self, x, y, text, size=10, anchor="middle", fill="", family="Helvetica", **kwdargs):
         self.svg.append(Text(x, y, text, size, anchor, fill, family, **kwdargs).render(self))
 
+    def insertSVG(self, otherSVG, x, y, width=None, height=None):
+        if width is None:
+            width = otherSVG.width
+        if height is None:
+            height = otherSVG.height
+
+        headerExtras = """x="{x}" y="{y}" width="{wscaled}" height="{hscaled}" """
+        headerExtras = headerExtras.format(x=x, y=y, wscaled=width, hscaled=height)
+        otherSVG.headerExtras = headerExtras
+        self.svg.append(otherSVG.asString(headerSet=None, xmlHeader=False)+"\n")
 
 
 
