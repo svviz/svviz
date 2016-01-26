@@ -102,8 +102,9 @@ def parseArgs(args):
 
     inputParams = parser.add_argument_group("input parameters")
     inputParams.add_argument("-t", "--type", help=
-        "event type: either del[etion], ins[ertion], mei (mobile element insertion), or batch (for \n"
-        "reading variants from a VCF file in batch mode)")
+        "event type: either del[etion], ins[ertion], inv[ersion], mei (mobile element insertion), \n"
+        "tra[nslocation], largedeletion (ldel), breakend (bkend) or batch (for reading variants  \n"
+        "from a VCF file in batch mode)")
 
     inputParams.add_argument("-A", "--annotations", action="append", help=
         "bed or gtf file containing annotations to plot; will be compressed and indexed using \n"
