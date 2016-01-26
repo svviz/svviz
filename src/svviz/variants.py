@@ -54,22 +54,22 @@ class ChromPartsCollection(object):
 def getBreakpointFormatsStr(which=None):
     formats = []
     if which in ["del", None]:
-        formats.append("Format for deletion breakpoints is '<chrom> <start> <end>'")
+        formats.append("Format for deletion (-t del) breakpoints is '<chrom> <start> <end>'")
     if which in ["ldel", None]:
-        formats.append("Format for large deletion breakpoints is '<chrom> <start> <end>'")
+        formats.append("Format for largedeletion (-t ldel) breakpoints is '<chrom> <start> <end>'")
     if which in ["ins", None]:
-        formats.append("Format for insertion breakpoints is '<chrom> <pos> [end] <seq>'; \n"
+        formats.append("Format for insertion (-t ins) breakpoints is '<chrom> <pos> [end] <seq>'; \n"
             "  specify 'end' to create a compound deletion-insertion, otherwise insertion \n"
             "  position is before 'pos'")
     if which in ["inv", None]:
-        formats.append("Format for inversion breakpoints is '<chrom> <start> <end>'")
+        formats.append("Format for inversion (-t inv) breakpoints is '<chrom> <start> <end>'")
     if which in ["mei", None]:
-        formats.append( "Format for mobile element insertion is '<mobile_elements.fasta> \n"
+        formats.append( "Format for mobile element insertion (-t mei) is '<mobile_elements.fasta> \n"
             "  <chrom> <pos> <ME name> [ME strand [start [end]]]'")
     if which in ["tra", None]:
-        formats.append( "Format for a translocation is 'chrom1 start1 chrom2 start2 orientation'")
+        formats.append( "Format for a translocation (-t tra) is 'chrom1 start1 chrom2 start2 orientation'")
     if which in ["bkend", None]:
-        formats.append( "Format for a breakend is 'chrom1 start1 strand1 chrom2 start2 strand2'")
+        formats.append( "Format for a breakend (-t bkend) is 'chrom1 start1 strand1 chrom2 start2 strand2'")
     return "\n".join(formats)
 
 
