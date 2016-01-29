@@ -94,6 +94,8 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     secondScore = None
 
     for name, mapping in mappings.iteritems():
+        if mapping is None:
+            return None
         strand, aln = mapping
         if bestAln is None or aln.score > bestAln.score:
             bestName = name
@@ -130,7 +132,13 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
 
     # map each read sequence against each chromosome part (the current allele only)
 
-    if processes != 1:
+    if processes == -1:
+        from svviz import alignproc
+        logging.info(" == aligning using slower subprocesses for error-prone "
+            "datasets (eg pacbio) ==")
+        remapped = alignproc.multimap(namesToReferences, [read.seq for read in reads])
+        # raise Exception("not yet implemented")
+    elif processes != 1:
         verbose = 0
         if sys.stdout.isatty():
             verbose = 3
@@ -148,13 +156,18 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
             remapped[seq] = result
 
     alignmentSets = collections.defaultdict(AlignmentSet)
+    badReads = set()
+
     for read in reads:
         # TODO: for paired-end, if there are equally-scoring alignments in multiple parts, we should pick
         # the pair which are in the correct orientation
         aln = chooseBestAlignment(read, remapped[read.seq], chromPartsCollection)
+        if aln is None:
+            badReads.append(read.qname)
+
         alignmentSets[read.qname].addAlignment(aln)
 
-    return alignmentSets
+    return alignmentSets, badReads
 
 
 
@@ -170,11 +183,20 @@ def do_realign(dataHub, sample):
     name = "{}:{{}}".format(sample.name[:15])
 
     t0 = time.time()
-    refalignments = do1remap(variant.chromParts("ref"), reads, processes, jobName=name.format("ref"))
-    altalignments = do1remap(variant.chromParts("alt"), reads, processes, jobName=name.format("alt"))
+    refalignments, badReadsRef = do1remap(variant.chromParts("ref"), reads, processes, 
+        jobName=name.format("ref"))
+    altalignments, badReadsAlt = do1remap(variant.chromParts("alt"), reads, processes, 
+        jobName=name.format("alt"))
     t1 = time.time()
 
     logging.debug(" Time to realign: {:.1f}s".format(t1-t0))
+
+    badReads = badReadsRef.union(badReadsAlt)
+    if len(badReads) > 0:
+        logging.warn(" Alignment failed with {} reads (this is a known issue)".format(badReads))
+        for badRead in badReads:
+            refalignments.pop(badRead, None)
+            altalignments.pop(badRead, None)
 
     assert refalignments.keys() == altalignments.keys()
 
