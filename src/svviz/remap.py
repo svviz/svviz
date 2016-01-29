@@ -163,7 +163,7 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
         # the pair which are in the correct orientation
         aln = chooseBestAlignment(read, remapped[read.seq], chromPartsCollection)
         if aln is None:
-            badReads.append(read.qname)
+            badReads.add(read.qname)
 
         alignmentSets[read.qname].addAlignment(aln)
 
