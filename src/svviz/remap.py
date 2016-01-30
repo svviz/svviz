@@ -164,8 +164,8 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
         aln = chooseBestAlignment(read, remapped[read.seq], chromPartsCollection)
         if aln is None:
             badReads.add(read.qname)
-
-        alignmentSets[read.qname].addAlignment(aln)
+        else:
+            alignmentSets[read.qname].addAlignment(aln)
 
     return alignmentSets, badReads
 
@@ -192,6 +192,7 @@ def do_realign(dataHub, sample):
     logging.debug(" Time to realign: {:.1f}s".format(t1-t0))
 
     badReads = badReadsRef.union(badReadsAlt)
+
     if len(badReads) > 0:
         logging.warn(" Alignment failed with {} reads (this is a known issue)".format(badReads))
         for badRead in badReads:

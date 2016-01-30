@@ -52,7 +52,8 @@ def checkOrientation(orientation, expectedOrientations):
         return True
     return False
 
-def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=False):
+def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=False,
+    alnScoreDeltaThreshold=2):
     # TODO: the cutoffs used below are somewhat arbitrary
 
     def choose(which, why):
@@ -83,9 +84,13 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
     if not refValid and not altValid:
         return choose("amb", str(alnCollection["ref"].evidences["valid"][1])+"_"+str(alnCollection["alt"].evidences["valid"][1]))
 
-    if altAlnScore-2 > refAlnScore:
+    if isinstance(alnScoreDeltaThreshold, float):
+        readLength = sum([len(aln.seq) for aln in alnCollection["ref"].getAlignments()])
+        alnScoreDeltaThreshold = alnScoreDeltaThreshold * readLength
+
+    if altAlnScore-alnScoreDeltaThreshold > refAlnScore:
         return choose("alt", "alignmentScore")
-    if refAlnScore-2 > altAlnScore:
+    if refAlnScore-alnScoreDeltaThreshold > altAlnScore:
         return choose("ref", "alignmentScore")
 
     if not singleEnded:
@@ -101,7 +106,7 @@ def disambiguate(alnCollection, insertSizeLogLikelihoodCutoff=1.0, singleEnded=F
     return choose("amb", "same_scores")
 
 def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=False, flankingRegionCollection=None,
-    maxMultimappingSimilarity=0.9):
+    maxMultimappingSimilarity=0.9, alnScoreDeltaThreshold=2):
     t0 = time.time()
 
     for alnCollection in alnCollections:
@@ -109,7 +114,7 @@ def batchDisambiguate(alnCollections, isd, expectedOrientations, singleEnded=Fal
             flankingRegionCollection=flankingRegionCollection, maxMultimappingSimilarity=maxMultimappingSimilarity)
 
     for alnCollection in alnCollections:
-        disambiguate(alnCollection, singleEnded=singleEnded)
+        disambiguate(alnCollection, singleEnded=singleEnded, alnScoreDeltaThreshold=alnScoreDeltaThreshold)
 
     t1 = time.time()
     logging.info(" Time for disambiguation: {:.2f}s".format(t1-t0))

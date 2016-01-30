@@ -120,7 +120,8 @@ def runDisambiguation(dataHub):
     for sample in dataHub:
         disambiguate.batchDisambiguate(sample.alnCollections, sample.readStatistics, sample.orientations, 
             singleEnded=sample.singleEnded, flankingRegionCollection=flankingRegionCollection,
-            maxMultimappingSimilarity=dataHub.args.max_multimapping_similarity)
+            maxMultimappingSimilarity=dataHub.args.max_multimapping_similarity,
+            alnScoreDeltaThreshold=dataHub.args.aln_score_delta)
 
     return disambiguate.checkMultimapping(dataHub)
 

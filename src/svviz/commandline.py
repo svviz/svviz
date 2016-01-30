@@ -111,7 +111,10 @@ def parseArgs(args):
         "samtools tabix in place if needed (can specify multiple annotations files)")
 
     # Obsolete
-    inputParams.add_argument("-o", "--orientation", help=argparse.SUPPRESS)
+    # inputParams.add_argument("-o", "--orientation", help=
+    #     "specify orientation of reads or read pairs; should probably be one of the following: \n"
+    #     "+-, -+, --, ++ or 'any'; multiple possible orientations can be specified using a \n"
+    #     "comma, eg '++,--' (default: infer from input data)")
 
     inputParams.add_argument("--fasta", help=
         "An additional indexable fasta file specifying insertion sequences (eg mobile element \n"
@@ -131,6 +134,13 @@ def parseArgs(args):
     inputParams.add_argument("-a", "--aln-quality", metavar="QUALITY", type=float, help=
         "minimum score of the Smith-Waterman alignment against the ref or alt allele in order to be \n"
         "considered (multiplied by 2)")
+
+    inputParams.add_argument("--aln-score-delta", metavar="DELTA", help=
+        "minimum difference in scores between ref alignment score and alt alignment score \n"
+        "to be assigned to one allele (use an integer to specify a hard score difference \n"
+        "threshold, or a float to specify a score difference relative to the read size; \n"
+        "default: 2)")
+
     inputParams.add_argument("--include-supplementary", action="store_true", help=
         "include supplementary alignments (ie, those with the 0x800 bit set in the bam flags); \n"
         "default: false")
@@ -205,7 +215,8 @@ def parseArgs(args):
     defaults.add_argument("--pacbio", action="store_true", help=argparse.SUPPRESS)
     defaults.add_argument("--lenient", action="store_true", help=
         "lowers the minimum alignment quality, showing reads even when breakpoints are only \n"
-        "approximately correct, or reads of lower quality (eg PacBio)")
+        "approximately correct, or reads of lower quality (eg PacBio); and requires a larger \n"
+        "difference in alignment scores in order to assign a read to an allele")
 
     if len(inputArgs)<1:
         parser.print_help()
@@ -217,6 +228,19 @@ def parseArgs(args):
     if args.pacbio or args.lenient:
         # TODO: should infer this from the input if possible, per-sample
         setDefault(args, "aln_quality", 0.65)
+        setDefault(args, "aln_score_delta", 0.005)
+
+    if args.aln_score_delta is None:
+        args.aln_score_delta = 2
+    try:
+        args.aln_score_delta = int(args.aln_score_delta)
+    except ValueError:
+        try:
+            args.aln_score_delta = float(args.aln_score_delta)
+        except ValueError:
+            logging.error("--aln-score-delta must be an integer or a float")
+            sys.exit(1)
+
 
 
     if args.aln_quality is not None:

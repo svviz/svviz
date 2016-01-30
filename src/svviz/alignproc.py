@@ -50,7 +50,7 @@ def multimap(namesToReferences, seqs):
     pool = multiprocessing.Pool(processes=misc.cpu_count_physical())
 
     results = {}
-    results = dict(pool.map(remaps, [(namesToReferences, seq) for seq in seqs]))
+    results = dict(pool.map_async(remaps, [(namesToReferences, seq) for seq in seqs]).get(999999))
     # results = dict(map(remaps, [(namesToReferences, seq) for seq in seqs]))
 
     return results
