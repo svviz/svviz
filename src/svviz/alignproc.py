@@ -21,6 +21,7 @@ from svviz import remap
 Aln = collections.namedtuple("Aln", ["ref_begin", "ref_end", "cigar_string", "score", "score2"])
 
 
+
 def alignProcWrapper(ref, seq):
     cmd = "python {} {} {}".format(
         os.path.realpath(__file__),
@@ -47,7 +48,10 @@ def remaps(args):
     return seq, seqresult
 
 def multimap(namesToReferences, seqs):
-    pool = multiprocessing.Pool(processes=misc.cpu_count_physical())
+    if not hasattr(multimap, "pool"):
+        multimap.pool = multiprocessing.Pool(processes=misc.cpu_count_physical())
+
+    pool = multimap.pool
 
     results = {}
     results = dict(pool.map_async(remaps, [(namesToReferences, seq) for seq in seqs]).get(999999))
