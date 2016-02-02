@@ -199,7 +199,8 @@ def do_realign(dataHub, sample):
             refalignments.pop(badRead, None)
             altalignments.pop(badRead, None)
 
-    assert refalignments.keys() == altalignments.keys()
+    assert set(refalignments.keys()) == set(altalignments.keys()), \
+                    set(refalignments.keys()) ^ set(altalignments.keys())
 
     alnCollections = []
     for key in refalignments:
