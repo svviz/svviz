@@ -67,7 +67,7 @@ A related option is ``--max-multimapping-similarity``, which adjust how aggressi
 Translocations and Breakends
 ----------------------------
 
-Complex variants (first introduced :ref:`here <complex_variants>`) can be visualized using the translocation or breakend event types. Two possible orientations are possible for a translocation, "+" and "--":
+Complex variants (first introduced :ref:`here <complex_variants>`) can be visualized using the translocation or breakend event types (specify event type using the command line options ``--type tra`` or ``--type bkend``). Two possible orientations are possible for a translocation, "+" and "--":
 
 .. figure:: translocation_possibilities.png
     :width: 100%
@@ -79,11 +79,11 @@ The top row shows the two reference chromosomes; for each chromosome, a region u
 
 The "--" orientation works similarly, but here the plus strand of one chromosome is fused to the minus strand of the other chromosome.
 
-For example, if the breakpoints were located at chr1:32,456,789 and chr2:12,468,579, then the "+" orientation event would be specified as ``chr1 32456789 chr2 12468579 +`` and the "--" orientation event would be specified as ``chr1 32456789 chr2 12468579 -``.
+For example, if the breakpoints were located at chr1:32,456,789 and chr2:12,468,579, then the "+" orientation event would be specified as ``chr1 32456789 chr2 12468579 +`` and the "--" orientation event would be specified as ``chr1 32456789 chr2 12468579 -``. Remember to use ``--type tra``.
 
 svviz always shows both reciprocal halves of a translocation -- if the translocation was not reciprocal, then reads should only support one fusion and not the other. To analyze only a single fusion, use the more general purpose breakend event type.
 
-The breakend event type takes two genomic locations and analyzes the structural variant formed by joining the two genomic regions. A few examples:
+The breakend event type (``--type bkend``) takes two genomic locations and analyzes the structural variant formed by joining the two genomic regions. A few examples:
 
 - a large deletion: in this case two breakpoints lie distantly on the same chromosome; the alternate allele shows the deletion allele formed by joining the upstream and downstream regions
 
