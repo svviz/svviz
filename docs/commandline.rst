@@ -62,6 +62,14 @@ The dotplot output shows regions of similarity within the reference allele as li
 A related option is ``--max-multimapping-similarity``, which adjust how aggressively svviz filters out reads that potentially align to multiple locations near the structural variant. The default score of 0.95 means that any read (for paired-end reads, this means any read-end) whose second-best alignment score is more than 0.95 times the best alignment score will be assigned as ambiguous. For example, if the best alignment score is 445, and the second-best alignment score is 439, the multimapping similarity would be 439/445=0.99 and the read would be marked as ambiguous. However, a read whose best alignment score is 445 but second-best alignment score is 405 would not be filtered because the multimapping similarity of 395/445=0.89 is less than 0.95.
 
 
+Important note for long-read sequencing data (eg PacBio)
+--------------------------------------------------------
+
+svviz performs a Smith-Waterman realignment of every read against both the reference and alternate allele sequences. This realignment is performed by an extremely fast implementation called `ssw <https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library/>`_. As of this writing, ssw has a serious bug which manifests as a segmentation fault (ie crash) occasionally when aligning two long sequences to one another, as might occur when aligning PacBio reads. To overcome this problem, svviz has an optional wrapper mode which runs ssw in a separate process; reads which cause a crash when aligning using ssw will be skipped. Please note that this mode runs somewhat more slowly when aligning many short reads, so it is recommended to use this mode only when necessary.
+
+To use this wrapper mode, specify ``--processes -1`` on the command line.
+
+
 .. _breakends:
 
 Translocations and Breakends

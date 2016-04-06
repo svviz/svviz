@@ -1,12 +1,26 @@
 Change log
 ==========
 
+1.5.0
+-----
+
+Improvements:
+
+- dotplots can now be written to file when in export mode
+- added an optional wrapper around the re-alignment module, allowing processing of long-read (eg pacbio) data despite a buggy Smith-Waterman library; specify ``--processes -1`` to enable this mode
+- added ``--aln-score-delta`` option to allow specifying how different the ref and alt alignments must be in order to choose one over the other (rather than punting the read to ambiguous); this option allows specifying a fraction, which can be useful for sequencing libraries such as pacbio with reads of differing lengths
+
+Bugfixes:
+
+- corrected help messages for structural variant formats
+
+
 1.4.0
 -----
 
 This release includes many small improvements and bugfixes.
 
-One changes to svviz's behavior is notable:
+One change to svviz's behavior is notable:
 
 - the ``--pair-min-mapq`` option now requires one read end to both exceed this mapq threshold *and* be near the variant
 
@@ -28,6 +42,7 @@ Bugfixes:
 - fixed a bug where reads mapping to both strands with similar alignment scores might not have been marked as multimapping
 - fixed a bug which prevented correctly analyzing translocations on the same chromosome on the same strand
 
+
 1.3.2
 -----
 This release includes a number of bugfixes and additions to the documentation.
@@ -42,6 +57,7 @@ This release includes a number of bugfixes and additions to the documentation.
 -----
 
 This release adds substantial improvements to the handling of multi-mapping reads (ie those aligning to multiple locations near the structural variant). See :ref:`here <dotplots>` for more details.
+
 
 1.3.0
 -----
@@ -58,6 +74,7 @@ This release adds a number of new features and fixes several bugs:
 - improved handling of paired-end reads that align to the same location
 - added option to skip variants with very deep read coverage (typically indicative of a repetitive genomic region); useful in batch mode
 
+
 1.2.0
 -----
 
@@ -71,16 +88,19 @@ Additional changes:
 - wrapping pyfaidx with a pickle-able ``GenomeSource`` object; should make automated debugging easier
 - added ``--skip-cigar`` option which disables visualizing mismatches and indels; this will speed up exporting and the web browser view for data with many errors (eg PacBio)
 
+
 1.1.1
 -----
 
 - no longer requires X11 if rpy2 is installed (I know, this was a weird one)
+
 
 1.1.0
 -----
 
 - code refactoring and new tests that should make it easier to modify and improve the visualizations produced by svviz
 - added experimental support for webkitToPDF, a command-line tool that uses OS X's built-in SVG support (part of Safari's webpage rendering code) to convert SVGs to PDFs; this currently requires a separate install of webkitToPDF. webkitToPDF produces much better PDFs than rsvg-convert does (for example, fonts are converted properly)
+
 
 1.0.9
 -----
@@ -90,11 +110,13 @@ Additional changes:
 - tweaks and fixes for visualizations
 - changed coloring of insertions in reads to cyan
 
+
 1.0.8
 -----
 
 - filter out reads that align multiple times within the region of the structural variant ("multimapping")
 - many minor bug-fixes and interface tweaks
+
 
 1.0.7
 -----
@@ -103,6 +125,7 @@ Additional changes:
 - added ``--version`` command line option
 - no longer fails if pandas is an older version
 - check for librsvg before we do the analysis
+
 
 1.0.6
 -----
