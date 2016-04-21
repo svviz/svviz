@@ -24,8 +24,11 @@ An axis is shown below each section, showing the scale in basepairs, as well as 
 
 For example, the first demonstration (``svviz demo``), which analyzes an inversion on chromosome 4, displays three colored bars: red, blue and then grey. The blue segment in the middle indicates the inverted region, and hence the arrows point to the left in the Alt section but to the right in the Ref section. Breakpoints are indicated as vertical lines through all the tracks.
 
-Reads aligning to the minus strand are colored red and those aligning to the plus strand are colored purple. Unsequenced space between read pairs is shown by light gray bars. Overlapping portions of read pairs are shown in a light green color (for example, if the insert size is 250 and 2x150bp sequencing was performed, the middle 50bp would be sequenced from both reads). Mismatches to the sequence of the allele (for example due to single nucleotide polymorphisms or sequencing errors) are shown as colored vertical bars with the width of a nucleotide (ie, you will probably need to zoom in to see them).
+The read alignments displayed in svviz are the result of a Smith-Waterman realignment of the full read sequence against the reference allele or the inferred alternate allele. Reads aligning to the minus strand are colored red and those aligning to the plus strand are colored purple. If the sample contains paired-end sequencing reads, the unsequenced space between read pairs is shown by light gray bars. Only reads matching the expected orientation (typically inwards-facing for standard Illumina libraries) will be assigned to one of the alleles (those aligning with unexpected orientations will be counted as ambiguous).
 
+Overlapping portions of read pairs are shown in a light green color (for example, if the insert size is 250 and 2x150bp sequencing was performed, the middle 50bp would be sequenced from both reads).
+
+Mismatches to the sequence of the allele are shown as colored vertical bars with the width of a nucleotide (you may need to zoom in to see them). Insertions or deletions, relative to the sequence of the assigned allele, are displayed as gray and cyan bars, respectively. Sequencing errors will thus show up as isolated vertical bars within individual read sequences; polymorphisms (SNPs and indels) will show up as vertical bars spanning multiple reads at the same position.
 
 Web interface
 -------------
