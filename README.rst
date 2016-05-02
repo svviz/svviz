@@ -16,7 +16,7 @@ Visit the `project site <http://svviz.github.io/svviz/>`_ for a tour of the feat
 
 
 .. |pypi| image:: https://img.shields.io/pypi/v/svviz.png   
-.. _pypi: http://svviz.readthedocs.org/en/latest/install.html
+.. _pypi: http://svviz.readthedocs.io/en/latest/install.html
 
 
     
@@ -29,7 +29,7 @@ svviz has been tested on Mac OS X and Linux, and should work on Windows, althoug
 2. Install the latest version of svviz from github using the following terminal command: ``sudo pip install -U svviz``. (The sudo may not be necessary depending on your setup.)
 3. Run the following command, which downloads example data and runs it through svviz: ``svviz demo``. After several processing steps, a web browser window should open, with separate, interactive views of the reference and alternate alleles.
 
-See the `documentation <http://svviz.readthedocs.org/>`_ for more detailed help, or run ``svviz -h`` to get help on command line arguments.
+See the `documentation <http://svviz.readthedocs.io/>`_ for more detailed help, or run ``svviz -h`` to get help on command line arguments.
 
 Please submit bug reports or feature requests on the `github issue tracker <https://github.com/svviz/svviz/issues>`_.
 

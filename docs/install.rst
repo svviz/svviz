@@ -93,7 +93,7 @@ Required python packages
 - `joblib <https://github.com/joblib/joblib>`_
 - `numpy <http://www.numpy.org>`_
 - `pyfaidx <https://github.com/mdshw5/pyfaidx>`_
-- `pysam <http://pysam.readthedocs.org/>`_
+- `pysam <http://pysam.readthedocs.io/>`_
 - `requests <http://docs.python-requests.org/en/latest/>`_
 
 
