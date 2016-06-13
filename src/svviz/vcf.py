@@ -77,6 +77,8 @@ def parseVCFLine(line, dataHub):
             return parseDeletion(record, dataHub)
         elif record.svtype == "INV":
             return parseInversion(record, dataHub)
+        elif record.svtype == "TRA":
+            return parseTranslocation(record, dataHub)
         raise VCFParserError("Unsupported variant type:{}".format(record.svtype))
     except Exception, e:
         logging.error("\n== Failed to load variant: {} ==".format(e))
@@ -116,6 +118,12 @@ def parseInsertion(record, dataHub):
         raise VCFParserError("Unknown insertion sequence")
 
     return variant
+
+def parseTranslocation(record, dataHub):
+    breakpoint1 = utilities.Locus(record.chrom, record.start, record.start, "+")
+    breakpoint2 = utilities.Locus(record.info["CHR2"], record.end, record.end, "+" if record.info["STRAND"]=="+" else "-")
+
+    return variants.Translocation(breakpoint1, breakpoint2, dataHub.alignDistance, dataHub.genome)
 
 if __name__ == '__main__':
     t = """
