@@ -81,10 +81,12 @@ def loadReads(dataHub):
     readCount = 0
     readLength = 0
     maxReads = dataHub.args.max_reads
+    sampleReads = dataHub.args.sample_reads
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
         sample.reads = remap.getReads(dataHub.variant, sample.bam, dataHub.args.min_mapq, dataHub.args.pair_min_mapq,
-            sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary, maxReads)
+            sample.searchDistance, sample.singleEnded, dataHub.args.include_supplementary, maxReads, sampleReads)
+
         readCount += len(sample.reads)
         readLength += sum(len(read.seq) for read in sample.reads)
         if maxReads is not None:

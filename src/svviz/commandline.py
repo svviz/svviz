@@ -145,6 +145,11 @@ def parseArgs(args):
         "include supplementary alignments (ie, those with the 0x800 bit set in the bam flags); \n"
         "default: false")
 
+
+    inputParams.add_argument("--sample-reads", type=int, help=
+        "use at most this many reads (pairs), sampling randomly if need be, useful \n"
+        "when running in batch mode (default: unlimited)")
+
     inputParams.add_argument("--max-reads", type=int, help=
         "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
         "mode (default: unlimited)")

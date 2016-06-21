@@ -1,5 +1,6 @@
 import collections
 import logging
+import random
 import time
 
 class TooManyReadsException(Exception): pass
@@ -15,7 +16,7 @@ class ReadSet(object):
 
 class PairFinder(object):
     def __init__(self, regions, sam, minmapq=-1, pair_minmapq=-1, is_paired=True, include_supplementary=False,
-                 max_reads=None):
+                 max_reads=None, sample_reads=None):
         self.include_supplementary = include_supplementary
         self.regions = regions
         self.sam = sam
@@ -38,6 +39,10 @@ class PairFinder(object):
 
         matchIDs = set(read.qname for read in self.tomatch)
         self.matched = [self.readsByID[id_].reads for id_ in matchIDs]
+
+        if sample_reads is not None and len(self.matched) > sample_reads:
+            logging.info("  {} read(pair)s found; sampling down to {}".format(len(self.matched), sample_reads))
+            self.matched = random.sample(self.matched, sample_reads)
 
         logging.info("  reads with missing pairs: {}".format(sum(1 for x in self.matched if (len(x)<2 and x[0].is_paired))))
 
