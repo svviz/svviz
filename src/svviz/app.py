@@ -80,7 +80,7 @@ def loadISDs(dataHub):
 def loadReads(dataHub):
     readCount = 0
     readLength = 0
-    maxReads = dataHub.args.max_reads
+    maxReads = None #dataHub.args.max_reads
     sampleReads = dataHub.args.sample_reads
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))

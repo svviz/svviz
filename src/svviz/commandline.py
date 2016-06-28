@@ -150,9 +150,9 @@ def parseArgs(args):
         "use at most this many reads (pairs), sampling randomly if need be, useful \n"
         "when running in batch mode (default: unlimited)")
 
-    inputParams.add_argument("--max-reads", type=int, help=
-        "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
-        "mode (default: unlimited)")
+    # inputParams.add_argument("--max-reads", type=int, help=
+    #     "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
+    #     "mode (default: unlimited)")
 
     inputParams.add_argument("--max-size", type=int, help=
         "maximum event size allowed, totaled across all chromosome parts in bp; if either the ref \n"
