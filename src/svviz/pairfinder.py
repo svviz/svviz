@@ -100,7 +100,8 @@ class PairFinder(object):
         if read.is_paired and read.rnext >= 0:
             chrom = self.sam.getrname(read.rnext)
             for read in self.loadRegion(chrom, read.pnext, read.pnext+1, mates=True):
-                self.readsByID[read.qname].add(read)
+                if read.qname in self.readsByID:
+                    self.readsByID[read.qname].add(read)
 
 
     def loadRegion(self, chrom, start, end, mates=False):
