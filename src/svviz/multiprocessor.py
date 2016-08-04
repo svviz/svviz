@@ -1,4 +1,3 @@
-import joblib
 import multiprocessing
 import sys
 import time
@@ -61,8 +60,7 @@ class Multiprocessor(object):
         asyncResults = []
         
         for i, chunk in enumerate(chunkIt(args, processes)):
-            result = pool.apply_async(joblib.parallel.SafeFunction(_map),
-                                                 [cls, methodname, initArgs, chunk, i, verbose])
+            result = pool.apply_async(_map, [cls, methodname, initArgs, chunk, i, verbose])
             result.chunkCount = i
             asyncResults.append(result)
         pool.close()
