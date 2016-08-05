@@ -1,6 +1,19 @@
 Change log
 ==========
 
+1.5.1
+-----
+
+Improvements:
+
+- now supports ``<TRA>``-style translocations
+- added a new ``--sample-reads`` option that can be used to downsample reads (read pairs) -- use with caution!
+
+Bugfixes:
+
+- removed joblib dependency (joblib 0.10 introduced some API changes that were not compatible with svviz)
+
+
 1.5.0
 -----
 

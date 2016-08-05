@@ -80,7 +80,7 @@ def loadISDs(dataHub):
 def loadReads(dataHub):
     readCount = 0
     readLength = 0
-    maxReads = None #dataHub.args.max_reads
+    maxReads = dataHub.args.max_reads
     sampleReads = dataHub.args.sample_reads
     for sample in dataHub:
         logging.info(" - {}".format(sample.name))
@@ -301,21 +301,21 @@ def run(args):
         debug.printDebugInfo(dataHub)
 
         logging.info("* Loading reads and finding mates *")
-        # try:
-        readCount, readLength = loadReads(dataHub)
-        # except pairfinder.TooManyReadsException:
-        #     readCount = dataHub.args.max_reads + 1
+        try:
+            readCount, readLength = loadReads(dataHub)
+        except pairfinder.TooManyReadsException:
+            readCount = dataHub.args.max_reads + 1
 
         nameExtra = None
         if len(svs) > 1:
             nameExtra = "variant_{}".format(i)
         saveReads(dataHub, nameExtra)
 
-        # if dataHub.args.max_reads and readCount > dataHub.args.max_reads:
-        #     logging.info("+++ Skipping variant -- number of reads ({}) exceeds threshold set by user ({})".format(
-        #         readCount, dataHub.args.max_reads))
-        #     skipped += 1
-        #     continue
+        if dataHub.args.max_reads and readCount > dataHub.args.max_reads:
+            logging.info("+++ Skipping variant -- number of reads ({}) exceeds threshold set by user ({})".format(
+                readCount, dataHub.args.max_reads))
+            skipped += 1
+            continue
 
         logging.info("* Realigning reads *")
         runRemap(dataHub)

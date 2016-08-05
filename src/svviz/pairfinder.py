@@ -53,8 +53,8 @@ class PairFinder(object):
 
                 if self.sampleReads is not None and len(readsByID) > self.sampleReads:
                     return None, None
-                # if self.maxReads and len(self.tomatch) > self.maxReads:
-                #     raise TooManyReadsException
+                if self.maxReads and len(tomatch) > self.maxReads:
+                    raise TooManyReadsException
 
         return tomatch, readsByID
 

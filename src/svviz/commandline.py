@@ -148,11 +148,11 @@ def parseArgs(args):
 
     inputParams.add_argument("--sample-reads", type=int, help=
         "use at most this many reads (pairs), sampling randomly if need be, useful \n"
-        "when running in batch mode (default: unlimited)")
+        "when running in batch mode (default: use all reads)")
 
-    # inputParams.add_argument("--max-reads", type=int, help=
-    #     "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
-    #     "mode (default: unlimited)")
+    inputParams.add_argument("--max-reads", type=int, help=
+        "maximum number of reads allowed, totaled across all samples, useful when running in batch \n"
+        "mode (default: unlimited)")
 
     inputParams.add_argument("--max-size", type=int, help=
         "maximum event size allowed, totaled across all chromosome parts in bp; if either the ref \n"
@@ -246,8 +246,10 @@ def parseArgs(args):
             logging.error("--aln-score-delta must be an integer or a float")
             sys.exit(1)
 
-
-
+    if args.max_reads is not None and args.sample_reads is not None:
+        print "Cannot use both --max-reads and --sample-reads options -- pick one!"
+        sys.exit(1)
+        
     if args.aln_quality is not None:
         AlignmentSet.AlnThreshold = args.aln_quality
     
