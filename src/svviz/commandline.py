@@ -45,7 +45,21 @@ def checkDemoMode(args):
     if inputArgs[0] == "test":
         inputArgs = "demo 1 -a --no-web".split(" ")
 
-    if inputArgs[0] == "demo":
+    # if inputArgs[0] == "demo":
+    if "demo" in inputArgs:
+        if inputArgs.index("demo") != 0 or len(inputArgs) > 2:
+            print "It looks like you're trying to run one of the demos, but "
+            print "I can't interpret the other arguments you're passing. Try "
+            print "running just 'svviz demo' or 'svviz demo 2'. If you'd like "
+            print "to play with the arguments for the demo, you can first run "
+            print "the simple demo, download the demo data, then copy the "
+            print "command (it's one of the first output lines when you run "
+            print "the demo), and run an edited version of that command. If "
+            print "you need more help, please submit an issue on the github "
+            print "https://github.com/svviz/svviz/issues page."
+            sys.exit(1)
+
+
         options = [x for x in inputArgs if x.startswith("-")]
         inputArgs = [x for x in inputArgs if not x.startswith("-")]
 
