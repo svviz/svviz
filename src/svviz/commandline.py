@@ -46,9 +46,22 @@ def checkDemoMode(args):
     if inputArgs[0] == "test":
         inputArgs = "demo 1 -a --no-web".split(" ")
 
-    # if inputArgs[0] == "demo":
     if "demo" in inputArgs:
-        if inputArgs.index("demo") != 0 or len(inputArgs) > 2:
+        parser = argparse.ArgumentParser(description="svviz version {}".format(svviz.__version__),
+            usage="%(prog)s demo [which] [demo options]")
+
+        parser.add_argument("demo")
+        parser.add_argument("which", default="example1", help=
+            "which demo/test to run; pick one of {1,2,3}")
+        parser.add_argument("-a", "--auto-download", action="store_true", help=
+            "automatically download missing example data without prompting the user")
+        parser.add_argument("-n", "--no-web", action="store_true", help=
+            "don't show the web interface")
+        parser.add_argument("--auto-export", action="store_true", help=
+            "export using defaults")
+
+        args, extra_args = parser.parse_known_args(inputArgs)
+        if len(extra_args) > 0 or args.demo != "demo":
             print "It looks like you're trying to run one of the demos, but "
             print "I can't interpret the other arguments you're passing. Try "
             print "running just 'svviz demo' or 'svviz demo 2'. If you'd like "
@@ -60,27 +73,20 @@ def checkDemoMode(args):
             print "https://github.com/svviz/svviz/issues page."
             sys.exit(1)
 
+        which = args.which
 
-        options = [x for x in inputArgs if x.startswith("-")]
-        inputArgs = [x for x in inputArgs if not x.startswith("-")]
 
-        which = "example1"
-        autoDownload = ("--auto-download" in options or "-a" in options)
-        noweb = ("--no-web" in options or "-n" in options)
-        autoExport = ("--auto-export" in options)
+        if which in ["1","2","3"]:
+            which = "example{}".format(inputArgs[1])
+        else:
+            raise Exception("Don't know how to load this example: {}".format(inputArgs[1]))
 
-        if len(inputArgs) > 1:
-            if inputArgs[1] in ["1","2","3"]:
-                which = "example{}".format(inputArgs[1])
-            else:
-                raise Exception("Don't know how to load this example: {}".format(inputArgs[1]))
-
-        cmd = demo.loadDemo(which, autoDownload)
+        cmd = demo.loadDemo(which, args.auto_download)
         if cmd is not None:
             inputArgs = cmd
-            if noweb:
+            if args.no_web:
                 inputArgs.append("--no-web")
-            if autoExport:
+            if args.auto_export:
                 # put this as a global in demo module so that it persists until we
                 # run the "open" command on the file
                 demo.TEMPDIR = tempfile.mkdtemp()

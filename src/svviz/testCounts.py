@@ -50,7 +50,7 @@ def run(genome, vcfs, bams, previousSummaryPath):
         print summaries
         return (True, "")
     else:
-        print "="*30, "COMAPRING", "="*30
+        print "="*30, "COMPARING", "="*30
         previousSummary = pandas.read_table(previousSummaryPath, index_col=0)
 
         combined = pandas.merge(previousSummary, summaries, how="outer", 
