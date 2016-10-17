@@ -61,7 +61,6 @@ def checkDemoMode(args):
             "export using defaults")
 
         args, extra_args = parser.parse_known_args(inputArgs)
-        print args, extra_args
         if len(extra_args) > 0 or args.demo != "demo":
             print "It looks like you're trying to run one of the demos, but "
             print "I can't interpret the other arguments you're passing. Try "
