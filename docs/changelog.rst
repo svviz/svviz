@@ -1,6 +1,14 @@
 Change log
 ==========
 
+1.5.3
+-----
+
+Bugfixes:
+
+- fixed an error with running demos
+
+
 1.5.2
 -----
 
@@ -10,6 +18,7 @@ Improvements:
 - added better warning and error messages around command line arguments
 - output progress every 30 seconds when not in an interactive shell (eg stderr redirected to file)
 - demo data is now downloaded from github
+
 
 1.5.1
 -----

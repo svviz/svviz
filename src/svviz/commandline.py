@@ -51,7 +51,7 @@ def checkDemoMode(args):
             usage="%(prog)s demo [which] [demo options]")
 
         parser.add_argument("demo")
-        parser.add_argument("which", default="example1", help=
+        parser.add_argument("which", default="1", nargs="?", help=
             "which demo/test to run; pick one of {1,2,3}")
         parser.add_argument("-a", "--auto-download", action="store_true", help=
             "automatically download missing example data without prompting the user")
@@ -61,6 +61,7 @@ def checkDemoMode(args):
             "export using defaults")
 
         args, extra_args = parser.parse_known_args(inputArgs)
+        print args, extra_args
         if len(extra_args) > 0 or args.demo != "demo":
             print "It looks like you're trying to run one of the demos, but "
             print "I can't interpret the other arguments you're passing. Try "
@@ -77,7 +78,7 @@ def checkDemoMode(args):
 
 
         if which in ["1","2","3"]:
-            which = "example{}".format(inputArgs[1])
+            which = "example{}".format(which)
         else:
             raise Exception("Don't know how to load this example: {}".format(inputArgs[1]))
 
