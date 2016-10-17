@@ -32,13 +32,14 @@ def downloadWithProgress(link, outpath):
     sys.stdout.write("\n")
     outf.close()
 
+
 def downloadDemo(which):
     try:
         downloadDir = tempfile.mkdtemp()
         archivePath = "{}/svviz-data.zip".format(downloadDir)
 
         # logging.info("Downloading...")
-        downloadWithProgress("http://web.stanford.edu/~nspies/svviz/examples/{}.zip".format(which), archivePath)
+        downloadWithProgress("http://svviz.github.io/svviz/assets/examples/{}.zip".format(which), archivePath)
         
         logging.info("Decompressing...")
         archive = zipfile.ZipFile(archivePath)
