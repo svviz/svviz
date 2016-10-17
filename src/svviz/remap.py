@@ -139,9 +139,7 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
         remapped = alignproc.multimap(namesToReferences, [read.seq for read in reads])
         # raise Exception("not yet implemented")
     elif processes != 1:
-        verbose = 0
-        if sys.stdout.isatty():
-            verbose = 3
+        verbose = 3
 
         remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
             verbose=verbose, processes=processes, name=jobName))

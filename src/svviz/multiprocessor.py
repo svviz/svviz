@@ -162,7 +162,9 @@ class _multiProgressBar(object):
         self.timeRemaining = "--"
         self.status = "+"
         self.name = name
-        
+        self.lastRedraw = time.time()
+        self.isatty = sys.stdout.isatty()
+
         try:
             self.handleResize(None,None)
             signal.signal(signal.SIGWINCH, self.handleResize)
@@ -216,30 +218,37 @@ class _multiProgressBar(object):
         sys.stderr.write(text+"\n")
         
     def redraw(self):
-        overallTotal = sum(x[1] for x in self.barsToProgress.values())
-        overallCompleted = sum(x[0] for x in self.barsToProgress.values())
-        
-        numBars = len(self.barsToProgress)+1
-        
-        barWidth = (self.term_width-40-len(self.name)) / numBars - 1
-
-        if self.status == "+":
-            self.status = " "
-        else:
-            self.status = "+"
+        if self.isatty or (time.time()-self.lastRedraw) > 30:
+            overallTotal = sum(x[1] for x in self.barsToProgress.values())
+            overallCompleted = sum(x[0] for x in self.barsToProgress.values())
             
-        text = [" ", self.status]
-        if len(self.name) > 0:
-            text.append(self.name)
-
-        text.append(self._getBar("total", overallCompleted, overallTotal, 25))
-
-        text.append("left:%s"%self.timeRemaining)
+            numBars = len(self.barsToProgress)+1
             
-        for barid in sorted(self.barsToProgress):
-            text.append(self._getBar(barid, self.barsToProgress[barid][0], self.barsToProgress[barid][1], barWidth))
+            barWidth = (self.term_width-40-len(self.name)) / numBars - 1
 
-        sys.stderr.write(" ".join(text)+"\r")
+            if self.status == "+":
+                self.status = " "
+            else:
+                self.status = "+"
+                
+            text = [" ", self.status]
+            if len(self.name) > 0:
+                text.append(self.name)
+
+            text.append(self._getBar("total", overallCompleted, overallTotal, 25))
+
+            text.append("left:%s"%self.timeRemaining)
+                
+            for barid in sorted(self.barsToProgress):
+                text.append(self._getBar(barid, self.barsToProgress[barid][0], self.barsToProgress[barid][1], barWidth))
+
+            endmarker = "\n"
+            if self.isatty:
+                endmarker = "\r"
+
+            sys.stderr.write(" ".join(text)+endmarker)
+
+            self.lastRedraw = time.time()
 
 
     def _getBar(self, name, completed, total, width):
