@@ -1,5 +1,6 @@
 import argparse
 import logging
+import os
 import sys
 import tempfile
 
@@ -243,6 +244,10 @@ def parseArgs(args):
 
     args = parser.parse_args(inputArgs)
     args._parser = parser
+
+    if not os.path.exists(args.ref):
+        print "Could not find fasta file '{}' -- did you forget to specify a reference file?".format(args.ref)
+        sys.exit(1)
 
     if args.pacbio or args.lenient:
         # TODO: should infer this from the input if possible, per-sample
