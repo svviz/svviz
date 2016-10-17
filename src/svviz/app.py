@@ -189,11 +189,28 @@ def runDirectExport(dataHub):
         if dataHub.args.open_exported:
             utilities.launchFile(dataHub.args.export)
 
+        outbasepath = os.path.splitext(path)[0]
         if dataHub.args.dotplots:
-            dotplotPath = os.path.splitext(path)[0] + ".dotplot.png"
+            dotplotPath = outbasepath + ".dotplot.png"
             with open(dotplotPath, "wb") as dotplotFile:
                 dotplotFile.write(dataHub.dotplots["ref vs ref"])
 
+        if dataHub.args.export_insert_sizes:
+            didExportISD = False
+
+            plotInsertSizeDistributions(dataHub)
+            for name, sample in dataHub.samples.iteritems():
+                if sample.insertSizePlot is not None:
+                    outpath = outbasepath + ".insertsizes.{}.png".format(name)
+                    with open(outpath, "w") as isdfile:
+                        isdfile.write(sample.insertSizePlot)
+                    didExportISD = True
+
+            if not didExportISD:
+                print "** Failed to plot the insert size distributions; please make sure the **"
+                print "** rpy2 is installed, your input bam files have sufficient numbers of **"
+                print "** reads (> 50,000), and that the reads are paired-ended eg Illumina  **"
+                print "** and not PacBio                                                     **"
 
 def runWebView(dataHub):
     if not dataHub.args.no_web:

@@ -227,6 +227,8 @@ def parseArgs(args):
         "generate dotplots to show sequence homology within the aligned region; requires some \n"
         "additional optional python libraries (scipy and PIL) and may take several minutes for \n"
         "longer variants")
+    interfaceParams.add_argument("--export-insert-sizes", action="store_true", help=
+        "plot the insert size distributions for each sample, for each event")
 
     interfaceParams.add_argument("--summary", metavar="SUMMARY_FILE", help=
         "save summary statistics to this (tab-delimited) file")
