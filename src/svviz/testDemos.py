@@ -14,7 +14,7 @@ def run():
         app.run(command.split(" "))
         times.append(time.time() - t0)
 
-    print pandas.DataFrame({"command":commands, "time (s)":times})
+    print(pandas.DataFrame({"command":commands, "time (s)":times}))
 
     return (True, "")
 

@@ -16,7 +16,11 @@ def launchFile(filepath):
 
 
 ############################ String utilities ############################
-comp = string.maketrans('ATCGNatcgn','TAGCNtagcn')
+try:
+    comp = str.maketrans('ATCGNatcgn','TAGCNtagcn')
+except AttributeError:
+    comp = string.maketrans('ATCGNatcgn','TAGCNtagcn')
+    
 def reverseComp(st):
     """ Returns the reverse complement of a DNA sequence; non ACGT bases will be ignored. """
     return reverseString(st).translate(comp)
@@ -195,6 +199,6 @@ if __name__ == '__main__':
                 Segment("chr100", 21, 31, "+", 4),
                 Segment("chr100", 33, 34, "+", 5)]
 
-    print segments
-    print mergedSegments(segments)
+    print(segments)
+    print(mergedSegments(segments))
 

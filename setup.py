@@ -19,7 +19,7 @@ setup(
       name='svviz',
       version=get_version(open('src/svviz/__init__.py').read()),
 
-      install_requires = ['requests', 'numpy', 'pyfaidx', 'pysam >= 0.7.8', 'flask'],
+      install_requires = ['requests', 'numpy', 'pyfaidx', 'pysam >= 0.7.8', 'flask', 'six'],
 
       # Packages
       packages = find_packages("src"),

@@ -10,7 +10,7 @@ def _arrowhead_marker():
 
 def _addOptions(**kwdargs):
     options = []
-    for key, arg in kwdargs.iteritems():
+    for key, arg in kwdargs.items():
         if arg is not None and arg != "":
             options.append("""{key}="{arg}" """.format(key=key, arg=arg))
     return " ".join(options)
@@ -157,7 +157,7 @@ class SVG(object):
         header.append("""<svg baseProfile="full" version="1.1" """
             """xmlns="http://www.w3.org/2000/svg" {extras} """
             """xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>{markers}</defs>""".format(extras=self.headerExtras,
-                markers="\n".join(self.markers.values())))
+                markers="\n".join(list(self.markers.values()))))
 
         header.append("<g class=\"svg_viewport\">")
         return header

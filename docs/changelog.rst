@@ -1,6 +1,11 @@
 Change log
 ==========
 
+1.6.0
+-----
+
+Adds support for python 3.x (python 2.7 will continue to be supported as well).
+
 1.5.3
 -----
 

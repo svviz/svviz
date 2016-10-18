@@ -1,4 +1,4 @@
-import cPickle as pickle
+import pickle as pickle
 import gzip
 import filecmp
 import json
@@ -19,17 +19,22 @@ def run():
     timings = {}
 
     for testName in ["mei", "inv", "ins_moleculo", "ins_pacbio", "del_chr1", "translocation"]:
-        print ">", testName, "<"
+        print(">", testName, "<")
 
         exportPath = "renderTests/export_{}_new.svg".format(testName)
         originalPath = "renderTests/export_{}_original.svg".format(testName)
 
-        dataHub = pickle.load(gzip.open("renderTests/{}.pickle.gz".format(testName), "rb"))
+        d = gzip.open("renderTests/{}.pickle.gz".format(testName), "rb")
+        try:
+            dataHub = pickle.load(d, encoding="latin1")
+        except TypeError:
+            dataHub = pickle.load(d)
 
         dataHub.args = MockArgs()
         dataHub.args.thicker_lines = False
         dataHub.args.export = exportPath
-
+        dataHub.args.context = 0
+        
         t0 = time.time()
         app.renderSamples(dataHub)
         app.ensureExportData(dataHub)    
@@ -40,19 +45,19 @@ def run():
         no_changes = True
 
         if not os.path.exists(originalPath):
-            print "  first time running; nothing to compare against"
+            print("  first time running; nothing to compare against")
             shutil.copy(exportPath, originalPath)
         else:
             if filecmp.cmp(originalPath, exportPath, shallow=False):
-                print "  files identical!"
+                print("  files identical!")
             else:
                 for a, b in zip(open(originalPath).readlines(), open(exportPath).readlines()):
                     if a != b:
                         no_changes = (False, "files differ: {}".format(testName))
-                        print "FILES DIFFER! First line that differs:"
-                        print "Original:", a.strip()
-                        print "New:     ", b.strip()
-                        print "..."
+                        print("FILES DIFFER! First line that differs:")
+                        print("Original:", a.strip())
+                        print("New:     ", b.strip())
+                        print("...")
 
                         time.sleep(3)
                         utilities.launchFile(exportPath)
@@ -65,22 +70,22 @@ def run():
     regenerateTimings = False
     try:
         oldTimings = json.load(open(timingsPath))
-        print "{:<20}{:>20}{:>20}".format("Test Name", "Previous", "New")
+        print("{:<20}{:>20}{:>20}".format("Test Name", "Previous", "New"))
         for testName in sorted(timings):
             try:
                 remark = "ok"
                 if timings[testName] > oldTimings[testName] * 1.1:
                     remark = "** slower! **"
-                print "{:<20}{:>19.2f}s{:>19.2f}s\t{}".format(testName, oldTimings[testName], timings[testName], remark)
+                print("{:<20}{:>19.2f}s{:>19.2f}s\t{}".format(testName, oldTimings[testName], timings[testName], remark))
             except KeyError:
-                print "{:<20}{:>20}s{:>19.2f}s".format(testName, "", timings[testName])
+                print("{:<20}{:>20}s{:>19.2f}s".format(testName, "", timings[testName]))
                 regenerateTimings = True
 
     except IOError:
-        print "unable to load previous timings..."
+        print("unable to load previous timings...")
 
     if not os.path.exists(timingsPath) or regenerateTimings:
-        print "overwriting previous timings..."
+        print("overwriting previous timings...")
         json.dump(timings, open(timingsPath, "w"))
         
     return no_changes, ""

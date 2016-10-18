@@ -154,7 +154,7 @@ if __name__ == '__main__':
     read.seq =        "ACCCGG"
     read.genome_seq = "ACGCGG"
 
-    print getBlastRepresentation(read)
+    print(getBlastRepresentation(read))
 
     refseq = "AGGGGATTCCGATGGGAGATGAACTTATTACCAC"
     altseq = "ATTTCGATGGGTTTTTAGAGGAACTTACCAC"
@@ -167,8 +167,8 @@ if __name__ == '__main__':
     read.genome_seq = refseq[aln.ref_begin:aln.ref_end+1]
 
 
-    print repr(aln)
-    print getBlastRepresentation(read)
+    print(repr(aln))
+    print(getBlastRepresentation(read))
 
 
     """AGGGGATTTCGATGGG     AGAGGAACTTATTACCAC

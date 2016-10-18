@@ -29,7 +29,7 @@ from svviz import testCounts
 # reset ...
 
 def reset():
-    print "resetting test values..."
+    print("resetting test values...")
 
     previousSummaryPath = "countsTest.previousSummary.txt"
     os.remove(previousSummaryPath)
@@ -42,15 +42,15 @@ def reset():
 
 
 def _runTest(fn, description):
-    print "\n\n -- running {} --\n\n".format(description)
+    print("\n\n -- running {} --\n\n".format(description))
     try:
         t0 = time.time()
         result = fn()
         t1 = time.time()
         result = [result[0], result[1], t1-t0]
-    except Exception, e:
-        print " ** error running {}: {} **".format(description, e)
-        print traceback.print_exc()
+    except Exception as e:
+        print(" ** error running {}: {} **".format(description, e))
+        print(traceback.print_exc())
         result = [False, str(e), -1]
 
     return result
@@ -105,13 +105,13 @@ def saveTimingInfo(summary):
 
     timings.to_csv(timingsPath)
 
-    print timings
+    print(timings)
 
         
 
 
 def run(which):
-    print "running all tests..."
+    print("running all tests...")
     summary = pandas.DataFrame(columns=["pass", "info", "timing"])
 
     # Test chromosome ends
@@ -131,7 +131,7 @@ def run(which):
         summary.loc["rendering"] = _runTest(rendertest.run, "rendering")    
 
     summary["timing"] = summary["timing"].apply(lambda x: "{}".format(datetime.timedelta(seconds=int(x))))
-    print summary
+    print(summary)
 
     saveTimingInfo(summary)
 
@@ -152,7 +152,7 @@ def main():
 
     args = parser.parse_args()
 
-    print args.which
+    print(args.which)
 
     # if len(sys.argv) < 2:
     #     print USAGE
@@ -161,7 +161,7 @@ def main():
     if args.mode == "run":
         if getHG19Ref(args.reference) is None:
             parser.print_help()
-            print "ERROR: Must provide path for hg19 reference fasta"
+            print("ERROR: Must provide path for hg19 reference fasta")
             sys.exit(1)
         run(args.which)
     elif args.mode == "reset":

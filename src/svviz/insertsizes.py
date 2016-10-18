@@ -145,9 +145,9 @@ class ReadStatistics(object):
             self.insertSizes, self.reads, self.orientations, self.readLengths = sampleInsertSizes(bam, keepReads=keepReads)
             if len(self.insertSizes) > 1:
                 logging.info("  insert size mean: {:.2f} std: {:.2f}".format(numpy.mean(self.insertSizes), numpy.std(self.insertSizes)))
-        except ValueError, e:
-            print "*"*100, "here"
-            print "ERROR:", e
+        except ValueError as e:
+            print("*"*100, "here")
+            print("ERROR:", e)
 
     def hasInsertSizeDistribution(self):
         if len(self.insertSizes) > 1000:

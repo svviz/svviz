@@ -36,9 +36,10 @@ Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of t
 News
 ----
 
+**Oct, 2016 -- svviz 1.6.0** as of version 1.6, svviz adds support for running under python 3.x in addition to python 2.7. I believe that the output should be identical (except for some very insignificant decimal places), but please report any anomalies or problems on the `issue tracker <https://github.com/svviz/svviz/issues>`_.
+
 **April, 2016 -- svviz 1.5.0** svviz 1.5.0 has been released. Upgrade using the following pip command: ``sudo pip install --upgrade svviz``.
 
-**Sept, 2015 -- Publication** The final version of the svviz paper is now `available in Bioinformatics <http://dx.doi.org/10.1093/bioinformatics/btv478>`_.
 
 
 

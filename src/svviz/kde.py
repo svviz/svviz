@@ -17,7 +17,7 @@
 #
 #-------------------------------------------------------------------------------
 
-from __future__ import division
+
 
 from numpy import atleast_2d, reshape, zeros, newaxis, dot, exp, pi, sqrt, power, sum, linalg
 import numpy as np
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     kde = stats.gaussian_kde(values)
     x = np.linspace(-5,10, 50)
     y = kde(x)
-    print y
+    print(y)
     r.plot(x, y, type="l", col="red")
 
 
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     y2 = kde2(x)
     r.lines(x, y2, col="blue", lty=2)
 
-    raw_input("")
+    input("")
 
 
 

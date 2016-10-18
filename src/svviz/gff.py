@@ -35,7 +35,7 @@ class GeneAnnotationSet(AnnotationSet):
             transcriptsToLines[tx].append(line)
 
         genes = []
-        for transcript, lines in transcriptsToLines.iteritems():
+        for transcript, lines in transcriptsToLines.items():
             genes.append(GTFGene(lines))
 
         if extension > 0:
@@ -157,4 +157,4 @@ if __name__ == '__main__':
     genes = gtf.getAnnotations("chr12", 66218240, 66360071)
 
     for gene in genes:
-        print gene
+        print(gene)

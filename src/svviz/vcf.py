@@ -80,7 +80,7 @@ def parseVCFLine(line, dataHub):
         elif record.svtype == "TRA":
             return parseTranslocation(record, dataHub)
         raise VCFParserError("Unsupported variant type:{}".format(record.svtype))
-    except Exception, e:
+    except Exception as e:
         logging.error("\n== Failed to load variant: {} ==".format(e))
         logging.error(str(line.strip()))
         return None
@@ -89,7 +89,7 @@ def parseDeletion(record, dataHub):
     deletion = variants.Deletion.from_breakpoints(record.chrom, record.start, record.end, dataHub.alignDistance, dataHub.genome)
     if dataHub.args.max_deletion_size and deletion.deletionLength() > dataHub.args.max_deletion_size:
         deletion = variants.LargeDeletion.from_breakpoints(record.chrom, record.start, record.end, dataHub.alignDistance, dataHub.genome)
-        print "*"*1000, deletion
+        print("*"*1000, deletion)
     return deletion
 
 def parseInversion(record, dataHub):
@@ -146,4 +146,4 @@ if __name__ == '__main__':
     for line in t.split("\n"):
         if len(line) <= 10 or line.startswith("#"):
             continue
-        print parseVCFLine(line, dh)
+        print(parseVCFLine(line, dh))

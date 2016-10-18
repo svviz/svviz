@@ -1,9 +1,10 @@
 import numpy
 import os
 import pandas
+import six
 import sys
 import time
-from StringIO import StringIO
+from io import StringIO
 
 
 from svviz import app
@@ -19,7 +20,7 @@ def run(genome, vcfs, bams, previousSummaryPath):
 
     for vcf in vcfs:
         name = os.path.basename(vcf)
-        print ">", name, "<"
+        print(">", name, "<")
 
         args = []
         args.append("test_script")
@@ -31,7 +32,7 @@ def run(genome, vcfs, bams, previousSummaryPath):
 
         args = " ".join(args).split()
 
-        print args
+        print(args)
         t0 = time.time()
         curSummary = app.run(args)
         t1 = time.time()
@@ -39,18 +40,18 @@ def run(genome, vcfs, bams, previousSummaryPath):
         timings[name] = t1-t0
         totalTime += t1-t0
 
-        curSummary = pandas.read_table(StringIO(curSummary))
+        curSummary = pandas.read_table(StringIO(six.text_type(curSummary)))
         summaries = pandas.concat([curSummary, summaries])
 
 
 
     if not os.path.exists(previousSummaryPath) or "-f" in sys.argv:
-        print "="*30, "SAVING", "="*30
+        print("="*30, "SAVING", "="*30)
         summaries.to_csv(previousSummaryPath, sep="\t")
-        print summaries
+        print(summaries)
         return (True, "")
     else:
-        print "="*30, "COMPARING", "="*30
+        print("="*30, "COMPARING", "="*30)
         previousSummary = pandas.read_table(previousSummaryPath, index_col=0)
 
         combined = pandas.merge(previousSummary, summaries, how="outer", 
@@ -62,12 +63,12 @@ def run(genome, vcfs, bams, previousSummaryPath):
         diff = combined.loc[~numpy.isclose(combined["diff"], 0), "diff"]
 
         if diff.shape[0] == 0:
-            print "--- same as previous run ---"
+            print("--- same as previous run ---")
 
             # return [True, "", totalTime]
             return (True, "")
         else:
-            print combined.loc[diff.index]
+            print(combined.loc[diff.index])
             return (False, "not equal to previous")
 
 

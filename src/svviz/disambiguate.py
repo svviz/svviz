@@ -5,7 +5,7 @@ import time
 
 def scoreAlignmentSetCollection(alnCollection, isd, minInsertSizeScore=0, expectedOrientations="any", singleEnded=False,
                                 flankingRegionCollection=None, maxMultimappingSimilarity=0.9):
-    for name, alignmentSet in alnCollection.sets.iteritems():
+    for name, alignmentSet in alnCollection.sets.items():
         if not singleEnded:
             alignmentSet.evidences["insertSizeScore"] = isd.scoreInsertSize(len(alignmentSet))
         else:

@@ -8,7 +8,7 @@ class Summary(object):
 
     def addVariantResults(self, dataHub):
         variant = str(dataHub.variant)
-        for sampleName, sample in dataHub.samples.iteritems():
+        for sampleName, sample in dataHub.samples.items():
             counts = collections.Counter()
             reasons = {}
             alnScores = collections.defaultdict(list)
@@ -29,7 +29,7 @@ class Summary(object):
 
 
             # record stats
-            for allele, count in counts.iteritems():
+            for allele, count in counts.items():
                 self.stats.append([variant, sampleName, allele, "count", count])
 
             for allele in reasons:
@@ -63,9 +63,9 @@ class Summary(object):
             pandas.options.display.width = 250
             pandas.options.display.max_rows = 400
             df = pandas.DataFrame(self.stats, columns=self.header)
-            print df.pivot_table(values="value", index=["variant","sample","allele"], columns="key")
+            print(df.pivot_table(values="value", index=["variant","sample","allele"], columns="key"))
         except:
-            print str(self)
+            print(str(self))
 
 
 

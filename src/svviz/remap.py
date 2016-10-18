@@ -66,12 +66,12 @@ class Multimap(Multiprocessor):
         from ssw import ssw_wrap
 
         self.namesToAligners = {}
-        for name, ref in namesToReferences.iteritems():
+        for name, ref in namesToReferences.items():
             self.namesToAligners[name] = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
 
     def remap(self, seq):
         results = {}
-        for name, aligner in self.namesToAligners.iteritems():
+        for name, aligner in self.namesToAligners.items():
             results[name] = alignBothStrands(seq, aligner)
         return seq, results
 
@@ -93,7 +93,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     bestStrand = None
     secondScore = None
 
-    for name, mapping in mappings.iteritems():
+    for name, mapping in mappings.items():
         if mapping is None:
             return None
         strand, aln = mapping
@@ -102,7 +102,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
             bestAln = aln
             bestStrand = strand
 
-    for name, mapping in mappings.iteritems():
+    for name, mapping in mappings.items():
         strand, aln = mapping
         if name == bestName:
             if secondScore is None or bestAln.score2 > secondScore:
@@ -127,7 +127,7 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
     reads = filterDegenerateOnly(reads)
 
     namesToReferences = {}
-    for name, chromPart in chromPartsCollection.parts.iteritems():
+    for name, chromPart in chromPartsCollection.parts.items():
         namesToReferences[chromPart.id] = chromPart.getSeq()
 
     # map each read sequence against each chromosome part (the current allele only)
@@ -226,7 +226,7 @@ def getReads(variant, bam, minmapq, pair_minmapq, searchDistance, single_ended=F
     try:
         reads, supplementaryAlignmentsFound = _getreads(searchRegions, bam, minmapq, pair_minmapq, single_ended, 
             include_supplementary, max_reads, sample_reads)
-    except ValueError, e:
+    except ValueError as e:
         oldchrom = searchRegions[0].chr()
         try:
             if "chr" in oldchrom:

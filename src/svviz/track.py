@@ -197,9 +197,9 @@ class ReadRenderer(object):
             
             if not NYIWarned:            
                 NYIWarned = True
-                print "\n"*5
-                print "WARNING! Not yet implemented: ambiguous track display of read pairs mapping to different chromosomes"
-                print "\n"*5
+                print("\n"*5)
+                print("WARNING! Not yet implemented: ambiguous track display of read pairs mapping to different chromosomes")
+                print("\n"*5)
             return
 
         regionID = alignmentSet.getAlignments()[0].regionID
@@ -582,7 +582,7 @@ class AnnotationTrack(object):
 
         try:
             self._drawGenes(scaleFactor)
-        except Exception, e:
+        except Exception as e:
             self._drawBED(scaleFactor)
 
 

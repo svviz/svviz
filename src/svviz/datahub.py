@@ -18,8 +18,7 @@ def nameFromBedPath(bampath):
 class DataHub(object):
     def __init__(self):
         self.args = None
-        self.searchDistance = None
-        self.alignDistance = None
+        self.alignDistance = 0
         self.samples = collections.OrderedDict()
         self.genome = None
         self.sources = {}
@@ -46,7 +45,7 @@ class DataHub(object):
         self.variant = None
         self._counts = None
         self._alignmentSetsByName = None
-        for sampleName, sample in self.samples.iteritems():
+        for sampleName, sample in self.samples.items():
             sample.reset()
         self.trackCompositor = None
 
@@ -84,7 +83,7 @@ class DataHub(object):
 
         except:
             self.args._parser.print_help()
-            print ""
+            print("")
             raise
 
         for bamPath in self.args.bam:
@@ -98,7 +97,7 @@ class DataHub(object):
     def getCounts(self):
         if self._counts is None:
             self._counts = collections.OrderedDict()
-            for name, sample in self.samples.iteritems():
+            for name, sample in self.samples.items():
                 self._counts[name] = collections.Counter([alnCollection.choice for alnCollection in sample.alnCollections])
             self._counts["Total"] = dict((allele, sum(self._counts[name][allele] for name in self.samples)) 
                                           for allele in ["alt", "ref", "amb"])
@@ -114,7 +113,7 @@ class DataHub(object):
         return self._alignmentSetsByName.get(name, None)
 
     def __iter__(self):
-        return iter(self.samples.values())
+        return iter(list(self.samples.values()))
 
 
 

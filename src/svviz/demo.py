@@ -10,7 +10,7 @@ import zipfile
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 def downloadWithProgress(link, outpath):
-    print "Downloading %s" % link
+    print("Downloading %s" % link)
     response = requests.get(link, stream=True)
     total_length = response.headers.get('content-length')
 
@@ -50,11 +50,11 @@ def downloadDemo(which):
 
         shutil.move("{temp}/{which}".format(temp=downloadDir, which=which), "svviz-examples/")
     except Exception as e:
-        print "error downloading and decompressing example data: {}".format(e)
+        print("error downloading and decompressing example data: {}".format(e))
         return False
 
     if not os.path.exists("svviz-examples"):
-        print "error finding example data after download and decompression"
+        print("error finding example data after download and decompression")
         return False
     return True
 
@@ -64,7 +64,7 @@ def checkForDemo(which, autoDownload):
         if autoDownload:
             choice = "y"
         else:
-            choice = raw_input("""Couldn't find example data in current working directory (svviz-examples/{}). """
+            choice = input("""Couldn't find example data in current working directory (svviz-examples/{}). """
                 """Shall I download it and decompress it into the current working directory? Y/n:""".format(which))
         if choice.lower() in ["y", "yes", ""]:
             return downloadDemo(which)

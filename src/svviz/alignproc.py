@@ -43,7 +43,7 @@ def alignProcWrapper(ref, seq):
 def remaps(args):
     namesToReferences, seq = args
     seqresult = {}
-    for name, ref in namesToReferences.iteritems():
+    for name, ref in namesToReferences.items():
         seqresult[name] = alignProcWrapper(ref, seq)
     return seq, seqresult
 
@@ -63,7 +63,7 @@ def align(ref, seq):
     aligner = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
     strand, aln = remap.alignBothStrands(seq, aligner)
     
-    print strand, aln.ref_begin, aln.ref_end, aln.cigar_string, aln.score, aln.score2
+    print(strand, aln.ref_begin, aln.ref_end, aln.cigar_string, aln.score, aln.score2)
     
 
 if __name__ == '__main__':

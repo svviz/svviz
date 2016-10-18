@@ -1,6 +1,10 @@
 import logging
 import os
-import urllib
+try:
+    from urllib.parse import unquote as unquote
+except ImportError:
+    from urllib import unquote as unquote
+
 from flask import Flask, render_template, request, jsonify, Response, session
 
 from svviz import export
@@ -44,7 +48,7 @@ def index():
     try:
         variantDescription = str(dataHub.variant).replace("::", " ").replace("-", "&ndash;")
         return render_template('index.html',
-            samples=dataHub.samples.keys(), 
+            samples=list(dataHub.samples.keys()), 
             annotations=dataHub.annotationSets,
             results_table=dataHub.getCounts(),
             insertSizeDistributions=[sample.name for sample in dataHub if sample.insertSizePlot], 
@@ -116,7 +120,7 @@ def display():
     if req in ["alt", "ref", "amb"]:
         allele = req
         results = []
-        for name, sample in dataHub.samples.iteritems():
+        for name, sample in dataHub.samples.items():
             # svg = open("{}.{}.svg".format(req, name)).read()
             track = sample.tracks[allele]
             track.render()
@@ -140,20 +144,20 @@ def display():
 
 @app.route('/_info')
 def info():
-    import alignment
-    readid = urllib.unquote(request.args.get('readid', 0))
+    from . import alignment
+    readid = unquote(request.args.get('readid', 0))
 
     alnSet = dataHub.getAlignmentSetByName(readid)
     if alnSet:
         if dataHub.args.verbose > 3:
-            print "\n"
-            print alnSet.parentCollection.name
-            for setName, moreAlnSet in alnSet.parentCollection.sets.iteritems():
+            print("\n")
+            print(alnSet.parentCollection.name)
+            for setName, moreAlnSet in alnSet.parentCollection.sets.items():
                 desc = [setName]
                 for aln in moreAlnSet.getAlignments():
                     desc.append("{}:{}-{}{} ({}[{}])".format(aln.regionID, aln.start, aln.end, aln.strand, aln.score, aln.score2))
 
-                print "\t".join(desc)
+                print("\t".join(desc))
 
 
         reads = alnSet.getAlignments()

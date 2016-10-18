@@ -34,7 +34,7 @@
             <th>Amb</th>
         </tr>
 
-        {% for samplename, row in results_table.iteritems() %}
+        {% for samplename, row in results_table.items() %}
             <tr>
                 <td>{{ samplename }}</td>
                 {% for cell in ["alt", "ref", "amb"] %}

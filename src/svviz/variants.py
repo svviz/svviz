@@ -47,7 +47,7 @@ class ChromPartsCollection(object):
         return self.parts[id_].getSeq(*args, **kwdargs)
 
     def __iter__(self):
-        return self.parts.itervalues()
+        return iter(self.parts.values())
     def __len__(self):
         return len(self.parts)
 
@@ -287,7 +287,7 @@ class StructuralVariant(object):
         refSegments = dict((segment.id, segment) for segment in self._segments("ref"))
         altSegments = dict((segment.id, segment) for segment in self._segments("alt"))
 
-        for segmentID, refSegment in refSegments.iteritems():
+        for segmentID, refSegment in refSegments.items():
             if not segmentID in altSegments:
                 continue
             altSegment = altSegments[segmentID]

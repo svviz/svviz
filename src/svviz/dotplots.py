@@ -34,7 +34,7 @@ try:
             path = os.path.join(tempDir, "dotplot.png")
             misc.imsave(path, mat)
             imgData = open(path).read()
-        except Exception, e:
+        except Exception as e:
             logging.error("Error generating dotplots:'{}'".format(e))
         finally:
             shutil.rmtree(tempDir)
@@ -68,7 +68,7 @@ def yass_dotplot(s1, breakpoints, boundaries=()):
         raise Exception("Check that yass is installed correctly")
     stderr = proc.stderr.readlines()
     if "Error" in stderr[0]:
-        print "Error running yass: '{}'".format(stderr[0])
+        print("Error running yass: '{}'".format(stderr[0]))
         raise Exception("Error running yass")
 
     ro.r.png(tempPNG, res=150, width=1000, height=1000)
@@ -108,7 +108,7 @@ def dotplot(dataHub):
         fullSeq = ""
 
         for i, chromPart in enumerate(dataHub.variant.chromParts("ref")):
-            print "*"*10, i
+            print("*"*10, i)
             # chromPart = list(dataHub.variant.chromParts("ref"))[0]
             ref = chromPart.getSeq()
             fullSeq += ref
@@ -123,7 +123,7 @@ def dotplot(dataHub):
                 boundaries.append(partStart)
 
         return yass_dotplot(fullSeq, breakpoints, boundaries)
-    except Exception, e:
+    except Exception as e:
         logging.info("  Couldn't run recommended dot-plot helper-program yass: '{}'".format(e))
         # return dotplot2(ref, ref)
 
@@ -137,7 +137,7 @@ if __name__ == '__main__':
             continue
         data.append(line.strip())
     s = "".join(data)
-    print s[:5000]
+    print(s[:5000])
     data = dotplot(s, s)
     open("temp.png", "wb").write(data)
 

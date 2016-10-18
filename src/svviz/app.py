@@ -22,7 +22,7 @@ from svviz import web
 
 def checkRequirements(args):
     if not remap.check_swalign():
-        print "ERROR: check that svviz is correctly installed -- the 'ssw' Smith-Waterman alignment module does not appear to be functional"
+        print("ERROR: check that svviz is correctly installed -- the 'ssw' Smith-Waterman alignment module does not appear to be functional")
         sys.exit(1)
     if args.export:
         exportFormat = export.getExportFormat(args)
@@ -149,9 +149,9 @@ def renderSamples(dataHub):
 def renderAxesAndAnnotations(dataHub):
     for allele in ["alt", "ref", "amb"]:
         # TODO: store width somewhere better
-        t = dataHub.samples.values()[0].tracks[allele]
+        t = list(dataHub.samples.values())[0].tracks[allele]
 
-        for name, annotationSet in dataHub.annotationSets.iteritems():
+        for name, annotationSet in dataHub.annotationSets.items():
             dataHub.alleleTracks[allele][name] = track.AnnotationTrack(annotationSet, t.scale, dataHub.variant, allele)
 
         axis = track.Axis(t.scale, dataHub.variant, allele)
@@ -179,11 +179,13 @@ def runDirectExport(dataHub):
             path = dataHub.args.export
 
         exportData = dataHub.trackCompositor.render()
+        filemode = "w"
         if exportFormat != "svg":
             converter = export.getExportConverter(dataHub.args, exportFormat)
             exportData = export.convertSVG(exportData, exportFormat, converter)
-
-        with open(path, "w") as outf:
+            filemode = "wb"
+            
+        with open(path, filemode) as outf:
             outf.write(exportData)
 
         if dataHub.args.open_exported:
@@ -199,7 +201,7 @@ def runDirectExport(dataHub):
             didExportISD = False
 
             plotInsertSizeDistributions(dataHub)
-            for name, sample in dataHub.samples.iteritems():
+            for name, sample in dataHub.samples.items():
                 if sample.insertSizePlot is not None:
                     outpath = outbasepath + ".insertsizes.{}.png".format(name)
                     with open(outpath, "w") as isdfile:
@@ -207,10 +209,10 @@ def runDirectExport(dataHub):
                     didExportISD = True
 
             if not didExportISD:
-                print "** Failed to plot the insert size distributions; please make sure the **"
-                print "** rpy2 is installed, your input bam files have sufficient numbers of **"
-                print "** reads (> 50,000), and that the reads are paired-ended eg Illumina  **"
-                print "** and not PacBio                                                     **"
+                print("** Failed to plot the insert size distributions; please make sure the **")
+                print("** rpy2 is installed, your input bam files have sufficient numbers of **")
+                print("** reads (> 50,000), and that the reads are paired-ended eg Illumina  **")
+                print("** and not PacBio                                                     **")
 
 def runWebView(dataHub):
     if not dataHub.args.no_web:
@@ -225,7 +227,7 @@ def plotInsertSizeDistributions(dataHub):
     # TODO: show only for samples with insert size distributions (ie paired end)
     if all(sample.readStatistics.hasInsertSizeDistribution() for sample in dataHub):
         plotISDs = True
-        for name, sample in dataHub.samples.iteritems():
+        for name, sample in dataHub.samples.items():
             isd = sample.readStatistics
             sample.insertSizePlot = insertsizes.plotInsertSizeDistribution(isd, name, dataHub)
             plotISDs = plotISDs and sample.insertSizePlot
@@ -272,7 +274,7 @@ def saveReads(dataHub, nameExtra=None):
             pysam.index(sorted_path+".bam")
 
 def saveState(dataHub):
-    import cPickle as pickle
+    import pickle as pickle
     import gzip
 
     pickle.dump(dataHub, gzip.open(dataHub.args.save_state, "wb"))

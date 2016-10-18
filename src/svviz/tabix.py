@@ -23,7 +23,7 @@ def ensureIndexed(bedPath, preset="bed", trySorting=True):
             raise Exception("Failed to create tabix index file for {file}; make sure the {preset} file is "
                 "sorted and the directory is writeable".format(preset=preset, file=bedPath))
 
-    line = pysam.Tabixfile(bedPath).fetch().next()
+    line = next(pysam.Tabixfile(bedPath).fetch())
     if len(line.strip().split("\t")) < 6 and preset == "bed":
         raise AnnotationError("BED files need to have at least 6 (tab-delimited) fields (including "
             "chrom, start, end, name, score, strand; score is unused)")

@@ -62,15 +62,15 @@ def checkDemoMode(args):
 
         args, extra_args = parser.parse_known_args(inputArgs)
         if len(extra_args) > 0 or args.demo != "demo":
-            print "It looks like you're trying to run one of the demos, but "
-            print "I can't interpret the other arguments you're passing. Try "
-            print "running just 'svviz demo' or 'svviz demo 2'. If you'd like "
-            print "to play with the arguments for the demo, you can first run "
-            print "the simple demo, download the demo data, then copy the "
-            print "command (it's one of the first output lines when you run "
-            print "the demo), and run an edited version of that command. If "
-            print "you need more help, please submit an issue on the github "
-            print "https://github.com/svviz/svviz/issues page."
+            print("It looks like you're trying to run one of the demos, but ")
+            print("I can't interpret the other arguments you're passing. Try ")
+            print("running just 'svviz demo' or 'svviz demo 2'. If you'd like ")
+            print("to play with the arguments for the demo, you can first run ")
+            print("the simple demo, download the demo data, then copy the ")
+            print("command (it's one of the first output lines when you run ")
+            print("the demo), and run an edited version of that command. If ")
+            print("you need more help, please submit an issue on the github ")
+            print("https://github.com/svviz/svviz/issues page.")
             sys.exit(1)
 
         which = args.which
@@ -254,7 +254,7 @@ def parseArgs(args):
     args._parser = parser
 
     if not os.path.exists(args.ref):
-        print "Could not find fasta file '{}' -- did you forget to specify a reference file?".format(args.ref)
+        print("Could not find fasta file '{}' -- did you forget to specify a reference file?".format(args.ref))
         sys.exit(1)
 
     if args.pacbio or args.lenient:
@@ -274,7 +274,7 @@ def parseArgs(args):
             sys.exit(1)
 
     if args.max_reads is not None and args.sample_reads is not None:
-        print "Cannot use both --max-reads and --sample-reads options -- pick one!"
+        print("Cannot use both --max-reads and --sample-reads options -- pick one!")
         sys.exit(1)
         
     if args.aln_quality is not None:
@@ -283,7 +283,7 @@ def parseArgs(args):
     if args.export is not None:
         args.no_web = True
         if args.type!="batch" and args.format is None and not args.export.lower()[-3:] in ["svg", "png", "pdf"]:
-            print "Export filename must end with one of .svg, .png or .pdf"
+            print("Export filename must end with one of .svg, .png or .pdf")
             sys.exit(1)
     elif args.format is not None:
         logging.error("ERROR: '--format' option provided without specifying '--export'")
@@ -292,14 +292,14 @@ def parseArgs(args):
 
     if args.port is not None:
         if args.no_web:
-            print "--port cannot be used with --no-web or --export"
+            print("--port cannot be used with --no-web or --export")
             sys.exit(1)
         if not checkPortIsClosed(args.port):
-            print "Error: port {} is already in use!".format(args.port)
+            print("Error: port {} is already in use!".format(args.port))
             sys.exit(1)
 
     logging.info(str(args))
     return args
 
 if __name__ == '__main__':
-    print parseArgs()
+    print(parseArgs())

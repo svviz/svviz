@@ -14,6 +14,13 @@ library and update the cache by using /sbin/ldconfig as root
 from ctypes import *
 import os
 
+def _get_libssw_path():
+    base = os.path.dirname(__file__)
+    matches = [x for x in os.listdir(base) if (x.startswith("libssw") & x.endswith(".so"))]
+    if len(matches) < 1:
+        raise Exception("Couldn't find libssw.so in this directory: '{}'".format(base))
+    return os.path.join(base, matches[0])
+libssw = cdll.LoadLibrary(_get_libssw_path())#os.path.join(os.path.dirname(__file__), 'libssw.so'))
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 class CAlignRes(Structure):
     """
@@ -50,7 +57,7 @@ class Aligner(object):
 
     # Load the ssw library using ctypes
     # libssw = cdll.LoadLibrary('libssw.so')
-    libssw = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), 'libssw.so'))
+    #libssw = cdll.LoadLibrary(_get_libssw_path())#os.path.join(os.path.dirname(__file__), 'libssw.so'))
 
     # Init and setup the functions pointer to map the one specified in the SSW lib
     # ssw_init method
@@ -193,7 +200,7 @@ class Aligner(object):
         # if < 15, the function will NOT return the suboptimal alignment information
 
         if query_len > 30:
-            mask_len = query_len/2
+            mask_len = query_len//2
         else:
             mask_len = 15
 
@@ -260,16 +267,16 @@ class Aligner(object):
 
 
 # Load the ssw library using ctypes
-glibssw = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), 'libssw.so'))
+#glibssw = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), 'libssw.so'))
 # libssw = cdll.LoadLibrary('libssw.so')
 
 # Init and setup the functions pointer to map the one specified in the SSW lib
 # cigar_int_to_len function
-cigar_int_to_len = glibssw.cigar_int_to_len
+cigar_int_to_len = libssw.cigar_int_to_len
 cigar_int_to_len.restype = c_int32
 cigar_int_to_len.argtypes = [c_int32]
 # cigar_int_to_op function
-cigar_int_to_op = glibssw.cigar_int_to_op
+cigar_int_to_op = libssw.cigar_int_to_op
 cigar_int_to_op.restype = c_char
 cigar_int_to_op.argtypes = [c_int32]
 
@@ -343,20 +350,20 @@ class PyAlignRes(object):
         Convert cigar and cigarLen into an human readable Cigar string as in SAM files
         """
         # Empty string for iterative writing of the cigar string
-        cigar_string = ""
+        cigar_string = []
 
         # If the query match do not start at its first base
         # = introduce a softclip at the begining
         if self.query_begin > 0:
             op_len = self.query_begin
             op_char = "S"
-            cigar_string += '{}{}'.format(op_len, op_char)
+            cigar_string.append('{}{}'.format(op_len, op_char))
 
         # Iterate over the cigar (pointer to a vector of int)
         for i in range(cigar_len):
             op_len = cigar_int_to_len(cigar[i])
-            op_char = cigar_int_to_op(cigar[i])
-            cigar_string += '{}{}'.format(op_len, op_char)
+            op_char = cigar_int_to_op(cigar[i]).decode("utf-8")
+            cigar_string.append('{}{}'.format(op_len, op_char))
 
         # If the length of bases aligned is shorter than the overall query length
         # = introduce a softclip at the end
@@ -364,6 +371,6 @@ class PyAlignRes(object):
         if  end_len != 0:
             op_len = end_len
             op_char = "S"
-            cigar_string += '{}{}'.format(op_len, op_char)
+            cigar_string.append('{}{}'.format(op_len, op_char))
 
-        return cigar_string
+        return "".join(cigar_string)

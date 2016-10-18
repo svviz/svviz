@@ -30,7 +30,7 @@ class TrackCompositor(object):
         for longAlleleName in ["Alternate Allele", "Reference Allele"]:
             allele = longAlleleName[:3].lower()
 
-            sampleNames = self.dataHub.samples.keys()
+            sampleNames = list(self.dataHub.samples.keys())
             tracks = [sample.tracks[allele] for sample in self.dataHub]
 
             self.addTracks(longAlleleName, sampleNames, tracks, allele)
@@ -109,7 +109,7 @@ class TrackCompositor(object):
             if self.dataHub.args.thicker_lines:
                 size *= 2.0
 
-            for name, track in alleleTracks.iteritems():
+            for name, track in alleleTracks.items():
                 # this is awkward: baseHeight() and imageHeight are used
                 # for Axis tracks but not Annotation tracks
                 imageHeight = width * (track.baseHeight()/float(self.width))
@@ -152,12 +152,12 @@ class TrackCompositor(object):
         columns = ["Sample", "Alt", "Ref", "Amb"]
 
         columnWidths = []
-        longestRowHeader = max(max(counts, key=lambda x: len(x)), len(columns[0]))
-        columnWidths.append(len(longestRowHeader)*charWidth)
+        longestRowHeader = max(max(len(x) for x in counts), len(columns[0]))
+        columnWidths.append(longestRowHeader*charWidth)
         columnWidths.extend([7*charWidth]*3)
 
         rows = [columns]
-        for sample, curcounts in counts.iteritems():
+        for sample, curcounts in counts.items():
             rows.append([sample, curcounts["alt"], curcounts["ref"], curcounts["amb"]])
 
         for i, row in enumerate(rows):
@@ -325,7 +325,7 @@ def _convertSVG_webkitToPDF(inpath, outpath, outformat):
     except subprocess.CalledProcessError:
         return None
 
-    return open(outpath).read()
+    return open(outpath, "rb").read()
 
 def _convertSVG_inkscape(inpath, outpath, outformat):
     options = ""
@@ -336,10 +336,10 @@ def _convertSVG_inkscape(inpath, outpath, outformat):
     try:
         subprocess.check_call("inkscape {} {} --export-{}={}".format(options, inpath, outformat, outpath), 
             shell=True)
-    except subprocess.CalledProcessError, e:
-        print "EXPORT ERROR:", str(e)
+    except subprocess.CalledProcessError as e:
+        print("EXPORT ERROR:", str(e))
 
-    return open(outpath).read()
+    return open(outpath, "rb").read()
 
 
 def _convertSVG_rsvg_convert(inpath, outpath, outformat):
@@ -350,30 +350,30 @@ def _convertSVG_rsvg_convert(inpath, outpath, outformat):
 
     try:
         subprocess.check_call("rsvg-convert -f {} {} -o {} {}".format(outformat, options, outpath, inpath), shell=True)
-    except subprocess.CalledProcessError, e:
-        print "EXPORT ERROR:", str(e)
+    except subprocess.CalledProcessError as e:
+        print("EXPORT ERROR:", str(e))
 
-    return open(outpath).read()
+    return open(outpath, "rb").read()
 
 
-def test():
-    base = """  <svg><rect x="10" y="10" height="100" width="100" style="stroke:#ffff00; stroke-width:3; fill: #0000ff"/><text x="25" y="25" fill="blue">{}</text></svg>"""
-    svgs = [base.format("track {}".format(i)) for i in range(5)]
+# def test():
+#     base = """  <svg><rect x="10" y="10" height="100" width="100" style="stroke:#ffff00; stroke-width:3; fill: #0000ff"/><text x="25" y="25" fill="blue">{}</text></svg>"""
+#     svgs = [base.format("track {}".format(i)) for i in range(5)]
 
-    tc = TrackCompositor(200, 600)
-    for i, svg in enumerate(svgs):
-        tc.addTrack(svg, i, viewbox="0 0 110 110")
+#     tc = TrackCompositor(200, 600)
+#     for i, svg in enumerate(svgs):
+#         tc.addTrack(svg, i, viewbox="0 0 110 110")
 
-    outf = open("temp.svg", "w")
-    outf.write(tc.render())
-    outf.flush()
-    outf.close()
+#     outf = open("temp.svg", "w")
+#     outf.write(tc.render())
+#     outf.flush()
+#     outf.close()
 
-    pdfPath = convertSVGToPDF("temp.svg")
-    subprocess.check_call("open {}".format(pdfPath), shell=True)
+#     pdfPath = convertSVGToPDF("temp.svg")
+#     subprocess.check_call("open {}".format(pdfPath), shell=True)
 
-if __name__ == '__main__':
-    test()
+# if __name__ == '__main__':
+#     test()
 
-    import sys
-    print >>sys.stderr, canConvertSVGToPDF()
+#     import sys
+#     print(canConvertSVGToPDF(), file=sys.stderr)

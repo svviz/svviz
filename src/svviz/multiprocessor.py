@@ -56,7 +56,7 @@ class Multiprocessor(object):
         # else:
         #     pool = 
 
-        methodname = method.im_func.func_name
+        methodname = method.__name__
         asyncResults = []
         
         for i, chunk in enumerate(chunkIt(args, processes)):
@@ -82,7 +82,7 @@ class Multiprocessor(object):
                     if verbose > 2:
                         progressBar.finishProcess(asyncResult.chunkCount)
                     elif verbose >= 1:
-                        print "-- %i of %i done"%(numChunks-len(asyncResults), numChunks)
+                        print("-- %i of %i done"%(numChunks-len(asyncResults), numChunks))
             
             time.sleep(0.5)
 
@@ -131,16 +131,16 @@ def _map(cls, methodName, initArgs, args, chunkNum, verbose):
                 if hasattr(_map, "q"):
                     _map.q.put((i, len(args), chunkNum))
                 else:
-                    print i, "of", len(args), chunkNum
+                    print(i, "of", len(args), chunkNum)
 
                 tlast = tnow
             results.append(boundMethod(arg))
         
         t1 = time.time()
         if 0 < verbose < 3:
-            print "time elapsed:", t1-t0, "chunk:", chunkNum
+            print("time elapsed:", t1-t0, "chunk:", chunkNum)
         return results
-    except Exception, e:
+    except Exception as e:
         traceback.print_exc(file=sys.stdout)
         raise
 
@@ -196,8 +196,8 @@ class _multiProgressBar(object):
             
         self.barsToProgress[barid] = (completed, total)
 
-        overallTotal = sum(x[1] for x in self.barsToProgress.values())
-        overallCompleted = sum(x[0] for x in self.barsToProgress.values())
+        overallTotal = sum(x[1] for x in list(self.barsToProgress.values()))
+        overallCompleted = sum(x[0] for x in list(self.barsToProgress.values()))
 
         self.updateTimeRemaining(overallCompleted, overallTotal)
         
@@ -219,12 +219,12 @@ class _multiProgressBar(object):
         
     def redraw(self):
         if self.isatty or (time.time()-self.lastRedraw) > 30:
-            overallTotal = sum(x[1] for x in self.barsToProgress.values())
-            overallCompleted = sum(x[0] for x in self.barsToProgress.values())
+            overallTotal = sum(x[1] for x in list(self.barsToProgress.values()))
+            overallCompleted = sum(x[0] for x in list(self.barsToProgress.values()))
             
             numBars = len(self.barsToProgress)+1
             
-            barWidth = (self.term_width-40-len(self.name)) / numBars - 1
+            barWidth = (self.term_width-40-len(self.name)) // numBars - 1
 
             if self.status == "+":
                 self.status = " "
@@ -281,6 +281,6 @@ if __name__ == "__main__":
     
     class MyMult(Multiprocessor):
         def methodASDSDG(self, arg):
-            print arg
+            print(arg)
             time.sleep(5)
-    MyMult.map(MyMult.methodASDSDG, range(30), verbose=3)
+    MyMult.map(MyMult.methodASDSDG, list(range(30)), verbose=3)
