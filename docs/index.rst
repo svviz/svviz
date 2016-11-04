@@ -36,7 +36,7 @@ Visit the `project page <http://svviz.github.io/svviz/>`_ for a visual tour of t
 News
 ----
 
-**April, 2016 -- svviz 1.5.0** svviz 1.5.0 has been released. Upgrade using the following pip command: ``sudo pip install --upgrade svviz``.
+**Oct, 2016 -- svviz 1.5.3** svviz 1.5.3 has been released. Upgrade using the following pip command: ``sudo pip install --upgrade svviz``. You can see a list of the changes :ref:`changelog`.
 
 **Sept, 2015 -- Publication** The final version of the svviz paper is now `available in Bioinformatics <http://dx.doi.org/10.1093/bioinformatics/btv478>`_.
 
