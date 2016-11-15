@@ -28,7 +28,7 @@ class VCFRecord(object):
                 raise VCFParserError("Inversions and deletions need to have start < end")
 
     def __str__(self):
-        return "{}::{}:{}-{},{}".format(self.svtype, self.chrom, self.start, self.end, self.svlen)
+        return "{}::{}:{}-{},{}".format(self.svtype, self.chrom, self.start, self.end, self.end-self.start)
 
 def getVariants(dataHub):
     vcfpath = dataHub.args.breakpoints[0]

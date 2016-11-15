@@ -384,7 +384,6 @@ class Insertion(StructuralVariant):
         self.sources["insertion"] = genomesource.GenomeSource(insertSeq)
         self.insertionLength = len(insertSeq)
 
-
     def searchRegions(self, searchDistance):
         chrom = self.breakpoints[0].chr()
         return [Locus(chrom, nonNegative(self.breakpoints[0].start()-searchDistance), 
@@ -415,6 +414,13 @@ class Insertion(StructuralVariant):
                     Segment(chrom, breakpoint.end()+deletionOffset, breakpoint.end()+self.alignDistance, "+", 2)]
 
     def __str__(self):
+        if len(self.breakpoints[0]) > 1:
+            return "{}::{}:{:,}-{:,};len={}".format(self.__class__.__name__, 
+                                                  self.breakpoints[0].chr(), 
+                                                  self.breakpoints[0].start(), 
+                                                  self.breakpoints[0].end(),
+                                                  self.insertionLength)
+
         return "{}::{}:{:,};len={}".format(self.__class__.__name__, self.breakpoints[0].chr(), self.breakpoints[0].start(), self.insertionLength)
        
 
