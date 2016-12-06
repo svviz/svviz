@@ -7,6 +7,7 @@ and the result is skipped
 not yet implemented: try aligning the reverse complement when the original sequence
 causes a segfault, then reverse the strand
 """
+from __future__ import print_function
 
 import collections
 import multiprocessing
