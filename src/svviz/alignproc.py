@@ -12,6 +12,7 @@ from __future__ import print_function
 import collections
 import multiprocessing
 import os
+import six
 import subprocess
 
 from svviz import misc
@@ -36,8 +37,9 @@ def alignProcWrapper(ref, seq):
         return None
 
     fields = out.split()
-    strand = fields[0]
-    aln = Aln(int(fields[1]), int(fields[2]), fields[3], int(fields[4]), int(fields[5]))
+    strand = fields[0].decode()
+    
+    aln = Aln(int(fields[1]), int(fields[2]), fields[3].decode(), int(fields[4]), int(fields[5]))
 
     return strand, aln
 
