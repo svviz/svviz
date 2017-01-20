@@ -1,6 +1,7 @@
 import collections
 import logging
 import math
+import re
 import sys
 import time
 
@@ -29,8 +30,37 @@ def check_swalign():
     return True
 
 
-def alignBothStrands(seq, aligner):
+class RemapAlignment(object):
+    def __init__(self, re_result, query, match):
+        self.score = match * len(query)
+        self.score2 = None
+        self.ref_begin = re_result.start()
+        self.ref_end = re_result.end()-1 ### I think this is right
+        self.query_begin = 0
+        self.query_end = len(query)-1
+        self.cigar_string = str(len(query)) + "M"
+
+def tryAlignExact(query, revquery, target, aligner):
+    f_results = [m for m in re.finditer(query, target)]
+    r_results = [m for m in re.finditer(revquery, target)]
+
+    if len(f_results) > 0:
+        aln = RemapAlignment(f_results[0], query, aligner.match)
+        strand = "+"
+    elif len(r_results) > 0:
+        aln = RemapAlignment(r_results[0], revquery, aligner.match)
+        strand = "-"
+    else:
+        return None
+
+    if len(f_results) + len(r_results) > 1:
+        aln.score2 = aln.score
+
+    return strand, aln
+
+def alignBothStrands(seq, aligner, target):
     revseq = reverseComp(seq)
+
     forward_al = aligner.align(seq)
     reverse_al = aligner.align(revseq)
 
@@ -62,17 +92,30 @@ def alignBothStrands(seq, aligner):
 
 
 class Multimap(Multiprocessor):
-    def __init__(self, namesToReferences):
+    def __init__(self, namesToReferences, tryExact=False):
         from ssw import ssw_wrap
 
+        self.tryExact = tryExact
+
         self.namesToAligners = {}
+        self.namesToRefs = {}
+
         for name, ref in namesToReferences.items():
             self.namesToAligners[name] = ssw_wrap.Aligner(ref, report_cigar=True, report_secondary=True)
+            self.namesToRefs[name] = ref
 
     def remap(self, seq):
         results = {}
         for name, aligner in self.namesToAligners.items():
-            results[name] = alignBothStrands(seq, aligner)
+            results[name] = None
+
+            if self.tryExact:
+                revseq = reverseComp(seq)
+                results[name] = tryAlignExact(seq, revseq, self.namesToRefs[name], aligner)
+
+            if results[name] is None:
+                results[name] = alignBothStrands(seq, aligner, self.namesToRefs[name])
+
         return seq, results
 
 
@@ -123,7 +166,7 @@ def chooseBestAlignment(read, mappings, chromPartsCollection):
     return bestAln
 
 
-def do1remap(chromPartsCollection, reads, processes, jobName=""):
+def do1remap(chromPartsCollection, reads, processes, jobName="", tryExact=False):
     reads = filterDegenerateOnly(reads)
 
     namesToReferences = {}
@@ -144,7 +187,7 @@ def do1remap(chromPartsCollection, reads, processes, jobName=""):
         remapped = dict(Multimap.map(Multimap.remap, [read.seq for read in reads], initArgs=[namesToReferences], 
             verbose=verbose, processes=processes, name=jobName))
     else:
-        mapper = Multimap(namesToReferences)
+        mapper = Multimap(namesToReferences, tryExact=tryExact)
 
         remapped = {}
         for i, read in enumerate(reads):
@@ -182,9 +225,9 @@ def do_realign(dataHub, sample):
 
     t0 = time.time()
     refalignments, badReadsRef = do1remap(variant.chromParts("ref"), reads, processes, 
-        jobName=name.format("ref"))
+        jobName=name.format("ref"), tryExact=dataHub.args.fast)
     altalignments, badReadsAlt = do1remap(variant.chromParts("alt"), reads, processes, 
-        jobName=name.format("alt"))
+        jobName=name.format("alt"), tryExact=dataHub.args.fast)
     t1 = time.time()
 
     logging.debug(" Time to realign: {:.1f}s".format(t1-t0))

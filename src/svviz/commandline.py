@@ -166,6 +166,10 @@ def parseArgs(args):
         "include supplementary alignments (ie, those with the 0x800 bit set in the bam flags); \n"
         "default: false")
 
+    inputParams.add_argument("--fast", action="store_true", help=
+        "implements some optimizations designed to find exact sequence matches quickly;\n"
+        "will substantially increase speed on Illumina data but may result in some inexact\n"
+        "results; default: false")
 
     inputParams.add_argument("--sample-reads", type=int, help=
         "use at most this many reads (pairs), sampling randomly if need be, useful \n"
