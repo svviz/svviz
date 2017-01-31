@@ -4,6 +4,9 @@ import shutil
 import subprocess
 import tempfile
 
+class YassException(Exception):
+    pass
+
 try:
     import numpy
     from scipy import misc
@@ -65,11 +68,11 @@ def yass_dotplot(s1, breakpoints, boundaries=()):
         stderr=subprocess.PIPE)
     resultCode = proc.wait()
     if resultCode != 0:
-        raise Exception("Check that yass is installed correctly")
+        raise YassException("Check that yass is installed correctly")
     stderr = proc.stderr.readlines()
     if "Error" in stderr[0]:
         print("Error running yass: '{}'".format(stderr[0]))
-        raise Exception("Error running yass")
+        raise YassException("Error running yass")
 
     ro.r.png(tempPNG, res=150, width=1000, height=1000)
     ro.r.plot(ro.IntVector([0]), ro.IntVector([0]), type="n", xaxs="i", yaxs="i", 
@@ -123,7 +126,7 @@ def dotplot(dataHub):
                 boundaries.append(partStart)
 
         return yass_dotplot(fullSeq, breakpoints, boundaries)
-    except Exception as e:
+    except YassException as e:
         logging.info("  Couldn't run recommended dot-plot helper-program yass: '{}'".format(e))
         # return dotplot2(ref, ref)
 
