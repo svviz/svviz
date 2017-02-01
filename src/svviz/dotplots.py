@@ -69,9 +69,9 @@ def yass_dotplot(s1, breakpoints, boundaries=()):
     resultCode = proc.wait()
     if resultCode != 0:
         raise YassException("Check that yass is installed correctly")
-    stderr = proc.stderr.readlines()
-    if "Error" in stderr[0]:
-        print("Error running yass: '{}'".format(stderr[0]))
+    stderr = proc.stderr.readlines()[0].decode()
+    if "Error" in stderr:
+        print("Error running yass: '{}'".format(stderr))
         raise YassException("Error running yass")
 
     ro.r.png(tempPNG, res=150, width=1000, height=1000)
@@ -99,7 +99,7 @@ def yass_dotplot(s1, breakpoints, boundaries=()):
 
     ro.r["dev.off"]()
 
-    return open(tempPNG).read()
+    return open(tempPNG, "rb").read()
 
 
 def dotplot(dataHub):
