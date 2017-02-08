@@ -58,7 +58,7 @@ def tryAlignExact(query, revquery, target, aligner):
 
     return strand, aln
 
-def alignBothStrands(seq, aligner, target):
+def alignBothStrands(seq, aligner): #, target):
     revseq = reverseComp(seq)
 
     forward_al = aligner.align(seq)
@@ -114,7 +114,7 @@ class Multimap(Multiprocessor):
                 results[name] = tryAlignExact(seq, revseq, self.namesToRefs[name], aligner)
 
             if results[name] is None:
-                results[name] = alignBothStrands(seq, aligner, self.namesToRefs[name])
+                results[name] = alignBothStrands(seq, aligner)#, self.namesToRefs[name])
 
         return seq, results
 
