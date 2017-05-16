@@ -242,7 +242,9 @@ class _multiProgressBar(object):
             if barWidth >= 6:
                 for barid in sorted(self.barsToProgress):
                     text.append(self._getBar(barid, self.barsToProgress[barid][0], self.barsToProgress[barid][1], barWidth))
-
+            else:
+                text.append("[processes=%d]"%len(self.barsToProgress))
+                
             endmarker = "\n"
             if self.isatty:
                 endmarker = "\r"
