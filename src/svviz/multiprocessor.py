@@ -238,9 +238,10 @@ class _multiProgressBar(object):
             text.append(self._getBar("total", overallCompleted, overallTotal, 25))
 
             text.append("left:%s"%self.timeRemaining)
-                
-            for barid in sorted(self.barsToProgress):
-                text.append(self._getBar(barid, self.barsToProgress[barid][0], self.barsToProgress[barid][1], barWidth))
+
+            if barWidth >= 6:
+                for barid in sorted(self.barsToProgress):
+                    text.append(self._getBar(barid, self.barsToProgress[barid][0], self.barsToProgress[barid][1], barWidth))
 
             endmarker = "\n"
             if self.isatty:
