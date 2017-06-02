@@ -46,7 +46,10 @@ Inversions
 Translocations
 ^^^^^^^^^^^^^^
 
-Support for translocations in batch mode is forthcoming.
+- chromosome (column 0)
+- start coordinate (column 1)
+- SVTYPE=TRA;CHR2=<other chromosome>;END=<end coordinate>;STRAND=<orientation, either + or -> (column 7)
+
 
 
 Examples
