@@ -9,6 +9,11 @@ import zipfile
 
 logging.getLogger("requests").setLevel(logging.WARNING)
 
+try:
+    input = raw_input # required for python2/3 compatibility
+except NameError:
+    pass
+
 def downloadWithProgress(link, outpath):
     print("Downloading %s" % link)
     response = requests.get(link, stream=True)
