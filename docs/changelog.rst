@@ -3,6 +3,14 @@
 Change log
 ==========
 
+1.6.2
+-----
+fixed a regression that prevented the demo from being run from python2
+
+1.6.1
+-----
+minor tweaks
+
 1.6.0
 -----
 
